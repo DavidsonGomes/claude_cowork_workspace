@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulso Diário — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .header-left h1 span { color: var(--evo-green); }
+
+  .header-left .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .health-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .health-badge.normal { background: rgba(18,183,106,0.15); color: var(--green); border: 1px solid rgba(18,183,106,0.3); }
+  .health-badge.atencao { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,9,0.3); }
+  .health-badge.critico { background: rgba(240,68,56,0.15); color: var(--red); border: 1px solid rgba(240,68,56,0.3); }
+
+  .health-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .health-badge.normal .dot { background: var(--green); }
+  .health-badge.atencao .dot { background: var(--yellow); }
+  .health-badge.critico .dot { background: var(--red); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .metric-card:hover { border-color: var(--evo-green); }
+
+  .metric-card .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-card .value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 8px 0 4px;
+  }
+
+  .metric-card .delta {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-header .count {
+    background: var(--bg-primary);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .section-body { padding: 0; }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  td {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .sentiment { display: inline-flex; align-items: center; gap: 6px; }
+
+  .topics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+
+  .topic-item {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topic-item:nth-child(3n) { border-right: none; }
+  .topic-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .topic-item .topic-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .topic-item .topic-count {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .topic-item .topic-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .topic-item .topic-bar-fill {
+    height: 100%;
+    background: var(--evo-green);
+    border-radius: 2px;
+  }
+
+  .action-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+  }
+
+  .action-item:last-child { border-bottom: none; }
+
+  .action-item .checkbox {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .action-item .action-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .action-item .action-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .action-item .action-tag.urgente { background: rgba(240,68,56,0.15); color: var(--red); }
+  .action-item .action-tag.importante { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .action-item .action-tag.normal { background: rgba(18,183,106,0.15); color: var(--green); }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span { color: var(--evo-green); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .support-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .support-item:last-child { border-bottom: none; }
+
+  .support-item .question {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 70%;
+  }
+
+  .support-item .time {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .support-item .time.alert { color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>evo</span>lution — Pulso Diário</h1>
+    <div class="subtitle">06 de Abril de 2026 — Comunidade Discord — Últimas 24h</div>
+  </div>
+  <div class="health-badge atencao">
+    <div class="dot"></div>
+    Atenção
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- MÉTRICAS -->
+  <div class="grid">
+    <div class="metric-card">
+      <div class="label">Mensagens (24h)</div>
+      <div class="value">117</div>
+      <div class="delta neutral">sem histórico anterior</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Membros ativos</div>
+      <div class="value">24</div>
+      <div class="delta neutral">em 3 canais</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Novos membros</div>
+      <div class="value">16</div>
+      <div class="delta neutral">0 saída(s)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Canal mais ativo</div>
+      <div class="value" style="font-size:18px;">💬 chat-pt</div>
+      <div class="delta neutral">100+ msgs</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- SUPORTE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🆘 Suporte <span class="count">5 tópicos recentes</span></h2>
+      </div>
+      <div class="section-body">
+        <div class="support-item">
+          <div class="question">QR code não gera / não aparece para conectar WhatsApp</div>
+          <div class="time alert">Recorrente hoje</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Erro "invalid product slug (HTTP 400)" no Evolution Go ao emitir licença</div>
+          <div class="time">Resolvido (downgrade + upgrade)</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Não consegue enviar mensagens para grupos</div>
+          <div class="time alert">Sem resposta definitiva</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Como usar notificamehub com evo API self-host?</div>
+          <div class="time alert">Sem resposta</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Como criar fluxo de conversa no evo api?</div>
+          <div class="time">Parcialmente respondido (n8n)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SENTIMENTO -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Sentimento</h2>
+      </div>
+      <div class="section-body" style="padding:20px;">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+          <div style="font-size:48px;">🟡</div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">Neutro / Misto</div>
+            <div style="font-size:13px;color:var(--text-muted);">Baseado em 117 mensagens analisadas</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+          A comunidade está ativa com muitas dúvidas técnicas sendo respondidas por membros experientes como <strong>oismaelash</strong> e <strong>d_paes</strong>.
+          Há entusiasmo com o <strong>Evolution Go</strong> (várias perguntas e menções positivas), mas também frustração recorrente com erros de QR code e bloqueios de WhatsApp.
+          O tom geral é colaborativo — membros ajudam uns aos outros — mas a alta demanda de suporte sem moderadores ativos gera tensão.
+          Destaque negativo: preocupação com bloqueios em massa (15 instâncias bloqueadas numa semana).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP TÓPICOS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔥 Top Tópicos do Dia</h2>
+    </div>
+    <div class="section-body">
+      <div class="topics-grid">
+        <div class="topic-item">
+          <div class="topic-name">Evolution Go — migração e uso</div>
+          <div class="topic-count">~18 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">QR Code não gera / erro de conexão</div>
+          <div class="topic-count">~15 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:83%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Bloqueios de instâncias WhatsApp</div>
+          <div class="topic-count">~10 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:56%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Baileys vs WhatsApp Cloud API</div>
+          <div class="topic-count">~8 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:44%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Evolution Go + Chatwoot bridge</div>
+          <div class="topic-count">~7 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:39%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Agentes IA da Meta no WhatsApp</div>
+          <div class="topic-count">~5 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:28%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBROS DESTAQUE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>⭐ Membros Destaque</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Membro</th>
+            <th>Contribuição</th>
+            <th>Canal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>oismaelash</strong></td>
+            <td>Principal suporte da comunidade hoje — respondeu 20+ perguntas técnicas em PT, EN e ES</td>
+            <td>chat-pt / chat-en / chat-es</td>
+          </tr>
+          <tr>
+            <td><strong>d_paes</strong></td>
+            <td>Suporte técnico ativo, ajudou com diagnóstico de bots e erros de senha no Evo Go</td>
+            <td>chat-pt</td>
+          </tr>
+          <tr>
+            <td><strong>yuricaetano</strong></td>
+            <td>Compartilhou bridge open source Evolution Go + Chatwoot: github.com/yuri12344/evolution-go-chatwoot-bridge</td>
+            <td>chat-pt</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOVOS MEMBROS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🆕 Novos Membros Hoje <span class="count">16 entradas</span></h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuário</th>
+            <th>Horário (UTC)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>404p3dro</td><td>21:50</td></tr>
+          <tr><td>santicisne.</td><td>00:23</td></tr>
+          <tr><td>efrancou</td><td>05:06</td></tr>
+          <tr><td>paulofab</td><td>04:15</td></tr>
+          <tr><td>joaofontes1337</td><td>11:57</td></tr>
+          <tr><td>frost.core0</td><td>12:34</td></tr>
+          <tr><td>gmousinho</td><td>12:37</td></tr>
+          <tr><td>gbrmth</td><td>14:05</td></tr>
+          <tr><td>clayton_tv</td><td>14:51</td></tr>
+          <tr><td>sohenscionexe</td><td>15:02</td></tr>
+          <tr><td>duddy57_59888</td><td>16:35</td></tr>
+          <tr><td>maumau220</td><td>17:02</td></tr>
+          <tr><td>adorable_maypole_74805</td><td>17:07</td></tr>
+          <tr><td>sipriano_</td><td>17:56</td></tr>
+          <tr><td>gustavo_87185</td><td>19:49</td></tr>
+          <tr><td>bruno.favaro</td><td>22:08</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- AÇÕES NECESSÁRIAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>💡 Ações Necessárias</h2>
+    </div>
+    <div class="section-body">
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Criar FAQ: "QR Code não aparece / erro de conexão" — pergunta mais frequente do dia (3ª vez que aparece). Resposta padrão: reiniciar serviço da Evolution na VPS + atualizar para v2.3.7</div>
+        <div class="action-tag importante">Importante</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Responder ou escalar pergunta de gbrmth: "não consigo enviar mensagens para grupos" — sem resposta definitiva ainda</div>
+        <div class="action-tag urgente">Urgente</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Responder pergunta de isaacmarcos: "Como usar notificamehub com evo API self host?" — sem resposta até agora</div>
+        <div class="action-tag urgente">Urgente</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Reconhecer contribuição de yuricaetano publicamente — criou bridge open source Evolution Go + Chatwoot e compartilhou com a comunidade</div>
+        <div class="action-tag normal">Normal</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Criar FAQ: "Diferença entre Baileys e WhatsApp Cloud API" — perguntado em PT e EN no mesmo dia</div>
+        <div class="action-tag importante">Importante</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Monitorar tópico de bloqueios em massa de instâncias WhatsApp — usuário reportou 15 bloqueios em 1 semana, pode indicar problema maior</div>
+        <div class="action-tag importante">Importante</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Canal #news está sem publicação desde fevereiro/2026 — considerar retomar comunicados regulares para aumentar engajamento</div>
+        <div class="action-tag normal">Normal</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pulse — 06/04/2026 às 21:30 BRT
+</div>
+
+</body>
+</html>

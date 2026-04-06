@@ -1,0 +1,2 @@
+- [IDs dos Canais Discord](reference_discord_channels.md) — Guild 1127247206752206969, mapeamento completo de canais e IDs
+- [Padrões Recorrentes da Comunidade](project_community_patterns.md) — FAQs candidatas, membros ativos, tópicos quentes (baseline abr/2026)
