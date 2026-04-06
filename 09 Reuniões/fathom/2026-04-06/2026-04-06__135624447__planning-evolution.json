@@ -1,0 +1,38 @@
+{
+  "title": "Planning Evolution",
+  "meeting_title": "Planning Evolution",
+  "url": "https://fathom.video/calls/625646479",
+  "created_at": "2026-04-06T18:40:39Z",
+  "scheduled_start_time": "2026-04-06T18:00:00Z",
+  "scheduled_end_time": "2026-04-06T19:00:00Z",
+  "recording_id": 135624447,
+  "recording_start_time": "2026-04-06T18:00:11Z",
+  "recording_end_time": "2026-04-06T18:37:02Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript_language": "pt",
+  "share_url": "https://fathom.video/share/2hQ2E8BLfe75skBNZT-ncNy_tkMS2PJK",
+  "calendar_invitees": [
+    {"name": "Raphael Petronilho", "email": "raphael.petronilho@brius.com.br"},
+    {"name": "Guilherme Gomes", "email": "guilherme.gomes@brius.com.br"},
+    {"name": "Nickolas Oliveira", "email": "nickolas.oliveira@brius.com.br"},
+    {"name": "Daniel Paes", "email": "daniel.paes@brius.com.br"},
+    {"name": "Danilo Carneiro", "email": "danilo.carneiro@brius.com.br"},
+    {"name": "Marcelo Soares", "email": "marcelo.soares@etus.com.br"},
+    {"name": "Davidson Gomes", "email": "davidson.gomes@brius.com.br"}
+  ],
+  "recorded_by": {"name": "Davidson Gomes", "email": "davidson.gomes@brius.com.br"},
+  "action_items": [
+    {"description": "Review Danilo's Evo CRM PR", "assignee": {"name": "Davidson Gomes"}, "recording_timestamp": "00:04:42", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=282.9999"},
+    {"description": "Coordinate Evo CRM install/test w/ team; collect bug reports by Apr 7 12:00", "assignee": {"name": "Davidson Gomes"}, "recording_timestamp": "00:07:08", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=428.9999"},
+    {"description": "Access portal.evi.com.br; confirm WhatsApp messages; notify Davidson to activate WhatsApp Web", "assignee": {"name": "Daniel Paes"}, "recording_timestamp": "00:11:38", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=698.9999"},
+    {"description": "Ask community to open EvoGo license issues on GitHub", "assignee": {"name": "Daniel Paes"}, "recording_timestamp": "00:13:23", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=803.9999"},
+    {"description": "Monitor EvoGo open-source issues/PRs; propose merges to Davidson", "assignee": {"name": "Matheus Gomes Pastorini"}, "recording_timestamp": "00:13:44", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=824.9999"},
+    {"description": "Test Evo CRM single-account/Telegram flow", "assignee": {"name": "Davidson Gomes"}, "recording_timestamp": "00:15:49", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=949.9999"},
+    {"description": "Review Evo CRM onboarding (Beacop) w/ Marcelo", "assignee": {"name": "Davidson Gomes"}, "recording_timestamp": "00:17:59", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=1079.9999"},
+    {"description": "Document Evo CRM installation (MCT-SERV)", "assignee": {"name": "Marcelo dos Reis Soares Junior"}, "recording_timestamp": "00:18:18", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=1098.9999"},
+    {"description": "Test Evolution API V2 w/ license manager; send PR", "assignee": {"name": "Matheus Gomes Pastorini"}, "recording_timestamp": "00:20:33", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=1233.9999"},
+    {"description": "Update EvoGo locally", "assignee": {"name": "Davidson Gomes"}, "recording_timestamp": "00:24:17", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=1457.9999"},
+    {"description": "Set up Evo CRM locally; test core flows; log bugs", "assignee": {"name": "Nickolas de Oliveira"}, "recording_timestamp": "00:25:52", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=1552.9999"},
+    {"description": "Ensure Evo CRM stores WhatsApp contact ID (WID) instead of phone number", "assignee": {"name": "Davidson Gomes"}, "recording_timestamp": "00:29:56", "recording_playback_url": "https://fathom.video/calls/625646479?timestamp=1796.9999"}
+  ]
+}
