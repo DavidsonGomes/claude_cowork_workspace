@@ -83,9 +83,26 @@ Apresentar no formato:
 {resumo de atividade por repo — ativo/moderado/parado}
 ```
 
-### Passo 4 — Salvar
+### Passo 4 — Gerar relatório HTML
 
-Salvar relatório em `02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.md`.
+Ler o template em `.claude/templates/html/github-review.html`.
+
+Substituir os placeholders `{{...}}` com os dados reais coletados.
+
+Classificações de tempo:
+- PRs/Issues < 2 dias: `fresh` (verde)
+- 2-5 dias: `aging` (amarelo)
+- > 5 dias: `stale` (vermelho)
+
+Classificações de atividade:
+- > 10 commits/semana: `active` (verde)
+- 1-10 commits: `moderate` (amarelo)
+- 0 commits: `inactive` (vermelho)
+
+Salvar HTML preenchido em:
+```
+02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.html
+```
 
 Criar diretório se não existir.
 

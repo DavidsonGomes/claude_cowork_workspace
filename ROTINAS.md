@@ -67,5 +67,5 @@ make clean-logs    # Remove logs > 30 dias
 | Linear Review | `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.md` |
 | Community Pulse | `03 Comunidade/reports/daily/[C] YYYY-MM-DD-community-pulse.html` |
 | Community Weekly | `03 Comunidade/reports/weekly/[C] YYYY-WXX-community-report.html` |
-| GitHub Review | `02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.md` |
+| GitHub Review | `02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.html` |
 | Memory Sync | `memory/` (arquivos individuais) |

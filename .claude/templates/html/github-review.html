@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Review — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+    --orange: #FB6514;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 { font-size: 24px; font-weight: 700; }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  .header-right { display: flex; gap: 12px; }
+
+  .stat-pill {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+  }
+
+  .stat-pill .icon { font-size: 16px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Repo cards */
+  .repos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .repo-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+
+  .repo-card:hover { border-color: var(--evo-green); }
+
+  .repo-card .repo-name {
+    font-size: 14px; font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .repo-card .repo-stats { display: flex; flex-direction: column; gap: 6px; }
+
+  .repo-stat {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+  }
+
+  .repo-stat .label { color: var(--text-muted); }
+  .repo-stat .value { font-weight: 600; color: var(--text-secondary); }
+  .repo-stat .value.alert { color: var(--red); }
+  .repo-stat .value.warn { color: var(--yellow); }
+  .repo-stat .value.ok { color: var(--green); }
+
+  .activity-bar {
+    height: 4px; background: var(--border); border-radius: 2px;
+    margin-top: 8px; overflow: hidden;
+  }
+
+  .activity-bar-fill { height: 100%; border-radius: 2px; }
+  .activity-bar-fill.high { background: var(--evo-green); }
+  .activity-bar-fill.medium { background: var(--yellow); }
+  .activity-bar-fill.low { background: var(--red); }
+
+  /* Sections */
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+  .badge {
+    font-size: 12px; font-weight: 600; padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .badge.count { background: var(--bg-primary); color: var(--text-muted); }
+  .badge.alert { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.warn { background: rgba(247,144,9,0.15); color: var(--yellow); }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    text-align: left; padding: 10px 20px;
+    font-size: 11px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.5px; background: rgba(0,0,0,0.2);
+  }
+
+  td {
+    padding: 12px 20px; font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .pr-title { font-weight: 500; }
+
+  .pr-repo {
+    font-size: 11px; font-weight: 600;
+    padding: 2px 6px; border-radius: 4px;
+    background: rgba(0,255,167,0.1); color: var(--evo-green);
+  }
+
+  .pr-author {
+    font-size: 12px; color: var(--text-muted);
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .days-badge {
+    font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  .days-badge.fresh { background: rgba(18,183,106,0.15); color: var(--green); }
+  .days-badge.aging { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .days-badge.stale { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  .review-status { font-size: 12px; font-weight: 600; }
+  .review-status.pending { color: var(--yellow); }
+  .review-status.approved { color: var(--green); }
+  .review-status.changes { color: var(--red); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Releases */
+  .release-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .release-item:last-child { border-bottom: none; }
+
+  .release-info { display: flex; align-items: center; gap: 12px; }
+
+  .release-tag {
+    font-size: 13px; font-weight: 700;
+    padding: 4px 10px; border-radius: 6px;
+    background: rgba(0,255,167,0.1); color: var(--evo-green);
+    font-family: monospace;
+  }
+
+  .release-repo { font-size: 14px; font-weight: 500; }
+  .release-name { font-size: 12px; color: var(--text-muted); }
+  .release-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+
+  /* Activity summary */
+  .activity-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .activity-item:last-child { border-bottom: none; }
+
+  .activity-label { font-size: 14px; font-weight: 500; }
+
+  .activity-status {
+    font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 100px;
+  }
+
+  .activity-status.active { background: rgba(18,183,106,0.15); color: var(--green); }
+  .activity-status.moderate { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .activity-status.inactive { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  .activity-commits { font-size: 12px; color: var(--text-muted); }
+
+  .footer {
+    text-align: center; padding: 24px;
+    color: var(--text-muted); font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span { color: var(--evo-green); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>evo</span>lution — GitHub Review</h1>
+    <div class="subtitle">{{DATA}} — 5 repositórios monitorados</div>
+  </div>
+  <div class="header-right">
+    <div class="stat-pill"><span class="icon">⑂</span> {{TOTAL_PRS}} PRs abertos</div>
+    <div class="stat-pill"><span class="icon">⚑</span> {{TOTAL_ISSUES}} Issues abertas</div>
+    <div class="stat-pill"><span class="icon">★</span> {{TOTAL_STARS}} Stars</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- REPO CARDS -->
+  <div class="repos-grid">
+    <!-- TEMPLATE: repetir para cada repo -->
+    <div class="repo-card">
+      <div class="repo-name">{{REPO_NAME}}</div>
+      <div class="repo-stats">
+        <div class="repo-stat">
+          <span class="label">PRs</span>
+          <span class="value {{PR_CLASS}}">{{REPO_PRS}}</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Issues</span>
+          <span class="value">{{REPO_ISSUES}}</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Stars</span>
+          <span class="value">{{REPO_STARS}}</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Forks</span>
+          <span class="value">{{REPO_FORKS}}</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Commits (7d)</span>
+          <span class="value">{{REPO_COMMITS}}</span>
+        </div>
+      </div>
+      <div class="activity-bar">
+        <div class="activity-bar-fill {{ACTIVITY_CLASS}}" style="width:{{ACTIVITY_PCT}}%"></div>
+      </div>
+    </div>
+    <!-- /TEMPLATE -->
+  </div>
+
+  <!-- PRs QUE PRECISAM DE ATENÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>PRs que precisam de atenção</h2>
+      <span class="badge {{PR_ALERT_CLASS}}">{{PR_ALERT_COUNT}}</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>PR</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Dias</th>
+            <th>Review</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TEMPLATE: repetir para cada PR -->
+          <tr>
+            <td><span class="pr-repo">{{PR_REPO}}</span></td>
+            <td>#{{PR_NUMBER}}</td>
+            <td class="pr-title">{{PR_TITLE}}</td>
+            <td class="pr-author">{{PR_AUTHOR}}</td>
+            <td><span class="days-badge {{PR_DAYS_CLASS}}">{{PR_DAYS}}d</span></td>
+            <td><span class="review-status {{PR_REVIEW_CLASS}}">{{PR_REVIEW}}</span></td>
+          </tr>
+          <!-- /TEMPLATE -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- ISSUES SEM RESPOSTA -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Issues sem resposta</h2>
+        <span class="badge {{ISSUES_ALERT_CLASS}}">{{ISSUES_NORESPONSE}}</span>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Repo</th>
+              <th>Issue</th>
+              <th>Dias</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- TEMPLATE -->
+            <tr>
+              <td><span class="pr-repo">{{ISSUE_REPO}}</span></td>
+              <td class="pr-title">{{ISSUE_TITLE}}</td>
+              <td><span class="days-badge {{ISSUE_DAYS_CLASS}}">{{ISSUE_DAYS}}d</span></td>
+            </tr>
+            <!-- /TEMPLATE -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RELEASES RECENTES -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Releases recentes</h2>
+      </div>
+      <div class="section-body">
+        <!-- TEMPLATE -->
+        <div class="release-item">
+          <div class="release-info">
+            <span class="release-tag">{{RELEASE_TAG}}</span>
+            <div>
+              <div class="release-repo">{{RELEASE_REPO}}</div>
+              <div class="release-name">{{RELEASE_NAME}}</div>
+            </div>
+          </div>
+          <div class="release-date">{{RELEASE_DATE}}</div>
+        </div>
+        <!-- /TEMPLATE -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ATIVIDADE POR REPO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Atividade (últimos 7 dias)</h2>
+    </div>
+    <div class="section-body">
+      <!-- TEMPLATE -->
+      <div class="activity-item">
+        <div class="activity-label">{{ACT_REPO}}</div>
+        <div class="activity-commits">{{ACT_COMMITS}} commits</div>
+        <div class="activity-status {{ACT_CLASS}}">{{ACT_LABEL}}</div>
+      </div>
+      <!-- /TEMPLATE -->
+    </div>
+  </div>
+
+  <!-- ISSUES MAIS COMENTADAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Issues mais comentadas / votadas</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>Issue</th>
+            <th>Título</th>
+            <th>Comentários</th>
+            <th>Labels</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TEMPLATE -->
+          <tr>
+            <td><span class="pr-repo">{{HOT_REPO}}</span></td>
+            <td>#{{HOT_NUMBER}}</td>
+            <td class="pr-title">{{HOT_TITLE}}</td>
+            <td>{{HOT_COMMENTS}}</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">{{HOT_LABELS}}</span></td>
+          </tr>
+          <!-- /TEMPLATE -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Atlas — {{TIMESTAMP}}
+</div>
+
+</body>
+</html>
