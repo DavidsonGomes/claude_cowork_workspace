@@ -1,78 +1,83 @@
 ---
 name: prod-end-of-day
-description: "End-of-day shutdown that syncs meetings, organizes tasks, and logs what was worked on so the next session can pick up. Trigger when user says 'end of day', 'wrap up', 'encerra o dia', 'finaliza', 'done for today', 'goodnight', 'boa noite', 'shutdown', or anything that signals finishing a work session."
+description: "End-of-day consolidation — analyzes agent memory, ADW logs, meetings, tasks, and learnings to generate a complete daily log. Trigger when user says 'end of day', 'wrap up', 'encerra o dia', 'finaliza', 'done for today', 'goodnight', 'boa noite', 'shutdown', or anything that signals finishing a work session."
 ---
 
-# End of Day
+# End of Day — Consolidação do Dia
 
-This skill writes a handoff note from the current session — something Claude can read at the start of the next session to quickly understand what happened and where to pick up.
+Rotina de encerramento que consolida tudo que aconteceu no dia: memória dos agentes, logs de ADW, reuniões, tarefas e aprendizados.
 
-## Why this matters
+**Sempre responder em pt-BR.**
 
-Without this log, the next Claude session starts with no memory of what you did today. This note is what bridges sessions together and keeps momentum going.
+## Step 1 — Coletar dados do dia (silenciosamente)
 
-## Step 0 — Sync and organize (silent)
+Ler todas as fontes disponíveis sem narrar cada passo:
 
-Before reviewing the session, run these housekeeping steps silently — don't narrate them:
+### 1a. Memória dos agentes
+Ler os arquivos de memória recentes de cada agente em `.claude/agent-memory/`:
+- `flux-financeiro/` — decisões financeiras do dia
+- `atlas-project/` — atualizações de projetos
+- `kai-personal-assistant/` — se houver algo relevante
+- Qualquer outro agente que tenha sido usado
 
-1. **Sync meetings do dia** — use `/sync-meetings` to process any unsynced Fathom recordings from today. Skip silently if none.
-2. **Review Todoist** — use `/review-todoist` to organize any uncategorized, untranslated, or messy tasks in the Evolution project.
+### 1b. Logs de ADW
+Ler o log JSONL de hoje em `ADWs/logs/YYYY-MM-DD.jsonl` para ver quais rotinas rodaram, duração e status.
 
-If either step fails (API down, etc.), skip and move on.
+### 1c. Reuniões do dia
+Verificar `09 Reuniões/summaries/` e `09 Reuniões/fathom/` do dia para reuniões que foram sincronizadas.
 
-## Step 1 — Review the session
+### 1d. Tarefas
+Rodar `todoist today` para ver tarefas concluídas e pendentes do dia.
 
-Look back through the conversation and pull out what matters:
+### 1e. Sessão atual
+Revisar a conversa da sessão atual — o que foi discutido, decidido e feito.
 
-- **What we worked on** — which projects, which tasks (3–6 bullets, keep it tight)
-- **What was built or changed** — specific files created or edited, decisions made
-- **Still open** — anything mid-flight, unresolved, or left for later
-- **Start here tomorrow** — 1–2 sentences on the best place to pick up next session
+## Step 2 — Consolidar aprendizados
 
-Write it like a note to a colleague taking over the shift — enough to orient them fast, not so much they have to read an essay. If nothing is clearly "still open," skip that section. Don't pad.
+Analisar tudo que foi coletado e identificar:
+- **Decisões tomadas** — o que foi decidido e por quê
+- **Aprendizados** — padrões, correções, feedbacks que devem ser lembrados
+- **Pessoas** — contexto novo sobre pessoas do time
+- **Pendências reais** — coisas que ficaram em aberto de verdade (não inventar)
 
-## Step 2 — Save the log
+## Step 3 — Salvar memória
 
-Save to:
+Se houver decisões, aprendizados ou feedbacks relevantes, salvar na memória persistente em `memory/` seguindo o sistema de memória do workspace (ver `prod-memory-management`).
 
+Não duplicar — verificar se já existe memória similar antes de criar.
+
+## Step 4 — Gerar log do dia
+
+Ler o template em `.claude/templates/end-of-day-log.md` e preencher com os dados consolidados.
+
+Salvar em:
 ```
 01 Daily Logs/[C] YYYY-MM-DD.md
 ```
 
-Use this format:
+O log deve incluir:
+- O que foi feito (projetos, tarefas, reuniões)
+- Arquivos criados ou alterados
+- Rotinas ADW que rodaram (com status)
+- Pendências (só se reais)
+- Onde retomar amanhã
 
-```markdown
----
-author: claude
-type: daily
-date: YYYY-MM-DD
----
+## Step 5 — Organizar tarefas
 
-# Session Log — [Weekday, Month DD YYYY]
+Rodar `/prod-review-todoist` para garantir que tarefas criadas durante o dia estão categorizadas e traduzidas.
 
-## What We Worked On
-- [project — what was done]
-- [project — what was done]
+## Step 6 — Confirmar
 
-## What Was Built or Changed
-- [specific file or decision]
-- [specific file or decision]
+Apresentar resumo curto:
 
-## Still Open
-- [thing that's mid-flight or unresolved]
-
-## Start Here Tomorrow
-[1–2 sentences on the best place to pick up next session]
 ```
+## Dia encerrado
 
-Only include "Still Open" if there's actually something unresolved. Don't invent open items.
+**Log:** 01 Daily Logs/[C] YYYY-MM-DD.md
+**Rotinas ADW:** {N} executadas ({status})
+**Tarefas:** {concluídas}/{total} concluídas
+**Memórias:** {N} criadas/atualizadas
+**Aprendizados:** {N} registrados
 
-## Step 3 — Update CLAUDE.md folder structure
-
-Open CLAUDE.md and update the `## Folder Structure` section to reflect any new folders or files created during the session. This keeps the context file accurate over time so future sessions don't work from stale information.
-
-Only update what actually changed — don't rewrite the whole section if one folder was added.
-
-## Step 4 — Confirm
-
-Tell the user where the file was saved and give them the "Start Here Tomorrow" line so they know the handoff is solid. Keep it to one or two lines — they're done for the day.
+**Amanhã:** {frase sobre onde retomar}
+```

@@ -17,14 +17,13 @@ Read these files before saying anything:
 
 If any of these files don't exist yet (the user might be very new), that's fine — just work with what's there.
 
-## Step 2 — Check agenda, emails, meetings and tasks
+## Step 2 — Check agenda, emails and tasks
 
 Before building the recap, gather live data silently (don't narrate each step):
 
 1. **Agenda do dia** — use `/gog-calendar` to list today's events. Note meetings, times, people, and free blocks.
 2. **Emails importantes** — use `/gog-email-triage` to check unread emails. Filter only those needing action or attention.
-3. **Sync meetings de ontem** — use `/sync-meetings` with yesterday's date to sync any unprocessed meetings from Fathom. Skip silently if none.
-4. **Tarefas de hoje** — run `todoist today` to list today's and overdue tasks from Todoist.
+3. **Tarefas de hoje** — run `todoist today` to list today's and overdue tasks from Todoist.
 
 ## Step 3 — Brief recap
 
@@ -34,7 +33,6 @@ Give the user a short morning briefing in **pt-BR**. Keep it tight — this is a
 - Anything left open or mid-flight
 - Today's agenda (meetings, times, people)
 - Emails needing attention (if any)
-- Meetings synced from yesterday (if any)
 - Today's priority tasks from Todoist
 
 Then immediately give your **recommendation** — one clear sentence on what seems most important to work on based on recency, open problems, agenda, and project momentum. Make a real call; don't hedge.
@@ -56,6 +54,10 @@ Ask them to pick a project and problem. Once they choose, read whatever addition
 ### If they want something new:
 
 Tell them to say "new project" and the new-project skill will walk them through it.
+
+## Step 5 — Save briefing
+
+Save the briefing output to `01 Daily Logs/[C] YYYY-MM-DD-morning.md` using the template at `.claude/templates/morning-briefing.md`. Fill in the template with the data gathered in Step 2-3.
 
 ## Tone
 

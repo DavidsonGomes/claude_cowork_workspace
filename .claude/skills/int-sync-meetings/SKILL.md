@@ -75,12 +75,14 @@ Determinar o projeto baseado no título da reunião:
 
 Usar o `default_summary.markdown_formatted` que já veio na resposta da API (Passo 1).
 
+Ler o template em `.claude/templates/meeting-summary.md` e preencher com os dados da reunião.
+
 Salvar em:
 ```
 {project-root}/09 Reuniões/summaries/{projeto}/YYYY-MM-DD__{projeto}__meeting__{slug}__{recording_id}.summary.md
 ```
 
-Formato do arquivo:
+Formato do arquivo (baseado no template):
 ```markdown
 ---
 date: YYYY-MM-DD
