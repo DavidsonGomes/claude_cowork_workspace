@@ -22,6 +22,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | Dia/Horário | Rotina | Comando | Agente | O que faz |
 |:---:|--------|---------|--------|-----------|
 | **Sexta 08:00** | Weekly Review | `make weekly` | @clawdia | Revisão completa: reuniões, tarefas, agenda, memória → relatório semanal |
+| **Sexta 08:30** | Trends | `make trends` | @clawdia | Análise de tendências: comunidade + GitHub + financeiro + operacional → scorecard |
 | **Seg/Qua/Sex 09:00** | Linear Review | `make linear` | @atlas | Issues em review, blockers, stale, sprint progress → relatório |
 | **Seg/Qua/Sex 09:15** | GitHub Review | `make github` | @atlas | PRs abertos, issues comunidade, stars/forks, releases → relatório |
 | **Segunda 09:30** | Community Weekly | `make community-week` | @pulse | Análise semanal: WAM, sentimento, tópicos, insights produto, docs gaps → HTML |
@@ -50,7 +51,7 @@ make clean-logs    # Remove logs > 30 dias
 
 | Agente | Rotinas |
 |--------|---------|
-| **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly |
+| **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly, Trends |
 | **@atlas** | Linear Review, GitHub Review |
 | **@pulse** | Community Pulse (diário), Community Weekly, FAQ Sync |
 | **@kai** | Health Check-in |

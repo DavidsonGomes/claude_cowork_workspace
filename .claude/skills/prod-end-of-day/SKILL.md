@@ -29,7 +29,15 @@ Verificar `09 Reuniões/summaries/` e `09 Reuniões/fathom/` do dia para reuniõ
 ### 1d. Tarefas
 Rodar `todoist today` para ver tarefas concluídas e pendentes do dia.
 
-### 1e. Sessão atual
+### 1e. Git changes do dia
+Rodar `git diff --stat` e `git log --oneline --since="today 00:00"` pra ver:
+- Arquivos criados, modificados ou deletados hoje
+- Commits feitos (mensagens e autores)
+- Mudanças não commitadas (working tree)
+
+Isso dá o panorama real do que mudou no workspace — mais preciso que ler a conversa.
+
+### 1f. Sessão atual
 Revisar a conversa da sessão atual — o que foi discutido, decidido e feito.
 
 ## Step 2 — Consolidar aprendizados

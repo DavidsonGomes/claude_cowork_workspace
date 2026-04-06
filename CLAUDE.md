@@ -25,120 +25,122 @@ O papel do Claude é manter o Davidson em movimento nesse loop. Se não há meta
 ## Folder Structure
 
 ```
-01 Daily Logs/        — logs de sessão para memória contínua
-02 Projects/          — uma pasta por projeto
-03 Comunidade/        — gestão da comunidade EVO Foundation
+01 Daily Logs/        — logs de sessão, briefings, reviews semanais
+02 Projects/          — uma pasta por projeto + reviews (github, linear)
+03 Comunidade/        — gestão da comunidade, FAQ, relatórios Discord
 04 Redes Sociais/     — conteúdo e estratégia de redes sociais
-05 Financeiro/        — controle financeiro pessoal e da empresa
+05 Financeiro/        — controle financeiro (Stripe, Omie, relatórios)
 06 Pessoal/           — saúde, fitness, hábitos e bem-estar
+07 Reuniões/          — transcrições e summaries do Fathom
+ADWs/                 — AI Developer Workflows (rotinas automatizadas)
+memory/               — memória persistente (pessoas, projetos, glossário)
+_evo/                 — Evo Method (framework de desenvolvimento)
 ```
 
 ---
 
 ## Active Projects
 
-*(Nenhum projeto ainda — diga "novo projeto" para criar o primeiro.)*
+| Nome | O que é | Status |
+|------|---------|--------|
+| **Evo AI** | CRM + agentes IA (produto principal) | In Progress |
+| **Evolution Summit** | Evento de lançamento (14-16 abril) | Em execução |
+| **Evo Academy** | Plataforma de cursos | Backlog |
+| **HostGator** | Parceria — reuniões recorrentes | Em andamento |
 
 ---
 
-## Áreas de Gestão
+## Agentes
 
-### 👥 Comunidade
-- Plugin: **product-management** (stakeholder updates, síntese de feedback)
-- Plugin: **marketing** (comunicados, campanhas)
-- MCP: **Notion** (base de conhecimento)
-- Arquivo de visão geral: `03 Comunidade/[C] Visão Geral — Comunidade.md`
-
-### 📱 Redes Sociais
-- Plugin: **marketing** (content-creation, campaign-plan, draft-content, seo-audit)
-- Plugin: **brand-voice** (manter consistência de voz e tom)
-- MCP: **Canva** (criação de artes e visuais)
-- Arquivo de visão geral: `04 Redes Sociais/[C] Visão Geral — Redes Sociais.md`
-
-### 💰 Financeiro
-- Plugin: **finance** (financial-statements, journal-entry, reconciliation, variance-analysis)
-- Skill: **xlsx** (planilhas financeiras)
-- Skill: **pdf** (relatórios)
-- Arquivo de visão geral: `05 Financeiro/[C] Visão Geral — Financeiro.md`
-
-### 🧘 Pessoal
-- Agente: **health-check** (roda todo dia 12h BRT — hidratação, movimento, postura)
-- Arquivo de visão geral: `06 Pessoal/[C] Visão Geral — Pessoal.md`
+| Agente | Command | Domínio |
+|--------|---------|---------|
+| **Clawdia** 🦞 | `/clawdia` | Hub operacional — agenda, emails, tarefas, decisões |
+| **Flux** 🧮 | `/flux` | Financeiro — fluxo de caixa, métricas, Stripe, Omie |
+| **Atlas** 🗂️ | `/atlas` | Projetos — status, milestones, blockers, Linear, GitHub |
+| **Kai** 👤 | `/kai` | Pessoal — saúde, hábitos, rotina (domínio isolado) |
+| **Pulse** 📣 | `/pulse` | Comunidade — Discord, sentimento, FAQ, engajamento |
 
 ---
 
-## Plugins Instalados
+## Rotinas Automatizadas
 
-| Plugin | Para que serve |
-|---|---|
-| **productivity** | Tarefas, memória de trabalho, TASKS.md |
-| **cowork-starter-pack** | good morning, end of day, new project, help |
-| **marketing** | Conteúdo, campanhas, SEO, email sequences |
-| **brand-voice** | Voz de marca, guias de estilo, geração de conteúdo on-brand |
-| **finance** | Demonstrativos, reconciliação, fechamento, análise de variação |
-| **product-management** | Roadmap, sprint, stakeholder updates, specs |
-| **design** | Critique, handoff, UX copy, acessibilidade |
-| **pdf-viewer** | Visualizar, assinar e anotar PDFs |
-| **cowork-plugin-management** | Instalar e customizar plugins |
+Gerenciadas pelo scheduler (`make scheduler`) — ver `ROTINAS.md` para detalhes completos.
 
-## MCPs Conectados
+### Diárias
+| Horário | Rotina | Make |
+|---------|--------|------|
+| 06:50 | Review Todoist | `make review` |
+| 07:00 | Good Morning (briefing) | `make morning` |
+| 07:15 | Email Triage | `make triage` |
+| a cada 30min | Sync Meetings (Fathom) | `make sync` |
+| 20:00 | Community Pulse (Discord) | `make community` |
+| 20:15 | FAQ Sync | `make faq` |
+| 21:00 | End of Day | `make eod` |
+| 21:15 | Memory Sync | `make memory` |
 
-| MCP | Para que serve |
-|---|---|
-| **Google Calendar** | Criar/ler/atualizar compromissos |
-| **Gmail** | Ler e rascunhar e-mails |
-| **Notion** | Base de conhecimento e documentação |
-| **Linear** | Issues e projetos de desenvolvimento |
-| **Canva** | Criar e editar artes e apresentações |
+### Semanais
+| Dia | Rotina | Make |
+|-----|--------|------|
+| Sexta 08:00 | Weekly Review | `make weekly` |
+| Seg/Qua/Sex 09:00 | Linear Review | `make linear` |
+| Seg/Qua/Sex 09:15 | GitHub Review | `make github` |
+| Segunda 09:30 | Community Weekly | `make community-week` |
+| Domingo 10:00 | Health Check-in | `make health` |
+
+---
+
+## Skills (92 skills)
+
+Organizadas por prefixo — ver `.claude/skills/CLAUDE.md` para índice completo.
+
+| Prefixo | Categoria | Qtd |
+|---------|-----------|-----|
+| `prod-` | Produtividade (morning, eod, review, memory) | 6 |
+| `gog-` | Gmail, Calendar, Tasks | 6 |
+| `int-` | Integrações (Fathom, Todoist, Stripe, Omie, Discord, Telegram, Linear, GitHub) | 9 |
+| `fin-` | Financeiro (statements, journal, reconciliation, SOX) | 8 |
+| `mkt-` | Marketing (content, campaigns, SEO, email sequences) | 8 |
+| `obs-` | Obsidian (CLI, markdown, bases, canvas) | 5 |
+| `discord-` | Discord (messages, channels, manage) | 5 |
+| `pulse-` | Comunidade (daily, weekly, FAQ sync) | 3 |
+| `evo-` | Evo Method (dev, architect, QA, PM, sprints) | 45 |
+
+---
+
+## Integrações (MCPs e APIs)
+
+| Integração | Tipo | Para que serve |
+|---|---|---|
+| **Google Calendar** | MCP | Criar/ler/atualizar compromissos |
+| **Gmail** | MCP | Ler e rascunhar e-mails |
+| **Linear** | MCP | Issues e projetos de desenvolvimento |
+| **Canva** | MCP | Criar e editar artes e apresentações |
+| **Telegram** | MCP + Bot | Mensagens, notificações, comandos |
+| **Discord** | API | Comunidade — canais, mensagens, moderação |
+| **Fathom** | API | Reuniões, transcrições, action items |
+| **Todoist** | CLI | Gestão de tarefas (projeto Evolution) |
+| **Stripe** | API | Cobranças, assinaturas, MRR |
+| **Omie** | API | ERP — clientes, NF-e, financeiro |
+| **GitHub** | CLI (gh) | PRs, issues, releases (5 repos Evolution) |
 
 ---
 
 ## What Claude Should Do
 
 - **Always respond in Portuguese (pt-BR).** This applies to every message, every session, without exception.
-- Manter um tom profissional, claro e bem organizado. Entregar outputs polidos que reflitam a qualidade que Davidson espera como CEO e desenvolvedor.
+- Manter um tom profissional, claro e bem organizado.
 - Antes de trabalhar em qualquer área, ler o arquivo de Visão Geral correspondente.
 - Outputs de cada área vão na pasta correta. Se não tiver certeza, perguntar.
-- Ao criar arquivos, prefixar com [C] para indicar que o Claude criou (ex: `[C] Rascunho Post.md`).
-- Usar os MCPs e plugins certos para cada área (ver tabelas acima).
+- Ao criar arquivos, prefixar com [C] para indicar que o Claude criou.
+- Usar os agentes certos para cada domínio (ver tabela de agentes acima).
+- Usar as skills com prefixo correto (ver `.claude/skills/CLAUDE.md`).
 
 ## What Claude Should NOT Do
 
-- Não editar notas sem pedir permissão. Apenas arquivos com prefixo [C] são de livre edição do Claude.
+- Não editar notas sem pedir permissão. Apenas arquivos com prefixo [C] são de livre edição.
 - Não encher de texto — ser direto e concreto.
 - Não criar projetos sem antes entrevistar o Davidson sobre o objetivo e contexto.
-
----
-
-## Rituais Recomendados
-
-| Ritual | Quando | Como acionar |
-|---|---|---|
-| Revisão do dia | Toda manhã | "good morning" |
-| Log do dia | Fim do expediente | "end of day" ou "wrap up" |
-| Revisão semanal | Segunda-feira | "revisão semanal" |
-| Fechamento financeiro | Fim do mês | "fechamento do mês" |
-| Planejamento de conteúdo | Segunda-feira | "planeja conteúdo da semana" |
-
----
-
-## Skills & Commands
-
-| Diga isto | O que acontece |
-|---|---|
-| "good morning" | Revisão do dia, agenda e prioridades |
-| "end of day" / "wrap up" | Log da sessão para memória contínua |
-| "novo projeto" | Cria pasta e visão geral do projeto |
-| "help" | Mostra tudo que o Claude pode fazer |
-| "quais são minhas tarefas?" | Lista tarefas abertas (Linear + TASKS.md) |
-| "o que tenho hoje?" | Lista eventos do Google Calendar |
-| "cria post sobre [tema]" | Redige post para redes sociais |
-| "cria update para a comunidade" | Redige comunicado para a comunidade |
-| "fechamento do mês" | Inicia processo de fechamento financeiro |
-| "planeja conteúdo da semana" | Sugere pauta semanal de conteúdo |
-| "revisão semanal" | Organiza e prioriza tarefas da semana |
-
----
+- Não sobrescrever skills ou templates existentes sem confirmar.
 
 ---
 
@@ -175,18 +177,31 @@ Emails: davidson.gomes@etus.com.br (profissional) | agenciadgcode@gmail.com (pes
 | Omie | ERP / integração financeira |
 → Glossário completo: memory/glossary.md
 
-### Projetos Ativos
-| Nome | O que é |
-|------|---------|
-| **Evo AI** | CRM + agentes IA (produto principal, In Progress) |
-| **Evo Academy** | Plataforma de cursos (Backlog) |
-| **HostGator** | Parceria — reuniões recorrentes |
-→ Detalhes: memory/projects/
-
 ### Preferências
 - Responder sempre em pt-BR
 - Timezone: Brasília (BRT, UTC-3)
 - Tom: profissional e direto
+
+---
+
+## Repositórios GitHub
+
+| Repo | Descrição |
+|------|-----------|
+| `EvolutionAPI/evolution-api` | API principal (open source) |
+| `EvolutionAPI/evo-ai` | CRM + agentes IA |
+| `EvolutionAPI/evolution-go` | Evolution Go (EvoGo) |
+| `EvolutionAPI/evo-crm-community` | CRM Community edition |
+| `EvolutionAPI/EVO-METHOD` | Metodologia Evo |
+
+---
+
+## Servidores
+
+| Comando | O que faz |
+|---------|-----------|
+| `make scheduler` | Inicia scheduler de rotinas (todas as rotinas automáticas) |
+| `make telegram` | Inicia bot Telegram (escuta mensagens) |
 
 ---
 
