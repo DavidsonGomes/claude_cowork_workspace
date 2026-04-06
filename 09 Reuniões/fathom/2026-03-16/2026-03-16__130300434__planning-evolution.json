@@ -1,0 +1,194 @@
+{
+  "title": "Planning Evolution",
+  "meeting_title": "Planning Evolution",
+  "url": "https://fathom.video/calls/600443448",
+  "created_at": "2026-03-16T19:55:59Z",
+  "scheduled_start_time": "2026-03-16T19:15:00Z",
+  "scheduled_end_time": "2026-03-16T20:15:00Z",
+  "recording_id": 130300434,
+  "recording_start_time": "2026-03-16T19:14:52Z",
+  "recording_end_time": "2026-03-16T19:53:10Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Align on urgent priorities for the upcoming product launch.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=359.0)\n\n## Key Takeaways\n\n  - [**New Members Area is Launch-Ready:** The new members area is complete, pending a strategic launch plan from Diego to maximize hype.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=252.0)\n  - [**Open-Source CRM is the Top Priority:** The team is racing to finalize the open-source CRM with a licensing engine and \"Community\" version by March 20 for internal validation.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1575.0)\n  - [**Evolving the Brand Narrative:** A new content strategy will use AI-generated SEO to shift the brand narrative from \"unofficial WhatsApp API\" to a full-stack CRM.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1285.0)\n  - [**Centralizing Product Updates:** A new, free community forum will be created to provide a single, reliable source for project roadmaps and progress updates.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1654.0)\n\n## Topics\n\n### Urgent Priority: Open-Source CRM & Licensing\n\n  - [The team is focused on finalizing the open-source CRM for internal validation by **March 20**.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1575.0)\n  - [**Licensing Engine (Matheus):**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1131.0)\n      - [Backend is nearly complete; Matheus is fixing bugs reported by Danilo.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1131.0)\n      - [Next: Build the license management UI directly into the `Foundation App` admin panel.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=2178.0)\n  - [**Community Version (Danilo):**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=397.0)\n      - [Building the free, single-account version of the CRM.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=397.0)\n      - [Will include a first-run setup wizard for a clean installation.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=403.0)\n      - [The repo will be a fresh V1.0 commit, excluding the main CRM's commit history to avoid revealing multi-account features.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=844.0)\n  - [**Evolution Hub (Guilherme):**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=900.0)\n      - [Building the new API proxy for Meta connections, replacing `Evopei Cloud`.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=900.0)\n      - [Will be deployed to production for testing to bypass local setup issues with Facebook app configurations.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=926.0)\n      - [Implementing runtime environment variables for easy configuration via the admin panel post-deployment.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=960.0)\n  - [**CRM Bug Fixes (Marcelo & Nick):**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1051.0)\n      - [Fixing bugs from the Linear backlog.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1051.0)\n      - [**Note:** Most bugs from the Excel report are already in Linear. Nick should cross-reference to avoid duplicates.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1819.0)\n      - [**Blocker:** Nick needs a second phone number for testing WhatsApp flows.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1913.0)\n\n### New Members Area & Launch Strategy\n\n  - [The new members area is complete, including anti-piracy security.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=252.0)\n  - [Launch is blocked pending a strategic plan from Diego to build hype.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=300.0)\n  - [The launch will be a major event: an \"Evo Week\" with five days of live streams and an institutional video.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=321.0)\n\n### Brand & Content Strategy\n\n  - [**Problem:** AI search results (e.g., OpenAI) recommend the company for its old \"unofficial WhatsApp API\" and the deprecated `Evopei Cloud` platform.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=561.0)\n  - [**Goal:** Shift the brand narrative to the new CRM and ecosystem.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1285.0)\n  - [**Solution:** A new content strategy combining a blog and YouTube tutorials.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1285.0)\n      - [**Blog:** Use an AI tool (e.g., `automatical.com`) to generate high-volume, SEO-optimized articles from live streams and other content.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1362.0)\n      - [**YouTube:** Create an overview video explaining the full product ecosystem. Davidson will record tutorials and embed them directly in the members area.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=631.0)\n\n### Communication & Community\n\n  - [**Problem:** Users lack a central source for project roadmaps and progress updates, leading to frustration.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1654.0)\n  - [**Solution:** Create a new, free community forum to centralize all announcements.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1654.0)\n      - [This will provide a single, reliable URL for project updates, unlike informal channels like Discord or WhatsApp.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1654.0)\n      - [A private, paid community will still exist for premium members.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1765.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=807.0)\n      - [Create a new n8n instance for Daniel's AI project.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=807.0)\n      - [Analyze options for the new community forum.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1654.0)\n  - [**Daniel:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=807.0)\n      - [Begin the AI project once the new n8n instance is ready.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=807.0)\n  - [**Matheus:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1113.0)\n      - [Finalize the licensing engine backend and build the admin UI.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1131.0)\n  - [**Danilo:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=397.0)\n      - [Continue building the \"Community\" version of the CRM.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=397.0)\n  - [**Guilherme:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=899.0)\n      - [Deploy the Evolution Hub to production for testing.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=926.0)\n  - [**Marcelo & Nick:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1051.0)\n      - [Continue fixing bugs in the CRM.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1051.0)\n  - [**Nick:**](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=1810.0)\n      - [Schedule the setup call with Alarcon, including Davidson.](https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM?tab=summary&timestamp=2049.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Reply to German cancellation email re: refund",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:01:13",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=73.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": "danilo.carneiro@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Create admin access for Daniel to test new members area",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:04:17",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=257.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement community version: remove multi-account; add setup wizard",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:06:49",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=409.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": "danilo.carneiro@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Finalize licensing API; then implement licenses admin in Foundation App",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:06:49",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=409.9999",
+      "assignee": {
+        "name": "Matheus Pastorini",
+        "email": "matheus.pastorine@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Upload Evolution Hub to prod for testing",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:15:15",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=915.9999",
+      "assignee": {
+        "name": "Guilherme Gomes",
+        "email": "guilherme.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement runtime env-var config in admin panel",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:15:49",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=949.9999",
+      "assignee": {
+        "name": "Guilherme Gomes",
+        "email": "guilherme.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Analyze free community notice area in members area",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:28:41",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=1721.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Schedule Alarcon pipeline call for Mar 17; include Davidson",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:33:58",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=2038.9999",
+      "assignee": {
+        "name": "Nickolas de Oliveira",
+        "email": "nickolas.oliveira@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Rebuild and deploy N8N instance for Daniel",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:37:00",
+      "recording_playback_url": "https://fathom.video/calls/600443448?timestamp=2220.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Raphael Petronilho",
+      "email": "raphael.petronilho@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "guilherme.gomes@brius.com.br",
+      "email": "guilherme.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "nickolas.oliveira@brius.com.br",
+      "email": "nickolas.oliveira@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "daniel.paes@brius.com.br",
+      "email": "daniel.paes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "danilo.carneiro@brius.com.br",
+      "email": "danilo.carneiro@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "marcelo.soares@etus.com.br",
+      "email": "marcelo.soares@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "matheus.pastorine@etus.com.br",
+      "email": "matheus.pastorine@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/56wBM-f3hyobcRB5xur4hyqCHwKReexM",
+  "crm_matches": null
+}

@@ -1,0 +1,151 @@
+{
+  "title": "Planning Evolution",
+  "meeting_title": "Planning Evolution",
+  "url": "https://fathom.video/calls/617063147",
+  "created_at": "2026-03-30T18:51:19Z",
+  "scheduled_start_time": "2026-03-30T18:00:00Z",
+  "scheduled_end_time": "2026-03-30T19:00:00Z",
+  "recording_id": 133974628,
+  "recording_start_time": "2026-03-30T18:08:00Z",
+  "recording_end_time": "2026-03-30T18:48:55Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Align on the Evo Summit launch plan and prioritize development tasks.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=50.0)\n\n## Key Takeaways\n\n  - [**Evo Summit Launch:** The Evo Summit is set for April 14, a 3-day live event to launch the new Evo Evolution ecosystem.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=107.0)\n  - [**Development Priority:** The immediate focus is updating EvoGo with new features (buttons, carousels) by April 1 to create a strong weekly launch narrative leading up to the summit.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1817.0)\n  - [**Critical Path:** The Academy and Checkout must be completed this week. The Checkout is a hard dependency, as it handles subscriptions and billing, and any delay will force a launch postponement.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2002.0)\n  - [**Strategic Shift:** Future product strategy will prioritize official Meta API integrations (like EvoGo) to offload support risk and focus resources on a new Meta proxy hub.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2168.0)\n\n## Topics\n\n### Evo Summit Launch Plan\n\n  - [**Date:** April 14](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=107.0)\n  - [**Format:** 3-day live event (likely Tue/Wed/Thu)](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=120.0)\n  - [**Agenda:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=120.0)\n      - [**Day 1:** New positioning & strategy](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=120.0)\n      - [**Day 2:** Open-source products (installation, features)](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=120.0)\n      - [**Day 3:** Academy sales pitch & Pro support](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=120.0)\n\n### Development Status & Blockers\n\n  - [**Guilherme:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=868.0)\n      - [**Progress:** Implementing gamification (points, achievements, rankings) for the Evo Academy community.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=874.0)\n      - [**Status:** Testing complete; moving to user badges today.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=901.0)\n  - [**Nickolas:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1089.0)\n      - [**Progress:** Working on Academy member area internationalization.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1104.0)\n      - [**Tooling:** Created a new AI script to automate task management (spec creation, status updates).](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1118.0)\n      - [**Status:** \\~3 cards remain; will then assist with Checkout.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1152.0)\n  - [**Marcelo:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1023.0)\n      - [**Progress:** Documenting EvoGo installation via HostGator.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1055.0)\n      - [**Status:** Finishing HostGator docs → returning to the guided CRM onboarding.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1055.0)\n  - [**Danilo:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=806.0)\n      - [**Progress:** Implementing the Evo CRM Community licensing flow.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=815.0)\n      - [**Blocker:** Onboarding's \"Create Account\" screen is in an infinite 503 loop.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=840.0)\n  - [**Matheus:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1449.0)\n      - [**Progress:** Reverse-engineered the unofficial WhatsApp API to fix interactive messages.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1451.0)\n      - [**Finding:** Meta uses a new `native flow` route for modern clients; older routes are deprecated.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1509.0)\n      - [**Status:** Can implement fixes, but the team pivoted to prioritize EvoGo.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1815.0)\n\n### Strategic Pivot: Prioritizing EvoGo\n\n  - [**Decision:** Prioritize updating EvoGo over the older Evolution API (\"Bales\").](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1815.0)\n  - [**Rationale:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1815.0)\n      - [EvoGo is the future product, making it a better investment.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1815.0)\n      - [The fix for interactive messages is simpler to implement in Go.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1815.0)\n      - [A new version with features creates a strong pre-launch narrative.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1740.0)\n  - [**Plan:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1863.0)\n      - [**Matheus:** Focus on EvoGo updates (buttons, carousels) until April 1.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1863.0)\n      - [**Davidson:** Review EvoGo with Matheus on April 1 to define the final scope.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1966.0)\n      - [**Marcelo:** Ensure EvoGo documentation is updated in parallel.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1986.0)\n\n### Long-Term Product Strategy\n\n  - [**Support Challenge:** A growing non-technical user base is increasing support load.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=483.0)\n      - [**Example:** A self-host user requested a password reset for a database we don't manage.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=229.0)\n  - [**Solution:** Automate support with an AI agent trained on comprehensive documentation.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=537.0)\n  - [**Product Consolidation:**](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2053.0)\n      - [**EvoGo:** Will integrate *only* with the official Evo CRM post-launch to drive adoption.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2106.0)\n      - [**Evolution API (\"Bales\"):** Will become a lightweight service that links to a shared manager, reducing its maintenance burden.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2053.0)\n      - [**WhatsApp Neo:** Will be treated as a community-supported open-source project with no official support from us.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2180.0)\n  - [**New Focus:** A new Meta proxy hub is in development to generate volume and pursue an official Meta partnership.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2168.0)\n\n## Next Steps\n\n  - [**Matheus:** Implement interactive message features in EvoGo by April 1.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1863.0)\n  - [**Marcelo:** Complete HostGator docs → return to guided CRM onboarding. Join Discord to monitor user issues.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1023.0)\n  - [**Danilo:** Resolve the 503 infinite loop on the \"Create Account\" screen.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=840.0)\n  - [**Guilherme:** Finish community gamification → begin user badge implementation.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=930.0)\n  - [**Nickolas:** Finish member area internationalization → assist with Checkout development.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1152.0)\n  - [**Davidson:** Review EvoGo updates with Matheus on April 1.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=1966.0)\n  - [**All:** Complete Academy and Checkout development this week.](https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3?tab=summary&timestamp=2002.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Fix Evo CRM Create Account 503/infinite loop; then upload Evo CRM and start support w/ Daniel",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:13:49",
+      "recording_playback_url": "https://fathom.video/calls/617063147?timestamp=829.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": "danilo.carneiro@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Share AI task-automation script w/ team",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:19:25",
+      "recording_playback_url": "https://fathom.video/calls/617063147?timestamp=1165.9999",
+      "assignee": {
+        "name": "Nickolas de Oliveira",
+        "email": "nickolas.oliveira@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Share Meta official API issue link in team chat",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:26:15",
+      "recording_playback_url": "https://fathom.video/calls/617063147?timestamp=1575.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Refactor Evo Go (Go) w/ interactive buttons/carousels; then align docs w/ Marcelo",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:30:08",
+      "recording_playback_url": "https://fathom.video/calls/617063147?timestamp=1808.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Join Evolution Discord; notify Daniel; then build FAQ/support page w/ Daniel",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:38:39",
+      "recording_playback_url": "https://fathom.video/calls/617063147?timestamp=2319.9999",
+      "assignee": {
+        "name": "Marcelo dos Reis Soares Junior",
+        "email": "marcelo.soares@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Update recurring Monday sync to 15:00 w/ team",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:39:33",
+      "recording_playback_url": "https://fathom.video/calls/617063147?timestamp=2373.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Raphael Petronilho",
+      "email": "raphael.petronilho@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "guilherme.gomes@brius.com.br",
+      "email": "guilherme.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "nickolas.oliveira@brius.com.br",
+      "email": "nickolas.oliveira@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "daniel.paes@brius.com.br",
+      "email": "daniel.paes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "danilo.carneiro@brius.com.br",
+      "email": "danilo.carneiro@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "marcelo.soares@etus.com.br",
+      "email": "marcelo.soares@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/5PgSVZ__cSJ_iYJ4pRJj-7rd9pX9buG3",
+  "crm_matches": null
+}

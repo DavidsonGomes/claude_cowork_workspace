@@ -1,0 +1,61 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/611443803",
+  "created_at": "2026-03-23T21:32:12Z",
+  "scheduled_start_time": "2026-03-23T21:01:10Z",
+  "scheduled_end_time": "2026-03-23T21:16:10Z",
+  "recording_id": 132154897,
+  "recording_start_time": "2026-03-23T21:02:02Z",
+  "recording_end_time": "2026-03-23T21:31:51Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[To explore two potential SaaS collaborations: a server setup tool and a WhatsApp API.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=14.0)\n\n## Key Takeaways\n\n  - [**Setup Orion Cloud:** A new SaaS for one-click server setup and management, starting with OpenCrawl. It will combine Orion's existing CLI installer with a new web UI to create a valuable tool for service providers.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=14.0)\n  - [**WhatsApp API Partnership:** Davidson will integrate Orion's unofficial WhatsApp API into his ecosystem, offering it as a more flexible alternative to the official API. The partnership will use an affiliate model.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=842.0)\n  - [**Proxy Strategy:** Orion is testing Flash Proxy as a cost-effective alternative to WebShare, using a global proxy to protect the server's IP and prevent bans.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1040.0)\n  - [**Launch Timeline:** Davidson's open-source projects launch between April 14–20, creating a strategic window for a joint announcement with the WhatsApp API.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1445.0)\n\n## Topics\n\n### Setup Orion Cloud\n\n  - [**Problem:** Service providers (e.g., for OpenCrawl) need a simple, UI-driven tool for server setup and client management.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=19.0)\n  - [**Solution:** Combine Orion's existing CLI installer with a new web UI.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=375.0)\n      - [**CLI:** Automates initial setup (dependencies, updates) and installs the main stack.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=375.0)\n      - [**Web UI:** Provides ongoing client management and configuration.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=540.0)\n  - [**Monetization:** A SaaS model with affiliate links for recommended cloud providers.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=125.0)\n  - [**Partnership:** Davidson will build the backend, using Orion's Figma designs and existing CLI code.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=230.0)\n  - [**Tech Stack:** Next.js frontend with Magic UI and ReactBits for components.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1527.0)\n\n### WhatsApp API Partnership\n\n  - [**Project:** Orion's unofficial WhatsApp API manager, built in Go.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=525.0)\n  - [**Status:** In beta with 16 instances; public beta starts April 15.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=686.0)\n  - [**Features:**](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=540.0)\n      - [Dashboard: Message/chat/group stats.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=540.0)\n      - [Instance Manager: Profile info, webhooks, proxy settings.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=566.0)\n      - [Chat View: Monitor conversations.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=607.0)\n      - [Integrations: Chatwoot.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=619.0)\n      - [Admin Panel: Manage companies, users, and plans.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=633.0)\n  - [**API Capabilities:** Supports carousels, buttons, lists, forms, and Pix buttons.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=776.0)\n  - [**Infrastructure:**](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=825.0)\n      - [**Hosting:** Hostinger KVM8 (free via affiliate status).](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=825.0)\n      - [**Performance:** Go's low resource use is key to the model.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=987.0)\n      - [**Challenge:** The API is a single point of failure; database is clustered, but the API is not.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=995.0)\n  - [**Partnership Model:**](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=842.0)\n      - [**Davidson:** Integrate the API into his ecosystem as a flexible alternative to the official API.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=842.0)\n      - [**Orion:** Manage the service; use an affiliate model for revenue.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=842.0)\n\n### Proxy Strategy\n\n  - [**Context:** Essential for unofficial WhatsApp APIs to prevent server IP bans.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1311.0)\n  - [**Orion's Approach:** Use a global proxy for all instances to protect the server's IP.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1288.0)\n  - [**Provider Comparison:**](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1061.0)\n      - [**Samuel:** High cost (R$25/IPv6), but a partnership could lower it.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1110.0)\n      - [**Flash Proxy:** Current test provider; more cost-effective than WebShare.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1040.0)\n      - [**Dedicated IPs:** Best performance, but expensive ($7.50/day or \\~$2,000/month for unlimited).](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1349.0)\n  - [**Consumption:** \\~1 GB/day for 15 instances.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1178.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1444.0)\n      - [Begin backend development for **Setup Orion Cloud**.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=230.0)\n      - [Integrate the **WhatsApp API** into his ecosystem for the April launch.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1445.0)\n  - [**Orion:**](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=431.0)\n      - [Locate and send **Setup Orion Cloud** Figma designs to Davidson.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=431.0)\n      - [Continue testing proxy providers (Flash Proxy, ProxEdge) to finalize the strategy.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=1417.0)\n      - [Prepare for the **WhatsApp API** public beta launch on April 15.](https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE?tab=summary&timestamp=686.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Send Davidson Setup Orion Figma/design files",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:00",
+      "recording_playback_url": "https://fathom.video/calls/611443803?timestamp=420.9999",
+      "assignee": {
+        "name": "OrionDesign",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Test ChatCN/Magic UI/ReactBits for Setup Orion Cloud UI",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:27:42",
+      "recording_playback_url": "https://fathom.video/calls/611443803?timestamp=1662.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/K_8AJk6PYsy3xWsoanoqc8u2GDdyeYYE",
+  "crm_matches": null
+}

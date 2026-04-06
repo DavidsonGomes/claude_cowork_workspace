@@ -1,0 +1,97 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/612920186",
+  "created_at": "2026-03-24T18:55:37Z",
+  "scheduled_start_time": "2026-03-24T18:24:48Z",
+  "scheduled_end_time": "2026-03-24T18:39:48Z",
+  "recording_id": 132472776,
+  "recording_start_time": "2026-03-24T18:26:59Z",
+  "recording_end_time": "2026-03-24T18:53:25Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Finalize the Evolution Go activation and licensing flow for launch.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1237.0)\n\n## Key Takeaways\n\n  - [**Launch Plan:** Deploy the new activation flow today on the existing Docker Swarm. This allows for immediate launch while deferring Kubernetes migration until after load testing provides performance data.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=738.0)\n  - [**Activation Flow:** A new `activate` route will gate all access to Evolution Go. Users must complete a web-based activation via the `manager` UI to unlock functionality.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1285.0)\n  - [**Security Upgrade:** The API key exchange now uses an authorization code flow, eliminating the security risk of exposing the API key directly in the URL.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=89.0)\n  - [**Telemetry Strategy:** Usage data is batched and sent as increments, ensuring metrics are preserved even if a user's local instance is reset.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=540.0)\n\n## Topics\n\n### Activation Flow & User Experience\n\n  - [**Problem:** The current activation process is too technical for non-developers, requiring manual log checks.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1091.0)\n  - [**Solution:** A new web-based activation flow will be built into the `manager` UI.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1135.0)\n  - [**User Journey:**](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1285.0)\n    1.  [User accesses Evolution Go URL.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1285.0)\n    2.  [Backend (Go) redirects to `/manager/activate` if not active.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1295.0)\n    3.  [Activation page in `manager` UI prompts user to activate.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1371.0)\n    4.  [User clicks \"Activate License\" → redirected to licensing portal.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1373.0)\n    5.  [User logs in → redirected back to `manager` UI with an authorization token.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1380.0)\n    6.  [`manager` UI exchanges token for API key → saves key.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1380.0)\n    7.  [Activation complete; user can now access Evolution Go.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1285.0)\n\n### Security & Telemetry\n\n  - [**API Key Security:** The API key exchange was upgraded from a direct URL parameter to an authorization code flow.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=89.0)\n      - [**Why:** Prevents exposing the API key in the URL, a significant security risk.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=103.0)\n  - [**Geolocation:** Capturing client geolocation via IP address.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=142.0)\n      - [**Why:** The frontend geolocation API is unreliable due to browser blocks.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=186.0)\n      - [**Fallback:** Matheus will add a local MaxMind database (\\~70MB) to the backend for reliable IP-based lookup.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=186.0)\n  - [**Telemetry Strategy:** Usage data is batched and sent as increments.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=540.0)\n      - [**Why:** This ensures metrics are preserved even if a user's local instance is reset, as the data is already logged on the server.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=610.0)\n\n### Infrastructure & Scaling\n\n  - [**Decision:** Deploy today on the existing Docker Swarm.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=738.0)\n      - [**Why:** Allows for immediate launch while deferring Kubernetes migration until after load testing provides performance data.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=738.0)\n  - [**Future Plan:** Conduct automated load testing (e.g., with K6) to determine Swarm's capacity and inform the Kubernetes migration strategy.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=755.0)\n\n## Next Steps\n\n  - [**Danilo:**](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1237.0)\n      - [Implement backend redirect logic: if not active, redirect all requests to `/manager/activate`.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1295.0)\n      - [Block migrations and other core functions until activation is complete.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=900.0)\n  - [**Matheus:**](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1237.0)\n      - [Build the activation page in the `manager` React UI.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1371.0)\n      - [Implement the authorization token exchange for the API key.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=89.0)\n      - [Add the MaxMind geolocation database to the backend.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=186.0)\n  - [**Davidson:**](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1237.0)\n      - [Grant Danilo `develop` branch bypass permissions.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=242.0)\n      - [Coordinate with Danilo and Matheus to ensure a smooth, synchronized launch.](https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG?tab=summary&timestamp=1237.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Upload MaxMind GeoIP DB to backend server",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:03:14",
+      "recording_playback_url": "https://fathom.video/calls/612920186?timestamp=194.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Cancel old PR; open new PR to develop w/ updated gate URL + version",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:13",
+      "recording_playback_url": "https://fathom.video/calls/612920186?timestamp=433.9999",
+      "assignee": {
+        "name": "Danilo Leone",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Update test suite",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:28",
+      "recording_playback_url": "https://fathom.video/calls/612920186?timestamp=448.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement license-gated migrations + activation redirect; then integrate w/ Matheus's UI",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:20:26",
+      "recording_playback_url": "https://fathom.video/calls/612920186?timestamp=1226.9999",
+      "assignee": {
+        "name": "Danilo Leone",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Build activation UI in manager w/ redirect to license login; then integrate w/ Danilo's backend",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:20:39",
+      "recording_playback_url": "https://fathom.video/calls/612920186?timestamp=1239.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/uHbzqGyZJh4ezEsyMsMftK25HWKs3mqG",
+  "crm_matches": null
+}

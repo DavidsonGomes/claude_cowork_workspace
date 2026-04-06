@@ -1,0 +1,147 @@
+{
+  "title": "Evolução de Produto - VPS",
+  "meeting_title": "Evolução de Produto - VPS",
+  "url": "https://fathom.video/calls/619452626",
+  "created_at": "2026-03-30T20:28:39Z",
+  "scheduled_start_time": "2026-03-30T20:00:00Z",
+  "scheduled_end_time": "2026-03-30T20:40:00Z",
+  "recording_id": 134018823,
+  "recording_start_time": "2026-03-30T20:00:28Z",
+  "recording_end_time": "2026-03-30T20:28:33Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Review VPS user experience and plan product improvements.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=0.0)\n\n## Key Takeaways\n\n  - [**Docker Manager is the top priority.** The current VPS setup is a \"wasted potential\" because it lacks a container manager, forcing users to use SSH for updates and limiting them to one app per server. A full Docker Manager is in development.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=162.0)\n  - [**Quick wins are coming.** Server naming and favoriting will be released by EOM April to improve management of multiple VPSs. A dedicated support queue for Brius clients is also being created.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=547.0)\n  - [**A new partnership is possible.** Brius will demo its multi-cloud server manager to explore an API integration that would allow users to provision HostGator servers directly from the Brius panel.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1174.0)\n  - [**CRM launch strategy is set.** The CRM will target users with some technical knowledge, not complete beginners. Its usage will be metered by conversations/day, not agents, to accommodate future AI agents.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1262.0)\n\n## Topics\n\n### VPS User Experience Gaps\n\n  - [**Server Management:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=124.0)\n      - [**No Naming:** Users cannot name servers, causing confusion when managing multiple instances for different clients.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=139.0)\n      - [**No Favoriting:** The list of all hosting products (VPS, dedicated, shared) is unfilterable, making it hard to find active VPSs.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=637.0)\n  - [**Docker Management:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=162.0)\n      - [**Limited Functionality:** The current Docker Compose setup is a \"wasted potential\" because it only installs one app per server and lacks a portal-based manager.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=162.0)\n      - [**Technical Barrier:** Users must use SSH for updates, a process that is error-prone and inaccessible to non-technical users.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=877.0)\n      - [**Competitor Benchmark:** Hostinger's portal-based Docker manager was cited as the standard for enabling multi-app scaling on a single server.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=232.0)\n\n### Planned Product Improvements\n\n  - [**Docker Manager (Long-Term):**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=495.0)\n      - [**Status:** A major, in-progress project requiring a full re-architecture of the provisioning (Ansible) and portal systems. No ETA.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=495.0)\n      - [**Goal:** Enable users to manage multiple containers, update apps, and configure environment variables directly from the portal.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=172.0)\n  - [**Server Naming & Favoriting (Short-Term):**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=547.0)\n      - [**Status:** Figma designs are complete; development starts next week for an EOM April release.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=547.0)\n      - [**Features:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=600.0)\n          - [**Naming:** Add custom names to servers for better identification.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=600.0)\n          - [**Favoriting:** Pin frequently used servers to the top of the list.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=637.0)\n          - [**Dedicated View:** Create a VPS-only list to remove clutter from shared hosting plans.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=690.0)\n  - [**Dedicated Support Queue:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=780.0)\n      - [**Action:** Create a dedicated support queue for Brius clients.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=780.0)\n      - [**Benefit:** Provides faster, specialized support, preventing Brius from becoming a de facto support channel.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=780.0)\n\n### Brius Server Manager Demo\n\n  - [**Tool:** A multi-cloud server manager built by Brius and Orion Design.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1150.0)\n  - [**Functionality:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=253.0)\n      - [Connects to any server via a Go binary agent.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=253.0)\n      - [Provides a marketplace to install apps (e.g., Evolution API) with specific versions.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=323.0)\n      - [Automates domain provisioning and DNS setup via Cloudflare integration.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=348.0)\n      - [Includes a security scanner with fix suggestions.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=300.0)\n  - [**Partnership Opportunity:** Brius proposed an API integration to allow users to provision HostGator servers directly from their panel.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1174.0)\n\n### Evolution CRM Launch Strategy\n\n  - [**Target Audience:** Users with some CRM experience, not complete beginners.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1395.0)\n  - [**Onboarding:** The product includes a guided tour and a first-run setup screen to simplify initial configuration.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1441.0)\n  - [**Usage Metering:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1262.0)\n      - [**Metric:** Conversations/day, not agents.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1296.0)\n      - [**Rationale:** This model supports future AI agents, which consume resources without being human \"users.\"](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1307.0)\n  - [**OS Requirement:** The CRM can run on Alma Linux, aligning with the standard OS for other Evolution apps.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1602.0)\n\n## Next Steps\n\n  - [**Eduarda:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=492.0)\n      - [Initiate development of server naming and favoriting features.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=547.0)\n      - [Create the dedicated support queue for Brius clients.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=780.0)\n      - [Schedule a feedback session for the Docker Manager Figma designs.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1055.0)\n  - [**Victor:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=571.0)\n      - [Share server list redesign Figma with Davidson for feedback.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=571.0)\n  - [**Davidson:**](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1174.0)\n      - [Demo the Brius server manager to Fernando to discuss a potential partnership.](https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX?tab=summary&timestamp=1174.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Email meeting recording to Eduarda, Victor, Isabela",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:01:27",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=87.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Deliver slides/doc on Docker Manager proposal to Eduarda, Victor, Isabela",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:49",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=469.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Start dev on VPS list naming/favorites/quick-actions; release to Davidson; then GA by Apr 30",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:08:56",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=536.9999",
+      "assignee": {
+        "name": "Eduarda da Silva",
+        "email": "eduarda.silva@bluehost.com",
+        "team": null
+      }
+    },
+    {
+      "description": "Confirm w/ Fernando support-queue setup for Brius; then set up dedicated queue + contact",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:13:07",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=787.9999",
+      "assignee": {
+        "name": "Eduarda da Silva",
+        "email": "eduarda.silva@bluehost.com",
+        "team": null
+      }
+    },
+    {
+      "description": "Schedule validation w/ Davidson re: Docker Manager UX/Figma",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:17:49",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=1069.9999",
+      "assignee": {
+        "name": "Eduarda da Silva",
+        "email": "eduarda.silva@bluehost.com",
+        "team": null
+      }
+    },
+    {
+      "description": "Schedule validation w/ Davidson re: Docker Manager UX/Figma",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:17:49",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=1069.9999",
+      "assignee": {
+        "name": "Victor Gomes",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Add multi-cloud/API provisioning to Mar 31 agenda w/ Fernando",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:20:17",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=1217.9999",
+      "assignee": {
+        "name": "Eduarda da Silva",
+        "email": "eduarda.silva@bluehost.com",
+        "team": null
+      }
+    },
+    {
+      "description": "Provision CRM on Alma Linux via Ansible",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:26:31",
+      "recording_playback_url": "https://fathom.video/calls/619452626?timestamp=1591.9999",
+      "assignee": {
+        "name": "Eduarda da Silva",
+        "email": "eduarda.silva@bluehost.com",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Fernando da Silva",
+      "email": "fernando.nascimento@newfold.com",
+      "email_domain": "newfold.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Eduarda da Silva",
+      "email": "eduarda.silva@bluehost.com",
+      "email_domain": "bluehost.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/BrSFo2-xW2e_qwxXa2Q6x-1DBoJYWfGX",
+  "crm_matches": null
+}

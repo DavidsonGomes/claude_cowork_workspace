@@ -1,0 +1,190 @@
+{
+  "title": "Revisão sistema Licença e Open Source",
+  "meeting_title": "Revisão sistema Licença e Open Source",
+  "url": "https://fathom.video/calls/607210067",
+  "created_at": "2026-03-19T17:12:56Z",
+  "scheduled_start_time": "2026-03-19T16:00:00Z",
+  "scheduled_end_time": "2026-03-19T17:00:00Z",
+  "recording_id": 131300277,
+  "recording_start_time": "2026-03-19T15:59:38Z",
+  "recording_end_time": "2026-03-19T17:08:31Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Review open-source progress and define next steps for licensing and onboarding.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=0.0)\n\n## Key Takeaways\n\n  - [**Open-Source Version Simplified:** The community version is now a single-tenant app, removing the \"Super Admin\" role and related features (multi-tenancy, campaign segmentation) to streamline the architecture and installation process.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n  - [**Automated License Activation:** A new, low-friction flow will use a social login redirect to automatically activate a license during installation, eliminating manual key entry.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1492.0)\n  - [**Guided Onboarding Wizard:** The installation wizard will adopt the multi-step, guided structure of the Evoacademy onboarding flow to improve user experience and ensure correct setup.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1831.0)\n  - [**AI-Powered Content Strategy:** A self-hosted GPU server will power AI agents for support, content recommendations, and commercial lead generation, using a hybrid RAG/semantic search model to manage costs and data privacy.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3172.0)\n\n## Topics\n\n### Open-Source Version Simplification\n\n  - [The community version was simplified to streamline architecture and installation.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n  - [**Removed:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n      - [\"Super Admin\" role](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n      - [Multi-tenancy features (e.g., organization management)](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n      - [Campaign segmentation](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n  - [**Result:** A single-tenant application with a simplified database schema.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=120.0)\n  - [**Architecture:** Remains a 5-repository setup (CRM, SiteKick, API, Processor, Office Service) plus a future AI runtime, making installation straightforward.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=227.0)\n\n### Licensing System & Activation Flow\n\n  - [The `Gerenciador de Licença` (License Manager) admin panel was reviewed.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1126.0)\n      - [**Dashboard:** Provides key metrics (active instances, Heartbeat coverage, alerts) and a map of installations by country.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1126.0)\n      - [**API Keys:** Lists keys with tiers (e.g., Community, Beta).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1191.0)\n      - [**Instances:** Shows installation status, version, and telemetry (IP, country, city).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1351.0)\n      - [**Missing:** A direct link between keys/instances and the user who generated them.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1206.0)\n  - [**New Activation Flow:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1492.0)\n    1.  [**User Action:** During installation, the user clicks an \"Activate License\" button.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1492.0)\n    2.  [**Redirect:** The user is sent to a public social login page on the `Foundation` platform.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1503.0)\n    3.  [**Login/Registration:** The user logs in or registers (e.g., via Google).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1503.0)\n    4.  [**Callback:** `Foundation` sends a callback to the CRM with an encrypted license key.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1611.0)\n    5.  [**Auto-Activation:** The CRM automatically activates the instance with the new key.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1611.0)\n  - [**Duplicate Instance Handling:** If a user clones a disk, creating a duplicate instance with the same key, the system will automatically generate and assign a new, unique key to the duplicate.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1744.0)\n\n### Guided Onboarding Wizard\n\n  - [The installation wizard will adopt the multi-step, guided structure of the Evoacademy onboarding flow to improve user experience.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1831.0)\n  - [**Model:** Marcelo's Evoacademy onboarding flow, which uses a step-by-step process with quizzes to personalize content.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=1831.0)\n  - [**Application:** The CRM wizard will guide users through setup steps like database configuration and initial organization creation.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2165.0)\n  - [**Rationale:** This structure provides a clear, intuitive path for users, especially for non-CLI installations (e.g., HostGator).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2224.0)\n\n### AI & Content Strategy\n\n  - [**Goal:** Build a robust knowledge base for AI agents using all content (videos, transcripts, community posts).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2807.0)\n  - [**Infrastructure:** A self-hosted GPU server will be used to avoid high token costs from external providers and ensure data privacy.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3338.0)\n  - [**AI Agents:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3172.0)\n      - [**Support Agent:** Handles user queries.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3172.0)\n      - [**Recommendation Agent:** Suggests content based on user profile and skill level.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3201.0)\n      - [**Commercial Agent:** Analyzes usage to identify upsell opportunities (e.g., Enterprise version) and trigger targeted offers.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3232.0)\n  - [**Knowledge Base Architecture:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2807.0)\n      - [**Courses/Videos:** Transcripts will be vectorized once for efficient RAG.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2921.0)\n      - [**Community Posts:** A hybrid approach will be used to manage high volume.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3487.0)\n          - [**Semantic Search:** For general queries.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3487.0)\n          - [**AI Summarization:** An agent will periodically summarize trending topics, saving them to a standard database to avoid constant vectorization and token costs.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3527.0)\n\n### Frontend Protection & Auto-Update\n\n  - [**Frontend Protection:** A mechanism will be implemented to prevent users from altering core branding elements (logo, favicon, colors).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=421.0)\n      - [**Rationale:** Maintain brand consistency and prevent unauthorized use.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=447.0)\n      - [**Enforcement:** The system will automatically revert changes on build.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=447.0)\n      - [**Alerts:** The license system will notify the team of any attempted alterations.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=471.0)\n  - [**Auto-Update Notification:** The system will check for new versions of the main repository and notify users in the UI.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2476.0)\n      - [**Rationale:** Ensure users stay current and receive important updates.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2476.0)\n      - [**Implementation:** A simple check against a central changelog file is the preferred initial approach.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=2494.0)\n\n## Next Steps\n\n  - [**Matheus:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3942.0)\n      - [Finalize the License Manager frontend (expose user data, complete UI flow).](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3942.0)\n      - [Build the public social login page on `Foundation` for automated license activation.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3845.0)\n  - [**Danilo & Marcelo:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3730.0)\n      - [Collaborate to build the multi-step installation wizard for the CRM, using the Evoacademy flow as a model.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3721.0)\n  - [**Danilo:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=416.0)\n      - [Research and implement the frontend protection mechanism.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=416.0)\n      - [Organize the main open-source repository with proper documentation and links.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=389.0)\n  - [**Davidson:**](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=4021.0)\n      - [Define and share key telemetry metrics (OKRs) to guide data collection.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=4021.0)\n      - [Plan the integration of AI agents and content embeds into the CRM.](https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh?tab=summary&timestamp=3775.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Organize main repo; add license, install book, Evo API/Go links",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:00:48",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=48.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Review Gui's config changes; align w/ Gui",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:05:19",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=319.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": "danilo.carneiro@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Send Danilo brand-protection spec; then Danilo implement front-asset lock",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:05",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=425.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Add 24h filter to license dashboard",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:19:19",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=1159.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": "guilherme.gomes@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Add commercial alerts to license dashboard",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:19:25",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=1165.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": "guilherme.gomes@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Revoke license (keep history); remove delete",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:21:49",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=1309.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": "guilherme.gomes@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement social-login activation (public route + callback); then build install wizard/CLI",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:25:38",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=1538.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": "guilherme.gomes@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement auto-update detection + in-app changelog; then set main version + email notifications",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:41:05",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=2465.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": "danilo.carneiro@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Share API tester w/ team; then coordinate testing w/ Danilo",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:45:26",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=2726.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": "guilherme.gomes@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Research and recommend RAG/vector approach for knowledge base",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:50:14",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=3014.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": "guilherme.gomes@etus.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Send Matheus telemetry/OKRs; then Matheus assess installer vs in-app telemetry",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "01:06:50",
+      "recording_playback_url": "https://fathom.video/calls/607210067?timestamp=4010.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "danilo.carneiro@etus.com.br",
+      "email": "danilo.carneiro@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "guilherme.gomes@etus.com.br",
+      "email": "guilherme.gomes@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "matheus.pastorine@etus.com.br",
+      "email": "matheus.pastorine@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/RLgyEvvHgxxmps9Ux6siwBhcqmxxjNjh",
+  "crm_matches": null
+}

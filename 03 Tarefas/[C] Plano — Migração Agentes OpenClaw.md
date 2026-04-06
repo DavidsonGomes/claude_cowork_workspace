@@ -45,11 +45,12 @@
 
 ### Fase 2 — Tier 2 (Valor Sólido)
 
-- [ ] **Atlas (projetos)** — Gestão de Projetos
+- [x] **Atlas (projetos)** — Gestão de Projetos ✅ (2026-04-06)
   - Fonte: `workspace-atlas-project/`
   - Adaptar: tracking de milestones, detecção de blockers, roadmap
   - Arquivo: `.claude/agents/atlas-project.md`
   - Nota: integração com Linear como fonte principal
+  - Integrações: Linear (MCP) + Google Calendar (MCP)
 
 - [ ] **Sage (estratégia)** — Análise Estratégica
   - Fonte: `workspace-sage-strategy/`

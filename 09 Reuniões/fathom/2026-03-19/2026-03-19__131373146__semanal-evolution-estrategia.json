@@ -1,0 +1,171 @@
+{
+  "title": "Semanal Evolution Estrategia",
+  "meeting_title": "Semanal Evolution Estrategia",
+  "url": "https://fathom.video/calls/605726783",
+  "created_at": "2026-03-19T18:52:18Z",
+  "scheduled_start_time": "2026-03-19T18:00:00Z",
+  "scheduled_end_time": "2026-03-19T19:00:00Z",
+  "recording_id": 131373146,
+  "recording_start_time": "2026-03-19T18:02:01Z",
+  "recording_end_time": "2026-03-19T18:50:11Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Finalize the product launch strategy, pricing, and timeline.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=139.0)\n\n## Key Takeaways\n\n  - [**Launch Strategy:** A 3-day \"Evo Week\" live event will target the existing community, with a sales pitch on day 3. The goal is to generate revenue by April.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1176.0)\n  - [**Product Pricing:** The Evo Community Contributor plan is R$89/mo (R$890/yr). The Support plan is R$400/mo. The Academy is R$149/mo or R$950/yr.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=351.0)\n  - [**Launch Offers:** The Support plan includes 6 months of Academy access. The Contributor plan unlocks a \"Buy 1, Get 1 Free\" annual Academy offer via a one-time upsell.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1964.0)\n  - [**Urgency & Scarcity:** A 7-day cart will create urgency. Founder pricing (e.g., the 50% Contributor upsell) will be locked in for life to reward early adopters.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=818.0)\n\n## Topics\n\n### Product & Platform Status\n\n  - [**Academy Platform:** Member area and financial integrations (Geto, ME) are complete. Video editing is in progress.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=32.0)\n  - [**Open Source:** Repositories are ready. The team is finalizing the onboarding flow to capture licenses and telemetry.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=76.0)\n  - [**HostGator Partnership:** HostGator has built LPs for the API and Go tools, providing a major organic traffic source. This requires high-quality documentation and strategic placement of Academy upsells.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=236.0)\n\n### Product Strategy & Pricing\n\n  - [**Launch Focus:** The initial launch will focus on Evo Community and the Academy. The Cloud product is on hold.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=139.0)\n  - [**Evo Community Plans:**](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=351.0)\n      - [**Contributor:** R$89/mo or R$890/yr (2 months free).](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=362.0)\n      - [**Support:** R$400/mo. Includes all Contributor benefits plus direct support, SLA, and monthly calls.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=507.0)\n  - [**Academy Pricing:**](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=411.0)\n      - [**Monthly:** R$149. This high price is a psychological anchor to make the annual plan more attractive.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2333.0)\n      - [**Annual:** R$950 (equivalent to R$79/mo).](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2333.0)\n\n### Launch Offers & Upsells\n\n  - [**Support Plan Bonus:** Includes 6 months of Academy access.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1964.0)\n      - [**Rationale:** Provides value while the Academy content library grows.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1964.0)\n      - [**Follow-up:** A strategy is needed to convert these users to paid plans after 6 months.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1988.0)\n  - [**Contributor Plan Upsell:** A one-time offer (OTO) on the thank-you page.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=583.0)\n      - [**Offer:** \"Buy 1, Get 1 Free\" on the annual Academy plan (R$950).](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2599.0)\n      - [**Mechanics:** Pay R$950 in 12 installments. The subscription renews at R$0 for year 2, then automatically bills at the full R$950 in year 3.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2697.0)\n  - [**Founder Pricing:** All launch offers (e.g., the 50% Contributor discount) will be locked in for life to reward early adopters.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=818.0)\n\n### Launch Event Strategy\n\n  - [**Format:** A 3-day \"Evo Week\" live event (Tues, Wed, Thurs) targeting the existing community.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1176.0)\n      - [**Day 1:** The \"New Evolution\" narrative.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1176.0)\n      - [**Day 2:** Solutions, code, and the HostGator partnership.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1189.0)\n      - [**Day 3:** Support plan details and the sales pitch.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1197.0)\n  - [**Urgency & Scarcity:**](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1650.0)\n      - [**Cart:** A 7-day open cart will create urgency.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1612.0)\n      - [**Boni:** Beyond the Academy offer, Davidson will explore adding a 1-hour consultation as a bonus.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1686.0)\n\n### Timeline & Execution\n\n  - [**Narrative:** The core \"New Evolution\" story must be finalized by March 23 to serve as the foundation for all content.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1275.0)\n  - [**Video:** Production of an institutional video must begin immediately after the narrative is approved.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1345.0)\n  - [**Anticipation Phase:** Begins March 31, using a dedicated channel to gather interested users.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1445.0)\n  - [**Evo Week:** Scheduled for a Tuesday–Thursday in mid-April, based on Davidson's data showing peak engagement.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1500.0)\n\n## Next Steps\n\n  - [**Diego:**](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2116.0)\n      - [Refine the launch document with final pricing and the \"Evo Week\" schedule.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1942.0)\n      - [Develop the \"News Cycle\" content plan for a presentation to André next week.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2852.0)\n  - [**Davidson:**](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2116.0)\n      - [Provide the \"New Evolution\" narrative brief by March 23.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2123.0)\n      - [Draft 3-day \"Evo Week\" live content outlines.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1176.0)\n      - [Explore additional launch bonuses (e.g., 1-hour consultation).](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1686.0)\n      - [Organize the Academy content list for the upsell page.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2198.0)\n      - [Initiate institutional video production planning.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=1345.0)\n  - [**Pedro:**](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2028.0)\n      - [Prepare the combined launch and product roadmap presentation for André.](https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN?tab=summary&timestamp=2028.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Email Diego HostGator LP PDFs + Academy links/banners request",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:05:02",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=302.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Define upgrade credit/proration for Contributor annual → Support monthly; sync billing",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:10:53",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=653.9999",
+      "assignee": {
+        "name": "Pedro Sancha",
+        "email": "ps@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Send Diego Evo Week narrative/brief + bonus ideas; then Diego draft video script + 3-live scripts",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:21:19",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=1279.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Brief video production re: institutional video; then schedule shoot",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:23:21",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=1401.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Confirm Evo Week dates/times; then update launch plan + schedule lives",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:24:49",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=1489.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": "diego@dpr.ag",
+        "team": null
+      }
+    },
+    {
+      "description": "Define post-cart-close plan; then set checkout rules + configure Academy upsell (12x, 1+1, auto-renew)",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:26:41",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=1601.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": "diego@dpr.ag",
+        "team": null
+      }
+    },
+    {
+      "description": "Map Academy content; then share w/ Diego for upsell copy",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:30:17",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=1817.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Define comms plan for Support bonus Academy expiry; then schedule reminders",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:32:52",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=1972.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": "diego@dpr.ag",
+        "team": null
+      }
+    },
+    {
+      "description": "Prepare André deck (launch + 52-week plan + product roadmap)",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:47:16",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=2836.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Email collaborative launch doc to Davidson + Pedro",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:47:38",
+      "recording_playback_url": "https://fathom.video/calls/605726783?timestamp=2858.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": "diego@dpr.ag",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "diego@dpr.ag",
+      "email": "diego@dpr.ag",
+      "email_domain": "dpr.ag",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "ps@brius.com.br",
+      "email": "ps@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/99sEno2zcJoYJzjRcf_svQ3eEikxzyXN",
+  "crm_matches": null
+}

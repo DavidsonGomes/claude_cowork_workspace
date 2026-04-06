@@ -1,0 +1,157 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/617624255",
+  "created_at": "2026-03-27T18:09:12Z",
+  "scheduled_start_time": "2026-03-27T17:34:11Z",
+  "scheduled_end_time": "2026-03-27T17:49:11Z",
+  "recording_id": 133540686,
+  "recording_start_time": "2026-03-27T17:39:23Z",
+  "recording_end_time": "2026-03-27T18:07:43Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Align on the new cloud platform's agent installation and launch strategy.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=752.0)\n\n## Key Takeaways\n\n  - [**Decoupled Agent:** The agent installation will be decoupled from Docker/Swarm, installing only a Go binary. This prevents conflicts on servers with existing setups (e.g., Kubernetes) and enables a monitoring-only mode.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=31.0)\n  - [**Phased Launch:** The cloud platform will launch Tuesday with a refined installation flow and a core set of popular apps (Chatwoot, Evolution, Typebot) to drive initial adoption.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=752.0)\n  - [**Freemium Model:** A freemium model will offer basic monitoring and a free `.setup.com` subdomain, with paid plans unlocking advanced features like custom DNS, AI-powered alerts, and multi-cloud management.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=549.0)\n  - [**Simplified Onboarding:** The \"client\" concept will be removed, making the user the default client. This streamlines the initial setup and eliminates confusion for single-server users.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=360.0)\n\n## Topics\n\n### Agent & Installation Strategy\n\n  - [**Problem:** The current agent installation script is monolithic and tightly coupled to Docker/Swarm, causing conflicts on servers with existing setups (e.g., Kubernetes).](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=31.0)\n  - [**Solution:** The agent installation will be a simple Go binary.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=39.0)\n      - [**Rationale:** This allows for a monitoring-only mode and prevents version conflicts on servers with existing Docker or Kubernetes installations.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=39.0)\n  - [**Multi-Stage Setup:** Users can optionally install other components (Docker, Swarm, Traefik) after the agent is active, enabling a gradual adoption path.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=62.0)\n  - [**Code Structure:** The new setup script is modularized for easier maintenance and future expansion.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=133.0)\n\n### Launch Plan & Feature Prioritization\n\n  - [**Launch Target:** Tuesday, March 30th.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=752.0)\n  - [**Pre-Launch Focus:**](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=752.0)\n      - [**OrionDesign:** Refine the installation flow to be simpler and more intuitive.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=877.0)\n      - [**Davidson:** Test the core platform and organize the codebase.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=1006.0)\n  - [**Initial App Catalog:** Focus on the most popular apps from the existing Setup Orion platform.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=766.0)\n      - [Chatwoot (CRM)](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=766.0)\n      - [Evolution API & Evolution Go](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=766.0)\n      - [Typebot](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=766.0)\n  - [**Marketing Angle:** Highlight AI-focused tools (e.g., Llama, Flowise) to attract new users.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=1288.0)\n\n### Business Model & Pricing\n\n  - [**Model:** Freemium, designed to be affordable to maximize user acquisition.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=1089.0)\n  - [**Free Tier:**](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=549.0)\n      - [Basic server monitoring (CPU, RAM, disk).](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=549.0)\n      - [Free `.setup.com` subdomain for installed apps.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=530.0)\n  - [**Paid Tiers:** Unlock advanced features.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=549.0)\n      - [Custom DNS integration (e.g., Cloudflare).](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=530.0)\n      - [AI-powered monitoring and alerts.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=586.0)\n      - [Automated server cleanup (log rotation, old image deletion).](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=602.0)\n      - [Multi-cloud cluster management.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=570.0)\n  - [**Pricing Idea:** R$49.90/month for 5 servers, with a customizable plan for higher server counts.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=1041.0)\n\n### Future Enhancements\n\n  - [**Portainer Integration:** A future feature to import and manage existing Portainer stacks directly from the platform.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=960.0)\n  - [**Embedded Tutorials:** Use OrionDesign's existing video content to create embedded tutorials within the platform.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=797.0)\n  - [**Multi-language Support:** A high-priority item for internationalization.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=827.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=121.0)\n      - [Grant OrionDesign access to the GitHub repo and Team.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=121.0)\n      - [Refine the agent installation script to be Docker-independent.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=273.0)\n  - [**OrionDesign:**](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=1598.0)\n      - [Refine the installation flow UI/UX.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=877.0)\n      - [Install Cloud Code and submit monthly invoices to Davidson for reimbursement.](https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C?tab=summary&timestamp=1598.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Add OrionDesign to GitHub repo + Evoluxo team",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:01:50",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=110.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Refactor agent installer: remove Docker; add optional Traefik; add flags; add checks + Docker/Swarm detection",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:04:22",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=262.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement uptime monitoring: agent heartbeats + fallback checks; short-term logs; AI alerts",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:11:15",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=675.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Add Chatwoot, Evolution API, Evolution Go, Typebot to catalog/install",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:12:35",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=755.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Add tutorials tab; upload setup/install videos",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:13:18",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=798.9999",
+      "assignee": {
+        "name": "OrionDesign",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Add i18n to platform; coordinate w/ Rapti for site i18n",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:13:36",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=816.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Add free subdomain feature",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:14:18",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=858.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Set up test VPS for setup/install testing",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:22:54",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=1374.9999",
+      "assignee": {
+        "name": "OrionDesign",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Install Cloud Code for dev",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:26:27",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=1587.9999",
+      "assignee": {
+        "name": "OrionDesign",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Send Fathom invoice to Davidson via WhatsApp; then monthly",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:27:11",
+      "recording_playback_url": "https://fathom.video/calls/617624255?timestamp=1631.9999",
+      "assignee": {
+        "name": "OrionDesign",
+        "email": null,
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/2fgPyexB9w_i695E_F52esYtp5KfsD_C",
+  "crm_matches": null
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Alinhamento",
+  "meeting_title": "Alinhamento",
+  "url": "https://fathom.video/calls/602765291",
+  "created_at": "2026-03-16T15:15:57Z",
+  "scheduled_start_time": "2026-03-16T15:00:00Z",
+  "scheduled_end_time": "2026-03-16T15:30:00Z",
+  "recording_id": 130168769,
+  "recording_start_time": "2026-03-16T15:03:05Z",
+  "recording_end_time": "2026-03-16T15:13:02Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Align on the new community platform and open-source strategy.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=95.0)\n\n## Key Takeaways\n\n  - [**New Community Platform:** A found Laravel repo will launch a members' area in weeks, bypassing a 3-month build. It will integrate with Fandex for sales via API.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=95.0)\n  - [**Open-Source Strategy:** A simplified, single-account version of the core platform will be created to differentiate it from the multi-tenant paid version.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=289.0)\n  - [**Immediate Action:** Danilo will begin creating the open-source version, starting with `auth-service`, after receiving the architecture plan from Gui.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=540.0)\n\n## Topics\n\n### New Community Platform\n\n  - [Davidson found a complete Laravel members' area repo on GitHub, accelerating launch from \\~3 months to weeks.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=95.0)\n  - [**Goal:** Launch quickly to meet member demand and generate revenue while the new platform is developed.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=233.0)\n  - [**Architecture:**](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=213.0)\n      - [**Sales:** Handled by Fandex.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=213.0)\n      - [**Access:** Fandex API will grant access to the new platform post-purchase.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=218.0)\n  - [**Status:** Davidson is organizing the repo and adding content (e.g., live streams as courses).](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=130.0)\n\n### Open-Source Strategy\n\n  - [**Goal:** Create a simplified, single-account version of the core platform to differentiate it from the multi-tenant paid version.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=289.0)\n  - [**Key Simplifications:**](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=330.0)\n      - [**Single Account:** Remove multi-account functionality.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=330.0)\n          - [**Rationale:** Protect the paid version's value, as it targets agencies and requires multi-tenancy.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=499.0)\n          - [**Implementation:** Remove `account_id` from routes and headers.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=364.0)\n      - [**Simplified `auth-service`:** Replace the `accounts` table with a `config` table for account-level settings.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=476.0)\n      - [**No SuperAdmin:** The community version will not include the SuperAdmin panel.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=467.0)\n      - [**Installer:** Develop a new installer to remove reliance on Docker for setup.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=310.0)\n  - [**Process:**](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=310.0)\n      - [Create new community-specific repos (`auth-service`, `crm`, `front`).](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=324.0)\n      - [Copy code from the main repos, then simplify it.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=390.0)\n\n### Team & Project Status\n\n  - [**New Developer (Matheus):**](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=11.0)\n      - [**Performance:** Good for a new hire; delivered 6 epics on time.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=11.0)\n      - [**Feedback:** Danilo provided constructive feedback to guide improvements.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=15.0)\n      - [**Blocker:** Limited by a personal laptop with only 5% disk space, causing performance issues.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=68.0)\n  - [**Licensing Project:** Matheus is on track to complete the licensing implementation.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=515.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=272.0)\n      - [Add Danilo to the new community platform repo and provide access.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=272.0)\n      - [Get the open-source architecture plan from Gui and send it to Danilo.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=540.0)\n  - [**Danilo:**](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=540.0)\n      - [Begin creating the open-source version, starting with `auth-service`, after receiving the plan from Gui.](https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa?tab=summary&timestamp=540.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Add Danilo to repo; send access; share repo link",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:04:21",
+      "recording_playback_url": "https://fathom.video/calls/602765291?timestamp=261.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Ask Gui to send Danilo Docker/arch docs; then Danilo copies repos, removes multi-account, builds installer, points front",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:06:42",
+      "recording_playback_url": "https://fathom.video/calls/602765291?timestamp=402.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "danilo.carneiro@etus.com.br",
+      "email": "danilo.carneiro@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/C_NFfmeAXYxSuPJhzQsNjydrC54hu7fa",
+  "crm_matches": null
+}

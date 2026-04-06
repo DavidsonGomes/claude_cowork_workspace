@@ -1,0 +1,157 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/604943451",
+  "created_at": "2026-03-17T23:09:04Z",
+  "scheduled_start_time": "2026-03-17T22:13:03Z",
+  "scheduled_end_time": "2026-03-17T22:28:03Z",
+  "recording_id": 130734213,
+  "recording_start_time": "2026-03-17T22:13:31Z",
+  "recording_end_time": "2026-03-17T23:08:54Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Review the new membership platform and align on launch strategy.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=165.0)\n\n## Key Takeaways\n\n  - [**Platform Rebuilt:** The membership platform was rebuilt from the fragile Catify base, adding robust security (reCAPTCHA, LGPD), a new community module, and advanced course features like drip content and Bandavideo integration.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=206.0)\n  - [**Phased Launch:** The plan is a phased launch: first, import existing funders into a \"Beta Access\" community for testing, then launch paid products (Academy, ProSupport) after validating offers.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1051.0)\n  - [**Core Product Strategy:** The strategy centers on three products: the Academy (annual subscription), ProSupport (monthly), and Beta Access (annual). The goal is to maximize revenue and retention.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1102.0)\n  - [**Future AI Integration:** AI is a key future differentiator, with plans for quiz generation from video transcripts, personalized study plans, and AI-assisted community moderation.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1947.0)\n\n## Topics\n\n### Platform Rebuild & Features\n\n  - [The platform was rebuilt from the fragile Catify base to create a secure, feature-rich community hub.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=206.0)\n  - [**Security & Compliance:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=880.0)\n      - [reCAPTCHA v3 added to all forms.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=3171.0)\n      - [LGPD compliance features implemented (cookie consent, data deletion requests).](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=960.0)\n      - [Webhook and API security significantly improved.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=960.0)\n  - [**Community Module:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=349.0)\n      - [Rebuilt from scratch with \"Spaces\" containing various page types: Announcements, Chat, Forum, and Resources.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=349.0)\n      - [Public announcement pages can be shared externally to drive sign-ups.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=373.0)\n  - [**Course Features (Academy):**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=714.0)\n      - [**Video:** Integrated with Bandavideo for hosting, dubbing, and transcription.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=714.0)\n      - [**Drip Content:** Rules for releasing lessons (e.g., after X days, upon previous lesson completion).](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=746.0)\n      - [**Materials:** Upload files directly to lessons.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=804.0)\n      - [**Search:** Transcripts enable full-text search of course content.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=804.0)\n  - [**Product & Offer Management:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=284.0)\n      - [**Classes (Turmas):** A new feature to segment users and control access to content.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=317.0)\n      - [**Bundling:** Products can be sold separately or as sub-products within a larger bundle.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=295.0)\n      - [**Refund Protection:** A consent screen for digital downloads logs user acceptance, invalidating refund claims after download.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=431.0)\n\n### Launch Strategy & Monetization\n\n  - [**Phased Rollout:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1051.0)\n    1.  [**Beta Access Community:** Import \\~600 existing funders to provide early access and gather feedback.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1440.0)\n    2.  [**Paid Products:** Launch the Academy, ProSupport, and Beta Access products after validating offers.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1051.0)\n  - [**Monetization Model:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1102.0)\n      - [**Academy & Beta Access:** Annual subscriptions to maximize revenue and retention.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1113.0)\n      - [**ProSupport:** Monthly subscription (target: R$399) to cover ongoing costs.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1102.0)\n      - [**Promotions:** Monthly flash sales on ProSupport to drive sign-ups.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1140.0)\n  - [**Sales Funnel:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=660.0)\n      - [**Public Pages:** Use public community pages for live streams and announcements to capture leads.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2531.0)\n      - [**Checkout:** Brazilian users require full address/CPF for fiscal compliance; international users only need country/city.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=679.0)\n\n### Future Enhancements & AI\n\n  - [**Live Streaming:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2274.0)\n      - [**Goal:** Host live streams directly on the platform to centralize the community.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2274.0)\n      - [**Method:** Use Bandavideo's live feature with OBS for multi-streaming to YouTube and the platform.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2485.0)\n      - [**Lead Gen:** Require free registration to comment, capturing user data.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2531.0)\n  - [**Quizzes:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2582.0)\n      - [**Goal:** Add mandatory quizzes to lessons to ensure comprehension before advancing.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2582.0)\n      - [**AI Integration:** Generate quizzes automatically from video transcripts.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2614.0)\n      - [**Cost Control:** Use a local LLM (e.g., Llama 3.5) for cost-effective, on-demand quiz generation.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2661.0)\n  - [**AI-Powered Support:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1643.0)\n      - [**Goal:** Implement an AI chatbot for instant Q\\&A.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2033.0)\n      - [**Workflow:** Premium support posts will create cards in a project management tool to track SLAs.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1643.0)\n  - [**Content Strategy:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2195.0)\n      - [Focus on practical, business-oriented topics (e.g., \"Evolution CRM for Dentists\").](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2195.0)\n      - [Use the platform to teach its own implementation, creating a self-referential ecosystem.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2210.0)\n\n### Licensing & Analytics\n\n  - [**Goal:** Implement a zero-friction licensing system for all new open-source projects (starting with the CRM).](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1766.0)\n  - [**Process:** Users activate a license via email during installation.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1766.0)\n  - [**Tracking:** The system logs installations using Machine ID and user email to differentiate new installs from re-installs.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1806.0)\n  - [**Rationale:** This provides valuable usage data for future enterprise features and proactive support.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1849.0)\n  - [**Auto-Updates:** The platform will notify users of new versions, improving the support process.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1706.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1929.0)\n      - [Grant Daniel \"producer\" access to test the full platform.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=3126.0)\n      - [Fix the broken login flow for users accessing multiple sub-products.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=3190.0)\n      - [Finalize the team moderation setup.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=421.0)\n      - [Launch the \"Beta Access\" community for existing funders this week.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1440.0)\n      - [Research Bandavideo's live streaming API for platform integration.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2274.0)\n  - [**Daniel:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1929.0)\n      - [Test the platform with \"student\" and \"producer\" access and report bugs.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=2888.0)\n  - [**All:**](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1947.0)\n      - [Brainstorm AI features for the Academy.](https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL?tab=summary&timestamp=1947.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Clarify performance evaluation process; update Daniel",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:00:37",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=37.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Finish moderation/team; grant Daniel moderator + producer; Orion affiliate; then import ~600 beta users",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:17:03",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=1023.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Record CRM installation tutorials; test setup on HostGator",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:22:15",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=1335.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Integrate support w/ Line; route premium posts to support cards",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:27:12",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=1632.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement in-app update alerts via changelog polling",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:28:15",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=1695.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Collect AI ideas from Daniel + Orion; add to roadmap",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:32:16",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=1936.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Evaluate live streaming providers (Panda/Vimeo/new tool); build embedded live room w/ multistream + public page",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:37:43",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=2263.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement AI quiz generation from VTT transcripts; enforce quizzes before advance",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:42:51",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=2571.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Fix member emails (logo/links); ensure single sign-on across products; fix 'Comprar para acessar' CTA",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:50:43",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=3043.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Send consolidated bug/feedback list to Davidson",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:54:24",
+      "recording_playback_url": "https://fathom.video/calls/604943451?timestamp=3264.9999",
+      "assignee": {
+        "name": "Daniel Paes",
+        "email": null,
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/Fvg1rAuKKK5GyQbdzPuEbH6WUq6u5JYL",
+  "crm_matches": null
+}

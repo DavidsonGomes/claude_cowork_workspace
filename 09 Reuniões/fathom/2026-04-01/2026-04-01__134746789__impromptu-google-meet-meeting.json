@@ -1,0 +1,109 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/622949808",
+  "created_at": "2026-04-01T19:22:45Z",
+  "scheduled_start_time": "2026-04-01T18:54:37Z",
+  "scheduled_end_time": "2026-04-01T19:09:37Z",
+  "recording_id": 134746789,
+  "recording_start_time": "2026-04-01T18:58:36Z",
+  "recording_end_time": "2026-04-01T19:22:38Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Align on the Evolution Summit launch plan and a new client's automation setup.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=0.0)\n\n## Key Takeaways\n\n  - [**Summit Launch Plan Ready:** A 120-page copy doc details the entire Summit campaign (capture, warm-up, sales) across all channels. Execution begins Monday, April 6.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=9.0)\n  - [**Immediate Summit Priority:** The capture page must be live by Monday. Diego will build the page in Rappet, and Davidson will handle the technical backend (form integration, WhatsApp group setup).](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=349.0)\n  - [**New Client Automation:** Diego will design two automation flows (official buyer, abandoned cart) for a new client. Davidson will provide the platform and technical support for the setup.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1031.0)\n  - [**Production Bottleneck:** The Summit's high-volume content requires immediate support from the agency or a designer (Orion) to create visuals.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=485.0)\n\n## Topics\n\n### Evolution Summit Launch Plan\n\n  - [**Plan Overview:** Diego created a 120-page copy doc detailing the full launch campaign, structured into four phases:](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=9.0)\n      - [**Capture (starts April 6):** Drive registrations for the free Summit.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=78.0)\n      - [**Warm-up (starts April 7):** Engage registered attendees.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=161.0)\n      - [**Launch (April 14–16):** Promote the live event.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=206.0)\n      - [**Sales (starts April 17):** Pitch the Academy to attendees.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=257.0)\n  - [**Content Strategy:**](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=647.0)\n      - [**Davidson's Role:** Record short, simple videos (e.g., 15-sec Stories) and share authentic, behind-the-scenes content to humanize the campaign.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=686.0)\n      - [**Production:** Simple edits are sufficient, but more polished Reels are welcome if resources (Orion, agency) are available.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=686.0)\n  - [**Execution & Coordination:**](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1230.0)\n      - [**Task Management:** Diego will create a Notion calendar from the copy doc to track all posts and assign responsibilities.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1230.0)\n      - [**Team Support:** The plan requires a \"force-task\" (force-task) from the agency and Orion to produce the high volume of required visuals.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=485.0)\n\n### New Client Automation Setup\n\n  - [**Project Context:** A new client needs automation flows to nurture leads and recover abandoned carts.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1031.0)\n  - [**Platform Status:** The platform is nearly ready; Davidson's team is finalizing the onboarding screen.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1074.0)\n  - [**Diego's Role:** Design two initial automation flows:](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1031.0)\n    1.  [**Official Buyer Flow:** Nurture customers after their first purchase.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1031.0)\n    2.  [**Abandoned Cart Flow:** Recover leads who don't complete a purchase.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1031.0)\n  - [**Technical Requirements:**](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=960.0)\n      - [**Lead Source:** The client's leads come from \"Green,\" requiring an integration.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=960.0)\n      - [**Communication:** An official WhatsApp Business number is needed for automated messages.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=980.0)\n  - [**Onboarding Plan:**](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1087.0)\n    1.  [**Internal Sync:** Davidson will first demo the platform for Diego.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1087.0)\n    2.  [**Client Review:** Diego will then present the proposed automation flows to the client.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1087.0)\n\n## Next Steps\n\n  - [**Diego:**](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1374.0)\n      - [Build the Summit capture page in Rappet by tomorrow morning.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1374.0)\n      - [Design the two automation flows for the new client.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1031.0)\n      - [Create the Summit publication calendar in Notion.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1230.0)\n  - [**Davidson:**](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=349.0)\n      - [Configure the Summit capture page backend (form integration, WhatsApp group).](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=349.0)\n      - [Secure production support (Orion, agency) for Summit visuals.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=485.0)\n      - [Demo the automation platform for Diego tomorrow.](https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ?tab=summary&timestamp=1087.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Add 2 days to capture plan; update doc",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:01:07",
+      "recording_playback_url": "https://fathom.video/calls/622949808?timestamp=67.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Record 15s opening video for Apr 6 launch",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:06:32",
+      "recording_playback_url": "https://fathom.video/calls/622949808?timestamp=392.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Create WhatsApp avisos group; add link to Rappet thank-you",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:19:33",
+      "recording_playback_url": "https://fathom.video/calls/622949808?timestamp=1173.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Post both doc links in group description for Diego",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:20:07",
+      "recording_playback_url": "https://fathom.video/calls/622949808?timestamp=1207.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Build Notion content calendar from copy doc",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:20:21",
+      "recording_playback_url": "https://fathom.video/calls/622949808?timestamp=1221.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Build Rappet capture page; coordinate form/CRM w/ Davidson; deliver 1st version by Apr 2 AM",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:21:31",
+      "recording_playback_url": "https://fathom.video/calls/622949808?timestamp=1291.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": null,
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/5VWfEzT7mdE_iZfy1YAfbhe29aaFPgZQ",
+  "crm_matches": null
+}

@@ -1,0 +1,68 @@
+{
+  "title": "Evolution <> Super Agentes",
+  "meeting_title": "Evolution <> Super Agentes",
+  "url": "https://fathom.video/calls/598359854",
+  "created_at": "2026-03-12T21:24:45Z",
+  "scheduled_start_time": "2026-03-12T21:00:00Z",
+  "scheduled_end_time": "2026-03-12T21:30:00Z",
+  "recording_id": 129574008,
+  "recording_start_time": "2026-03-12T21:01:52Z",
+  "recording_end_time": "2026-03-12T21:20:44Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Define a strategy to scale a high-volume WhatsApp marketing operation.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=1027.0)\n\n## Key Takeaways\n\n  - [**Goal:** Outsource a high-volume WhatsApp operation to hit a client's break-even, enabling a shift from operational management to strategic marketing.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=778.0)\n  - [**Problem:** The current setup has a low 37% delivery rate, blocking growth. The client needs a mass campaign (4k contacts) to hit break-even and unlock a revenue-share model.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=240.0)\n  - [**Solution:** Implement a hybrid API architecture (official + unofficial) to ensure high deliverability for aggressive campaigns, while using official APIs for standard flows to maintain account health.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=919.0)\n  - [**Timeline:** A 2-week POC for the mass campaign is required to provide the client with immediate, tangible results.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=1027.0)\n\n## Topics\n\n### The Challenge: Scaling a High-Risk Operation\n\n  - [**Objective:** Hit break-even for a new Forex trading client to trigger a revenue-share partnership.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=480.0)\n  - [**Current State:** The operation is stalled by a low 37% WhatsApp delivery rate, blocking the mass campaign needed to hit the break-even target.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=240.0)\n  - [**Client Profile:**](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=155.0)\n      - [\\~150 new clients/day, primarily from the Middle East.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=472.0)\n      - [High-volume potential: client is ready to increase ad spend significantly.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=472.0)\n  - [**Current Architecture:**](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=180.0)\n      - [**API:** Official WhatsApp Business API (BSP) via a partner.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=180.0)\n      - [**Cost:** \\~R$0.60 per message.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=521.0)\n      - [**Automation:** N800 workflow using ZAPI for non-official API access.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=382.0)\n      - [**Flow:** E-commerce event → DB entry → N800 reads DB → 3-message recovery sequence (15m, 45m, 75m).](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=180.0)\n\n### Proposed Solution: Hybrid API Strategy\n\n  - [**Core Idea:** Use a hybrid architecture to balance account health and deliverability.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=919.0)\n      - [**Official API:** For standard, lower-risk flows.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=919.0)\n      - [**Unofficial API:** For aggressive campaigns where deliverability is paramount.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=960.0)\n  - [**Tactics for Official API:**](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=919.0)\n      - [**Template Rotation:** Dynamically vary templates to avoid detection.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=930.0)\n      - [**Utility Messaging:** Frame marketing messages as \"utility\" to improve delivery.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=925.0)\n      - [**Number Rotation:** Use a pool of numbers (Twilio) to manage reputation.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=953.0)\n  - [**Tactics for Unofficial API:**](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=960.0)\n      - [**Mass Campaigns:** Ensure high deliverability for large, one-off sends.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=960.0)\n      - [**Account Warm-up:** Implement a systematic process to build account reputation.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=420.0)\n\n## Next Steps\n\n  - [**Davidson:** Analyze the current architecture and propose a hybrid API strategy.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=1071.0)\n  - [**Davidson:** Create a document outlining technical options before discussing pricing.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=1071.0)\n  - [**Talles:** Provide any additional information Davidson needs for the analysis.](https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz?tab=summary&timestamp=1094.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Send WhatsApp billing/cost metrics to Davidson",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:10:07",
+      "recording_playback_url": "https://fathom.video/calls/598359854?timestamp=607.9999",
+      "assignee": {
+        "name": "Talles Souza",
+        "email": "tallessouza@academialendaria.ai",
+        "team": null
+      }
+    },
+    {
+      "description": "Analyze Talles's WhatsApp setup; send alternatives/POC plan (official vs unofficial) to Talles",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:14:59",
+      "recording_playback_url": "https://fathom.video/calls/598359854?timestamp=899.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Talles Souza",
+      "email": "tallessouza@academialendaria.ai",
+      "email_domain": "academialendaria.ai",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/hRzs17w4eVsPQvsw5yxw2RydebHNVNNz",
+  "crm_matches": null
+}

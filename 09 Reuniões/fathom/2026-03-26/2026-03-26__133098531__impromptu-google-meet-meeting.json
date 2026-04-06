@@ -1,0 +1,109 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/615794090",
+  "created_at": "2026-03-26T15:06:57Z",
+  "scheduled_start_time": "2026-03-26T14:49:09Z",
+  "scheduled_end_time": "2026-03-26T15:04:09Z",
+  "recording_id": 133098531,
+  "recording_start_time": "2026-03-26T14:52:25Z",
+  "recording_end_time": "2026-03-26T15:03:47Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Align on replicating the open-source release process for other products.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=18.0)\n\n## Key Takeaways\n\n  - [Replicate the Evolution Go release process (code obfuscation, auto-sync) for the CRM and Community products.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=368.0)\n  - [The paid version's value is SaaS hosting (no installation) and advanced features like multi-account management, which are excluded from the open-source build.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=151.0)\n  - [Danilo will build the licensing system; Matheus will configure the automated build/obfuscation process.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n  - [A separate `community-develop` branch will isolate Community code from Enterprise features, simplifying the build logic.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=502.0)\n\n## Topics\n\n### Open-Source Strategy & Value Proposition\n\n  - [**Concern:** Open-sourcing the CRM could enable competitors to replicate the paid version using AI.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=127.0)\n  - [**Resolution:** The paid version's value is protected by two key differentiators:](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=151.0)\n      - [**SaaS Hosting:** No self-installation required.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=151.0)\n      - [**Feature Gating:** Advanced features (e.g., multi-account management) are excluded from the open-source build.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=151.0)\n  - [**Product Focus:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=69.0)\n      - [**Evolgo:** Keep the manager panel closed-source as a pre-compiled build.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=94.0)\n      - [**CRM & Community:** Focus open-source efforts here.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=69.0)\n\n### Technical Implementation Plan\n\n  - [**Goal:** Replicate the Evolution Go release workflow for the CRM and Community products.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=368.0)\n  - [**Core Components:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=438.0)\n      - [**Licensing System:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=300.0)\n          - [**Mechanism:** Use a `runtime_configs` DB table to store `Instance ID` and API key.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=300.0)\n          - [**Activation:** Managed by the CRM backend, with a front-end wizard.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=334.0)\n      - [**Automated Build & Obfuscation:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=355.0)\n          - [**Process:** Obfuscate code (e.g., using Fathom) before public release.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=463.0)\n          - [**Workflow:** `develop` branch → `beta` repo; `main` branch → public repo.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=378.0)\n  - [**Branching Strategy:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=502.0)\n      - [**Decision:** Create a separate `community-develop` branch.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=502.0)\n      - [**Rationale:** Prevents mixing Community code with Enterprise-only features (e.g., super admin), simplifying the build process.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=502.0)\n\n## Next Steps\n\n  - [**Danilo:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n      - [Build the licensing system and activation wizard for the CRM, using the Evolution Go manager as a reference.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n  - [**Matheus:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n      - [Configure the automated build, obfuscation, and repository sync process for the CRM and Community products.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n  - [**Danilo & Matheus:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n      - [Coordinate to define dependencies (e.g., API routes) and ensure parallel work on the front-end and back-end.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=450.0)\n  - [**Davidson:**](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=594.0)\n      - [Prioritize development over detailed task tracking; log only a summary of work in Línea to maintain momentum.](https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo?tab=summary&timestamp=594.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Test/upload Noivo, Community, CRM changes",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:00:19",
+      "recording_playback_url": "https://fathom.video/calls/615794090?timestamp=19.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Align w/ Danilo on Open Source/Community scope + responsibilities",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:04:35",
+      "recording_playback_url": "https://fathom.video/calls/615794090?timestamp=275.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Align w/ Danilo on Open Source/Community scope + responsibilities",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:04:35",
+      "recording_playback_url": "https://fathom.video/calls/615794090?timestamp=275.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Implement license/activation wizard + routes; use CRM backend for activation",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:19",
+      "recording_playback_url": "https://fathom.video/calls/615794090?timestamp=439.9999",
+      "assignee": {
+        "name": "Danilo Leone dos Santos Carneiro",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Implement obfuscation + build/sync; use Fathom; align w/ Danilo on routes",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:32",
+      "recording_playback_url": "https://fathom.video/calls/615794090?timestamp=452.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Create Community develop repo; keep Enterprise/Community separate",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:08:34",
+      "recording_playback_url": "https://fathom.video/calls/615794090?timestamp=514.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/9zb1n9yFMUjGtcxespEHcVR1odYE6Cpo",
+  "crm_matches": null
+}

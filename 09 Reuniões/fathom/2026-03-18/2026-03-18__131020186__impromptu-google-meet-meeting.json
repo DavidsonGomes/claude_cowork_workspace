@@ -1,0 +1,61 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/606299651",
+  "created_at": "2026-03-18T18:26:52Z",
+  "scheduled_start_time": "2026-03-18T18:03:20Z",
+  "scheduled_end_time": "2026-03-18T18:18:20Z",
+  "recording_id": 131020186,
+  "recording_start_time": "2026-03-18T18:03:49Z",
+  "recording_end_time": "2026-03-18T18:23:21Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Define OMI invoice automation logic for a new platform.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=13.0)\n\n## Key Takeaways\n\n  - [**OMI Configuration is the Key:** The automation's success hinges on correctly configuring OMI's service codes (`Código de Serviço`, `Código da Lei Complementar`) and tax rules, not the Stripe data source.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=13.0)\n  - [**Strategic 7-Day Delay:** Invoice issuance will be delayed 7 days to align with the refund window. This avoids manual reconciliation of canceled invoices and ensures accurate monthly revenue reports.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=731.0)\n  - [**Automated Refund Cancellation:** Refunds will automatically trigger an OMI invoice cancellation, eliminating a manual step from the current workflow.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=780.0)\n  - [**New Platform & Payment Gateway:** Davidson is building a platform that integrates with the low-cost `Gator` payment gateway (2.79% fee, no admin fees), replacing Stripe.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=963.0)\n\n## Topics\n\n### OMI Automation Requirements\n\n  - [Felipe's existing automation (Stripe → Pluga → OMI) failed to auto-issue invoices due to incorrect OMI configuration.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=166.0)\n  - [**Critical OMI Fields:**](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=327.0)\n      - [`Código de Serviço` (Service Code)](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=241.0)\n      - [`Código da Lei Complementar` (Complementary Law Code)](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=327.0)\n  - [**Tax Logic:**](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=589.0)\n      - [**Tributation Type:** `Tributável` (Taxable) for Brazil, `Isento` (Exempt) for international.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=638.0)\n      - [**ISS Withholding:** A new checkout field will capture if a CNPJ client withholds ISS.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=589.0)\n  - [**Service Codes:**](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=421.0)\n      - [Initially, all services can use the same SaaS code.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=421.0)\n      - [The new platform can support product-specific codes if needed.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=540.0)\n\n### Invoice & Refund Workflow\n\n  - [**Problem:** Issuing invoices immediately for refunded purchases creates manual reconciliation work and distorts monthly revenue reports.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=741.0)\n  - [**Solution:** Delay invoice issuance by 7 days to align with the refund window.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=731.0)\n      - [**Rationale:** This ensures only final, non-refunded sales are invoiced, simplifying reporting.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=819.0)\n  - [**Refund Process:** Refunds will automatically trigger an OMI invoice cancellation.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=780.0)\n      - [**Felipe's Confirmation:** OMI's simple cancellation process makes this feasible.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=927.0)\n\n### New Platform & Payment Gateway\n\n  - [Davidson is building a platform to replace the current Stripe/Pluga setup.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=963.0)\n  - [**Payment Gateway:** The platform will integrate with `Gator`, a low-cost alternative to Stripe.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=963.0)\n      - [**Fee:** 2.79% per transaction, with no admin fees.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=1020.0)\n  - [**Business Model:** Davidson plans to offer the platform to other businesses, bundling `Gator` to generate revenue from transaction volume.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=1030.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=951.0)\n      - [Finalize the OMI integration, incorporating the 7-day delay and automated cancellation logic.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=951.0)\n      - [Add the \"ISS withholding\" field to the checkout for CNPJ clients.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=589.0)\n      - [Notify Felipe to test the full purchase-invoice-refund flow.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=951.0)\n  - [**Felipe:**](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=1092.0)\n      - [Provide Davidson with OMI access credentials via Slack.](https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz?tab=summary&timestamp=1092.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Add ISS retention flag to CNPJ customers; then auto-cancel OME NFSe on refund",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:09:49",
+      "recording_playback_url": "https://fathom.video/calls/606299651?timestamp=589.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement 7-day NFSe emission; then run test purchase/refund w/ Felipe",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:13:36",
+      "recording_playback_url": "https://fathom.video/calls/606299651?timestamp=816.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/7HqaW7tSxRXPW2E5sk5h-BMjrwbHvZEz",
+  "crm_matches": null
+}

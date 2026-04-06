@@ -1,0 +1,73 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/601114610",
+  "created_at": "2026-03-13T19:58:44Z",
+  "scheduled_start_time": "2026-03-13T19:32:35Z",
+  "scheduled_end_time": "2026-03-13T19:47:35Z",
+  "recording_id": 129889975,
+  "recording_start_time": "2026-03-13T19:33:25Z",
+  "recording_end_time": "2026-03-13T19:58:21Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Discussing AI creative tools and a potential collaboration.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=2.0)\n\n## Key Takeaways\n\n  - [**\"Seu Sobrinho\" AI Creative Tool:** um2 is developing a tool to generate high-quality creatives that don't look AI-generated, solving a key market problem. It's a PHP MVP, but scaling requires a move to AWS, which is blocked by funding.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=12.0)\n  - [**OpenClaw Agent Model:** Davidson proposed a new model: sell OpenClaw agents that use um2's API. This enables revenue without a UI, funding the AWS migration and creating a new product line.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=723.0)\n  - [**Blog Automation System:** um2's existing blog system can automate Brius's \"New Cycles\" content strategy. A pilot installation on Brius's server is planned for next week.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=600.0)\n  - [**Next Step:** A technical meeting is scheduled for Saturday morning (10–11 am) with um2's developer, Jorge, to explore the OpenClaw integration.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1297.0)\n\n## Topics\n\n### \"Seu Sobrinho\" AI Creative Tool\n\n  - [**Problem:** Small businesses need professional creatives but can't afford designers and get poor results from tools like Canva. Existing AI tools often produce low-quality, generic outputs.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=47.0)\n  - [**Solution:** \"Seu Sobrinho\" (Your Nephew) is an AI tool designed to generate high-quality creatives that appear human-made.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=12.0)\n      - [**Key Feature:** Excels at complex, text-heavy layouts—a major challenge for most AI image generators.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=381.0)\n      - [**User Workflow:** A simple UI guides users to build complex prompts via selections and reference image uploads.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=240.0)\n      - [**Customization:** Includes logo placement, size, and color matching.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=314.0)\n  - [**Status & Scaling:**](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=448.0)\n      - [**MVP:** Built in PHP; layout delivery is expected by Monday.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=448.0)\n      - [**Pilot:** A controlled test will use a $200 ad account budget.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=464.0)\n      - [**Scaling Blocker:** Requires a move to AWS for robustness, but this is blocked by the cost of hiring an AWS developer.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=557.0)\n      - [**Pricing Model:** Credit-based, estimated at R$5/creative.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=487.0)\n\n### Proposed Collaboration: OpenClaw Agent Integration\n\n  - [**Concept:** Sell pre-configured OpenClaw agent templates that use um2's API.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=723.0)\n  - [**Benefits:**](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=723.0)\n      - [**Revenue Source:** Funds the AWS migration without needing a UI.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=723.0)\n      - [**New Product:** Creates a scalable product line (e.g., agents for blog posts, LinkedIn content).](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=723.0)\n      - [**Pilot Project:** The blog automation system is the ideal first candidate for this integration.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=906.0)\n  - [**Technical Details:**](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=799.0)\n      - [**OpenClaw:** A local agent framework installed on a VPS.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=799.0)\n      - [**Integration:** An agent's \"skill\" calls um2's API using a client's purchased key.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=869.0)\n      - [**UI:** The client interacts with the agent via a simple chat interface (e.g., Telegram).](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=881.0)\n      - [**Compatibility:** Language (PHP vs. Python) is not an issue, as the integration is API-based.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1057.0)\n\n### Blog Automation System\n\n  - [**Product:** An existing system that automates blog post creation.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=600.0)\n  - [**Functionality:**](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=985.0)\n      - [**Input:** Takes a list of weekly themes.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=985.0)\n      - [**Process:** Scans the web for current news on those themes.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=985.0)\n      - [**Output:** Generates and schedules posts with a customizable tone (e.g., sarcastic).](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1396.0)\n  - [**Brius's Need:** Automate the \"New Cycles\" strategy (52 news items/year) for the Evolution project.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=669.0)\n  - [**Pilot Plan:** Install the system on Brius's server next week to test its fit and generate content.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1334.0)\n\n## Next Steps\n\n  - [**um2 Marketing:**](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1272.0)\n      - [Schedule a technical meeting for Saturday morning (10–11 am) with developer Jorge and Davidson.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1297.0)\n      - [Provide Davidson with sample prompts for the creative generator to begin exploring the agent integration.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1194.0)\n      - [Arrange for the blog automation system to be installed on Brius's server next week.](https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU?tab=summary&timestamp=1334.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Define credits/cost for alterations; update pricing",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:08:20",
+      "recording_playback_url": "https://fathom.video/calls/601114610?timestamp=500.9999",
+      "assignee": {
+        "name": "um2 Marketing",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Schedule Sat 10–11 AM sync w/ Jorge + Davidson; then send creative prompts/API docs to Davidson",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:15:27",
+      "recording_playback_url": "https://fathom.video/calls/601114610?timestamp=927.9999",
+      "assignee": {
+        "name": "um2 Marketing",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Install blog system on Evolution dev env Mar 16–17; then configure 1st-week topics/schedule",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:22:49",
+      "recording_playback_url": "https://fathom.video/calls/601114610?timestamp=1369.9999",
+      "assignee": {
+        "name": "um2 Marketing",
+        "email": null,
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/CsRGf7_VszEP6BQJRh6K7pLH69qBPzjU",
+  "crm_matches": null
+}

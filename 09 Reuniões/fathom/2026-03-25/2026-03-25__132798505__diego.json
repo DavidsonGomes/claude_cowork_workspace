@@ -1,0 +1,99 @@
+{
+  "title": "Diego",
+  "meeting_title": "Davidson <> Diego",
+  "url": "https://fathom.video/calls/612365992",
+  "created_at": "2026-03-25T17:37:54Z",
+  "scheduled_start_time": "2026-03-25T17:00:00Z",
+  "scheduled_end_time": "2026-03-25T18:00:00Z",
+  "recording_id": 132798505,
+  "recording_start_time": "2026-03-25T17:00:15Z",
+  "recording_end_time": "2026-03-25T17:31:47Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Define a pilot project for Evolution's new platform.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=123.0)\n\n## Key Takeaways\n\n  - [**Pilot Project:** Diego's agency will become a paying client of Evolution's \"Pro Support\" plan to implement a full sales funnel for their client, fitness educator Pedro.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=218.0)\n  - [**Client Need:** Pedro's business is entirely manual, leaving significant revenue on the table from missed upsells and abandoned carts.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=394.0)\n  - [**Solution:** Evolution will automate lead qualification, segment customers (Personal Trainer vs. Athlete), and drive upsells via Instagram DMs.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=454.0)\n  - [**Phased Rollout:** To ensure stability, the implementation will be phased: manual operation first for feedback, then automation.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1338.0)\n\n## Topics\n\n### Client Problem: Pedro's Manual Operation\n\n  - [**Core Product:** R$67 exercise library sold via Green.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=327.0)\n  - [**Key Gaps:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=394.0)\n      - [**No Customer Segmentation:** Cannot differentiate between Personal Trainers (PTs) and Athletes.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=454.0)\n      - [**No Upsell Funnel:** Missed opportunities to sell higher-ticket products.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=360.0)\n      - [**No Lead Management:** No CRM, cart recovery, or follow-up on unpaid Pix invoices.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=749.0)\n  - [**Upsell Opportunities:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=633.0)\n      - [**For PTs:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=633.0)\n          - [`CTF` certification course.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=633.0)\n          - [1-on-1 mentorship.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=660.0)\n      - [**For Athletes:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=679.0)\n          - [Personalized training plans (e.g., for Jiu-Jitsu, Football).](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=679.0)\n          - [1-on-1 consultation.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=728.0)\n  - [**Future Project:** A separate training app is in development, creating a potential future integration point.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=542.0)\n\n### Solution: Evolution Platform Implementation\n\n  - [**Platform Scope:** The Community version provides a multi-channel AI assistant and CRM.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=857.0)\n  - [**Integration Strategy:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=974.0)\n      - [**Green:** Use postbacks to send sales data to Evolution.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=974.0)\n      - [**N8N:** Act as middleware for custom logic (e.g., scheduled upsell messages).](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1024.0)\n  - [**Channel Strategy:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=922.0)\n      - [**Primary:** Instagram DMs for inbound leads.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=922.0)\n      - [**Secondary:** Email and WhatsApp for follow-ups, bypassing Instagram's 24-hour rule.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1045.0)\n  - [**Infrastructure:** Davidson is exploring a pre-installed server package (Evolution + N8N) with HostGator to simplify setup.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1232.0)\n\n## Next Steps\n\n  - [**Diego:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1375.0)\n      - [Create a group chat with Davidson and Philipe.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1375.0)\n      - [Draft the CRM pipeline structure with Pedro.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1321.0)\n      - [Formalize the agency's \"Pro Support\" subscription.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1386.0)\n  - [**Davidson:**](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1193.0)\n      - [Notify Diego when the platform is ready for testing.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1193.0)\n      - [Send the subscription link to Diego.](https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg?tab=summary&timestamp=1386.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Notify Diego/Philipe when platform ready; then coordinate Green test acct + postback/webhook",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:19:44",
+      "recording_playback_url": "https://fathom.video/calls/612365992?timestamp=1184.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Create 3-person group chat (Diego, Davidson, Philipe) re: Pedro pilot",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:22:44",
+      "recording_playback_url": "https://fathom.video/calls/612365992?timestamp=1364.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": "diego@dpr.ag",
+        "team": null
+      }
+    },
+    {
+      "description": "Send Pro Support checkout link to Diego; then Diego completes purchase",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:23:33",
+      "recording_playback_url": "https://fathom.video/calls/612365992?timestamp=1413.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Draft Pedro CRM pipeline (stages/fields/triggers) for Davidson/Philipe review",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:28:49",
+      "recording_playback_url": "https://fathom.video/calls/612365992?timestamp=1729.9999",
+      "assignee": {
+        "name": "Diego Lerina",
+        "email": "diego@dpr.ag",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "diego@dpr.ag",
+      "email": "diego@dpr.ag",
+      "email_domain": "dpr.ag",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "philipe.designergrafico@gmail.com",
+      "email": "philipe.designergrafico@gmail.com",
+      "email_domain": "gmail.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/gpxRmXZnoq6-YZ4fpVdjh2V8EYzQg-tg",
+  "crm_matches": null
+}

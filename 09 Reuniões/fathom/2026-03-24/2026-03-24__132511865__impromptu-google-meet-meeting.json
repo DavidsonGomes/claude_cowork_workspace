@@ -1,0 +1,73 @@
+{
+  "title": "Impromptu Google Meet Meeting",
+  "meeting_title": "Impromptu Google Meet Meeting",
+  "url": "https://fathom.video/calls/613021495",
+  "created_at": "2026-03-24T20:10:56Z",
+  "scheduled_start_time": "2026-03-24T19:55:08Z",
+  "scheduled_end_time": "2026-03-24T20:10:08Z",
+  "recording_id": 132511865,
+  "recording_start_time": "2026-03-24T19:55:31Z",
+  "recording_end_time": "2026-03-24T20:05:06Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Define the system activation and licensing flow.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=32.0)\n\n## Key Takeaways\n\n  - [**New Activation Flow:** A middleware will gate all API routes, returning an error with an activation link if a license is invalid. This replaces a dedicated activation page, simplifying the user experience.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=427.0)\n  - [**User-Provided Key:** The system will use the user's existing API key for activation, eliminating friction from requiring them to change it.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=333.0)\n  - [**Backend Priority:** Matheus will implement the middleware in Go, obscuring the activation logic to prevent tampering.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=93.0)\n  - [**Immediate Focus:** The CLI installer is deferred to prioritize the web-based activation flow for the upcoming live event.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=208.0)\n\n## Topics\n\n### Problem: Activation Friction\n\n  - [The original plan for a mandatory activation page created friction by forcing users to change their existing API key.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=333.0)\n  - [A temporary installation system was also considered but rejected in favor of a permanent, integrated solution.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=48.0)\n\n### Solution: Middleware-Based Activation\n\n  - [**Core Logic:** A middleware will check license validity on every API request.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=427.0)\n      - [**Valid License:** Request proceeds normally.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=427.0)\n      - [**Invalid License:** Request returns an error with a link to the activation page.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=427.0)\n  - [**User Experience:** This approach allows the system to initialize, but all functionality is blocked until activation. The manager login will also be gated by this check.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=427.0)\n  - [**Implementation:**](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=492.0)\n      - [**Backend (Matheus):** Implement the middleware in Go, obscuring activation endpoints to prevent tampering.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=93.0)\n      - [**Frontend (Davidson):** Adapt the manager login to redirect to the activation page if the license is invalid.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=469.0)\n\n### Implementation Details\n\n  - [**API Key Handling:**](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=333.0)\n      - [The license system will be updated to accept an optional API key during registration.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=398.0)\n      - [This allows the system to use the user's existing key for activation, avoiding the need for them to change it.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=333.0)\n  - [**Telemetry:**](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=510.0)\n      - [The telemetry process (e.g., counting sent messages) will be integrated with the license validation check.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=510.0)\n      - [This provides a natural point to trigger the activation error if the license is invalid.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=510.0)\n\n## Next Steps\n\n  - [**Davidson:** Update the license system to accept an optional API key during registration.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=398.0)\n  - [**Matheus:**](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=492.0)\n      - [Implement the middleware in Go to gate API routes based on license validity.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=427.0)\n      - [Obscure activation endpoints in the backend to prevent tampering.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=93.0)\n  - [**Davidson:** Adapt the manager login to redirect to the activation page if the license is invalid.](https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV?tab=summary&timestamp=469.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Obfuscate activation/telemetry in Go; remove gate; implement middleware; add telemetry; send activation link on invalid",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:01:22",
+      "recording_playback_url": "https://fathom.video/calls/613021495?timestamp=82.9999",
+      "assignee": {
+        "name": "Matheus Gomes Pastorini",
+        "email": null,
+        "team": null
+      }
+    },
+    {
+      "description": "Update license init to accept optional API key; send to Matheus",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:06:36",
+      "recording_playback_url": "https://fathom.video/calls/613021495?timestamp=396.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement Manager login validation; redirect to activation on invalid",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:07:38",
+      "recording_playback_url": "https://fathom.video/calls/613021495?timestamp=458.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/MQETT_HJ6SeaBkr-J6v_-nC4srPvj5zV",
+  "crm_matches": null
+}

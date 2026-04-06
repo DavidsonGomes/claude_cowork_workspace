@@ -1,0 +1,115 @@
+{
+  "title": "HostGator <> Evolution API",
+  "meeting_title": "HostGator <> Evolution API",
+  "url": "https://fathom.video/calls/616177109",
+  "created_at": "2026-03-26T21:28:59Z",
+  "scheduled_start_time": "2026-03-26T21:00:00Z",
+  "scheduled_end_time": "2026-03-26T21:30:00Z",
+  "recording_id": 133283597,
+  "recording_start_time": "2026-03-26T21:00:31Z",
+  "recording_end_time": "2026-03-26T21:28:51Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Review launch issues and product feedback for the Evolution API integration.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=21.0)\n\n## Key Takeaways\n\n  - [**Critical Bugs Identified:** The launch was blocked by three bugs: stalled server provisioning, failed password changes, and inaccessible SSH on Ubuntu builds.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=345.0)\n  - [**Root Causes & Fixes:**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=587.0)\n      - [**SSH:** Ubuntu builds block the outdated RSA key protocol. The fix is to rebuild on Alma Linux, which supports modern protocols.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=587.0)\n      - [**Rebuilds:** A pending `rebootsoft` command on the server prevented a rebuild from executing.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=980.0)\n      - [**Password Changes:** The request to change a password is not reaching the backend (`SBOG` API), preventing the Ansible playbook from running.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1124.0)\n  - [**Product Feedback:** Users need a simple UI for pre-installation configuration (e.g., RabbitMQ credentials) to avoid manual `.env` file edits.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1230.0)\n  - [**Next Steps:** A follow-up meeting is set for Monday to review a demo of a proposed setup UI.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1420.0)\n\n## Topics\n\n### Launch Issues & Debugging\n\n  - [**Stalled Server Provisioning**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=348.0)\n      - [**Issue:** New VPS purchases were stuck in a \"configuring\" state for hours, blocking user access.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=348.0)\n      - [**Status:** Fixed yesterday afternoon (March 25). Support is manually activating all remaining stalled accounts.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1516.0)\n  - [**SSH Access Failure**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=367.0)\n      - [**Issue:** SSH connection was refused on a server running Ubuntu.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=367.0)\n      - [**Root Cause:** The server's SSH configuration was set to reject the outdated RSA key protocol for security.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=618.0)\n      - [**Resolution:** Rebuilding the server on Alma Linux, which supports modern protocols, resolves the issue.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=587.0)\n  - [**Password Change Failure**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=806.0)\n      - [**Issue:** Changing the root password in the client portal fails.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=806.0)\n      - [**Root Cause:** The password change request is not reaching the backend (`SBOG` API), preventing the Ansible playbook from running.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1124.0)\n      - [**Status:** Unresolved; requires further investigation.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1573.0)\n  - [**Web Terminal Login Failure**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=806.0)\n      - [**Issue:** The web terminal (VNC) rejects correct passwords.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=806.0)\n      - [**Root Cause:** The VNC client does not support copy-pasting, requiring manual entry. However, manual entry also fails, indicating a separate bug.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=498.0)\n      - [**Status:** Unresolved; requires further investigation.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1573.0)\n  - [**Failed Server Rebuild**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=980.0)\n      - [**Issue:** A server rebuild request failed to execute.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=980.0)\n      - [**Root Cause:** A pending `rebootsoft` command on the server was blocking the rebuild process.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=980.0)\n      - [**Resolution:** The rebuild succeeded after the pending reboot completed.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=980.0)\n\n### Product Feedback: Configuration UI\n\n  - [**Problem:** Users need a simple way to configure the application (e.g., RabbitMQ credentials) without manual SSH access and `.env` file edits.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1230.0)\n  - [**Proposed Solution:** A pre-installation setup screen in the portal, similar to the one used for OpenClaw's LLM API keys.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1383.0)\n  - [**Demo:** Davidson is building a setup application and will demo it on Monday to illustrate the required configuration options.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1420.0)\n\n## Next Steps\n\n  - [**Eduarda:**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1573.0)\n      - [Prioritize and investigate the password change failure bug.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1573.0)\n      - [Schedule a follow-up meeting for Monday to review the setup UI demo.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1420.0)\n  - [**Davidson:**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1600.0)\n      - [Demo the setup application on Monday.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1420.0)\n      - [Contact Guilherme directly for urgent server/SSH issues.](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=1600.0)\n  - [**Fernando:**](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=67.0)\n      - [Schedule a separate meeting for tomorrow (March 27) to discuss business terms (SaaS, revenue share).](https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE?tab=summary&timestamp=67.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Email meeting recording to Davidson + team",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:01:54",
+      "recording_playback_url": "https://fathom.video/calls/616177109?timestamp=114.9999",
+      "assignee": {
+        "name": "Tiago de Oliveira",
+        "email": "tiago.oliveira1@newfold.com",
+        "team": null
+      }
+    },
+    {
+      "description": "Email Eduarda your account email + IPs of affected servers",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:15:26",
+      "recording_playback_url": "https://fathom.video/calls/616177109?timestamp=926.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Open task re: password change + web terminal; prioritize fix; update Davidson",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:26:02",
+      "recording_playback_url": "https://fathom.video/calls/616177109?timestamp=1562.9999",
+      "assignee": {
+        "name": "Eduarda da Silva",
+        "email": "eduarda.silva@bluehost.com",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Fernando da Silva",
+      "email": "fernando.nascimento@newfold.com",
+      "email_domain": "newfold.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Jose Lara",
+      "email": "jose.lara@newfold.com",
+      "email_domain": "newfold.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Pedro Braga",
+      "email": "pedro.braga@bluehost.com",
+      "email_domain": "bluehost.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Eduarda da Silva",
+      "email": "eduarda.silva@bluehost.com",
+      "email_domain": "bluehost.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Guilherme da Fonseca",
+      "email": "guilherme.fonseca@newfold.com",
+      "email_domain": "newfold.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Tiago de Oliveira",
+      "email": "tiago.oliveira1@newfold.com",
+      "email_domain": "newfold.com",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/znsziK28UjC18KJjwKkNMJvmqvxZ8rSE",
+  "crm_matches": null
+}
