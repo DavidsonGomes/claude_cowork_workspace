@@ -88,9 +88,19 @@ Analisar as últimas semanas (quantas tiver) e identificar:
 - **Anomalias** — pico ou queda incomum vs média
 - **Sazonalidade** — padrões que se repetem (ex: segunda tem mais atividade)
 
-### Passo 5 — Gerar relatório
+### Passo 5 — Gerar relatório HTML
 
-Salvar em `01 Daily Logs/[C] YYYY-WXX-trends.md`:
+Ler o template em `.claude/templates/html/trends-report.html`.
+Substituir os placeholders `{{...}}` com os dados reais.
+
+Classificação do health geral:
+- Todos 🟢 ou maioria 🟢: `healthy` — "Saudável"
+- Mix de 🟢 e 🟡: `mixed` — "Atenção"
+- Qualquer 🔴: `risk` — "Risco"
+
+Salvar HTML em `01 Daily Logs/[C] YYYY-WXX-trends.html`.
+
+Também salvar versão markdown resumida em `01 Daily Logs/[C] YYYY-WXX-trends.md`:
 
 ```markdown
 # Análise de Tendências — Semana {WXX}
