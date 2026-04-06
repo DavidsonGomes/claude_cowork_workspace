@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análise de Tendências W15 — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 40%, rgba(0,255,167,0.03) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 { font-size: 24px; font-weight: 700; }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  .health-pill {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 16px; border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+  }
+  .health-pill.mixed { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,9,0.3); }
+  .health-pill.risk { background: rgba(240,68,56,0.15); color: var(--red); border: 1px solid rgba(240,68,56,0.3); }
+  .health-pill.healthy { background: rgba(18,183,106,0.15); color: var(--green); border: 1px solid rgba(18,183,106,0.3); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  .exec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .exec-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+
+  .exec-icon { font-size: 24px; flex-shrink: 0; margin-top: 2px; }
+  .exec-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .exec-label.positive { color: var(--green); }
+  .exec-label.warning { color: var(--yellow); }
+  .exec-label.opportunity { color: var(--blue); }
+  .exec-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .section-header h2 { font-size: 16px; font-weight: 600; }
+
+  .badge {
+    font-size: 12px; font-weight: 600;
+    padding: 2px 10px; border-radius: 100px;
+    background: rgba(0,255,167,0.1); color: var(--evo-green);
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    text-align: left; padding: 10px 20px;
+    font-size: 11px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.5px; background: rgba(0,0,0,0.2);
+  }
+
+  td {
+    padding: 12px 20px; font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .area-badge {
+    font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+  }
+  .area-badge.community { background: rgba(129,51,170,0.15); color: #a855f7; }
+  .area-badge.github { background: rgba(0,255,167,0.1); color: var(--evo-green); }
+  .area-badge.financial { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .area-badge.operational { background: rgba(247,144,9,0.15); color: var(--yellow); }
+
+  .trend-arrow { font-weight: 700; font-size: 16px; }
+  .trend-arrow.up { color: var(--green); }
+  .trend-arrow.down { color: var(--red); }
+  .trend-arrow.flat { color: var(--text-muted); }
+
+  .var-cell { font-weight: 600; font-size: 13px; }
+  .var-cell.positive { color: var(--green); }
+  .var-cell.negative { color: var(--red); }
+  .var-cell.neutral { color: var(--text-muted); }
+
+  .status-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%; margin-right: 6px;
+  }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .insight-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex; gap: 12px; align-items: flex-start;
+  }
+  .insight-item:last-child { border-bottom: none; }
+  .insight-icon { font-size: 20px; flex-shrink: 0; }
+  .insight-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+  .insight-evidence { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+
+  .rec-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex; align-items: flex-start; gap: 12px;
+  }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-number {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(0,255,167,0.1); color: var(--evo-green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+  .rec-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+
+  .footnote {
+    font-size: 12px; color: var(--text-muted);
+    text-align: center; padding: 24px;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div>
+      <h1>📈 Análise de Tendências — W15</h1>
+      <div class="subtitle">06 de abril de 2026 · Comparativo: W14 (baseline) → W15</div>
+    </div>
+  </div>
+  <div>
+    <span class="health-pill mixed">⚠️ Atenção</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- RESUMO EXECUTIVO -->
+  <div class="exec-grid">
+    <div class="exec-card">
+      <div class="exec-icon">✅</div>
+      <div>
+        <div class="exec-label positive">O que melhorou</div>
+        <div class="exec-text">ADWs com 100% de success rate em todas as rotinas. Comunidade com sentimento positivo e 78 novos membros — impulso do anúncio do Summit.</div>
+      </div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-icon">⚠️</div>
+      <div>
+        <div class="exec-label warning">O que piorou</div>
+        <div class="exec-text">Issues no evolution-api subiram de 408 → 428 (+5%), sem commits recentes (último push: 24/02). Evo-ai acumula 4 PRs abertos sem merge — alguns com mais de 9 meses.</div>
+      </div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-icon">💡</div>
+      <div>
+        <div class="exec-label opportunity">Oportunidade</div>
+        <div class="exec-text">Integração Evo Go + Chatwoot é a feature mais pedida da semana (5+ pedidos). Comunidade já criou biblioteca bridge — documentar e promover oficialmente pode virar diferencial de produto.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCORECARD -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Scorecard de Métricas</h2>
+      <span class="badge">W14 baseline → W15</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Área</th>
+          <th>Métrica</th>
+          <th>Atual (W15)</th>
+          <th>Anterior (W14)</th>
+          <th>Variação</th>
+          <th>Trend</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="area-badge community">Comunidade</span></td>
+          <td>WAM (membros ativos)</td>
+          <td class="metric-value">81</td>
+          <td>81 (baseline)</td>
+          <td class="var-cell neutral">= 0%</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot green"></span>🟢 Saudável</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge community">Comunidade</span></td>
+          <td>Mensagens na semana</td>
+          <td class="metric-value">497</td>
+          <td>497 (baseline)</td>
+          <td class="var-cell neutral">= 0%</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot green"></span>🟢 Saudável</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge community">Comunidade</span></td>
+          <td>Novos membros (semana)</td>
+          <td class="metric-value">78</td>
+          <td>— (baseline)</td>
+          <td class="var-cell neutral">baseline</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot green"></span>🟢 Saudável</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge community">Comunidade</span></td>
+          <td>Threads fórum ativas</td>
+          <td class="metric-value">29</td>
+          <td>— (baseline)</td>
+          <td class="var-cell neutral">baseline</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Atenção</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge community">Comunidade</span></td>
+          <td>Docs gaps identificados</td>
+          <td class="metric-value">6</td>
+          <td>— (baseline)</td>
+          <td class="var-cell neutral">baseline</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Atenção</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge community">Comunidade</span></td>
+          <td>Sentimento</td>
+          <td class="metric-value">Positivo</td>
+          <td>Misto (baseline)</td>
+          <td class="var-cell positive">↑ melhora</td>
+          <td><span class="trend-arrow up">↑</span></td>
+          <td><span class="status-dot green"></span>🟢 Saudável</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge github">GitHub</span></td>
+          <td>Issues abertas (evolution-api)</td>
+          <td class="metric-value">428</td>
+          <td>408</td>
+          <td class="var-cell negative">+20 (+4,9%)</td>
+          <td><span class="trend-arrow down">↑</span></td>
+          <td><span class="status-dot red"></span>🔴 Risco</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge github">GitHub</span></td>
+          <td>PRs abertos (evolution-api)</td>
+          <td class="metric-value">~10</td>
+          <td>10 (baseline)</td>
+          <td class="var-cell neutral">= estável</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Atenção</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge github">GitHub</span></td>
+          <td>PRs abertos (evo-ai)</td>
+          <td class="metric-value">4</td>
+          <td>— (baseline)</td>
+          <td class="var-cell neutral">baseline</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Atenção</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge github">GitHub</span></td>
+          <td>Stars (evolution-api)</td>
+          <td class="metric-value">7.785</td>
+          <td>7.785</td>
+          <td class="var-cell neutral">= 0</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Atenção</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge github">GitHub</span></td>
+          <td>Stars (evolution-go)</td>
+          <td class="metric-value">169</td>
+          <td>169 (baseline)</td>
+          <td class="var-cell neutral">= 0</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Atenção</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge github">GitHub</span></td>
+          <td>Commits recentes (evolution-api)</td>
+          <td class="metric-value">0</td>
+          <td>0 (último: 24/02)</td>
+          <td class="var-cell neutral">= inativo</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot red"></span>🔴 Risco</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge financial">Financeiro</span></td>
+          <td>MRR</td>
+          <td class="metric-value">—</td>
+          <td>— (não consultado)</td>
+          <td class="var-cell neutral">sem dados</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot yellow"></span>🟡 Sem dados</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge operational">Operacional</span></td>
+          <td>Success rate ADWs</td>
+          <td class="metric-value">100%</td>
+          <td>100% (baseline)</td>
+          <td class="var-cell positive">= estável</td>
+          <td><span class="trend-arrow flat">→</span></td>
+          <td><span class="status-dot green"></span>🟢 Saudável</td>
+        </tr>
+        <tr>
+          <td><span class="area-badge operational">Operacional</span></td>
+          <td>Rotinas com dados</td>
+          <td class="metric-value">3</td>
+          <td>2 (baseline)</td>
+          <td class="var-cell positive">+1</td>
+          <td><span class="trend-arrow up">↑</span></td>
+          <td><span class="status-dot green"></span>🟢 Saudável</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PADRÕES + RISCOS -->
+  <div class="two-col">
+
+    <!-- PADRÕES -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🔍 Padrões Detectados</h2>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">📈</div>
+        <div>
+          <div class="insight-text"><strong>Correlação Summit → Crescimento.</strong> Os 78 novos membros da semana coincidem diretamente com o anúncio do Evolution Summit. Evento funciona como aquisição de comunidade — padrão a monitorar nas próximas 2 semanas pós-evento (14-16/abr).</div>
+          <div class="insight-evidence">Evidência: relatório W14 cita "anúncio Evolution Summit impulsionou +78 membros"</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">⚠️</div>
+        <div>
+          <div class="insight-text"><strong>Correlação Issues GitHub ↑ + Bugs Discord ↑.</strong> Issues abertos subiram 5% (+20) enquanto comunidade reporta bugs recorrentes: stream:error 515, duplicação de webhooks no Evo Go, bloqueios de instâncias. Sinal de acumulação técnica sem releases.</div>
+          <div class="insight-evidence">Evidência: último push evolution-api em 24/02; 4 bugs reportados no relatório semanal</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">📊</div>
+        <div>
+          <div class="insight-text"><strong>Evo-ai acumula PRs sem triagem.</strong> 4 PRs abertos, sendo 2 do mesmo autor externo pedindo badge de segurança (spam), 1 com 9+ meses aberto, e 1 contribuição real de AG2 engine. Falta processo de triagem ativo.</div>
+          <div class="insight-evidence">Evidência: PR #43 e #40 (mesmo badge, datas 2025-07-17 e 2025-06-17), PR #36 (2025-06-03)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RISCOS -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🔴 Riscos</h2>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🚨</div>
+        <div>
+          <div class="insight-text"><strong>evolution-api parado há 40+ dias.</strong> Último commit em 24/02. Issues acumulando (+20 na semana). Sem release ativa no repo principal. Bugs críticos reportados (stream:error 515 causa logout indevido de instâncias) sem fix publicado.</div>
+          <div class="insight-evidence">Risco: reputação de projeto ativo + frustração crescente da comunidade</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">⚠️</div>
+        <div>
+          <div class="insight-text"><strong>6 docs gaps não resolvidos.</strong> Perguntas recorrentes sem documentação: Evo Go + Chatwoot, stream:error 515, bloqueios de instâncias. Cada gap gera múltiplos tickets no Discord.</div>
+          <div class="insight-evidence">Risco: aumento de threads de suporte + percepção de produto difícil de usar</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">💰</div>
+        <div>
+          <div class="insight-text"><strong>Financeiro sem dados.</strong> Stripe não foi consultado em nenhuma execução até agora. MRR, churn e crescimento de assinaturas estão cegos.</div>
+          <div class="insight-evidence">Risco: decisões sem suporte em dados financeiros reais</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPORTUNIDADES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>💡 Oportunidades</h2>
+    </div>
+    <div class="insight-item">
+      <div class="insight-icon">🔗</div>
+      <div>
+        <div class="insight-text"><strong>Documentar integração Evo Go + Chatwoot como guia oficial.</strong> Comunidade (yuricaetano) já criou biblioteca open source de bridge. 5+ pedidos na semana. Documentar e promover oficialmente gera valor imediato sem esforço de desenvolvimento.</div>
+        <div class="insight-evidence">Ação: pedir link da lib para Daniel/comunidade, criar guia, publicar</div>
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-icon">🎯</div>
+      <div>
+        <div class="insight-text"><strong>Summit como catalisador de aquisição.</strong> Se 78 membros vieram de 1 anúncio, durante e pós-Summit o crescimento pode ser significativo. Preparar onboarding específico para novos membros pós-evento.</div>
+        <div class="insight-evidence">Ação: criar mensagem de boas-vindas temática + FAQ para o período 14-20/abr</div>
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-icon">🧹</div>
+      <div>
+        <div class="insight-text"><strong>Triagem de PRs no evo-ai.</strong> 2 PRs de badge (spam externo) podem ser fechados agora. 1 PR de AG2 engine merece review técnico do Danilo/Gui. Limpar fila melhora percepção de projeto ativo.</div>
+        <div class="insight-evidence">Ação: fechar #40, #43 como "não planejado", revisar #46 com Danilo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMENDAÇÕES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>✅ Recomendações</h2>
+      <span class="badge">5 ações</span>
+    </div>
+    <div class="rec-item">
+      <div class="rec-number">1</div>
+      <div class="rec-text"><strong>Conectar Stripe às rotinas ADW.</strong> MRR está cego faz 2 semanas. Habilitar a skill <code>/int-stripe</code> nas próximas execuções para ter financeiro no próximo relatório de tendências.</div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-number">2</div>
+      <div class="rec-text"><strong>Publicar fix para stream:error 515 no evolution-api.</strong> Bug com reprodução 100% relatado pelo usuário OmarEltak com solução proposta. Avaliar merge ou criar issue oficial para priorização com o time.</div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-number">3</div>
+      <div class="rec-text"><strong>Fechar PRs de spam no evo-ai (#40, #43).</strong> São duplicatas de badge MseeP — fechar como "won't merge" libera triagem e melhora percepção do repo.</div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-number">4</div>
+      <div class="rec-text"><strong>Criar guia oficial Evo Go + Chatwoot.</strong> Usar a lib da comunidade como base. Feature mais pedida da semana — custo baixo, impacto alto em percepção de suporte.</div>
+    </div>
+    <div class="rec-item">
+      <div class="rec-number">5</div>
+      <div class="rec-text"><strong>Preparar onboarding pós-Summit.</strong> Semanas de 14-20/abr devem trazer pico de novos membros. Preparar fluxo de boas-vindas + FAQ direcionado para contexto de lançamento do Evo AI.</div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footnote">
+  Gerado por Clawdia · 06/04/2026 · Fontes: Discord (W14 report), GitHub API, ADWs metrics.json · Financeiro: sem dados (Stripe não consultado)
+</div>
+
+</body>
+</html>

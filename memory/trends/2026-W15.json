@@ -1,0 +1,67 @@
+{
+  "week": "2026-W15",
+  "date": "2026-04-06",
+  "health": "mixed",
+  "community": {
+    "wam": 81,
+    "new_members_week": 78,
+    "messages_week": 497,
+    "forum_threads_active": 29,
+    "docs_gaps": 6,
+    "sentiment": "positivo",
+    "top_topics": [
+      "bloqueios de instâncias WhatsApp",
+      "Evo Go + Chatwoot integração",
+      "stream:error 515 / QR code",
+      "duplicação de webhooks Evo Go",
+      "Evo CRM lançamento / Evolution Summit"
+    ],
+    "highlight_event": "Anúncio Evolution Summit impulsionou +78 membros"
+  },
+  "github": {
+    "evolution_api": {
+      "stars": 7785,
+      "forks": 5929,
+      "issues_open": 428,
+      "prs_open": 10,
+      "last_push": "2026-02-24",
+      "commits_recent": 0,
+      "alert": "Inativo há 40+ dias — último push 24/02"
+    },
+    "evo_ai": {
+      "issues_open": 17,
+      "prs_open": 4,
+      "prs_note": "2 spam (MseeP badge), 1 antigo (9+ meses), 1 AG2 engine (real)"
+    },
+    "evolution_go": {
+      "stars": 169,
+      "forks": 76,
+      "issues_open": 13,
+      "created_at": "2026-03-25"
+    }
+  },
+  "financial": {
+    "mrr": null,
+    "subscriptions": null,
+    "note": "Stripe não consultado — integrar nas próximas execuções"
+  },
+  "operational": {
+    "adw_runs": 3,
+    "adw_success_rate": 100.0,
+    "adw_avg_seconds": {
+      "community-weekly": 399.1,
+      "faq-sync": 139.5,
+      "trends": 109.8
+    }
+  },
+  "risks": [
+    "evolution-api inativo 40+ dias; issues +5% na semana",
+    "6 docs gaps acumulados sem resolução",
+    "Financeiro sem dados (Stripe não integrado)"
+  ],
+  "opportunities": [
+    "Guia oficial Evo Go + Chatwoot (lib da comunidade pronta)",
+    "Onboarding pós-Summit (14-20/abr)",
+    "Triagem PRs evo-ai: fechar #40/#43, revisar #46"
+  ]
+}
