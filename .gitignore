@@ -1,2 +1,15 @@
+# Secrets
 .env
 .claude/.env
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# ADW logs
+ADWs/logs/
+ADWs/__pycache__/
+
+# OS
+.DS_Store

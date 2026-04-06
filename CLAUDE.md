@@ -27,12 +27,10 @@ O papel do Claude é manter o Davidson em movimento nesse loop. Se não há meta
 ```
 01 Daily Logs/        — logs de sessão para memória contínua
 02 Projects/          — uma pasta por projeto
-03 Tarefas/           — gestão de tarefas e to-dos
-04 Agenda/            — compromissos e eventos (Google Calendar)
-05 Comunidade/        — gestão da comunidade EVO Foundation
-06 Redes Sociais/     — conteúdo e estratégia de redes sociais
-07 Financeiro/        — controle financeiro pessoal e da empresa
-08 Pessoal/           — saúde, fitness, hábitos e bem-estar
+03 Comunidade/        — gestão da comunidade EVO Foundation
+04 Redes Sociais/     — conteúdo e estratégia de redes sociais
+05 Financeiro/        — controle financeiro pessoal e da empresa
+06 Pessoal/           — saúde, fitness, hábitos e bem-estar
 ```
 
 ---
@@ -45,37 +43,27 @@ O papel do Claude é manter o Davidson em movimento nesse loop. Se não há meta
 
 ## Áreas de Gestão
 
-### 📋 Tarefas
-- Plugin: **productivity** (task-management, start, update, memory-management)
-- MCP: **Linear** (issues e projetos de desenvolvimento)
-- Arquivo de visão geral: `03 Tarefas/[C] Visão Geral — Tarefas.md`
-
-### 📅 Agenda
-- MCP: **Google Calendar** (criar, listar, atualizar eventos)
-- MCP: **Gmail** (identificar convites e compromissos)
-- Arquivo de visão geral: `04 Agenda/[C] Visão Geral — Agenda.md`
-
 ### 👥 Comunidade
 - Plugin: **product-management** (stakeholder updates, síntese de feedback)
 - Plugin: **marketing** (comunicados, campanhas)
 - MCP: **Notion** (base de conhecimento)
-- Arquivo de visão geral: `05 Comunidade/[C] Visão Geral — Comunidade.md`
+- Arquivo de visão geral: `03 Comunidade/[C] Visão Geral — Comunidade.md`
 
 ### 📱 Redes Sociais
 - Plugin: **marketing** (content-creation, campaign-plan, draft-content, seo-audit)
 - Plugin: **brand-voice** (manter consistência de voz e tom)
 - MCP: **Canva** (criação de artes e visuais)
-- Arquivo de visão geral: `06 Redes Sociais/[C] Visão Geral — Redes Sociais.md`
+- Arquivo de visão geral: `04 Redes Sociais/[C] Visão Geral — Redes Sociais.md`
 
 ### 💰 Financeiro
 - Plugin: **finance** (financial-statements, journal-entry, reconciliation, variance-analysis)
 - Skill: **xlsx** (planilhas financeiras)
 - Skill: **pdf** (relatórios)
-- Arquivo de visão geral: `07 Financeiro/[C] Visão Geral — Financeiro.md`
+- Arquivo de visão geral: `05 Financeiro/[C] Visão Geral — Financeiro.md`
 
 ### 🧘 Pessoal
 - Agente: **health-check** (roda todo dia 12h BRT — hidratação, movimento, postura)
-- Arquivo de visão geral: `08 Pessoal/[C] Visão Geral — Pessoal.md`
+- Arquivo de visão geral: `06 Pessoal/[C] Visão Geral — Pessoal.md`
 
 ---
 

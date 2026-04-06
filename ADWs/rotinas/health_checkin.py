@@ -7,7 +7,7 @@ from runner import run_claude, banner, summary
 
 PROMPT = """Execute o check-in semanal de saúde do Davidson:
 
-1. Leia os dados mais recentes em '08 Pessoal/' (último check-in, evolução, baseline)
+1. Leia os dados mais recentes em '06 Pessoal/' (último check-in, evolução, baseline)
 2. Pergunte sobre:
    - Peso atual (se tiver balança por perto)
    - Como está a alimentação essa semana
@@ -18,7 +18,7 @@ PROMPT = """Execute o check-in semanal de saúde do Davidson:
    - Aplicação do Mounjaro (se aplicável na semana)
 3. Compare com o último check-in e identifique tendências
 4. Gere um relatório curto com semáforo (verde/amarelo/vermelho) para cada item
-5. Salve o check-in em '08 Pessoal/health-checkins/reports/YYYY-MM-DD.md'
+5. Salve o check-in em '06 Pessoal/health-checkins/reports/YYYY-MM-DD.md'
 6. Atualize o arquivo de evolução se houver mudanças relevantes
 
 Ser direto e prático — como um amigo próximo que se preocupa com a saúde do Davidson."""

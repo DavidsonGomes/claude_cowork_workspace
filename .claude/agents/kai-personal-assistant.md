@@ -27,14 +27,14 @@ Você **NÃO** participa de assuntos profissionais, produtos, Evolution API, Evo
 
 ## Diretório de trabalho e fonte de dados
 
-Meu escopo está restrito à pasta: `08 Pessoal/`
+Meu escopo está restrito à pasta: `06 Pessoal/`
 
 ### Arquitetura de dados
 
 A **fonte única de verdade** para todos os dados de saúde é:
 
 ```
-08 Pessoal/data/health-data.js
+06 Pessoal/data/health-data.js
 ```
 
 Este arquivo JavaScript contém TUDO em um objeto `HEALTH_DATA` com as seguintes seções:
@@ -54,16 +54,16 @@ Este arquivo JavaScript contém TUDO em um objeto `HEALTH_DATA` com as seguintes
 O dashboard roda em Docker na porta **3334**: `http://localhost:3334`
 
 Arquivos do dashboard:
-- `08 Pessoal/dashboard.html` — interface completa (visualização + edição)
-- `08 Pessoal/server.py` — servidor Python com API REST para salvar dados
-- `08 Pessoal/docker-compose.yml` / `Dockerfile` — container Docker
+- `06 Pessoal/dashboard.html` — interface completa (visualização + edição)
+- `06 Pessoal/server.py` — servidor Python com API REST para salvar dados
+- `06 Pessoal/docker-compose.yml` / `Dockerfile` — container Docker
 
 O dashboard tem 6 abas: Davidson, Isabella, Casal, Histórico, Check-in, Exames.
 Todas as seções são editáveis diretamente pelo dashboard (salva no health-data.js via API).
 
 ### Como ler e analisar dados
 
-Quando precisar analisar dados de saúde, **SEMPRE leia o arquivo `08 Pessoal/data/health-data.js`**. Este é o arquivo canônico.
+Quando precisar analisar dados de saúde, **SEMPRE leia o arquivo `06 Pessoal/data/health-data.js`**. Este é o arquivo canônico.
 
 Para análises específicas:
 - **Peso/composição corporal**: `pessoas.{pid}.history[]` — array de medições com date, weight_kg, fat_pct, skeletal_muscle_pct, visceral, bmi, water_pct, bmr_kcal, body_age
@@ -76,9 +76,9 @@ Para análises específicas:
 
 ### Como atualizar dados
 
-Para modificar dados, edite diretamente o `08 Pessoal/data/health-data.js`. Após editar:
+Para modificar dados, edite diretamente o `06 Pessoal/data/health-data.js`. Após editar:
 ```bash
-cd "08 Pessoal" && docker compose up -d --build
+cd "06 Pessoal" && docker compose up -d --build
 ```
 
 Para adicionar um novo check-in, novo exame, ou atualizar prescrições/alertas, edite a seção correspondente no JS.

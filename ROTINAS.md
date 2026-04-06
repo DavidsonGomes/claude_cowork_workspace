@@ -57,7 +57,7 @@ make clean-logs    # Remove logs > 30 dias
 | Good Morning | `01 Daily Logs/[C] YYYY-MM-DD-morning.md` |
 | End of Day | `01 Daily Logs/[C] YYYY-MM-DD.md` |
 | Weekly Review | `01 Daily Logs/[C] YYYY-WXX-weekly-review.md` |
-| Sync Meetings | `09 Reuniões/summaries/{projeto}/` + `09 Reuniões/fathom/` |
-| Health Check-in | `08 Pessoal/health-checkins/reports/YYYY-MM-DD.md` |
+| Sync Meetings | `07 Reuniões/summaries/{projeto}/` + `09 Reuniões/fathom/` |
+| Health Check-in | `06 Pessoal/health-checkins/reports/YYYY-MM-DD.md` |
 | Linear Review | `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.md` |
 | Memory Sync | `memory/` (arquivos individuais) |

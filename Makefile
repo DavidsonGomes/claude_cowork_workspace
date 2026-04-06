@@ -8,6 +8,12 @@
 PYTHON := uv run python
 ADW_DIR := ADWs/rotinas
 
+# Carrega .env se existir
+ifneq (,$(wildcard .env))
+include .env
+export
+endif
+
 # --- Rotinas diárias ---
 
 morning:            ## ☀️  Briefing matinal — agenda, emails, tarefas (@clawdia)
@@ -43,6 +49,11 @@ linear:             ## 🗂️  Review do Linear — issues em review, blockers,
 
 daily: sync review  ## Combo: sync meetings + review todoist
 
+# --- Servidores ---
+
+telegram:           ## 📨 Inicia bot Telegram (mostra mensagens no console)
+	@set -a && source .env && set +a && $(PYTHON) telegram_server.py
+
 # --- Utilitários ---
 
 logs:               ## 📝 Mostra últimos logs (JSONL)
@@ -60,5 +71,5 @@ clean-logs:         ## 🗑️  Remove logs > 30 dias
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod weekly health linear daily logs logs-detail logs-tail clean-logs help
+.PHONY: morning sync triage review memory eod weekly health linear daily telegram logs logs-detail logs-tail clean-logs help
 .DEFAULT_GOAL := help

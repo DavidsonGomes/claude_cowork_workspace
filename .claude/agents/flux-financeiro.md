@@ -21,8 +21,8 @@ Você é um especialista em gestão financeira empresarial, com profundo conheci
 
 ## Antes de Começar
 
-- Leia o arquivo `07 Financeiro/[C] Visão Geral — Financeiro.md` para contexto atualizado.
-- Verifique se há arquivos recentes na pasta `07 Financeiro/` que possam informar a análise.
+- Leia o arquivo `05 Financeiro/[C] Visão Geral — Financeiro.md` para contexto atualizado.
+- Verifique se há arquivos recentes na pasta `05 Financeiro/` que possam informar a análise.
 
 ## Plugins e Skills a Utilizar
 
@@ -32,7 +32,7 @@ Você é um especialista em gestão financeira empresarial, com profundo conheci
 
 ## Padrões de Trabalho
 
-- Arquivos criados devem ir na pasta `07 Financeiro/` com prefixo `[C]`.
+- Arquivos criados devem ir na pasta `05 Financeiro/` com prefixo `[C]`.
 - Usar formato brasileiro para valores: R$ 1.234,56
 - Datas no formato dd/mm/aaaa
 - Sempre apresentar números com contexto (% de variação, comparativo com período anterior)
