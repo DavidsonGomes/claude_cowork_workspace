@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulso Diário — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .header-left h1 span { color: var(--evo-green); }
+
+  .header-left .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .health-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .health-badge.normal { background: rgba(18,183,106,0.15); color: var(--green); border: 1px solid rgba(18,183,106,0.3); }
+  .health-badge.atencao { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,9,0.3); }
+  .health-badge.critico { background: rgba(240,68,56,0.15); color: var(--red); border: 1px solid rgba(240,68,56,0.3); }
+
+  .health-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .health-badge.normal .dot { background: var(--green); }
+  .health-badge.atencao .dot { background: var(--yellow); }
+  .health-badge.critico .dot { background: var(--red); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .metric-card:hover { border-color: var(--evo-green); }
+
+  .metric-card .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-card .value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 8px 0 4px;
+  }
+
+  .metric-card .delta {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-header .count {
+    background: var(--bg-primary);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .section-body { padding: 0; }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  td {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .sentiment { display: inline-flex; align-items: center; gap: 6px; }
+
+  .topics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+
+  .topic-item {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topic-item:nth-child(3n) { border-right: none; }
+  .topic-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .topic-item .topic-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .topic-item .topic-count {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .topic-item .topic-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .topic-item .topic-bar-fill {
+    height: 100%;
+    background: var(--evo-green);
+    border-radius: 2px;
+  }
+
+  .action-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+  }
+
+  .action-item:last-child { border-bottom: none; }
+
+  .action-item .checkbox {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .action-item .action-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .action-item .action-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .action-item .action-tag.urgente { background: rgba(240,68,56,0.15); color: var(--red); }
+  .action-item .action-tag.importante { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .action-item .action-tag.normal { background: rgba(18,183,106,0.15); color: var(--green); }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span { color: var(--evo-green); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .support-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .support-item:last-child { border-bottom: none; }
+
+  .support-item .question {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 70%;
+  }
+
+  .support-item .time {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .support-item .time.alert { color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>evo</span>lution — Pulso Diário</h1>
+    <div class="subtitle">{{DATA}} — Comunidade Discord — Últimas 24h</div>
+  </div>
+  <div class="health-badge {{STATUS_CLASS}}">
+    <div class="dot"></div>
+    {{STATUS_LABEL}}
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- MÉTRICAS -->
+  <div class="grid">
+    <div class="metric-card">
+      <div class="label">Mensagens (24h)</div>
+      <div class="value">{{MENSAGENS}}</div>
+      <div class="delta {{MENSAGENS_DIR}}">{{MENSAGENS_DELTA}} vs média 7d</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Membros ativos</div>
+      <div class="value">{{ATIVOS}}</div>
+      <div class="delta {{ATIVOS_DIR}}">{{ATIVOS_DELTA}} vs ontem</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Novos membros</div>
+      <div class="value">{{NOVOS}}</div>
+      <div class="delta neutral">{{SAIDAS}} saída(s)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Canal mais ativo</div>
+      <div class="value" style="font-size:18px;">{{CANAL_ATIVO}}</div>
+      <div class="delta neutral">{{CANAL_MSGS}} msgs</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- SUPORTE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Suporte <span class="count">{{SUPORTE_TOTAL}} abertas</span></h2>
+      </div>
+      <div class="section-body">
+        <!-- TEMPLATE: repetir para cada pergunta sem resposta -->
+        <div class="support-item">
+          <div class="question">{{PERGUNTA}}</div>
+          <div class="time {{TIME_CLASS}}">{{TEMPO_SEM_RESPOSTA}}</div>
+        </div>
+        <!-- /TEMPLATE -->
+      </div>
+    </div>
+
+    <!-- SENTIMENTO -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Sentimento</h2>
+      </div>
+      <div class="section-body" style="padding:20px;">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+          <div style="font-size:48px;">{{SENTIMENTO_EMOJI}}</div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">{{SENTIMENTO_LABEL}}</div>
+            <div style="font-size:13px;color:var(--text-muted);">Baseado em {{SENTIMENTO_AMOSTRAS}} mensagens analisadas</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+          {{SENTIMENTO_NOTAS}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP TÓPICOS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Top Tópicos do Dia</h2>
+    </div>
+    <div class="section-body">
+      <div class="topics-grid">
+        <!-- TEMPLATE: repetir para cada tópico -->
+        <div class="topic-item">
+          <div class="topic-name">{{TOPICO_NOME}}</div>
+          <div class="topic-count">{{TOPICO_MENCOES}} menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:{{TOPICO_PCT}}%"></div></div>
+        </div>
+        <!-- /TEMPLATE -->
+      </div>
+    </div>
+  </div>
+
+  <!-- AÇÕES NECESSÁRIAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Ações Necessárias</h2>
+    </div>
+    <div class="section-body">
+      <!-- TEMPLATE: repetir para cada ação -->
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">{{ACAO_TEXTO}}</div>
+        <div class="action-tag {{ACAO_PRIORIDADE}}">{{ACAO_PRIORIDADE_LABEL}}</div>
+      </div>
+      <!-- /TEMPLATE -->
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pulse — {{TIMESTAMP}}
+</div>
+
+</body>
+</html>

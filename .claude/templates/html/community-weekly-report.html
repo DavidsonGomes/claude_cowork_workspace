@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal da Comunidade — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 40%, rgba(0,255,167,0.03) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .header h1 span { color: var(--evo-green); }
+
+  .header .period {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .header .exec-summary {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .exec-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .exec-item .exec-icon { margin-right: 6px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Metric cards */
+  .metrics-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .m-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .m-card:hover { border-color: var(--evo-green); }
+
+  .m-card .m-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .m-card .m-value { font-size: 28px; font-weight: 700; margin: 6px 0 4px; }
+  .m-card .m-sub { font-size: 12px; color: var(--text-muted); }
+  .m-card .m-delta { font-size: 12px; font-weight: 600; }
+  .m-card .m-delta.up { color: var(--green); }
+  .m-card .m-delta.down { color: var(--red); }
+
+  /* Sections */
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .badge { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .trend-up { color: var(--green); }
+  .trend-down { color: var(--red); }
+  .trend-flat { color: var(--text-muted); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Topic sentiment bars */
+  .topic-row { padding: 14px 20px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .topic-row:last-child { border-bottom: none; }
+  .topic-row .topic-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .topic-row .topic-name { font-size: 14px; font-weight: 600; }
+  .topic-row .topic-msgs { font-size: 12px; color: var(--text-muted); }
+  .topic-row .sentiment-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
+  .topic-row .s-positive { background: var(--green); }
+  .topic-row .s-neutral { background: var(--text-muted); }
+  .topic-row .s-negative { background: var(--red); }
+
+  /* Members */
+  .member-row { padding: 10px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .member-row:last-child { border-bottom: none; }
+  .member-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--evo-green); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--bg-primary); }
+  .member-info .member-name { font-size: 14px; font-weight: 600; }
+  .member-info .member-stat { font-size: 12px; color: var(--text-muted); }
+  .member-badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .member-badge.top { background: rgba(0,255,167,0.15); color: var(--evo-green); }
+  .member-badge.new { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .member-badge.risk { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  /* Comparativo */
+  .compare-row td:nth-child(4) { font-weight: 600; }
+
+  /* Product insights */
+  .insight-item { padding: 14px 20px; border-bottom: 1px solid rgba(52,64,84,0.5); display: flex; gap: 12px; align-items: flex-start; }
+  .insight-item:last-child { border-bottom: none; }
+  .insight-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .insight-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+  .insight-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .insight-label.feature { color: var(--evo-green); }
+  .insight-label.bug { color: var(--red); }
+  .insight-label.docs { color: var(--blue); }
+
+  /* Actions */
+  .action-item { padding: 12px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .action-item:last-child { border-bottom: none; }
+  .action-checkbox { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; }
+  .action-text { font-size: 14px; color: var(--text-secondary); flex: 1; }
+  .action-owner { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+  .action-due { font-size: 12px; color: var(--evo-green); font-weight: 500; white-space: nowrap; }
+
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1><span>evo</span>lution — Relatório Semanal da Comunidade</h1>
+  <div class="period">Semana {{SEMANA}} — {{DATA_INICIO}} a {{DATA_FIM}}</div>
+
+  <div class="exec-summary">
+    <div class="exec-item"><span class="exec-icon">+</span> {{EXEC_POSITIVO}}</div>
+    <div class="exec-item"><span class="exec-icon">!</span> {{EXEC_ATENCAO}}</div>
+    <div class="exec-item"><span class="exec-icon">*</span> {{EXEC_OPORTUNIDADE}}</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- MÉTRICAS PRINCIPAIS -->
+  <div class="metrics-row">
+    <div class="m-card">
+      <div class="m-label">Total membros</div>
+      <div class="m-value">{{TOTAL_MEMBROS}}</div>
+      <div class="m-delta {{MEMBROS_DIR}}">{{MEMBROS_DELTA}}</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">WAM</div>
+      <div class="m-value">{{WAM}}</div>
+      <div class="m-sub">{{WAM_PCT}}% do total</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Communicators</div>
+      <div class="m-value">{{COMMUNICATORS}}</div>
+      <div class="m-sub">{{COMM_PCT}}% dos visitantes</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Taxa resolução</div>
+      <div class="m-value">{{TAXA_RESOLUCAO}}%</div>
+      <div class="m-delta {{RESOLUCAO_DIR}}">{{RESOLUCAO_DELTA}}</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">1st response</div>
+      <div class="m-value">{{FIRST_RESPONSE}}</div>
+      <div class="m-sub">mediana (min)</div>
+    </div>
+  </div>
+
+  <!-- TOP TÓPICOS + SENTIMENTO -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header">
+        <h2>Top 5 Tópicos</h2>
+      </div>
+      <div class="section-body">
+        <!-- TEMPLATE: repetir para cada tópico -->
+        <div class="topic-row">
+          <div class="topic-header">
+            <div class="topic-name">{{TOPICO_NOME}}</div>
+            <div class="topic-msgs">{{TOPICO_MSGS}} msgs</div>
+          </div>
+          <div class="sentiment-bar">
+            <div class="s-positive" style="width:{{S_POS}}%"></div>
+            <div class="s-neutral" style="width:{{S_NEU}}%"></div>
+            <div class="s-negative" style="width:{{S_NEG}}%"></div>
+          </div>
+        </div>
+        <!-- /TEMPLATE -->
+      </div>
+    </div>
+
+    <!-- TOP MEMBROS -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Membros Destaque</h2>
+      </div>
+      <div class="section-body">
+        <!-- TEMPLATE: repetir para cada membro -->
+        <div class="member-row">
+          <div class="member-avatar">{{MEMBRO_INICIAL}}</div>
+          <div class="member-info">
+            <div class="member-name">{{MEMBRO_NOME}}</div>
+            <div class="member-stat">{{MEMBRO_MSGS}} msgs • {{MEMBRO_AJUDAS}} respostas</div>
+          </div>
+          <div class="member-badge {{MEMBRO_TIPO}}">{{MEMBRO_BADGE}}</div>
+        </div>
+        <!-- /TEMPLATE -->
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Comparativo Semanal</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Métrica</th>
+            <th>Esta semana</th>
+            <th>Semana anterior</th>
+            <th>Tendência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TEMPLATE: repetir para cada métrica -->
+          <tr class="compare-row">
+            <td>{{COMP_METRICA}}</td>
+            <td>{{COMP_ATUAL}}</td>
+            <td>{{COMP_ANTERIOR}}</td>
+            <td class="{{COMP_TREND_CLASS}}">{{COMP_TREND}}</td>
+          </tr>
+          <!-- /TEMPLATE -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INSIGHTS PARA O PRODUTO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Insights para o Produto</h2>
+    </div>
+    <div class="section-body">
+      <!-- TEMPLATE: repetir para cada insight -->
+      <div class="insight-item">
+        <div class="insight-icon">{{INSIGHT_ICON}}</div>
+        <div>
+          <div class="insight-label {{INSIGHT_TIPO}}">{{INSIGHT_TIPO_LABEL}}</div>
+          <div class="insight-text">{{INSIGHT_TEXTO}}</div>
+        </div>
+      </div>
+      <!-- /TEMPLATE -->
+    </div>
+  </div>
+
+  <!-- DOCS GAP -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Docs Gap — Perguntas sem documentação</h2>
+      <span class="badge">{{DOCS_GAP_TOTAL}} gaps</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Pergunta recorrente</th>
+            <th>Frequência</th>
+            <th>Canal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- TEMPLATE: repetir -->
+          <tr>
+            <td>{{GAP_PERGUNTA}}</td>
+            <td>{{GAP_FREQ}}x</td>
+            <td>{{GAP_CANAL}}</td>
+          </tr>
+          <!-- /TEMPLATE -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- AÇÕES PARA PRÓXIMA SEMANA -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Ações para Próxima Semana</h2>
+    </div>
+    <div class="section-body">
+      <!-- TEMPLATE: repetir -->
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">{{ACAO_TEXTO}}</div>
+        <div class="action-owner">{{ACAO_RESPONSAVEL}}</div>
+        <div class="action-due">{{ACAO_PRAZO}}</div>
+      </div>
+      <!-- /TEMPLATE -->
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pulse — {{TIMESTAMP}}
+</div>
+
+</body>
+</html>
