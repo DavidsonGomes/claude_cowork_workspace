@@ -61,6 +61,35 @@ def _send_telegram(text: str):
         return False
 
 
+def _save_metrics(log_name, duration, returncode, agent, stdout):
+    """Salva métricas acumuladas por rotina em metrics.json."""
+    metrics_file = LOGS_DIR / "metrics.json"
+    try:
+        metrics = json.loads(metrics_file.read_text()) if metrics_file.exists() else {}
+    except (json.JSONDecodeError, OSError):
+        metrics = {}
+
+    key = log_name
+    if key not in metrics:
+        metrics[key] = {"runs": 0, "successes": 0, "failures": 0, "total_seconds": 0, "avg_seconds": 0, "last_run": None, "agent": agent or "none"}
+
+    m = metrics[key]
+    m["runs"] += 1
+    m["total_seconds"] = round(m["total_seconds"] + duration, 1)
+    m["avg_seconds"] = round(m["total_seconds"] / m["runs"], 1)
+    m["last_run"] = datetime.now().isoformat()
+    m["agent"] = agent or "none"
+
+    if returncode == 0:
+        m["successes"] += 1
+    else:
+        m["failures"] += 1
+
+    m["success_rate"] = round((m["successes"] / m["runs"]) * 100, 1)
+
+    metrics_file.write_text(json.dumps(metrics, indent=2, ensure_ascii=False))
+
+
 def _log_to_file(log_name, prompt, stdout, stderr, returncode, duration):
     """Salva log estruturado em JSONL + arquivo detalhado."""
     log_file = LOGS_DIR / f"{datetime.now().strftime('%Y-%m-%d')}.jsonl"
@@ -140,6 +169,7 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600, agent
 
         full_prompt = f"[agent:{agent}] {prompt}" if agent else prompt
         _log_to_file(log_name, full_prompt, stdout, stderr, process.returncode, duration)
+        _save_metrics(log_name, duration, process.returncode, agent, stdout)
 
         if process.returncode == 0:
             console.print(f"\r  [success]✓[/success] {log_name} [dim]({duration:.0f}s, {line_count} linhas)[/dim]")
