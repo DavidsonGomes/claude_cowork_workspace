@@ -1,0 +1,46 @@
+TIMESTAMP: 2026-04-06T17:56:09.995309
+DURATION: 207.0s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a rotina de consolidação de memória:
+
+1. Leia os últimos 3 daily logs em '01 Daily Logs/' (mais recentes primeiro)
+2. Leia os summaries de reuniões dos últimos 3 dias em '09 Reuniões/summaries/'
+3. Para cada fonte, extraia:
+   - Decisões tomadas → salvar em memory/ como tipo 'project'
+   - Pessoas novas ou contexto novo sobre pessoas → salvar como tipo 'user' ou atualizar existente
+   - Feedbacks ou correções de abordagem → salvar como tipo 'feedback'
+   - Termos ou referências externas novas → salvar como tipo 'reference'
+4. Antes de salvar, verificar se já existe memória similar — atualizar em vez de duplicar
+5. Atualizar MEMORY.md com ponteiros para novos arquivos
+
+Reportar no final: quantas memórias criadas/atualizadas por tipo.
+Ser conciso — não criar memórias para coisas óbvias ou já documentadas no código.
+
+============================================================
+STDOUT:
+============================================================
+Consolidação concluída. Aqui está o resumo:
+
+---
+
+**Memórias criadas: 11 arquivos + MEMORY.md**
+
+| Tipo | Qtd | Destaques |
+|------|-----|-----------|
+| **project** | 4 | Evo CRM launch, Evolution Summit 01, estratégia EvoGo como produto central, Evo Academy |
+| **user** | 3 | Diego Lerina (copy/marketing), Daniel Paes (suporte comunidade), Raphael Petronilho (Planning recorrente) |
+| **feedback** | 1 | Davidson faz conteúdo simples/autêntico — produção em escala vai para Orion/agência |
+| **reference** | 3 | Parceria Uavoip (comissão, webphone), HostGator/Brius (VPS, CRM), Rappet (landing pages Diego) |
+
+---
+
+**Contexto crítico capturado:**
+
+- **Semana de alta pressão** — duas frentes simultâneas: Evo CRM em testes finais (deadline ~07/04) + campanha Evolution Summit 01 (captura ativa desde 06/04, evento 14–16/04).
+- **Decisão estratégica nova** — EvoGo é o produto central daqui pra frente. Evolution API vira manutenção mínima. Isso impacta qualquer conversa de roadmap.
+- **Pessoas novas** que não estavam documentadas: Diego Lerina, Daniel Paes, Raphael Petronilho.
+
+Daily Logs estavam vazios — memória veio inteiramente dos summaries de reuniões do Fathom.
+
+

@@ -20,6 +20,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | Dia/Horário | Rotina | Comando | Agente | O que faz |
 |:---:|--------|---------|--------|-----------|
 | **Sexta 08:00** | Weekly Review | `make weekly` | @clawdia | Revisão completa: reuniões, tarefas, agenda, memória → relatório semanal |
+| **Seg/Qua/Sex 09:00** | Linear Review | `make linear` | @atlas | Issues em review, blockers, stale, sprint progress → relatório |
 | **Domingo 10:00** | Health Check-in | `make health` | @kai | Check-in de saúde: peso, alimentação, treino, sono, energia, Mounjaro |
 
 ---
@@ -46,6 +47,7 @@ make clean-logs    # Remove logs > 30 dias
 | Agente | Rotinas |
 |--------|---------|
 | **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly |
+| **@atlas** | Linear Review |
 | **@kai** | Health Check-in |
 
 ## Arquivos gerados
@@ -57,4 +59,5 @@ make clean-logs    # Remove logs > 30 dias
 | Weekly Review | `01 Daily Logs/[C] YYYY-WXX-weekly-review.md` |
 | Sync Meetings | `09 Reuniões/summaries/{projeto}/` + `09 Reuniões/fathom/` |
 | Health Check-in | `08 Pessoal/health-checkins/reports/YYYY-MM-DD.md` |
+| Linear Review | `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.md` |
 | Memory Sync | `memory/` (arquivos individuais) |
