@@ -1,26 +1,26 @@
 {
-  "date": "2026-03-13",
-  "week_number": 11,
+  "date": "2026-03-23",
+  "week_number": 12,
   "davidson": {
     "scale": {
-      "weight_kg": 95.55,
-      "fat_pct": 23.7,
-      "skeletal_muscle_pct": 72.5,
-      "visceral": 11.5,
-      "bmi": 28.8,
-      "water_pct": 55.1,
-      "bmr_kcal": 1944
+      "weight_kg": 93.6,
+      "fat_pct": 23,
+      "skeletal_muscle_pct": 73.2,
+      "visceral": 11,
+      "bmi": 28.3,
+      "water_pct": 55.6,
+      "bmr_kcal": 1927
     },
     "trend": {
-      "weight": "=",
-      "fat": "=",
-      "muscle": "=",
-      "visceral": "="
+      "weight": "↓",
+      "fat": "↓",
+      "muscle": "↑",
+      "visceral": "↓"
     },
     "adherence": {
-      "diet_score": 9,
+      "diet_score": 10,
       "workouts_count": 4,
-      "notes": "Energia e força muito boas. Constipação controlada com PegLax 17g diário.",
+      "notes": "tudo ok",
       "medication_on_time": true
     },
     "symptoms": {
@@ -39,24 +39,24 @@
   },
   "isabella": {
     "scale": {
-      "weight_kg": 75.5,
-      "fat_pct": 35.6,
-      "skeletal_muscle_pct": 37.6,
-      "visceral": 12,
-      "bmi": 30.2,
-      "water_pct": 44.2,
-      "bmr_kcal": 1421
+      "weight_kg": 73.55,
+      "fat_pct": 34.5,
+      "skeletal_muscle_pct": 38.2,
+      "visceral": 11,
+      "bmi": 29.5,
+      "water_pct": 45,
+      "bmr_kcal": 1411
     },
     "trend": {
-      "weight": "=",
-      "fat": "=",
-      "muscle": "=",
-      "visceral": "="
+      "weight": "↓",
+      "fat": "↓",
+      "muscle": "↑",
+      "visceral": "↓"
     },
     "adherence": {
       "diet_score": 10,
       "workouts_count": 4,
-      "notes": "tudo ok",
+      "notes": "Medidas corporais coletadas.",
       "medication_on_time": true
     },
     "symptoms": {
@@ -74,8 +74,8 @@
     }
   },
   "summary": {
-    "what_worked": "Davidson: dieta sem erros, 4 treinos, sem efeitos colaterais relevantes.",
+    "what_worked": "Davidson: −8.9 kg, gordura 23%. Isabella: −7.0 kg, gordura 34.5%.",
     "what_hindered": "",
-    "next_week_priority": "Davidson: possível subida para Mounjaro 5mg (~2 semanas)."
+    "next_week_priority": "Davidson: avaliar subida de dose Mounjaro."
   }
 }

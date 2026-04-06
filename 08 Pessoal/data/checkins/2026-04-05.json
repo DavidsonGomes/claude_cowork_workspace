@@ -1,0 +1,81 @@
+{
+  "date": "2026-04-05",
+  "week_number": 14,
+  "davidson": {
+    "scale": {
+      "weight_kg": 92.75,
+      "fat_pct": 22.5,
+      "skeletal_muscle_pct": 73.6,
+      "visceral": 10.7,
+      "bmi": 28,
+      "water_pct": 55.9,
+      "bmr_kcal": 1922
+    },
+    "trend": {
+      "weight": "↓",
+      "fat": "↓",
+      "muscle": "↑",
+      "visceral": "↓"
+    },
+    "adherence": {
+      "diet_score": 10,
+      "workouts_count": 3,
+      "notes": "tudo ok",
+      "medication_on_time": true
+    },
+    "symptoms": {
+      "nausea": 0,
+      "reflux": 0,
+      "constipation": 1,
+      "diarrhea": 0,
+      "bloating": 0,
+      "headache": 0,
+      "fatigue": 0,
+      "low_energy": 0,
+      "anxiety_stress": 0,
+      "poor_sleep": 0,
+      "other": ""
+    }
+  },
+  "isabella": {
+    "scale": {
+      "weight_kg": 73,
+      "fat_pct": 34,
+      "skeletal_muscle_pct": 38.5,
+      "visceral": 11,
+      "bmi": 29.2,
+      "water_pct": 45.3,
+      "bmr_kcal": 1410
+    },
+    "trend": {
+      "weight": "↓",
+      "fat": "↓",
+      "muscle": "↑",
+      "visceral": "↓"
+    },
+    "adherence": {
+      "diet_score": 10,
+      "workouts_count": 3,
+      "notes": "tudo ok",
+      "medication_on_time": true
+    },
+    "symptoms": {
+      "nausea": 0,
+      "reflux": 0,
+      "constipation": 0,
+      "diarrhea": 0,
+      "bloating": 0,
+      "headache": 0,
+      "fatigue": 0,
+      "low_energy": 0,
+      "anxiety_stress": 0,
+      "poor_sleep": 0,
+      "other": ""
+    }
+  },
+  "summary": {
+    "what_worked": "Isabella: −7.55 kg desde baseline (38.8→34.0% gordura). Davidson: −9.75 kg, visceral 13.4→10.7.",
+    "what_hindered": "",
+    "next_week_priority": "Davidson: avaliar subida para Mounjaro 5mg."
+  }
+}

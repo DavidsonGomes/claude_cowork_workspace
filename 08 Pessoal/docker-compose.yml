@@ -1,0 +1,9 @@
+services:
+  dashboard-saude:
+    build: .
+    container_name: dashboard-saude
+    ports:
+      - "3334:8765"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

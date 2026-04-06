@@ -3,609 +3,1674 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Saúde — Davidson & Isabella</title>
+  <title>Dashboard Saúde</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script src="data/health-data.js"></script>
   <style>
     :root {
-      --bg: #080e1c;
-      --surface: #0f1929;
-      --border: #1e2d45;
-      --text: #e2e8f0;
-      --muted: #64748b;
-      --d: #38bdf8;
-      --d-dim: rgba(56,189,248,.12);
-      --i: #f472b6;
-      --i-dim: rgba(244,114,182,.12);
-      --green: #34d399;
-      --amber: #fbbf24;
+      --bg:#080e1c; --surface:#0f1929; --s2:#152236; --s3:#1a2d45;
+      --border:#1e2d45; --text:#e2e8f0; --muted:#64748b;
+      --green:#34d399; --amber:#fbbf24; --red:#f87171;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.5; }
-    h1, h2, h3 { font-weight: 600; }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:'Segoe UI',system-ui,sans-serif;font-size:14px;line-height:1.5;}
 
-    /* Layout */
-    .page { max-width: 1400px; margin: 0 auto; padding: 24px 16px; }
-    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
-    .header h1 { font-size: 20px; }
-    .header .subtitle { color: var(--muted); font-size: 13px; margin-top: 2px; }
-    .last-updated { color: var(--muted); font-size: 12px; }
+    /* ── NAV ── */
+    .topbar{display:flex;align-items:center;justify-content:space-between;padding:13px 24px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+    .topbar h1{font-size:15px;font-weight:600;}
+    .sub{font-size:12px;color:var(--muted);margin-top:1px;}
+    .tabs{display:flex;gap:4px;}
+    .tab{padding:6px 14px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;color:var(--muted);transition:all .15s;}
+    .tab:hover{color:var(--text);background:var(--s2);}
+    .tab.active{color:var(--text);background:var(--s2);border-color:var(--border);}
 
-    .section { margin-bottom: 32px; }
-    .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
+    /* ── LAYOUT ── */
+    .page{max-width:1400px;margin:0 auto;padding:24px 20px;}
+    .view{display:none;}.view.active{display:block;}
+    .sec{margin-bottom:28px;}
+    .sec-title{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px;}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
 
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-    .grid-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    /* ── CARDS ── */
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+    .p-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+    .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+    .p-head h2{font-size:14px;font-weight:600;}
 
-    /* Cards */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+    /* ── KPIs ── */
+    .kpi{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+    .kpi .lbl{font-size:11px;color:var(--muted);margin-bottom:3px;}
+    .kpi .val{font-size:22px;font-weight:700;}
+    .kpi .dlt{font-size:11px;margin-top:2px;}
+    .good{color:var(--green);}.bad{color:var(--red);}.neutral{color:var(--muted);}
+
+    /* ── PROGRESS ── */
+    .prog-top{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px;}
+    .prog-track{height:8px;background:var(--border);border-radius:99px;position:relative;}
+    .prog-fill{height:100%;border-radius:99px;transition:width .4s;}
+    .prog-marker{position:absolute;top:50%;transform:translate(-50%,-50%);width:3px;height:14px;border-radius:2px;background:var(--amber);}
+    .prog-labels{display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:3px;}
+    .pills{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;}
+    .pill{display:inline-flex;align-items:center;gap:3px;font-size:12px;padding:3px 10px;border-radius:99px;background:var(--border);color:var(--muted);}
+    .pill.good{background:rgba(52,211,153,.1);color:var(--green);}
+    .pill.bad{background:rgba(248,113,113,.1);color:var(--red);}
+
+    /* ── GOAL CONFIG ── */
+    .goal-config{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+    .goal-config-toggle{font-size:12px;color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;gap:4px;}
+    .goal-config-toggle:hover{color:var(--text);}
+    .goal-config-body{display:none;margin-top:10px;}
+    .goal-config-body.open{display:block;}
+    .goal-frow{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;}
+    .goal-field label{font-size:11px;color:var(--muted);display:block;margin-bottom:3px;}
+    .goal-field input{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:13px;outline:none;}
+    .goal-field input:focus{border-color:#38bdf8;}
+    .goal-note{font-size:11px;color:var(--muted);margin-top:6px;}
+
+    /* ── CHARTS ── */
+    .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px;}
+    .chart-title{font-size:13px;font-weight:600;margin-bottom:12px;}
+    .chart-wrap{position:relative;height:190px;}
+
+    /* ── TABLE ── */
+    table{width:100%;border-collapse:collapse;}
+    th{text-align:left;font-size:11px;font-weight:500;color:var(--muted);padding:5px 8px;}
+    td{padding:6px 8px;font-size:13px;border-top:1px solid var(--border);}
+    .badge{display:inline-block;padding:1px 8px;border-radius:99px;font-size:11px;font-weight:500;}
+    .delta-dn{color:var(--green);}.delta-up{color:var(--red);}
+
+    /* ── CHECKIN DISPLAY ── */
+    .ci-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:13px;}
+    .ci-row:last-child{border-bottom:none;}
+    .sym-tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:11px;margin:2px;border:1px solid var(--border);color:var(--muted);}
+    .sym-tag.ok{color:var(--green);border-color:rgba(52,211,153,.25);background:rgba(52,211,153,.06);}
+    .sym-tag.warn{color:var(--amber);border-color:rgba(251,191,36,.25);background:rgba(251,191,36,.06);}
+
+    /* ── HISTÓRICO ── */
+    .hist-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+    .hist-header{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;transition:background .15s;}
+    .hist-header:hover{background:var(--s2);}
+    .hist-title{display:flex;align-items:center;gap:10px;}
+    .hist-title h3{font-size:14px;font-weight:600;}
+    .hist-week{font-size:12px;color:var(--muted);}
+    .hist-status{display:flex;gap:6px;}
+    .status-dot{display:inline-flex;align-items:center;gap:4px;font-size:11px;padding:2px 8px;border-radius:99px;}
+    .status-dot.full{background:rgba(52,211,153,.1);color:var(--green);}
+    .status-dot.partial{background:rgba(251,191,36,.1);color:var(--amber);}
+    .status-dot.empty{background:rgba(248,113,113,.1);color:var(--red);}
+    .hist-metrics{display:flex;gap:16px;font-size:12px;}
+    .hist-metric{display:flex;flex-direction:column;gap:2px;}
+    .hist-metric .lbl{font-size:10px;color:var(--muted);text-transform:uppercase;}
+    .hist-metric .val{font-weight:600;}
+    .hist-metric .val.missing{color:var(--amber);}
+    .hist-body{display:none;border-top:1px solid var(--border);}
+    .hist-body.open{display:block;}
+    .hist-body-inner{padding:16px;}
+    .hist-person-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;}
+    .chevron{font-size:12px;color:var(--muted);transition:transform .2s;}
+    .chevron.open{transform:rotate(180deg);}
+
+    /* ── FORM ── */
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    .form-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;}
+    .form-card h3{font-size:14px;font-weight:600;margin-bottom:14px;}
+    .field{margin-bottom:12px;}
+    .field label{display:block;font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.04em;}
+    .field input,.field select,.field textarea{width:100%;background:var(--s2);border:1px solid var(--border);border-radius:8px;padding:8px 10px;color:var(--text);font-size:13px;outline:none;transition:border-color .15s;}
+    .field input:focus,.field select:focus{border-color:#38bdf8;}
+    .field input.missing-val{border-color:var(--amber);}
+    .field textarea{resize:vertical;min-height:54px;}
+    .frow{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .sym-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+    .divider{height:1px;background:var(--border);margin:12px 0;}
+    .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .15s;}
+    .btn-p{background:#38bdf8;color:#000;}.btn-p:hover{opacity:.9;}
+    .btn-s{background:var(--s2);color:var(--text);border:1px solid var(--border);}.btn-s:hover{border-color:#38bdf8;color:#38bdf8;}
+    .btn-sm{padding:5px 12px;font-size:12px;border-radius:6px;}
+    .form-actions{display:flex;gap:10px;align-items:center;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+    .form-hint{font-size:12px;color:var(--muted);background:var(--s2);border-radius:8px;padding:10px 12px;margin-bottom:16px;line-height:1.6;}
+    .json-out{background:#0a1526;border:1px solid var(--border);border-radius:8px;padding:14px;font-family:monospace;font-size:11px;white-space:pre-wrap;word-break:break-all;max-height:260px;overflow-y:auto;color:#94a3b8;margin-top:12px;display:none;}
+    .copy-btn{font-size:11px;padding:4px 10px;background:var(--s2);border:1px solid var(--border);border-radius:6px;cursor:pointer;color:var(--muted);}
+    .copy-btn:hover{color:var(--text);}
+
+    /* ── TABLE SCROLL WRAPPER ── */
+    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+    /* ── RESPONSIVE: TABLET (max 900px) ── */
+    @media(max-width:900px){
+      .g2,.form-grid,.hist-person-row{grid-template-columns:1fr;}
+      .g4{grid-template-columns:repeat(2,1fr);}
+      .topbar{flex-direction:column;gap:10px;align-items:flex-start;}
+      .tabs{flex-wrap:wrap;gap:4px;}
+      .tab{padding:7px 12px;font-size:12px;}
+      .hist-header{flex-direction:column;align-items:flex-start;gap:8px;}
+      .hist-status{flex-wrap:wrap;}
+      .hist-metrics{flex-wrap:wrap;}
+      .ci-row{font-size:12px;gap:8px;}
+      .ci-row span:last-child{text-align:right;max-width:60%;}
+      /* Exam edit grid rows — 5-col inline grids */
+      [style*="grid-template-columns:2fr 1fr 1fr 1.2fr auto"]{
+        grid-template-columns:1fr 1fr!important;
+      }
+      /* Prescription edit grid — 5-col */
+      [style*="grid-template-columns:2fr 1fr 2fr 1fr auto"]{
+        grid-template-columns:1fr 1fr!important;
+      }
+      /* Alert edit grid — 4-col */
+      [style*="grid-template-columns:auto 3fr 1fr auto"]{
+        grid-template-columns:1fr 1fr!important;
+      }
+      /* Upcoming edit grid — 4-col */
+      [style*="grid-template-columns:2fr 1fr 1fr auto"]{
+        grid-template-columns:1fr 1fr!important;
+      }
+      .goal-frow{grid-template-columns:1fr 1fr auto;}
+      .sym-grid{grid-template-columns:repeat(2,1fr);}
+      /* Inline symptom grids in hist edit */
+      [style*="grid-template-columns:repeat(3,1fr)"]{
+        grid-template-columns:repeat(2,1fr)!important;
+      }
     }
-    .card.d-accent { border-color: rgba(56,189,248,.3); }
-    .card.i-accent { border-color: rgba(244,114,182,.3); }
 
-    .person-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-    .person-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-    .person-dot.d { background: var(--d); }
-    .person-dot.i { background: var(--i); }
-    .person-header h2 { font-size: 15px; }
+    /* ── RESPONSIVE: PHONE (max 600px) ── */
+    @media(max-width:600px){
+      body{font-size:13px;}
+      .page{padding:16px 12px;}
+      .topbar{padding:10px 14px;}
+      .topbar h1{font-size:13px;}
+      .sub{font-size:11px;}
+      .tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;width:100%;padding-bottom:4px;gap:4px;}
+      .tab{padding:8px 12px;font-size:12px;white-space:nowrap;flex-shrink:0;min-height:44px;display:inline-flex;align-items:center;}
+      .g4{grid-template-columns:1fr!important;}
+      .g2{gap:12px;}
+      .kpi{padding:10px 12px;}
+      .kpi .val{font-size:18px;}
+      .kpi .lbl{font-size:10px;}
+      .card{padding:12px;border-radius:10px;}
+      .chart-card{padding:12px;border-radius:10px;}
+      .chart-wrap{height:160px;}
+      .sec-title{font-size:10px;}
+      .sec{margin-bottom:20px;}
 
-    /* KPI */
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-    .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
-    .kpi .label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
-    .kpi .value { font-size: 22px; font-weight: 700; }
-    .kpi .delta { font-size: 11px; margin-top: 2px; }
-    .kpi.d .value { color: var(--d); }
-    .kpi.i .value { color: var(--i); }
-    .delta.down { color: var(--green); }
-    .delta.up-bad { color: #f87171; }
-    .delta.up-good { color: var(--green); }
-    .delta.neutral { color: var(--muted); }
+      /* Forms single column */
+      .frow{grid-template-columns:1fr!important;}
+      .goal-frow{grid-template-columns:1fr!important;}
+      .sym-grid{grid-template-columns:1fr 1fr!important;}
+      [style*="grid-template-columns:repeat(3,1fr)"]{
+        grid-template-columns:1fr!important;
+      }
 
-    /* Progress bar */
-    .progress-wrap { margin-bottom: 8px; }
-    .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
-    .progress-track { height: 8px; background: var(--border); border-radius: 99px; position: relative; }
-    .progress-fill { height: 100%; border-radius: 99px; transition: width .4s; }
-    .progress-fill.d { background: var(--d); }
-    .progress-fill.i { background: var(--i); }
-    .progress-marker {
-      position: absolute; top: 50%; transform: translate(-50%, -50%);
-      width: 3px; height: 14px; border-radius: 2px; background: var(--amber);
-    }
-    .milestone-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 4px; }
+      /* Tables scroll */
+      table{min-width:500px;}
+      th{font-size:10px;padding:4px 6px;}
+      td{font-size:12px;padding:5px 6px;}
 
-    /* Trend pills */
-    .trend-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-    .trend-pill {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 12px; padding: 3px 10px; border-radius: 99px;
-      background: var(--border);
-    }
-    .trend-pill.down-good { background: rgba(52,211,153,.12); color: #34d399; }
-    .trend-pill.up-good  { background: rgba(52,211,153,.12); color: #34d399; }
-    .trend-pill.neutral  { background: var(--border); color: var(--muted); }
+      /* Exam edit grid rows — stack on phone */
+      [style*="grid-template-columns:2fr 1fr 1fr 1.2fr auto"]{
+        grid-template-columns:1fr!important;
+      }
+      [style*="grid-template-columns:2fr 1fr 2fr 1fr auto"]{
+        grid-template-columns:1fr!important;
+      }
+      [style*="grid-template-columns:auto 3fr 1fr auto"]{
+        grid-template-columns:1fr!important;
+      }
+      [style*="grid-template-columns:2fr 1fr 1fr auto"]{
+        grid-template-columns:1fr!important;
+      }
 
-    /* Chart */
-    .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
-    .chart-title { font-size: 13px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
-    .chart-wrap { position: relative; height: 200px; }
+      /* Histórico cards */
+      .hist-header{padding:10px 12px;}
+      .hist-title h3{font-size:13px;}
+      .hist-week{font-size:11px;}
+      .hist-body-inner{padding:12px;}
+      .status-dot{font-size:10px;padding:2px 6px;}
+      .form-card{padding:12px;}
+      .form-card h3{font-size:13px;}
+      .form-actions{flex-wrap:wrap;gap:8px;}
 
-    /* Measurements table */
-    table { width: 100%; border-collapse: collapse; }
-    th { text-align: left; font-size: 11px; font-weight: 500; color: var(--muted); padding: 6px 8px; }
-    td { padding: 6px 8px; font-size: 13px; border-top: 1px solid var(--border); }
-    .badge { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 11px; }
-    .badge.d { background: var(--d-dim); color: var(--d); }
-    .badge.i { background: var(--i-dim); color: var(--i); }
+      /* Progress bar */
+      .prog-top{font-size:11px;flex-direction:column;gap:2px;}
+      .prog-labels{font-size:9px;}
 
-    /* Last checkin */
-    .checkin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .checkin-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
-    .checkin-row:last-child { border-bottom: none; }
-    .checkin-val { font-weight: 600; }
+      /* Pills and badges */
+      .pills{gap:4px;}
+      .pill{font-size:11px;padding:3px 8px;}
+      .badge{font-size:10px;padding:1px 6px;}
 
-    /* Symptom dots */
-    .sym-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-    .sym { font-size: 11px; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); }
-    .sym.ok { color: var(--green); border-color: rgba(52,211,153,.3); background: rgba(52,211,153,.06); }
-    .sym.warn { color: var(--amber); border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.06); }
+      /* Buttons — touch target minimum 44px */
+      .btn{min-height:44px;padding:10px 16px;font-size:13px;}
+      .btn-sm{min-height:40px;padding:8px 12px;font-size:12px;}
+      .copy-btn{min-height:40px;padding:6px 10px;font-size:11px;}
 
-    @media (max-width: 900px) {
-      .grid-2, .grid-charts, .checkin-grid { grid-template-columns: 1fr; }
-      .kpi-grid { grid-template-columns: repeat(2,1fr); }
+      /* JSON output */
+      .json-out{font-size:10px;padding:10px;max-height:200px;}
+
+      /* Form hints */
+      .form-hint{font-size:11px;padding:8px 10px;}
+
+      /* Check-in display rows */
+      .ci-row{flex-direction:column;gap:2px;padding:8px 0;}
+      .ci-row span:last-child{text-align:left;max-width:100%;}
+
+      /* Goal config */
+      .goal-config-toggle{font-size:11px;}
+      .goal-note{font-size:10px;}
+
+      /* Upcoming exam items */
+      [style*="display:flex;align-items:center;gap:10px;padding:8px 12px"]{
+        flex-direction:column!important;align-items:flex-start!important;
+      }
+
+      /* Casal view summary rows */
+      .ci-row span[style*="max-width:60%"]{max-width:100%!important;text-align:left!important;}
     }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="header">
-    <div>
-      <h1>Dashboard Saúde — Davidson &amp; Isabella</h1>
-      <div class="subtitle" id="subtitleDate"></div>
-    </div>
-    <div class="last-updated" id="lastUpdated"></div>
-  </div>
-
-  <!-- KPIs Davidson -->
-  <div class="section">
-    <div class="section-title">Davidson — Indicadores</div>
-    <div class="kpi-grid">
-      <div class="kpi d"><div class="label">Peso atual</div><div class="value" id="d-weight">—</div><div class="delta" id="d-weight-delta"></div></div>
-      <div class="kpi d"><div class="label">Gordura corporal</div><div class="value" id="d-fat">—</div><div class="delta" id="d-fat-delta"></div></div>
-      <div class="kpi d"><div class="label">Massa muscular</div><div class="value" id="d-muscle">—</div><div class="delta" id="d-muscle-delta"></div></div>
-      <div class="kpi d"><div class="label">Gordura visceral</div><div class="value" id="d-visceral">—</div><div class="delta" id="d-visceral-delta"></div></div>
-    </div>
-  </div>
-
-  <!-- Meta gordura Davidson -->
-  <div class="section">
-    <div class="section-title">Davidson — Progresso meta gordura corporal</div>
-    <div class="card d-accent">
-      <div class="progress-wrap">
-        <div class="progress-label"><span>Baseline: 26,8%</span><span id="d-fat-label">—</span></div>
-        <div class="progress-track">
-          <div class="progress-fill d" id="d-fat-bar" style="width:0%"></div>
-          <div class="progress-marker" id="d-fat-intermediate-marker"></div>
-        </div>
-        <div class="milestone-labels"><span>26,8% (início)</span><span>20% (intermediário)</span><span>15% (meta)</span></div>
-      </div>
-      <div class="trend-row" id="d-trends"></div>
-    </div>
-  </div>
-
-  <!-- KPIs Isabella -->
-  <div class="section">
-    <div class="section-title">Isabella — Indicadores</div>
-    <div class="kpi-grid">
-      <div class="kpi i"><div class="label">Peso atual</div><div class="value" id="i-weight">—</div><div class="delta" id="i-weight-delta"></div></div>
-      <div class="kpi i"><div class="label">Gordura corporal</div><div class="value" id="i-fat">—</div><div class="delta" id="i-fat-delta"></div></div>
-      <div class="kpi i"><div class="label">Músculo esquelético</div><div class="value" id="i-muscle">—</div><div class="delta" id="i-muscle-delta"></div></div>
-      <div class="kpi i"><div class="label">Gordura visceral</div><div class="value" id="i-visceral">—</div><div class="delta" id="i-visceral-delta"></div></div>
-    </div>
-  </div>
-
-  <!-- Isabella progresso -->
-  <div class="section">
-    <div class="section-title">Isabella — Progresso composição corporal</div>
-    <div class="card i-accent">
-      <div class="progress-wrap">
-        <div class="progress-label"><span>Baseline: 38,8%</span><span id="i-fat-label">—</span></div>
-        <div class="progress-track">
-          <div class="progress-fill i" id="i-fat-bar" style="width:0%"></div>
-        </div>
-        <div class="milestone-labels"><span>38,8% (início)</span><span>30% (objetivo)</span></div>
-      </div>
-      <div class="trend-row" id="i-trends"></div>
-    </div>
-  </div>
-
-  <!-- Charts -->
-  <div class="section">
-    <div class="section-title">Evolução — Gráficos</div>
-    <div class="grid-charts">
-      <div class="chart-card"><div class="chart-title">Peso — Davidson (kg)</div><div class="chart-wrap"><canvas id="chartDWeight"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Peso — Isabella (kg)</div><div class="chart-wrap"><canvas id="chartIWeight"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Gordura corporal % — Ambos</div><div class="chart-wrap"><canvas id="chartFat"></canvas></div></div>
-      <div class="chart-card"><div class="chart-title">Músculo esquelético % — Ambos</div><div class="chart-wrap"><canvas id="chartMuscle"></canvas></div></div>
-    </div>
-  </div>
-
-  <!-- Medidas -->
-  <div class="section">
-    <div class="section-title">Medidas corporais (cm)</div>
-    <div class="grid-2">
-      <div class="card d-accent">
-        <div class="person-header"><div class="person-dot d"></div><h2>Davidson</h2></div>
-        <table>
-          <thead><tr><th>Data</th><th>Cintura</th><th>Peito</th><th>Braços</th><th>Ombros</th><th>Quadril</th><th>Coxas</th><th>Pant.</th></tr></thead>
-          <tbody id="d-measurements"></tbody>
-        </table>
-      </div>
-      <div class="card i-accent">
-        <div class="person-header"><div class="person-dot i"></div><h2>Isabella</h2></div>
-        <table>
-          <thead><tr><th>Data</th><th>Cintura</th><th>Peito</th><th>Braços</th><th>Ombros</th><th>Quadril</th><th>Coxas</th><th>Pant.</th></tr></thead>
-          <tbody id="i-measurements"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-
-  <!-- Último check-in -->
-  <div class="section">
-    <div class="section-title">Último check-in semanal — <span id="checkin-date-label"></span></div>
-    <div class="checkin-grid">
-      <div class="card d-accent">
-        <div class="person-header"><div class="person-dot d"></div><h2>Davidson</h2></div>
-        <div id="d-checkin"></div>
-      </div>
-      <div class="card i-accent">
-        <div class="person-header"><div class="person-dot i"></div><h2>Isabella</h2></div>
-        <div id="i-checkin"></div>
-      </div>
-    </div>
-  </div>
-
+<div class="topbar">
+  <div><h1>Dashboard Saúde — Davidson &amp; Isabella</h1><div class="sub" id="hdrSub"></div></div>
+  <div class="tabs" id="tabBar"></div>
 </div>
 
+<div id="view-davidson" class="view page"></div>
+<div id="view-isabella" class="view page"></div>
+<div id="view-casal"    class="view page"></div>
+<div id="view-historico" class="view page"></div>
+<div id="view-checkin"   class="view page"></div>
+<div id="view-exames"    class="view page"></div>
+
 <script>
-// ─── FONTE DE DADOS ────────────────────────────────────────────────────────────
-// Atualizado automaticamente pelo agente de check-in toda semana (domingo).
-const HEALTH_DATA = {
-  baselines: {
-    davidson: { date: "2026-02-04", weight_kg: 102.5, fat_pct: 26.8, muscle_pct: 69.5, skeletal_muscle_pct: 47.3, visceral: 13.4 },
-    isabella: { date: "2026-02-04", weight_kg: 80.55, fat_pct: 38.8, skeletal_muscle_pct: 35.7, visceral: 14 }
-  },
-  goals: {
-    davidson: { fat_pct_intermediate: 20.0, fat_pct_main: 15.0 },
-    isabella: { fat_pct_target: 30.0 }
-  },
+// ── PERSISTÊNCIA DE METAS (localStorage) ─────────────────────────────────────
+(function loadSavedGoals(){
+  try {
+    const saved = JSON.parse(localStorage.getItem('hd_goals') || '{}');
+    for(const pid in saved){
+      if(HEALTH_DATA.pessoas[pid]) Object.assign(HEALTH_DATA.pessoas[pid].goals, saved[pid]);
+    }
+  } catch(e){}
+})();
 
-  // Histórico de peso e composição — Davidson
-  davidson_history: [
-    { date: "2026-02-04", weight_kg: 102.5,  fat_pct: 26.8, muscle_pct: 69.5, skeletal_muscle_pct: 47.3, visceral: 13.4 },
-    { date: "2026-02-13", weight_kg: 99.85,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-02-20", weight_kg: 98.45,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-02-27", weight_kg: 97.5,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-03-06", weight_kg: 96.8,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-03-13", weight_kg: 95.55,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-03-20", weight_kg: 94.9,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-03-27", weight_kg: 94.2,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-04-01", weight_kg: 93.5,   fat_pct: 23.8, muscle_pct: 71.2, skeletal_muscle_pct: 48.5, visceral: 12.1 },
-    { date: "2026-04-04", weight_kg: 92.95,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
-    { date: "2026-04-06", weight_kg: 92.7,   fat_pct: 22.5, muscle_pct: 72.1, skeletal_muscle_pct: 49.2, visceral: 11.5 }
-  ],
+// ── SERVIDOR LOCAL — auto-save ────────────────────────────────────────────────
+const IS_SERVER = location.protocol === 'http:';
+async function autoSave(data) {
+  if (!IS_SERVER) return false;
+  try {
+    const r = await fetch('/api/save', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+    const result = await r.json();
+    return result.ok === true;
+  } catch(e) { return false; }
+}
+function showSaveResult(elId, ok, fallbackJson) {
+  const el = document.getElementById(elId);
+  if (!el) return;
+  if (ok) {
+    el.textContent = '✅ Salvo com sucesso! Recarregando...';
+    el.style.display = 'block'; el.style.color = 'var(--green)';
+    el.style.fontFamily = 'inherit'; el.style.fontSize = '13px';
+    el.style.whiteSpace = 'normal';
+    setTimeout(() => location.reload(), 1400);
+  } else {
+    el.textContent = fallbackJson;
+    el.style.display = 'block'; el.style.color = '#94a3b8';
+    el.style.fontFamily = 'monospace'; el.style.fontSize = '11px';
+    el.style.whiteSpace = 'pre-wrap';
+  }
+}
 
-  // Histórico de peso e composição — Isabella
-  isabella_history: [
-    { date: "2026-02-04", weight_kg: 80.55, fat_pct: 38.8, skeletal_muscle_pct: 35.7, visceral: 14 },
-    { date: "2026-02-13", weight_kg: 79.8,  fat_pct: 38.1, skeletal_muscle_pct: 35.9, visceral: 13.8 },
-    { date: "2026-02-20", weight_kg: 79.1,  fat_pct: 37.8, skeletal_muscle_pct: 36.1, visceral: 13.5 },
-    { date: "2026-02-27", weight_kg: 78.4,  fat_pct: 37.4, skeletal_muscle_pct: 36.3, visceral: 13.3 },
-    { date: "2026-03-06", weight_kg: 77.6,  fat_pct: 36.9, skeletal_muscle_pct: 36.5, visceral: 13.1 },
-    { date: "2026-03-13", weight_kg: 75.5,  fat_pct: 35.6, skeletal_muscle_pct: 37.6, visceral: 12 },
-    { date: "2026-03-20", weight_kg: 76.3,  fat_pct: 36.0, skeletal_muscle_pct: 37.2, visceral: 12.2 },
-    { date: "2026-03-27", weight_kg: 75.9,  fat_pct: 35.8, skeletal_muscle_pct: 37.4, visceral: 12.1 },
-    { date: "2026-04-01", weight_kg: 75.7,  fat_pct: 35.7, skeletal_muscle_pct: 37.5, visceral: 12.0 },
-    { date: "2026-04-06", weight_kg: 75.5,  fat_pct: 35.6, skeletal_muscle_pct: 37.6, visceral: 12.0 }
-  ],
+// ── HELPERS ───────────────────────────────────────────────────────────────────
+const fd = d => { const [y,m,dd]=d.split("-"); return `${dd}/${m}/${y}`; };
+const lastVal = (arr, key) => { for(let i=arr.length-1;i>=0;i--) if(arr[i][key]!=null) return arr[i][key]; return null; };
+const diffStr = (cur, base, inv=false) => {
+  if(cur==null||base==null) return {txt:"—",cls:"neutral"};
+  const d=(cur-base).toFixed(1);
+  return {txt:(d>0?"+":"")+d, cls:(inv?d>0:d<0)?"good":"bad"};
+};
+const tCls = (v, isGoodUp=false) => v==="↓"?(isGoodUp?"bad":"good"):v==="↑"?(isGoodUp?"good":"bad"):"neutral";
 
-  // Medidas corporais — Davidson
-  davidson_measurements: [
-    { date: "2026-02-04", cintura: 107, peito: 114, bracos: 42, ombros: 131, quadril: 110, coxas: 64, panturrilhas: 41 },
-    { date: "2026-03-04", cintura: 103, peito: 112, bracos: 41, ombros: 130, quadril: 108, coxas: 63, panturrilhas: 40 },
-    { date: "2026-04-04", cintura: 100, peito: 110, bracos: 41, ombros: 129, quadril: 107, coxas: 62, panturrilhas: 40 }
-  ],
+const CD = {
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false}},
+  scales:{x:{ticks:{color:"#64748b",font:{size:10},maxTicksLimit:9},grid:{color:"#1e2d45"}},
+          y:{ticks:{color:"#64748b",font:{size:10}},grid:{color:"#1e2d45"}}}
+};
+function mkLine(id,labels,datasets,legend=false){
+  const o=JSON.parse(JSON.stringify(CD));
+  if(legend)o.plugins.legend={display:true,labels:{color:"#94a3b8",font:{size:11}}};
+  new Chart(document.getElementById(id),{type:"line",data:{labels,datasets},
+    options:{...o,elements:{point:{radius:3},line:{tension:.35}}}});
+}
 
-  // Medidas corporais — Isabella
-  isabella_measurements: [
-    { date: "2026-02-04", cintura: 87,  peito: 97,  bracos: 36, ombros: 107, quadril: 117, coxas: 71, panturrilhas: 41 },
-    { date: "2026-03-23", cintura: 83,  peito: 93,  bracos: 35, ombros: 104, quadril: 114, coxas: 69, panturrilhas: 40 }
-  ],
+function copyText(txt, btn){
+  navigator.clipboard.writeText(txt).then(()=>{
+    const t=btn.textContent;btn.textContent="Copiado ✓";setTimeout(()=>btn.textContent=t,2000);
+  });
+}
 
-  // Último check-in
-  last_checkin: {
-    date: "2026-04-06",
-    davidson: {
-      scale: { weight_kg: 92.7, fat_pct: 22.5, muscle_pct: 72.1, visceral: 11.5 },
-      trend: { weight: "↓", fat: "↓", muscle: "↑", visceral: "↓" },
-      adherence: { mounjaro_on_time: true, diet_score: 9, workouts_count: 4, water_sleep_notes: "Energia e força muito boas. Constipação controlada com PegLax 17g diário." },
-      symptoms: { nausea: 0, reflux: 0, constipation: 1, diarrhea: 0, headache: 0, low_energy: 0 }
-    },
-    isabella: {
-      scale: { weight_kg: 75.5, fat_pct: 35.6, skeletal_muscle_pct: 37.6, visceral: 12 },
-      trend: { weight: "↓", fat: "↓", muscle: "↑", visceral: "↓" },
-      adherence: { diet_score: null, workouts_count: null, water_sleep_notes: "" },
-      symptoms: { bloating: 0, headache: 0, fatigue: 0, anxiety_stress: 0, poor_sleep: 0 }
-    },
-    summary: {
-      what_worked: "Davidson: dieta sem erros, 4 treinos, sem efeitos colaterais relevantes.",
-      what_hindered: "",
-      next_week_priority: "Davidson: possível subida para Mounjaro 5mg (~2 semanas)."
+// ── GOAL CONFIG widget ─────────────────────────────────────────────────────────
+function goalConfigHTML(pid) {
+  const p = HEALTH_DATA.pessoas[pid];
+  const g = p.goals;
+  return `
+    <div class="goal-config">
+      <div class="goal-config-toggle" onclick="toggleGoalConfig('${pid}')">
+        ⚙️ Configurar metas
+      </div>
+      <div class="goal-config-body" id="goal-body-${pid}">
+        <div class="goal-frow" style="margin-top:8px">
+          <div class="goal-field">
+            <label>Meta principal (gordura %)</label>
+            <input type="number" step="0.5" id="goal-target-${pid}" value="${g.fat_pct_target??''}" placeholder="ex: 15"/>
+          </div>
+          <div class="goal-field">
+            <label>Meta intermediária (opcional)</label>
+            <input type="number" step="0.5" id="goal-mid-${pid}" value="${g.fat_pct_intermediate??''}" placeholder="ex: 20"/>
+          </div>
+          <button class="btn btn-s btn-sm" onclick="applyGoal('${pid}')">Aplicar</button>
+        </div>
+        <div class="goal-note">Após ajustar, clique em Aplicar para atualizar a barra. Copie o JSON gerado para salvar.</div>
+        <pre class="json-out" id="goal-json-${pid}"></pre>
+      </div>
+    </div>`;
+}
+
+function toggleGoalConfig(pid){
+  const el=document.getElementById(`goal-body-${pid}`);
+  el.classList.toggle("open");
+}
+
+function applyGoal(pid){
+  const t=parseFloat(document.getElementById(`goal-target-${pid}`).value)||null;
+  const m=parseFloat(document.getElementById(`goal-mid-${pid}`).value)||null;
+  HEALTH_DATA.pessoas[pid].goals.fat_pct_target=t;
+  HEALTH_DATA.pessoas[pid].goals.fat_pct_intermediate=m;
+  updateProgressBar(pid);
+  // Persistir no localStorage (sobrevive ao refresh da página)
+  try {
+    const saved=JSON.parse(localStorage.getItem('hd_goals')||'{}');
+    saved[pid]={fat_pct_target:t,fat_pct_intermediate:m};
+    localStorage.setItem('hd_goals',JSON.stringify(saved));
+  } catch(e){}
+  const el=document.getElementById(`goal-json-${pid}`);
+  el.textContent=`✅ Meta salva! (fat_pct_target: ${t??'—'}%, intermediária: ${m??'nenhuma'})`;
+  el.style.display="block";el.style.color="var(--green)";el.style.fontFamily="inherit";el.style.fontSize="12px";
+}
+
+function updateProgressBar(pid){
+  const p=HEALTH_DATA.pessoas[pid];
+  const g=p.goals;
+  const cf=lastVal(p.history,"fat_pct");
+  const b=p.baseline;
+  if(cf==null||!g.fat_pct_target) return;
+  const range=b.fat_pct-g.fat_pct_target;
+  const pct=Math.min(100,Math.max(0,((b.fat_pct-cf)/range)*100));
+  const bar=document.getElementById(`prog-bar-${pid}`);
+  if(bar) bar.style.width=pct+"%";
+  const lbl=document.getElementById(`prog-lbl-${pid}`);
+  if(lbl) lbl.textContent=`Atual: ${cf}% → Meta: ${g.fat_pct_target}%`;
+  const mid=document.getElementById(`prog-mid-${pid}`);
+  if(mid){
+    if(g.fat_pct_intermediate){
+      const mp=((b.fat_pct-g.fat_pct_intermediate)/range)*100;
+      mid.style.left=mp+"%";mid.style.display="block";
+    } else {
+      mid.style.display="none";
     }
   }
-};
-
-// ─── HELPERS ──────────────────────────────────────────────────────────────────
-function fmt(v, unit = "") { return v != null ? v + unit : "—"; }
-function delta(current, baseline, invert = false) {
-  if (current == null || baseline == null) return { text: "—", cls: "neutral" };
-  const diff = (current - baseline).toFixed(1);
-  const isDown = diff < 0;
-  const isGood = invert ? !isDown : isDown;
-  return { text: (diff > 0 ? "+" : "") + diff + (invert ? " ↑" : " ↓"), cls: isGood ? "down" : "up-bad" };
-}
-function lastNonNull(arr, key) {
-  for (let i = arr.length - 1; i >= 0; i--) {
-    if (arr[i][key] != null) return arr[i][key];
-  }
-  return null;
-}
-function formatDate(d) {
-  const [y, m, day] = d.split("-");
-  return `${day}/${m}/${y}`;
+  const ll=document.getElementById(`prog-labels-${pid}`);
+  if(ll) ll.innerHTML=`<span>${b.fat_pct}% (início)</span>${g.fat_pct_intermediate?`<span>${g.fat_pct_intermediate}% (interm.)</span>`:"<span></span>"}<span>${g.fat_pct_target??'?'}% (meta)</span>`;
 }
 
-// ─── RENDER KPIs ──────────────────────────────────────────────────────────────
-function renderKPIs() {
-  const db = HEALTH_DATA.baselines.davidson;
-  const ib = HEALTH_DATA.baselines.isabella;
-  const dh = HEALTH_DATA.davidson_history;
-  const ih = HEALTH_DATA.isabella_history;
+// ── RESUMO DE EXAMES (para view principal) ──────��────────────────────────────
+function buildPersonExamsSummary(pid){
+  const E=HEALTH_DATA.exams||{}, A=HEALTH_DATA.clinical_alerts||{}, U=HEALTH_DATA.upcoming_exams||{}, P=HEALTH_DATA.prescriptions||{};
+  const p=HEALTH_DATA.pessoas[pid];
+  const exams=E[pid]||[], alerts=A[pid]||[], upcoming=U[pid]||[], prescr=P[pid]||[];
 
-  // Davidson
-  const dWeight = lastNonNull(dh, "weight_kg");
-  const dFat    = lastNonNull(dh, "fat_pct");
-  const dMuscle = lastNonNull(dh, "muscle_pct");
-  const dVisc   = lastNonNull(dh, "visceral");
+  if(!exams.length && !alerts.length && !upcoming.length && !prescr.length) return "";
 
-  document.getElementById("d-weight").textContent  = fmt(dWeight, " kg");
-  document.getElementById("d-fat").textContent     = fmt(dFat, "%");
-  document.getElementById("d-muscle").textContent  = fmt(dMuscle, "%");
-  document.getElementById("d-visceral").textContent = fmt(dVisc);
+  const lastExam=exams.length?exams[exams.length-1]:null;
+  const warnResults=lastExam?lastExam.results.filter(r=>r.status==="warn"):[];
 
-  const dwd = delta(dWeight, db.weight_kg);
-  document.getElementById("d-weight-delta").innerHTML = `<span class="delta ${dwd.cls}">vs baseline ${dwd.text}</span>`;
-  const dfd = delta(dFat, db.fat_pct);
-  document.getElementById("d-fat-delta").innerHTML = `<span class="delta ${dfd.cls}">vs baseline ${dfd.text}%</span>`;
-  const dmd = delta(dMuscle, db.muscle_pct, true);
-  document.getElementById("d-muscle-delta").innerHTML = `<span class="delta ${dmd.cls}">vs baseline ${dmd.text}%</span>`;
-  const dvd = delta(dVisc, db.visceral);
-  document.getElementById("d-visceral-delta").innerHTML = `<span class="delta ${dvd.cls}">vs baseline ${dvd.text}</span>`;
-
-  // Isabella
-  const iWeight = lastNonNull(ih, "weight_kg");
-  const iFat    = lastNonNull(ih, "fat_pct");
-  const iMuscle = lastNonNull(ih, "skeletal_muscle_pct");
-  const iVisc   = lastNonNull(ih, "visceral");
-
-  document.getElementById("i-weight").textContent  = fmt(iWeight, " kg");
-  document.getElementById("i-fat").textContent     = fmt(iFat, "%");
-  document.getElementById("i-muscle").textContent  = fmt(iMuscle, "%");
-  document.getElementById("i-visceral").textContent = fmt(iVisc);
-
-  const iwd = delta(iWeight, ib.weight_kg);
-  document.getElementById("i-weight-delta").innerHTML = `<span class="delta ${iwd.cls}">vs baseline ${iwd.text}</span>`;
-  const ifd = delta(iFat, ib.fat_pct);
-  document.getElementById("i-fat-delta").innerHTML = `<span class="delta ${ifd.cls}">vs baseline ${ifd.text}%</span>`;
-  const imd = delta(iMuscle, ib.skeletal_muscle_pct, true);
-  document.getElementById("i-muscle-delta").innerHTML = `<span class="delta ${imd.cls}">vs baseline ${imd.text}%</span>`;
-  const ivd = delta(iVisc, ib.visceral);
-  document.getElementById("i-visceral-delta").innerHTML = `<span class="delta ${ivd.cls}">vs baseline ${ivd.text}</span>`;
-}
-
-// ─── PROGRESS BARS ────────────────────────────────────────────────────────────
-function renderProgress() {
-  const dh = HEALTH_DATA.davidson_history;
-  const ih = HEALTH_DATA.isabella_history;
-  const dg = HEALTH_DATA.goals.davidson;
-  const ig = HEALTH_DATA.goals.isabella;
-
-  // Davidson fat% progress: 26.8% → 15% (range = 11.8pp)
-  const dFat = lastNonNull(dh, "fat_pct");
-  if (dFat != null) {
-    const range = 26.8 - 15;
-    const pct = Math.min(100, Math.max(0, ((26.8 - dFat) / range) * 100));
-    document.getElementById("d-fat-bar").style.width = pct + "%";
-    document.getElementById("d-fat-label").textContent = `Atual: ${dFat}% → Meta: 15%`;
-    // intermediate marker at 20% = (26.8-20)/11.8 of full width
-    const interPct = ((26.8 - 20) / range) * 100;
-    document.getElementById("d-fat-intermediate-marker").style.left = interPct + "%";
+  // Evolução de marcadores entre exames (marcadores em comum com valor numérico)
+  let evoHTML="";
+  if(exams.length>=2){
+    const keyMarkers=["Testosterona total","FSH","LH","Creatinina","eGFR (CKD-EPI)","HbA1c","Colesterol total","LDL (calculado)","HDL","Triglicérides","Vitamina D (25-OH)","Vitamina B12","Ferritina","HOMA-IR","Glicose jejum","Insulina","TSH","T4 livre","TGO (AST)","TGP (ALT)"];
+    // Build map: marker -> [{date, value}]
+    const markerMap={};
+    exams.forEach(ex=>{
+      ex.results.forEach(r=>{
+        if(typeof r.value!=="number") return;
+        if(!markerMap[r.name]) markerMap[r.name]=[];
+        markerMap[r.name].push({date:ex.date,value:r.value,unit:r.unit,status:r.status});
+      });
+    });
+    // Filter to markers that appear in 2+ exams
+    const evolved=keyMarkers.filter(m=>markerMap[m]&&markerMap[m].length>=2);
+    if(evolved.length){
+      evoHTML=`
+        <div style="margin-bottom:12px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px;text-transform:uppercase">Evolução entre exames</div>
+          <div class="table-scroll"><table style="width:100%;min-width:500px">
+            <thead><tr><th style="text-align:left">Marcador</th>${exams.map(ex=>`<th style="text-align:right;font-size:10px">${fd(ex.date)}</th>`).join("")}<th style="text-align:right">Δ</th></tr></thead>
+            <tbody>${evolved.map(m=>{
+              const pts=markerMap[m];
+              const first=pts[0], last=pts[pts.length-1];
+              const d=(last.value-first.value);
+              const pct=first.value!==0?((d/first.value)*100).toFixed(0):"";
+              const isGoodDown=["Creatinina","HbA1c","Colesterol total","LDL (calculado)","Triglicérides","HOMA-IR","Insulina","Glicose jejum","TSH","TGO (AST)","TGP (ALT)"].includes(m);
+              const isGoodUp=["Testosterona total","FSH","LH","HDL","Vitamina D (25-OH)","Vitamina B12","Ferritina","eGFR (CKD-EPI)","T4 livre"].includes(m);
+              const cls=d===0?"neutral":((isGoodUp&&d>0)||(isGoodDown&&d<0))?"good":"bad";
+              // Build cells for each exam
+              const cells=exams.map(ex=>{
+                const found=pts.find(p=>p.date===ex.date);
+                return `<td style="text-align:right;font-size:12px;${found?.status==='warn'?'color:var(--red)':''}">${found?found.value:"—"}</td>`;
+              }).join("");
+              return `<tr>
+                <td style="font-size:12px;font-weight:500">${m} <span style="color:var(--muted);font-size:10px">${first.unit}</span></td>
+                ${cells}
+                <td style="text-align:right"><span class="${cls}" style="font-size:11px;font-weight:600">${d>0?"+":""}${d.toFixed(1)}${pct?` (${pct}%)`:""}</span></td>
+              </tr>`;
+            }).join("")}</tbody>
+          </table></div>
+        </div>`;
+    }
   }
 
-  // Davidson trends
-  const lc = HEALTH_DATA.last_checkin.davidson.trend;
-  const dTrends = [
-    { label: "Peso", v: lc.weight },
-    { label: "Gordura", v: lc.fat },
-    { label: "Músculo", v: lc.muscle },
-    { label: "Visceral", v: lc.visceral }
-  ];
-  const dTrendEl = document.getElementById("d-trends");
-  dTrendEl.innerHTML = dTrends.map(t => {
-    const cls = (t.v === "↓" && t.label !== "Músculo") ? "down-good" :
-                (t.v === "↑" && t.label === "Músculo") ? "up-good" : "neutral";
-    return `<span class="trend-pill ${cls}">${t.label} ${t.v}</span>`;
+  return `
+    <div class="sec">
+      <div class="sec-title">Saúde — Exames e prescrições</div>
+      <div class="card" style="border-color:${p.colorDim}">
+        ${upcoming.length?`
+          <div style="margin-bottom:12px">
+            ${upcoming.map(u=>`
+              <div style="display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:8px;margin-bottom:4px;font-size:12px">
+                <span>📅</span>
+                <span style="font-weight:600">${u.exam}</span>
+                <span style="color:var(--muted)">· ${u.window}</span>
+                <span class="pill bad" style="margin-left:auto;font-size:10px">${u.status}</span>
+              </div>`).join("")}
+          </div>`:""}
+
+        ${alerts.length?`
+          <div style="margin-bottom:12px">
+            ${alerts.map(a=>`
+              <div style="display:flex;align-items:center;gap:6px;font-size:12px;padding:3px 0">
+                <span style="color:${a.type==="action"?"var(--amber)":"var(--red)"}">${a.type==="action"?"🔔":"⚠️"}</span>
+                <span>${a.text}</span>
+              </div>`).join("")}
+          </div>`:""}
+
+        ${evoHTML}
+
+        ${lastExam&&!evoHTML?`
+          <div style="margin-bottom:12px">
+            <div style="font-size:12px;color:var(--muted);margin-bottom:6px">Último exame: <strong style="color:var(--text)">${lastExam.label}</strong> · ${fd(lastExam.date)}</div>
+            ${warnResults.length?`
+              <div style="display:flex;gap:6px;flex-wrap:wrap">
+                ${warnResults.map(r=>`<span class="pill bad" style="font-size:11px">${r.name}: ${r.value} ${r.unit}</span>`).join("")}
+              </div>`:`<span class="pill good" style="font-size:11px">Todos os marcadores OK</span>`}
+          </div>`:""}
+
+        ${prescr.length?`
+          <div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Prescrições ativas</div>
+            <div style="display:flex;gap:4px;flex-wrap:wrap">
+              ${prescr.map(r=>`<span class="pill" style="font-size:11px">${r.name} ${r.dose}</span>`).join("")}
+            </div>
+          </div>`:""}
+
+        <div style="margin-top:10px;text-align:right">
+          <span style="font-size:11px;color:var(--muted);cursor:pointer" onclick="setTab('exames')">Ver detalhes →</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ── PERSON VIEW ───────────────────────────────────────────────────────────────
+function buildPersonView(pid){
+  const p=HEALTH_DATA.pessoas[pid],c=p.color;
+  const lastCI=HEALTH_DATA.checkins[HEALTH_DATA.checkins.length-1];
+  const pCI=lastCI[pid];
+  const b=p.baseline,g=p.goals;
+  const cw=lastVal(p.history,"weight_kg"),cf=lastVal(p.history,"fat_pct"),
+        cm=lastVal(p.history,"skeletal_muscle_pct"),cv=lastVal(p.history,"visceral");
+  const rw=diffStr(cw,b.weight_kg),rf=diffStr(cf,b.fat_pct),rm=diffStr(cm,b.skeletal_muscle_pct,true),rv=diffStr(cv,b.visceral);
+
+  const range=b.fat_pct-(g.fat_pct_target??15);
+  const prog=cf!=null?Math.min(100,Math.max(0,((b.fat_pct-cf)/range)*100)):0;
+  const midPct=g.fat_pct_intermediate?((b.fat_pct-g.fat_pct_intermediate)/range)*100:null;
+  const midMarker=midPct!=null?`<div class="prog-marker" id="prog-mid-${pid}" style="left:${midPct}%"></div>`:`<div class="prog-marker" id="prog-mid-${pid}" style="display:none"></div>`;
+  const midLbl=g.fat_pct_intermediate?`<span>${g.fat_pct_intermediate}% (interm.)</span>`:"<span></span>";
+
+  const tr=pCI.trend;
+  const pills=[["Peso",tr.weight,false],["Gordura",tr.fat,false],["Músculo",tr.muscle,true],["Visceral",tr.visceral,false]]
+    .map(([l,v,inv])=>`<span class="pill ${tCls(v,inv)}">${l} ${v}</span>`).join("");
+
+  const mFields=["cintura","peito","bracos","ombros","quadril","coxas","panturrilhas"];
+  const medsRows=p.measurements.map((r,i)=>{
+    const prev=i>0?p.measurements[i-1]:null;
+    return `<tr><td><span class="badge" style="background:${p.colorDim};color:${c}">${fd(r.date)}</span></td>`+
+      mFields.map(f=>{
+        const v=r[f],pp=prev?prev[f]:null;
+        if(v==null)return"<td>—</td>";
+        if(pp!=null&&v!==pp){const d=v-pp;return`<td>${v} <small class="${d<0?"delta-dn":"delta-up"}">(${d>0?"+":""}${d})</small></td>`;}
+        return`<td>${v}</td>`;
+      }).join("")+"</tr>";
   }).join("");
 
-  // Isabella fat%: 38.8% → 30%
-  const iFat = lastNonNull(ih, "fat_pct");
-  if (iFat != null) {
-    const range = 38.8 - 30;
-    const pct = Math.min(100, Math.max(0, ((38.8 - iFat) / range) * 100));
-    document.getElementById("i-fat-bar").style.width = pct + "%";
-    document.getElementById("i-fat-label").textContent = `Atual: ${iFat}% → Meta: 30%`;
-  }
-
-  // Isabella trends
-  const ilc = HEALTH_DATA.last_checkin.isabella.trend;
-  const iTrends = [
-    { label: "Peso", v: ilc.weight },
-    { label: "Gordura", v: ilc.fat },
-    { label: "Músculo", v: ilc.muscle },
-    { label: "Visceral", v: ilc.visceral }
+  const sc=pCI.scale,ad=pCI.adherence;
+  const ciRows=[
+    ["Peso",sc.weight_kg!=null?sc.weight_kg+" kg":"—"],
+    ["Gordura",sc.fat_pct!=null?sc.fat_pct+"%":"—"],
+    [p.muscle_label||"Músculo",sc.skeletal_muscle_pct!=null?sc.skeletal_muscle_pct+"%":"—"],
+    ["Visceral",sc.visceral??"—"],
+    ["Dieta",ad.diet_score!=null?ad.diet_score+"/10":"—"],
+    ["Treinos",ad.workouts_count??"—"],
   ];
-  const iTrendEl = document.getElementById("i-trends");
-  iTrendEl.innerHTML = iTrends.map(t => {
-    const cls = (t.v === "↓" && t.label !== "Músculo") ? "down-good" :
-                (t.v === "↑" && t.label === "Músculo") ? "up-good" : "neutral";
-    return `<span class="trend-pill ${cls}">${t.label} ${t.v}</span>`;
-  }).join("");
+  if(p.treatment) ciRows.splice(3,0,["Medicação",ad.medication_on_time?"✓ Em dia":ad.medication_on_time===false?"✗ Atrasou":"—"]);
+  const ciHtml=ciRows.map(([l,v])=>`<div class="ci-row"><span>${l}</span><strong>${v}</strong></div>`).join("")+
+    (ad.notes?`<p style="font-size:12px;color:#94a3b8;margin-top:8px">${ad.notes}</p>`:"")+
+    `<div style="margin-top:10px">${Object.entries(pCI.symptoms).map(([k,v])=>{
+      const label=p.symptoms_schema[k]||k;
+      return`<span class="sym-tag ${v===0?"ok":v>0?"warn":""}">${label}: ${v??"-"}</span>`;
+    }).join("")}</div>`;
+
+  document.getElementById(`view-${pid}`).innerHTML=`
+    <div class="sec">
+      <div class="sec-title">Indicadores — ${p.nome}</div>
+      <div class="g4">
+        <div class="kpi"><div class="lbl">Peso atual</div><div class="val" style="color:${c}">${cw!=null?cw+" kg":"—"}</div><div class="dlt"><span class="${rw.cls}">baseline ${rw.txt} kg</span></div></div>
+        <div class="kpi"><div class="lbl">Gordura corporal</div><div class="val" style="color:${c}">${cf!=null?cf+"%":"—"}</div><div class="dlt"><span class="${rf.cls}">baseline ${rf.txt}%</span></div></div>
+        <div class="kpi"><div class="lbl">${p.muscle_label||"Músculo"}</div><div class="val" style="color:${c}">${cm!=null?cm+"%":"—"}</div><div class="dlt"><span class="${rm.cls}">baseline ${rm.txt}%</span></div></div>
+        <div class="kpi"><div class="lbl">Gordura visceral</div><div class="val" style="color:${c}">${cv??"—"}</div><div class="dlt"><span class="${rv.cls}">baseline ${rv.txt}</span></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Meta — Gordura corporal</div>
+      <div class="card" style="border-color:${p.colorDim}">
+        <div class="prog-top"><span>Baseline ${b.fat_pct}%</span><span id="prog-lbl-${pid}">${cf!=null?`Atual: ${cf}% → Meta: ${g.fat_pct_target??'?'}%`:"—"}</span></div>
+        <div class="prog-track">
+          <div class="prog-fill" id="prog-bar-${pid}" style="width:${prog}%;background:${c}"></div>
+          ${midMarker}
+        </div>
+        <div class="prog-labels" id="prog-labels-${pid}"><span>${b.fat_pct}% (início)</span>${midLbl}<span>${g.fat_pct_target??'?'}% (meta)</span></div>
+        <div class="pills">${pills}</div>
+        ${goalConfigHTML(pid)}
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Evolução — ${p.history.length} medições</div>
+      <div class="g2">
+        <div class="chart-card"><div class="chart-title">Peso (kg)</div><div class="chart-wrap"><canvas id="ch-w-${pid}"></canvas></div></div>
+        <div class="chart-card"><div class="chart-title">Composição corporal (%)</div><div class="chart-wrap"><canvas id="ch-c-${pid}"></canvas></div></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Medidas corporais (cm) — ${p.measurements.length} registros</div>
+      <div class="card" style="border-color:${p.colorDim}">
+        <div class="table-scroll"><table><thead><tr><th>Data</th><th>Cintura</th><th>Peito</th><th>Braços</th><th>Ombros</th><th>Quadril</th><th>Coxas</th><th>Pant.</th></tr></thead>
+        <tbody>${medsRows}</tbody></table></div>
+      </div>
+    </div>
+
+    <div class="sec">
+      <div class="sec-title">Último check-in — Semana ${lastCI.week_number} · ${fd(lastCI.date)}</div>
+      <div class="card" style="border-color:${p.colorDim}">${ciHtml}</div>
+    </div>
+
+    ${buildPersonExamsSummary(pid)}
+  `;
+
+  const h=p.history;
+  mkLine(`ch-w-${pid}`,h.map(d=>fd(d.date)),[{data:h.map(d=>d.weight_kg),borderColor:c,backgroundColor:p.colorDim,fill:true,borderWidth:2}]);
+  const hc=h.filter(d=>d.fat_pct!=null);
+  mkLine(`ch-c-${pid}`,hc.map(d=>fd(d.date)),[
+    {label:"Gordura %",data:hc.map(d=>d.fat_pct),borderColor:c,borderWidth:2},
+    {label:`${p.muscle_label} %`,data:hc.map(d=>d.skeletal_muscle_pct),borderColor:"#34d399",borderWidth:2,borderDash:[4,3]}
+  ],true);
 }
 
-// ─── CHARTS ───────────────────────────────────────────────────────────────────
-const chartDefaults = {
-  responsive: true, maintainAspectRatio: false,
-  plugins: { legend: { display: false } },
-  scales: {
-    x: { ticks: { color: "#64748b", font: { size: 10 }, maxTicksLimit: 6 }, grid: { color: "#1e2d45" } },
-    y: { ticks: { color: "#64748b", font: { size: 10 } }, grid: { color: "#1e2d45" } }
-  }
-};
+// ── CASAL VIEW ────────────────────────────────────────────────────────────────
+function buildCasalView(){
+  const d=HEALTH_DATA.pessoas.davidson,i=HEALTH_DATA.pessoas.isabella;
+  const lastCI=HEALTH_DATA.checkins[HEALTH_DATA.checkins.length-1];
+  const dw=lastVal(d.history,"weight_kg"),df=lastVal(d.history,"fat_pct");
+  const iw=lastVal(i.history,"weight_kg"),iif=lastVal(i.history,"fat_pct");
 
-function mkLine(ctx, labels, datasets) {
-  new Chart(ctx, {
-    type: "line",
-    data: { labels, datasets },
-    options: { ...chartDefaults, elements: { point: { radius: 3 }, line: { tension: .35 } } }
-  });
+  const sp=(pid,ci)=>[["Peso",ci.trend.weight,false],["Gordura",ci.trend.fat,false],["Músculo",ci.trend.muscle,true]]
+    .map(([l,v,inv])=>`<span class="pill ${tCls(v,inv)}">${l} ${v}</span>`).join("");
+
+  const s=lastCI.summary;
+  document.getElementById("view-casal").innerHTML=`
+    <div class="sec">
+      <div class="sec-title">Resumo do casal — ${fd(lastCI.date)}</div>
+      <div class="g2">
+        <div class="card" style="border-color:${d.colorDim}">
+          <div class="p-head"><div class="dot" style="background:${d.color}"></div><h2>${d.nome}</h2></div>
+          <div class="g2" style="gap:8px">
+            <div class="kpi"><div class="lbl">Peso</div><div class="val" style="font-size:18px;color:${d.color}">${dw!=null?dw+" kg":"—"}</div></div>
+            <div class="kpi"><div class="lbl">Gordura</div><div class="val" style="font-size:18px;color:${d.color}">${df!=null?df+"%":"—"}</div></div>
+          </div>
+          <div class="pills" style="margin-top:12px">${sp("davidson",lastCI.davidson)}</div>
+        </div>
+        <div class="card" style="border-color:${i.colorDim}">
+          <div class="p-head"><div class="dot" style="background:${i.color}"></div><h2>${i.nome}</h2></div>
+          <div class="g2" style="gap:8px">
+            <div class="kpi"><div class="lbl">Peso</div><div class="val" style="font-size:18px;color:${i.color}">${iw!=null?iw+" kg":"—"}</div></div>
+            <div class="kpi"><div class="lbl">Gordura</div><div class="val" style="font-size:18px;color:${i.color}">${iif!=null?iif+"%":"—"}</div></div>
+          </div>
+          <div class="pills" style="margin-top:12px">${sp("isabella",lastCI.isabella)}</div>
+        </div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-title">Gordura corporal % — comparativo</div>
+      <div class="chart-card"><div class="chart-wrap" style="height:210px"><canvas id="ch-fat-casal"></canvas></div></div>
+    </div>
+    <div class="sec">
+      <div class="sec-title">Peso (kg) — lado a lado</div>
+      <div class="g2">
+        <div class="chart-card"><div class="chart-title" style="color:${d.color}">${d.nome}</div><div class="chart-wrap"><canvas id="ch-wd-casal"></canvas></div></div>
+        <div class="chart-card"><div class="chart-title" style="color:${i.color}">${i.nome}</div><div class="chart-wrap"><canvas id="ch-wi-casal"></canvas></div></div>
+      </div>
+    </div>
+    <div class="sec">
+      <div class="sec-title">Resumo — Semana ${lastCI.week_number}</div>
+      <div class="card">
+        ${s.what_worked?`<div class="ci-row"><span>✅ O que funcionou</span><span style="color:var(--green);font-size:12px;max-width:60%;text-align:right">${s.what_worked}</span></div>`:""}
+        ${s.what_hindered?`<div class="ci-row"><span>⚠️ O que atrapalhou</span><span style="color:var(--amber);font-size:12px;max-width:60%;text-align:right">${s.what_hindered}</span></div>`:""}
+        ${s.next_week_priority?`<div class="ci-row"><span>🎯 Próxima semana</span><span style="color:#38bdf8;font-size:12px;max-width:60%;text-align:right">${s.next_week_priority}</span></div>`:""}
+      </div>
+    </div>`;
+
+  const allD=[...new Set([...HEALTH_DATA.pessoas.davidson.history.map(x=>x.date),...HEALTH_DATA.pessoas.isabella.history.map(x=>x.date)])].sort();
+  const dfm=Object.fromEntries(d.history.filter(x=>x.fat_pct!=null).map(x=>[x.date,x.fat_pct]));
+  const ifm=Object.fromEntries(i.history.filter(x=>x.fat_pct!=null).map(x=>[x.date,x.fat_pct]));
+  mkLine("ch-fat-casal",allD.map(fd),[
+    {label:d.nome,data:allD.map(x=>dfm[x]??null),borderColor:d.color,borderWidth:2,spanGaps:true},
+    {label:i.nome,data:allD.map(x=>ifm[x]??null),borderColor:i.color,borderWidth:2,spanGaps:true}
+  ],true);
+  mkLine("ch-wd-casal",d.history.map(x=>fd(x.date)),[{data:d.history.map(x=>x.weight_kg),borderColor:d.color,backgroundColor:d.colorDim,fill:true,borderWidth:2}]);
+  mkLine("ch-wi-casal",i.history.map(x=>fd(x.date)),[{data:i.history.map(x=>x.weight_kg),borderColor:i.color,backgroundColor:i.colorDim,fill:true,borderWidth:2}]);
 }
 
-function renderCharts() {
-  const dh = HEALTH_DATA.davidson_history;
-  const ih = HEALTH_DATA.isabella_history;
+// ── HISTÓRICO VIEW ─────────────────────────────────────────────────────────────
+function ciStatus(ci, pid){
+  const sc=ci[pid]?.scale, ad=ci[pid]?.adherence;
+  if(!sc) return {cls:"empty",label:"✗ vazio"};
+  const keyScale=[sc.weight_kg,sc.fat_pct,sc.skeletal_muscle_pct,sc.visceral];
+  const keyAdh=[ad?.diet_score,ad?.workouts_count];
+  const nullCount=[...keyScale,...keyAdh].filter(v=>v==null).length;
+  if(nullCount===0) return {cls:"full",label:"✓ completo"};
+  if(nullCount<=3) return {cls:"partial",label:"⚠ parcial"};
+  return {cls:"empty",label:"✗ incompleto"};
+}
 
-  // Davidson weight
-  mkLine(
-    document.getElementById("chartDWeight"),
-    dh.map(d => formatDate(d.date)),
-    [{ data: dh.map(d => d.weight_kg), borderColor: "#38bdf8", backgroundColor: "rgba(56,189,248,.08)", fill: true, borderWidth: 2 }]
-  );
+function buildHistoricoView(){
+  const el=document.getElementById("view-historico");
+  const cis=[...HEALTH_DATA.checkins].reverse();
+  el.innerHTML=`
+    <div class="form-hint" style="margin-bottom:16px">
+      Clique em qualquer check-in para <strong>expandir, editar ou completar</strong> dados faltantes (campos em amarelo).
+      Após ajustar, clique em <strong>💾 Salvar</strong> ${IS_SERVER?'— salva direto no arquivo.':'e copie o JSON para enviar ao Claude.'}
+    </div>
+    ${cis.map((ci,idx)=>buildHistCardHTML(ci, HEALTH_DATA.checkins.length-1-idx)).join("")}`;
+}
 
-  // Isabella weight
-  mkLine(
-    document.getElementById("chartIWeight"),
-    ih.map(d => formatDate(d.date)),
-    [{ data: ih.map(d => d.weight_kg), borderColor: "#f472b6", backgroundColor: "rgba(244,114,182,.08)", fill: true, borderWidth: 2 }]
-  );
+function buildHistCardHTML(ci, origIdx){
+  const d=HEALTH_DATA.pessoas.davidson, i=HEALTH_DATA.pessoas.isabella;
+  const dsc=ci.davidson?.scale, isc=ci.isabella?.scale;
+  const ds=ciStatus(ci,"davidson"), is_=ciStatus(ci,"isabella");
 
-  // Fat% combined
-  const fatLabels = [...new Set([...dh.map(d=>d.date), ...ih.map(d=>d.date)])].sort();
-  const dFatMap = Object.fromEntries(dh.filter(d=>d.fat_pct!=null).map(d=>[d.date,d.fat_pct]));
-  const iFatMap = Object.fromEntries(ih.filter(d=>d.fat_pct!=null).map(d=>[d.date,d.fat_pct]));
-  mkLine(
-    document.getElementById("chartFat"),
-    fatLabels.map(formatDate),
-    [
-      { label: "Davidson", data: fatLabels.map(d=>dFatMap[d]??null), borderColor: "#38bdf8", borderWidth: 2, spanGaps: true },
-      { label: "Isabella", data: fatLabels.map(d=>iFatMap[d]??null), borderColor: "#f472b6", borderWidth: 2, spanGaps: true }
-    ]
-  );
-  // override legend for fat chart
-  const fatChart = Chart.getChart("chartFat");
-  if (fatChart) fatChart.options.plugins.legend.display = true;
+  const metric=(label,val,unit="")=>{
+    const missing=val==null;
+    return `<div class="hist-metric">
+      <span class="lbl">${label}</span>
+      <span class="val ${missing?"missing":""}">${missing?"—":val+unit}</span>
+    </div>`;
+  };
 
-  // Muscle% combined
-  const muscLabels = fatLabels;
-  const dMuscMap = Object.fromEntries(dh.filter(d=>d.muscle_pct!=null).map(d=>[d.date,d.muscle_pct]));
-  const iMuscMap = Object.fromEntries(ih.filter(d=>d.skeletal_muscle_pct!=null).map(d=>[d.date,d.skeletal_muscle_pct]));
-  const muscChart = new Chart(document.getElementById("chartMuscle"), {
-    type: "line",
-    data: {
-      labels: muscLabels.map(formatDate),
-      datasets: [
-        { label: "Davidson (total)", data: muscLabels.map(d=>dMuscMap[d]??null), borderColor: "#38bdf8", borderWidth: 2, spanGaps: true },
-        { label: "Isabella (esq.)",  data: muscLabels.map(d=>iMuscMap[d]??null), borderColor: "#f472b6", borderWidth: 2, spanGaps: true }
-      ]
+  return `<div class="hist-card" id="hcard-${origIdx}">
+    <div class="hist-header" onclick="toggleHist(${origIdx})">
+      <div class="hist-title">
+        <span class="chevron" id="chev-${origIdx}">▼</span>
+        <h3>${fd(ci.date)}</h3>
+        <span class="hist-week">Semana ${ci.week_number}</span>
+      </div>
+      <div class="hist-status">
+        <span class="status-dot ${ds.cls}" style="color:${d.color};background:${d.colorDim}">${d.nome} ${ds.label}</span>
+        <span class="status-dot ${is_.cls}" style="color:${i.color};background:${i.colorDim}">${i.nome} ${is_.label}</span>
+      </div>
+    </div>
+
+    <div class="hist-body" id="hbody-${origIdx}">
+      <div class="hist-body-inner">
+        <!-- Resumo rápido -->
+        <div class="hist-person-row" style="margin-bottom:12px">
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <span style="font-size:12px;font-weight:600;color:${d.color}">${d.nome}</span>
+            ${metric("Peso",dsc?.weight_kg," kg")}${metric("Gordura",dsc?.fat_pct,"%")}${metric("Visceral",dsc?.visceral)}${metric("Dieta",ci.davidson?.adherence?.diet_score,"/10")}${metric("Treinos",ci.davidson?.adherence?.workouts_count)}
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap">
+            <span style="font-size:12px;font-weight:600;color:${i.color}">${i.nome}</span>
+            ${metric("Peso",isc?.weight_kg," kg")}${metric("Gordura",isc?.fat_pct,"%")}${metric("Visceral",isc?.visceral)}${metric("Dieta",ci.isabella?.adherence?.diet_score,"/10")}${metric("Treinos",ci.isabella?.adherence?.workouts_count)}
+          </div>
+        </div>
+        <div class="divider"></div>
+        <!-- Edit form -->
+        ${buildHistEditForm(ci, origIdx)}
+      </div>
+    </div>
+  </div>`;
+}
+
+function buildHistEditForm(ci, idx){
+  const d=HEALTH_DATA.pessoas.davidson, i=HEALTH_DATA.pessoas.isabella;
+  const dsc=ci.davidson?.scale||{}, dad=ci.davidson?.adherence||{}, dsy=ci.davidson?.symptoms||{};
+  const isc=ci.isabella?.scale||{}, iad=ci.isabella?.adherence||{}, isy=ci.isabella?.symptoms||{};
+
+  const inp=(id,val,type="number",step=".1",ph="")=>{
+    const missing=(val==null||val==="");
+    return `<input type="${type}" ${type==="number"?`step="${step}"`:""}
+      id="he-${idx}-${id}" value="${val??""}"
+      placeholder="${ph}" class="${missing?"missing-val":""}" style="width:100%;background:var(--s2);border:1px solid ${missing?"var(--amber)":"var(--border)"};border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none;" />`;
+  };
+  const sel=(id,val)=>`<select id="he-${idx}-${id}" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none;">
+    <option value="true" ${val===true?"selected":""}>✓ Sim</option>
+    <option value="false" ${val===false?"selected":""}>✗ Não</option>
+    <option value="null" ${val==null?"selected":""}>— N/A</option>
+  </select>`;
+
+  const dSymFields=Object.entries(d.symptoms_schema).map(([k,l])=>`
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${l}</div>${inp(`d-s-${k}`,dsy[k],"number","1","0")}</div>`).join("");
+  const iSymFields=Object.entries(i.symptoms_schema).map(([k,l])=>`
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${l}</div>${inp(`i-s-${k}`,isy[k],"number","1","0")}</div>`).join("");
+
+  return `
+    <div class="form-grid">
+      <div class="form-card" style="border-color:${d.colorDim};padding:14px">
+        <div class="p-head" style="margin-bottom:10px"><div class="dot" style="background:${d.color}"></div><h3>${d.nome}</h3></div>
+        <div class="frow">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Peso (kg)</div>${inp("d-w",dsc.weight_kg)}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Gordura %</div>${inp("d-f",dsc.fat_pct)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Músculo %</div>${inp("d-m",dsc.skeletal_muscle_pct)}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Visceral</div>${inp("d-v",dsc.visceral)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">IMC</div>${inp("d-bmi",dsc.bmi)}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Água %</div>${inp("d-wat",dsc.water_pct)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">TMB (kcal)</div>${inp("d-bmr",dsc.bmr_kcal,"number","1")}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Mounjaro no prazo?</div>${sel("d-med",dad.medication_on_time)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Dieta (1-10)</div>${inp("d-diet",dad.diet_score,"number","1")}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Treinos</div>${inp("d-wkt",dad.workouts_count,"number","1")}</div>
+        </div>
+        <div style="margin-top:6px"><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Notas</div>${inp("d-notes",dad.notes,"text","","Observações...")}</div>
+        <div class="divider"></div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;text-transform:uppercase">Sintomas (0–3)</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">${dSymFields}</div>
+      </div>
+
+      <div class="form-card" style="border-color:${i.colorDim};padding:14px">
+        <div class="p-head" style="margin-bottom:10px"><div class="dot" style="background:${i.color}"></div><h3>${i.nome}</h3></div>
+        <div class="frow">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Peso (kg)</div>${inp("i-w",isc.weight_kg)}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Gordura %</div>${inp("i-f",isc.fat_pct)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Músculo esq. %</div>${inp("i-m",isc.skeletal_muscle_pct)}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Visceral</div>${inp("i-v",isc.visceral)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">IMC</div>${inp("i-bmi",isc.bmi)}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Água %</div>${inp("i-wat",isc.water_pct)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">TMB (kcal)</div>${inp("i-bmr",isc.bmr_kcal,"number","1")}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i.treatment?.label??'Medicação'} no prazo?</div>${sel("i-med",iad.medication_on_time)}</div>
+        </div>
+        <div class="frow" style="margin-top:6px">
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Dieta (1-10)</div>${inp("i-diet",iad.diet_score,"number","1")}</div>
+          <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Treinos</div>${inp("i-wkt",iad.workouts_count,"number","1")}</div>
+        </div>
+        <div style="margin-top:6px"><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Notas</div>${inp("i-notes",iad.notes,"text","","Observações...")}</div>
+        <div class="divider"></div>
+        <div style="font-size:10px;color:var(--muted);margin-bottom:6px;text-transform:uppercase">Sintomas (0–3)</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">${iSymFields}</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px"><div style="font-size:10px;color:var(--muted);margin-bottom:4px">RESUMO DA SEMANA</div>
+      <div class="frow">
+        <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">O que funcionou</div>${inp(`sum-good`,ci.summary?.what_worked,"text","","Dieta, treinos...")}</div>
+        <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Prioridade próxima semana</div>${inp(`sum-next`,ci.summary?.next_week_priority,"text","","Metas...")}</div>
+      </div>
+    </div>
+
+    <div class="form-actions" style="margin-top:12px">
+      <button class="btn btn-p btn-sm" onclick="generateHistJSON(${idx}, '${ci.date}')">💾 Salvar</button>
+      <span style="font-size:11px;color:var(--muted)">${IS_SERVER?'':'Copie e envie ao Claude para salvar'}</span>
+      <button class="copy-btn" id="hist-copy-${idx}" style="display:none;margin-left:auto" onclick="copyHistJSON(${idx})">Copiar JSON</button>
+    </div>
+    <pre class="json-out" id="hist-json-${idx}"></pre>`;
+}
+
+function toggleHist(idx){
+  const body=document.getElementById(`hbody-${idx}`);
+  const chev=document.getElementById(`chev-${idx}`);
+  body.classList.toggle("open");
+  chev.classList.toggle("open");
+}
+
+function getHV(idx, key, fallback=null){
+  const el=document.getElementById(`he-${idx}-${key}`);
+  if(!el) return fallback;
+  const v=el.value.trim();
+  if(v===""||v==="null") return null;
+  if(v==="true") return true;
+  if(v==="false") return false;
+  const n=parseFloat(v);
+  return isNaN(n)?v:n;
+}
+
+async function generateHistJSON(idx, date){
+  const d=HEALTH_DATA.pessoas.davidson, i=HEALTH_DATA.pessoas.isabella;
+  const prev=HEALTH_DATA.checkins[idx];
+  const tr=(cur,old)=>cur==null||old==null?"=":cur<old?"↓":cur>old?"↑":"=";
+  const pp=idx>0?HEALTH_DATA.checkins[idx-1]:null;
+
+  const buildSc=(pid)=>{
+    const pre=pp?pp[pid]?.scale:{};
+    const w=getHV(idx,`${pid[0]}-w`), f=getHV(idx,`${pid[0]}-f`),
+          m=getHV(idx,`${pid[0]}-m`), v=getHV(idx,`${pid[0]}-v`);
+    return {
+      scale:{weight_kg:w,fat_pct:f,skeletal_muscle_pct:m,visceral:v,
+             bmi:getHV(idx,`${pid[0]}-bmi`),water_pct:getHV(idx,`${pid[0]}-wat`),bmr_kcal:getHV(idx,`${pid[0]}-bmr`)},
+      trend:{weight:tr(w,pre?.weight_kg),fat:tr(f,pre?.fat_pct),muscle:tr(m,pre?.skeletal_muscle_pct),visceral:tr(v,pre?.visceral)},
+    };
+  };
+
+  const dS=buildSc("davidson"), iS=buildSc("isabella");
+  const dSym=Object.fromEntries(Object.keys(d.symptoms_schema).map(k=>[k,getHV(idx,`d-s-${k}`)??0]));
+  const iSym=Object.fromEntries(Object.keys(i.symptoms_schema).map(k=>[k,getHV(idx,`i-s-${k}`)??0]));
+
+  const payload={
+    _action:"update_checkin",
+    date, week_number:prev.week_number,
+    davidson:{...dS,
+      adherence:{diet_score:getHV(idx,"d-diet"),workouts_count:getHV(idx,"d-wkt"),notes:getHV(idx,"d-notes",""),medication_on_time:getHV(idx,"d-med")},
+      symptoms:{...dSym,other:""}},
+    isabella:{...iS,
+      adherence:{diet_score:getHV(idx,"i-diet"),workouts_count:getHV(idx,"i-wkt"),notes:getHV(idx,"i-notes",""),medication_on_time:getHV(idx,"i-med")},
+      symptoms:{...iSym,other:""}},
+    summary:{what_worked:getHV(idx,"sum-good",""),what_hindered:"",next_week_priority:getHV(idx,"sum-next","")}
+  };
+
+  const btn=document.querySelector(`#hbody-${idx} .btn-p`);
+  if(btn){btn.textContent='⏳ Salvando...';btn.disabled=true;}
+  const ok = await autoSave(payload);
+  if(btn){btn.textContent='💾 Salvar';btn.disabled=false;}
+
+  const outId=`hist-json-${idx}`;
+  showSaveResult(outId, ok, JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById(`hist-copy-${idx}`).style.display="inline-block";
+  document.getElementById(outId).scrollIntoView({behavior:"smooth"});
+}
+
+function copyHistJSON(idx){
+  const btn=document.getElementById(`hist-copy-${idx}`);
+  copyText(document.getElementById(`hist-json-${idx}`).textContent,btn);
+}
+
+// ── CHECK-IN FORM VIEW ────────────────────────────────────────────────────────
+function buildCheckinView(){
+  const d=HEALTH_DATA.pessoas.davidson, i=HEALTH_DATA.pessoas.isabella;
+  const el=document.getElementById("view-checkin");
+
+  const personForm=(pid,p)=>{
+    const symF=Object.entries(p.symptoms_schema).map(([k,l])=>
+      `<div class="field"><label>${l}</label><input type="number" min="0" max="3" id="f-sym-${pid}-${k}" value="0"/></div>`).join("");
+    return `<div class="form-card" style="border-color:${p.colorDim}">
+      <div class="p-head"><div class="dot" style="background:${p.color}"></div><h3>${p.nome}</h3></div>
+      <div class="frow">
+        <div class="field"><label>Peso (kg)</label><input type="number" step="0.01" id="f-w-${pid}"/></div>
+        <div class="field"><label>Gordura %</label><input type="number" step="0.1" id="f-f-${pid}"/></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>${p.muscle_label} %</label><input type="number" step="0.1" id="f-m-${pid}"/></div>
+        <div class="field"><label>Visceral</label><input type="number" step="0.1" id="f-v-${pid}"/></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>IMC</label><input type="number" step="0.1" id="f-bmi-${pid}"/></div>
+        <div class="field"><label>Água %</label><input type="number" step="0.1" id="f-wat-${pid}"/></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>TMB (kcal)</label><input type="number" id="f-bmr-${pid}"/></div>
+        ${p.treatment?`<div class="field"><label>${p.treatment.label} no prazo?</label>
+          <select id="f-med-${pid}"><option value="true">✓ Sim</option><option value="false">✗ Não</option><option value="null">— N/A</option></select>
+        </div>`:""}
+      </div>
+      <div class="frow">
+        <div class="field"><label>Dieta (1–10)</label><input type="number" min="1" max="10" id="f-diet-${pid}"/></div>
+        <div class="field"><label>Treinos na semana</label><input type="number" min="0" max="7" id="f-wkt-${pid}"/></div>
+      </div>
+      <div class="field"><label>Notas livres</label><textarea id="f-notes-${pid}" placeholder="Observações..."></textarea></div>
+      <div class="divider"></div>
+      <div class="sec-title" style="margin-bottom:8px">Sintomas (0–3)</div>
+      <div class="sym-grid">${symF}</div>
+    </div>`;
+  };
+
+  el.innerHTML=`
+    <div class="form-hint">Preencha os dados do check-in de hoje e clique em <strong>💾 Salvar check-in</strong>${IS_SERVER?' — salva direto no arquivo.':'. Copie o JSON gerado e envie ao Claude para salvar.'}</div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="frow">
+        <div class="field"><label>Data do check-in</label><input type="date" id="f-date"/></div>
+        <div class="field"><label>Semana nº</label><input type="number" min="1" max="53" id="f-week"/></div>
+      </div>
+      <div class="frow">
+        <div class="field"><label>O que funcionou bem</label><textarea id="f-good" placeholder="Dieta, treinos..."></textarea></div>
+        <div class="field"><label>Prioridade próxima semana</label><textarea id="f-next" placeholder="Metas..."></textarea></div>
+      </div>
+    </div>
+    <div class="form-grid">
+      ${personForm("davidson",d)}
+      ${personForm("isabella",i)}
+    </div>
+    <div class="form-actions">
+      <button class="btn btn-p" onclick="generateNewCI()">💾 Salvar check-in</button>
+      <button class="btn btn-s" onclick="buildCheckinView()">Limpar</button>
+      <span style="font-size:11px;color:var(--muted)">${IS_SERVER?'':'Copie e envie ao Claude para salvar'}</span>
+      <button class="copy-btn" id="new-ci-copy" style="display:none;margin-left:auto" onclick="copyText(document.getElementById('new-ci-json').textContent,this)">Copiar JSON</button>
+    </div>
+    <pre class="json-out" id="new-ci-json"></pre>`;
+
+  const now=new Date();
+  document.getElementById("f-date").value=now.toISOString().split("T")[0];
+  const wd=new Date(Date.UTC(now.getFullYear(),now.getMonth(),now.getDate()));
+  wd.setUTCDate(wd.getUTCDate()+4-(wd.getUTCDay()||7));
+  const wy=new Date(Date.UTC(wd.getUTCFullYear(),0,1));
+  document.getElementById("f-week").value=Math.ceil((((wd-wy)/86400000)+1)/7);
+}
+
+function fv(id){const v=document.getElementById(id)?.value;return v==null||v===""?null:isNaN(v)?v:parseFloat(v);}
+function fs(id){const v=document.getElementById(id)?.value;return v==="null"?null:v==="true"?true:v==="false"?false:v;}
+
+async function generateNewCI(){
+  const prev=HEALTH_DATA.checkins[HEALTH_DATA.checkins.length-1];
+  const tr=(c,o)=>c==null||o==null?"=":c<o?"↓":c>o?"↑":"=";
+  const d=HEALTH_DATA.pessoas.davidson, i=HEALTH_DATA.pessoas.isabella;
+
+  const dw=fv("f-w-davidson"),df=fv("f-f-davidson"),dm=fv("f-m-davidson"),dv=fv("f-v-davidson");
+  const iw=fv("f-w-isabella"),iif=fv("f-f-isabella"),im=fv("f-m-isabella"),iv=fv("f-v-isabella");
+  const prd=prev.davidson.scale, pri=prev.isabella.scale;
+  const dSym=Object.fromEntries(Object.keys(d.symptoms_schema).map(k=>[k,fv(`f-sym-davidson-${k}`)??0]));
+  const iSym=Object.fromEntries(Object.keys(i.symptoms_schema).map(k=>[k,fv(`f-sym-isabella-${k}`)??0]));
+
+  const payload={
+    _action:"new_checkin",
+    date:document.getElementById("f-date").value, week_number:fv("f-week"),
+    davidson:{
+      scale:{weight_kg:dw,fat_pct:df,skeletal_muscle_pct:dm,visceral:dv,bmi:fv("f-bmi-davidson"),water_pct:fv("f-wat-davidson"),bmr_kcal:fv("f-bmr-davidson")},
+      trend:{weight:tr(dw,prd.weight_kg),fat:tr(df,prd.fat_pct),muscle:tr(dm,prd.skeletal_muscle_pct),visceral:tr(dv,prd.visceral)},
+      adherence:{diet_score:fv("f-diet-davidson"),workouts_count:fv("f-wkt-davidson"),notes:document.getElementById("f-notes-davidson")?.value||"",medication_on_time:fs("f-med-davidson")},
+      symptoms:{...dSym,other:""}
     },
-    options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: true, labels: { color: "#94a3b8", font: { size: 11 } } } }, elements: { point: { radius: 3 }, line: { tension: .35 } } }
+    isabella:{
+      scale:{weight_kg:iw,fat_pct:iif,skeletal_muscle_pct:im,visceral:iv,bmi:fv("f-bmi-isabella"),water_pct:fv("f-wat-isabella"),bmr_kcal:fv("f-bmr-isabella")},
+      trend:{weight:tr(iw,pri.weight_kg),fat:tr(iif,pri.fat_pct),muscle:tr(im,pri.skeletal_muscle_pct),visceral:tr(iv,pri.visceral)},
+      adherence:{diet_score:fv("f-diet-isabella"),workouts_count:fv("f-wkt-isabella"),notes:document.getElementById("f-notes-isabella")?.value||"",medication_on_time:fs("f-med-isabella")},
+      symptoms:{...iSym,other:""}
+    },
+    summary:{what_worked:document.getElementById("f-good")?.value||"",what_hindered:"",next_week_priority:document.getElementById("f-next")?.value||""}
+  };
+
+  const btn=document.querySelector(".form-actions .btn-p");
+  if(btn){btn.textContent='⏳ Salvando...';btn.disabled=true;}
+  const ok = await autoSave(payload);
+  if(btn){btn.textContent='💾 Salvar check-in';btn.disabled=false;}
+
+  showSaveResult("new-ci-json", ok, JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById("new-ci-copy").style.display="inline-block";
+  document.getElementById("new-ci-json").scrollIntoView({behavior:"smooth"});
+}
+
+// ── EXAMES VIEW ──────────────────────────────────────────────────────────────
+let examFormRows={davidson:1,isabella:1};
+
+function buildExamsView(){
+  const el=document.getElementById("view-exames");
+  const E=HEALTH_DATA.exams||{}, P=HEALTH_DATA.prescriptions||{}, A=HEALTH_DATA.clinical_alerts||{}, U=HEALTH_DATA.upcoming_exams||{};
+
+  function statusIcon(s){ return s==="ok"?"✓":s==="warn"?"⚠":"●"; }
+  function statusCls(s){ return s==="ok"?"good":s==="warn"?"bad":"neutral"; }
+
+  const INP_S='width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--text);font-size:12px;outline:none';
+
+  function upcomingHTML(pid){
+    const upcoming=U[pid]||[];
+    return `
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div class="sec-title" style="margin-bottom:0">Próximos exames</div>
+          <button class="btn btn-s btn-sm" style="padding:2px 8px;font-size:11px" onclick="toggleSection('upcoming-${pid}')">✏️</button>
+        </div>
+
+        <!-- Visualização -->
+        <div id="upcoming-view-${pid}">
+          ${upcoming.length?upcoming.map(u=>`
+            <div style="display:flex;align-items:center;gap:10px;padding:8px 12px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.2);border-radius:8px;margin-bottom:6px">
+              <span style="font-size:18px">📅</span>
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:600">${u.exam}</div>
+                <div style="font-size:11px;color:var(--muted)">Janela: ${u.window} · Status: <span style="color:var(--amber)">${u.status}</span></div>
+                ${u.notes?`<div style="font-size:11px;color:var(--muted);margin-top:2px">${u.notes}</div>`:""}
+              </div>
+            </div>`).join(""):`<p style="color:var(--muted);font-size:12px">Nenhum exame agendado.</p>`}
+        </div>
+
+        <!-- Edição -->
+        <div id="upcoming-edit-${pid}" style="display:none">
+          <div id="upcoming-rows-${pid}">
+            ${upcoming.map((u,i)=>`
+              <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:6px;margin-bottom:6px;align-items:end" id="up-row-${pid}-${i}">
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Exame":""}</div>
+                  <input type="text" id="up-${pid}-${i}-exam" value="${u.exam}" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Janela":""}</div>
+                  <input type="text" id="up-${pid}-${i}-window" value="${u.window}" placeholder="2026-04" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Status":""}</div>
+                  <select id="up-${pid}-${i}-status" style="${INP_S}">
+                    <option value="pendente" ${u.status==="pendente"?"selected":""}>Pendente</option>
+                    <option value="agendado" ${u.status==="agendado"?"selected":""}>Agendado</option>
+                    <option value="realizado" ${u.status==="realizado"?"selected":""}>Realizado</option>
+                  </select></div>
+                <div><div style="font-size:10px;color:transparent;margin-bottom:2px">${i===0?".":""}</div>
+                  <button style="${DEL_BTN_S}" onclick="removeRow('up-row-${pid}-${i}');document.getElementById('up-notes-wrap-${pid}-${i}')?.remove()">✕</button></div>
+              </div>
+              <div style="margin-bottom:8px" id="up-notes-wrap-${pid}-${i}"><input type="text" id="up-${pid}-${i}-notes" value="${u.notes||''}" placeholder="Notas..." style="${INP_S}"/></div>
+            `).join("")}
+          </div>
+          <button class="btn btn-s btn-sm" style="margin-bottom:8px" onclick="addUpcomingRow('${pid}')">+ Exame</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn btn-p btn-sm" onclick="saveUpcoming('${pid}')">💾 Salvar</button>
+            <button class="btn btn-s btn-sm" onclick="toggleSection('upcoming-${pid}')">Cancelar</button>
+            <button class="copy-btn" id="up-copy-${pid}" style="display:none;margin-left:auto" onclick="copyText(document.getElementById('up-json-${pid}').textContent,this)">Copiar</button>
+          </div>
+          <pre class="json-out" id="up-json-${pid}"></pre>
+        </div>
+      </div>`;
+  }
+
+  function alertsHTML(pid){
+    const alerts=A[pid]||[];
+    return `
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div class="sec-title" style="margin-bottom:0">Alertas clínicos</div>
+          <button class="btn btn-s btn-sm" style="padding:2px 8px;font-size:11px" onclick="toggleSection('alerts-${pid}')">✏️</button>
+        </div>
+
+        <!-- Visualização -->
+        <div id="alerts-view-${pid}">
+          ${alerts.length?alerts.map(a=>`
+            <div style="display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px">
+              <span style="color:${a.type==="action"?"var(--amber)":"var(--red)"}">${a.type==="action"?"🔔":"⚠️"}</span>
+              <span>${a.text}</span>
+              <span style="color:var(--muted);margin-left:auto;white-space:nowrap;font-size:11px">desde ${a.since}</span>
+            </div>`).join(""):`<p style="color:var(--muted);font-size:12px">Nenhum alerta.</p>`}
+        </div>
+
+        <!-- Edição -->
+        <div id="alerts-edit-${pid}" style="display:none">
+          <div id="alerts-rows-${pid}">
+            ${alerts.map((a,i)=>`
+              <div style="display:grid;grid-template-columns:auto 3fr 1fr auto;gap:6px;margin-bottom:4px;align-items:end" id="al-row-${pid}-${i}">
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Tipo":""}</div>
+                  <select id="al-${pid}-${i}-type" style="${INP_S}">
+                    <option value="monitor" ${a.type==="monitor"?"selected":""}>⚠ Monitorar</option>
+                    <option value="action" ${a.type==="action"?"selected":""}>🔔 Ação</option>
+                  </select></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Descrição":""}</div>
+                  <input type="text" id="al-${pid}-${i}-text" value="${a.text}" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Desde":""}</div>
+                  <input type="text" id="al-${pid}-${i}-since" value="${a.since}" placeholder="2026-01" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:transparent;margin-bottom:2px">${i===0?".":""}</div>
+                  <button style="${DEL_BTN_S}" onclick="removeRow('al-row-${pid}-${i}')">✕</button></div>
+              </div>
+            `).join("")}
+          </div>
+          <button class="btn btn-s btn-sm" style="margin-bottom:8px" onclick="addAlertRow('${pid}')">+ Alerta</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn btn-p btn-sm" onclick="saveAlerts('${pid}')">💾 Salvar</button>
+            <button class="btn btn-s btn-sm" onclick="toggleSection('alerts-${pid}')">Cancelar</button>
+            <button class="copy-btn" id="al-copy-${pid}" style="display:none;margin-left:auto" onclick="copyText(document.getElementById('al-json-${pid}').textContent,this)">Copiar</button>
+          </div>
+          <pre class="json-out" id="al-json-${pid}"></pre>
+        </div>
+      </div>`;
+  }
+
+  function prescrHTML(pid){
+    const p=HEALTH_DATA.pessoas[pid], prescr=P[pid]||[];
+    return `
+      <div style="margin-bottom:16px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+          <div class="sec-title" style="margin-bottom:0">Prescrições ativas</div>
+          <button class="btn btn-s btn-sm" style="padding:2px 8px;font-size:11px" onclick="toggleSection('prescr-${pid}')">✏️</button>
+        </div>
+
+        <!-- Visualização -->
+        <div id="prescr-view-${pid}">
+          ${prescr.length?`<div class="table-scroll"><table>
+            <thead><tr><th>Medicamento</th><th>Dose</th><th>Frequência</th><th>Desde</th></tr></thead>
+            <tbody>${prescr.map(r=>`
+              <tr>
+                <td style="font-weight:500">${r.name}</td>
+                <td>${r.dose}</td>
+                <td style="color:var(--muted)">${r.frequency}</td>
+                <td><span class="badge" style="background:${p.colorDim};color:${p.color}">${r.since}</span></td>
+              </tr>`).join("")}
+            </tbody>
+          </table></div>`:`<p style="color:var(--muted);font-size:12px">Nenhuma prescrição.</p>`}
+        </div>
+
+        <!-- Edição -->
+        <div id="prescr-edit-${pid}" style="display:none">
+          <div id="prescr-rows-${pid}">
+            ${prescr.map((r,i)=>`
+              <div style="display:grid;grid-template-columns:2fr 1fr 2fr 1fr auto;gap:6px;margin-bottom:4px;align-items:end" id="pr-row-${pid}-${i}">
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Medicamento":""}</div>
+                  <input type="text" id="pr-${pid}-${i}-name" value="${r.name}" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Dose":""}</div>
+                  <input type="text" id="pr-${pid}-${i}-dose" value="${r.dose}" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Frequência":""}</div>
+                  <input type="text" id="pr-${pid}-${i}-freq" value="${r.frequency}" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${i===0?"Desde":""}</div>
+                  <input type="text" id="pr-${pid}-${i}-since" value="${r.since}" placeholder="2026-01" style="${INP_S}"/></div>
+                <div><div style="font-size:10px;color:transparent;margin-bottom:2px">${i===0?".":""}</div>
+                  <button style="${DEL_BTN_S}" onclick="removeRow('pr-row-${pid}-${i}')">✕</button></div>
+              </div>
+            `).join("")}
+          </div>
+          <button class="btn btn-s btn-sm" style="margin-bottom:8px" onclick="addPrescrRow('${pid}')">+ Prescrição</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <button class="btn btn-p btn-sm" onclick="savePrescr('${pid}')">💾 Salvar</button>
+            <button class="btn btn-s btn-sm" onclick="toggleSection('prescr-${pid}')">Cancelar</button>
+            <button class="copy-btn" id="pr-copy-${pid}" style="display:none;margin-left:auto" onclick="copyText(document.getElementById('pr-json-${pid}').textContent,this)">Copiar</button>
+          </div>
+          <pre class="json-out" id="pr-json-${pid}"></pre>
+        </div>
+      </div>`;
+  }
+
+  function examHistoryHTML(pid){
+    const p=HEALTH_DATA.pessoas[pid], exams=E[pid]||[];
+    if(!exams.length) return `<p style="color:var(--muted);font-size:12px">Nenhum exame registrado.</p>`;
+    return `
+      <div>
+        <div class="sec-title" style="margin-bottom:8px">Histórico de exames</div>
+        ${[...exams].reverse().map((ex,revIdx)=>{
+          const origIdx=exams.length-1-revIdx;
+          const eid=`${pid}-${origIdx}`;
+          const okCount=ex.results.filter(r=>r.status==="ok").length;
+          const warnCount=ex.results.filter(r=>r.status==="warn").length;
+          return `
+          <div style="margin-bottom:12px;border:1px solid var(--border);border-radius:10px;overflow:hidden" id="exam-card-${eid}">
+            <div style="padding:12px 14px;background:var(--s2);display:flex;align-items:center;justify-content:space-between">
+              <div>
+                <span style="font-weight:600;font-size:13px">${ex.label}</span>
+                <span style="font-size:11px;color:var(--muted);margin-left:8px">${fd(ex.date)}</span>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center">
+                ${okCount?`<span class="pill good">${okCount} ok</span>`:""}
+                ${warnCount?`<span class="pill bad">${warnCount} atenção</span>`:""}
+                <button class="btn btn-s btn-sm" style="padding:3px 10px;font-size:11px" onclick="toggleEditExam('${pid}',${origIdx})">✏️ Editar</button>
+              </div>
+            </div>
+
+            <!-- Visualização -->
+            <div id="exam-view-${eid}" style="padding:10px 14px">
+              <div class="table-scroll"><table>
+                <thead><tr><th>Marcador</th><th>Valor</th><th>Unidade</th><th>Ref.</th><th></th></tr></thead>
+                <tbody>${ex.results.map(r=>`
+                  <tr>
+                    <td style="font-weight:500">${r.name}</td>
+                    <td><strong class="${statusCls(r.status)}">${r.value}</strong></td>
+                    <td style="color:var(--muted)">${r.unit}</td>
+                    <td style="color:var(--muted);font-size:11px">${r.ref||"—"}</td>
+                    <td><span class="${statusCls(r.status)}" style="font-size:12px">${statusIcon(r.status)}</span></td>
+                  </tr>`).join("")}
+                </tbody>
+              </table></div>
+              ${ex.notes?`<div style="font-size:11px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border)">📝 ${ex.notes}</div>`:""}
+            </div>
+
+            <!-- Edição (oculto por padrão) -->
+            <div id="exam-edit-${eid}" style="display:none;padding:14px">
+              <div class="frow" style="margin-bottom:8px">
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Data</div>
+                  <input type="date" id="exe-date-${eid}" value="${ex.date}" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none"/></div>
+                <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Nome do painel</div>
+                  <input type="text" id="exe-label-${eid}" value="${ex.label}" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none"/></div>
+              </div>
+              <div style="font-size:10px;color:var(--muted);margin-bottom:6px;text-transform:uppercase">Marcadores</div>
+              <div id="exe-rows-${eid}">
+                ${ex.results.map((r,ri)=>editExamRowHTML(eid,ri,r)).join("")}
+              </div>
+              <button class="btn btn-s btn-sm" style="margin-top:4px" onclick="addEditExamRow('${pid}',${origIdx})">+ Marcador</button>
+              <div style="margin-top:8px"><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Notas</div>
+                <input type="text" id="exe-notes-${eid}" value="${ex.notes||''}" style="width:100%;background:var(--s2);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none"/></div>
+              <div class="form-actions" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+                <button class="btn btn-p btn-sm" onclick="saveEditExam('${pid}',${origIdx})">💾 Salvar</button>
+                <button class="btn btn-s btn-sm" onclick="toggleEditExam('${pid}',${origIdx})">Cancelar</button>
+                <button class="copy-btn" id="exe-copy-${eid}" style="display:none;margin-left:auto" onclick="copyText(document.getElementById('exe-json-${eid}').textContent,this)">Copiar JSON</button>
+              </div>
+              <pre class="json-out" id="exe-json-${eid}"></pre>
+            </div>
+          </div>`;
+        }).join("")}
+      </div>`;
+  }
+
+  function newExamFormHTML(pid){
+    const p=HEALTH_DATA.pessoas[pid];
+    return `
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+        <div class="goal-config-toggle" onclick="document.getElementById('exam-form-${pid}').classList.toggle('open')" style="font-size:12px;color:var(--muted);cursor:pointer">
+          ➕ Adicionar novo exame
+        </div>
+        <div id="exam-form-${pid}" class="goal-config-body">
+          <div style="margin-top:10px;padding:14px;background:var(--s2);border-radius:10px">
+            <div class="frow" style="margin-bottom:8px">
+              <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Data do exame</div>
+                <input type="date" id="exf-date-${pid}" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none"/></div>
+              <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Nome do painel</div>
+                <input type="text" id="exf-label-${pid}" placeholder="ex: Hemograma completo" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none"/></div>
+            </div>
+            <div style="font-size:10px;color:var(--muted);margin-bottom:6px;text-transform:uppercase">Marcadores</div>
+            <div id="exf-rows-${pid}">
+              ${examResultRowHTML(pid, 0)}
+            </div>
+            <button class="btn btn-s btn-sm" style="margin-top:6px" onclick="addExamRow('${pid}')">+ Marcador</button>
+            <div style="margin-top:8px"><div style="font-size:10px;color:var(--muted);margin-bottom:2px">Notas</div>
+              <input type="text" id="exf-notes-${pid}" placeholder="Observações gerais..." style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;outline:none"/></div>
+            <div class="form-actions" style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border)">
+              <button class="btn btn-p btn-sm" onclick="saveNewExam('${pid}')">💾 Salvar exame</button>
+              <span style="font-size:11px;color:var(--muted)">${IS_SERVER?'':'Copie o JSON e envie ao Claude'}</span>
+              <button class="copy-btn" id="exf-copy-${pid}" style="display:none;margin-left:auto" onclick="copyText(document.getElementById('exf-json-${pid}').textContent,this)">Copiar JSON</button>
+            </div>
+            <pre class="json-out" id="exf-json-${pid}"></pre>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function examCard(pid){
+    const p=HEALTH_DATA.pessoas[pid];
+    return `<div class="card" style="border-color:${p.colorDim}">
+      <div class="p-head"><div class="dot" style="background:${p.color}"></div><h2>${p.nome}</h2></div>
+      ${upcomingHTML(pid)}${alertsHTML(pid)}${prescrHTML(pid)}${examHistoryHTML(pid)}${newExamFormHTML(pid)}
+    </div>`;
+  }
+
+  el.innerHTML=`
+    <div class="sec">
+      <div class="form-hint">Visualize exames, prescrições e alertas. Use <strong>➕ Adicionar novo exame</strong> para registrar resultados laboratoriais${IS_SERVER?' — salva direto no arquivo.':'. Copie o JSON e envie ao Claude para salvar.'}
+      </div>
+      <div class="sec-title">Exames laboratoriais e prescrições</div>
+      <div class="g2">
+        ${examCard("davidson")}
+        ${examCard("isabella")}
+      </div>
+    </div>`;
+}
+
+function examResultRowHTML(pid, idx){
+  const s=`exr-${pid}-${idx}`;
+  return `<div id="${s}" style="display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr auto;gap:6px;margin-bottom:4px;align-items:end">
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${idx===0?"Marcador":""}</div>
+      <input type="text" id="${s}-name" placeholder="ex: Glicose" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${idx===0?"Valor":""}</div>
+      <input type="text" id="${s}-val" placeholder="99" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${idx===0?"Unidade":""}</div>
+      <input type="text" id="${s}-unit" placeholder="mg/dL" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${idx===0?"Ref.":""}</div>
+      <input type="text" id="${s}-ref" placeholder="70-110" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div><div style="font-size:10px;color:var(--muted);margin-bottom:2px">${idx===0?"Status":""}</div>
+      <select id="${s}-st" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 4px;color:var(--text);font-size:12px;outline:none">
+        <option value="ok">✓ Ok</option><option value="warn">⚠ Atenção</option>
+      </select></div>
+  </div>`;
+}
+
+function addExamRow(pid){
+  const idx=examFormRows[pid]||1;
+  examFormRows[pid]=idx+1;
+  const container=document.getElementById(`exf-rows-${pid}`);
+  container.insertAdjacentHTML('beforeend', examResultRowHTML(pid, idx));
+}
+
+async function saveNewExam(pid){
+  const date=document.getElementById(`exf-date-${pid}`)?.value;
+  const label=document.getElementById(`exf-label-${pid}`)?.value?.trim();
+  const notes=document.getElementById(`exf-notes-${pid}`)?.value?.trim()||"";
+
+  if(!date||!label){
+    alert("Preencha a data e o nome do painel.");
+    return;
+  }
+
+  const results=[];
+  for(let i=0;i<(examFormRows[pid]||1);i++){
+    const pre=`exr-${pid}-${i}`;
+    const name=document.getElementById(`${pre}-name`)?.value?.trim();
+    if(!name) continue;
+    let val=document.getElementById(`${pre}-val`)?.value?.trim()||"";
+    const numVal=parseFloat(val);
+    results.push({
+      name,
+      value:isNaN(numVal)?val:numVal,
+      unit:document.getElementById(`${pre}-unit`)?.value?.trim()||"",
+      ref:document.getElementById(`${pre}-ref`)?.value?.trim()||"",
+      status:document.getElementById(`${pre}-st`)?.value||"ok"
+    });
+  }
+
+  if(!results.length){
+    alert("Adicione pelo menos um marcador.");
+    return;
+  }
+
+  const payload={
+    _action:"new_exam",
+    person:pid,
+    exam:{ date, label, results, notes }
+  };
+
+  const btn=document.querySelector(`#exam-form-${pid} .btn-p`);
+  if(btn){btn.textContent='⏳ Salvando...';btn.disabled=true;}
+  const ok = await autoSave(payload);
+  if(btn){btn.textContent='💾 Salvar exame';btn.disabled=false;}
+
+  const outId=`exf-json-${pid}`;
+  showSaveResult(outId, ok, JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById(`exf-copy-${pid}`).style.display="inline-block";
+}
+
+// ── EDIT EXAM (inline) ──────────────────────────────────────────────────────
+let editExamRowCounts={};
+
+function editExamRowHTML(eid, idx, r){
+  r=r||{};
+  const s=`exre-${eid}-${idx}`;
+  const val=r.value!=null?r.value:"";
+  return `<div id="${s}" style="display:grid;grid-template-columns:2fr 1fr 1fr 1.2fr auto;gap:6px;margin-bottom:4px;align-items:end">
+    <div>${idx===0?'<div style="font-size:10px;color:var(--muted);margin-bottom:2px">Marcador</div>':""}
+      <input type="text" id="${s}-name" value="${r.name||''}" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div>${idx===0?'<div style="font-size:10px;color:var(--muted);margin-bottom:2px">Valor</div>':""}
+      <input type="text" id="${s}-val" value="${val}" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div>${idx===0?'<div style="font-size:10px;color:var(--muted);margin-bottom:2px">Unidade</div>':""}
+      <input type="text" id="${s}-unit" value="${r.unit||''}" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div>${idx===0?'<div style="font-size:10px;color:var(--muted);margin-bottom:2px">Ref.</div>':""}
+      <input type="text" id="${s}-ref" value="${r.ref||''}" style="width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 7px;color:var(--text);font-size:12px;outline:none"/></div>
+    <div>${idx===0?'<div style="font-size:10px;color:var(--muted);margin-bottom:2px">Status</div>':""}
+      <select id="${s}-st" style="background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 4px;color:var(--text);font-size:12px;outline:none">
+        <option value="ok" ${r.status==="ok"?"selected":""}>✓ Ok</option><option value="warn" ${r.status==="warn"?"selected":""}>⚠ Atenção</option>
+      </select></div>
+  </div>`;
+}
+
+function toggleEditExam(pid, origIdx){
+  const eid=`${pid}-${origIdx}`;
+  const viewEl=document.getElementById(`exam-view-${eid}`);
+  const editEl=document.getElementById(`exam-edit-${eid}`);
+  const isEditing=editEl.style.display!=="none";
+  viewEl.style.display=isEditing?"block":"none";
+  editEl.style.display=isEditing?"none":"block";
+  // Track row count for this exam
+  if(!isEditing){
+    const exams=(HEALTH_DATA.exams||{})[pid]||[];
+    editExamRowCounts[eid]=exams[origIdx]?.results?.length||0;
+  }
+}
+
+function addEditExamRow(pid, origIdx){
+  const eid=`${pid}-${origIdx}`;
+  const idx=editExamRowCounts[eid]||0;
+  editExamRowCounts[eid]=idx+1;
+  document.getElementById(`exe-rows-${eid}`).insertAdjacentHTML('beforeend', editExamRowHTML(eid, idx));
+}
+
+async function saveEditExam(pid, origIdx){
+  const eid=`${pid}-${origIdx}`;
+  const date=document.getElementById(`exe-date-${eid}`)?.value;
+  const label=document.getElementById(`exe-label-${eid}`)?.value?.trim();
+  const notes=document.getElementById(`exe-notes-${eid}`)?.value?.trim()||"";
+
+  if(!date||!label){ alert("Preencha data e nome."); return; }
+
+  const rowCount=editExamRowCounts[eid]||(HEALTH_DATA.exams[pid][origIdx]?.results?.length||0);
+  const results=[];
+  for(let i=0;i<rowCount;i++){
+    const pre=`exre-${eid}-${i}`;
+    const name=document.getElementById(`${pre}-name`)?.value?.trim();
+    if(!name) continue;
+    let val=document.getElementById(`${pre}-val`)?.value?.trim()||"";
+    const numVal=parseFloat(val);
+    results.push({
+      name,
+      value:isNaN(numVal)?val:numVal,
+      unit:document.getElementById(`${pre}-unit`)?.value?.trim()||"",
+      ref:document.getElementById(`${pre}-ref`)?.value?.trim()||"",
+      status:document.getElementById(`${pre}-st`)?.value||"ok"
+    });
+  }
+
+  const payload={
+    _action:"update_exam",
+    person:pid,
+    exam_index:origIdx,
+    exam:{ date, label, results, notes }
+  };
+
+  const btn=document.querySelector(`#exam-edit-${eid} .btn-p`);
+  if(btn){btn.textContent='⏳ Salvando...';btn.disabled=true;}
+  const ok = await autoSave(payload);
+  if(btn){btn.textContent='💾 Salvar';btn.disabled=false;}
+
+  const outId=`exe-json-${eid}`;
+  showSaveResult(outId, ok, JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById(`exe-copy-${eid}`).style.display="inline-block";
+}
+
+// ── REMOVE ROW (global) ─────────────────────────────────────────────────────
+function removeRow(id){
+  const el=document.getElementById(id);
+  if(el) el.remove();
+}
+const DEL_BTN_S='background:none;border:1px solid var(--border);border-radius:6px;padding:4px 7px;color:var(--red);font-size:12px;cursor:pointer;line-height:1';
+
+// ── TOGGLE / ADD / SAVE para Próximos, Alertas, Prescrições ────────────────
+const sectionRowCounts={};
+
+function toggleSection(id){
+  const v=document.getElementById(`${id.split('-').slice(0,-1).join('-')}-view-${id.split('-').pop()}`);
+  const e=document.getElementById(`${id.split('-').slice(0,-1).join('-')}-edit-${id.split('-').pop()}`);
+  // Simpler: parse prefix and pid
+  const parts=id.lastIndexOf('-');
+  const prefix=id.substring(0,parts);
+  const pid=id.substring(parts+1);
+  const viewEl=document.getElementById(`${prefix}-view-${pid}`);
+  const editEl=document.getElementById(`${prefix}-edit-${pid}`);
+  if(!viewEl||!editEl) return;
+  const isEditing=editEl.style.display!=="none";
+  viewEl.style.display=isEditing?"block":"none";
+  editEl.style.display=isEditing?"none":"block";
+}
+
+// ── Upcoming exams ──
+function addUpcomingRow(pid){
+  const key=`up-${pid}`;
+  const existing=document.querySelectorAll(`[id^="up-row-${pid}-"]`).length;
+  const i=existing;
+  const IS=`width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--text);font-size:12px;outline:none`;
+  document.getElementById(`upcoming-rows-${pid}`).insertAdjacentHTML('beforeend',`
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr auto;gap:6px;margin-bottom:6px;align-items:end" id="up-row-${pid}-${i}">
+      <div><input type="text" id="up-${pid}-${i}-exam" placeholder="Nome do exame" style="${IS}"/></div>
+      <div><input type="text" id="up-${pid}-${i}-window" placeholder="2026-05" style="${IS}"/></div>
+      <div><select id="up-${pid}-${i}-status" style="${IS}">
+        <option value="pendente">Pendente</option><option value="agendado">Agendado</option><option value="realizado">Realizado</option>
+      </select></div>
+      <div><button style="${DEL_BTN_S}" onclick="removeRow('up-row-${pid}-${i}');document.getElementById('up-notes-wrap-${pid}-${i}')?.remove()">✕</button></div>
+    </div>
+    <div style="margin-bottom:8px" id="up-notes-wrap-${pid}-${i}"><input type="text" id="up-${pid}-${i}-notes" placeholder="Notas..." style="${IS}"/></div>`);
+}
+
+async function saveUpcoming(pid){
+  const rows=document.querySelectorAll(`[id^="up-row-${pid}-"]`);
+  const items=[];
+  rows.forEach(el=>{
+    const i=el.id.split('-').pop();
+    const exam=document.getElementById(`up-${pid}-${i}-exam`)?.value?.trim();
+    if(!exam) return;
+    items.push({
+      exam,
+      window:document.getElementById(`up-${pid}-${i}-window`)?.value?.trim()||"",
+      status:document.getElementById(`up-${pid}-${i}-status`)?.value||"pendente",
+      notes:document.getElementById(`up-${pid}-${i}-notes`)?.value?.trim()||""
+    });
   });
+  const payload={_action:"update_upcoming",person:pid,upcoming_exams:items};
+  const ok=await autoSave(payload);
+  showSaveResult(`up-json-${pid}`,ok,JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById(`up-copy-${pid}`).style.display="inline-block";
 }
 
-// ─── MEASUREMENTS ─────────────────────────────────────────────────────────────
-function renderMeasurements() {
-  const fields = ["cintura","peito","bracos","ombros","quadril","coxas","panturrilhas"];
-  function buildRows(arr, cls) {
-    return arr.map((row, i) => {
-      const prev = i > 0 ? arr[i-1] : null;
-      const cells = fields.map(f => {
-        const v = row[f];
-        const p = prev ? prev[f] : null;
-        let tag = `<td>${v ?? "—"}</td>`;
-        if (v != null && p != null) {
-          const d = v - p;
-          if (d !== 0) tag = `<td>${v} <small style="color:${d<0?"#34d399":"#f87171"}">(${d>0?"+":""}${d})</small></td>`;
-        }
-        return tag;
-      }).join("");
-      return `<tr><td><span class="badge ${cls}">${formatDate(row.date)}</span></td>${cells}</tr>`;
-    }).join("");
+// ── Alerts ──
+function addAlertRow(pid){
+  const existing=document.querySelectorAll(`[id^="al-row-${pid}-"]`).length;
+  const i=existing;
+  const IS=`width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--text);font-size:12px;outline:none`;
+  document.getElementById(`alerts-rows-${pid}`).insertAdjacentHTML('beforeend',`
+    <div style="display:grid;grid-template-columns:auto 3fr 1fr auto;gap:6px;margin-bottom:4px;align-items:end" id="al-row-${pid}-${i}">
+      <div><select id="al-${pid}-${i}-type" style="${IS}">
+        <option value="monitor">⚠ Monitorar</option><option value="action">🔔 Ação</option>
+      </select></div>
+      <div><input type="text" id="al-${pid}-${i}-text" placeholder="Descrição..." style="${IS}"/></div>
+      <div><input type="text" id="al-${pid}-${i}-since" placeholder="2026-04" style="${IS}"/></div>
+      <div><button style="${DEL_BTN_S}" onclick="removeRow('al-row-${pid}-${i}')">✕</button></div>
+    </div>`);
+}
+
+async function saveAlerts(pid){
+  const rows=document.querySelectorAll(`[id^="al-row-${pid}-"]`);
+  const items=[];
+  rows.forEach(el=>{
+    const i=el.id.split('-').pop();
+    const text=document.getElementById(`al-${pid}-${i}-text`)?.value?.trim();
+    if(!text) return;
+    items.push({
+      type:document.getElementById(`al-${pid}-${i}-type`)?.value||"monitor",
+      text,
+      since:document.getElementById(`al-${pid}-${i}-since`)?.value?.trim()||""
+    });
+  });
+  const payload={_action:"update_alerts",person:pid,clinical_alerts:items};
+  const ok=await autoSave(payload);
+  showSaveResult(`al-json-${pid}`,ok,JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById(`al-copy-${pid}`).style.display="inline-block";
+}
+
+// ── Prescriptions ──
+function addPrescrRow(pid){
+  const existing=document.querySelectorAll(`[id^="pr-row-${pid}-"]`).length;
+  const i=existing;
+  const IS=`width:100%;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 8px;color:var(--text);font-size:12px;outline:none`;
+  document.getElementById(`prescr-rows-${pid}`).insertAdjacentHTML('beforeend',`
+    <div style="display:grid;grid-template-columns:2fr 1fr 2fr 1fr auto;gap:6px;margin-bottom:4px;align-items:end" id="pr-row-${pid}-${i}">
+      <div><input type="text" id="pr-${pid}-${i}-name" placeholder="Medicamento" style="${IS}"/></div>
+      <div><input type="text" id="pr-${pid}-${i}-dose" placeholder="50 mg" style="${IS}"/></div>
+      <div><input type="text" id="pr-${pid}-${i}-freq" placeholder="Frequência" style="${IS}"/></div>
+      <div><input type="text" id="pr-${pid}-${i}-since" placeholder="2026-01" style="${IS}"/></div>
+      <div><button style="${DEL_BTN_S}" onclick="removeRow('pr-row-${pid}-${i}')">✕</button></div>
+    </div>`);
+}
+
+async function savePrescr(pid){
+  const rows=document.querySelectorAll(`[id^="pr-row-${pid}-"]`);
+  const items=[];
+  rows.forEach(el=>{
+    const i=el.id.split('-').pop();
+    const name=document.getElementById(`pr-${pid}-${i}-name`)?.value?.trim();
+    if(!name) return;
+    items.push({
+      name,
+      dose:document.getElementById(`pr-${pid}-${i}-dose`)?.value?.trim()||"",
+      frequency:document.getElementById(`pr-${pid}-${i}-freq`)?.value?.trim()||"",
+      since:document.getElementById(`pr-${pid}-${i}-since`)?.value?.trim()||""
+    });
+  });
+  const payload={_action:"update_prescriptions",person:pid,prescriptions:items};
+  const ok=await autoSave(payload);
+  showSaveResult(`pr-json-${pid}`,ok,JSON.stringify(payload,null,2));
+  if(!ok) document.getElementById(`pr-copy-${pid}`).style.display="inline-block";
+}
+
+// ── TABS ──────────────────────────────────────────────────────────────────────
+const TABS=[
+  {id:"davidson",label:"Davidson",color:HEALTH_DATA.pessoas.davidson.colorDim},
+  {id:"isabella",label:"Isabella",color:HEALTH_DATA.pessoas.isabella.colorDim},
+  {id:"casal",   label:"Casal",   color:"rgba(251,191,36,.15)"},
+  {id:"historico",label:"📋 Histórico",color:"rgba(148,163,184,.1)"},
+  {id:"checkin", label:"✏️ Check-in",color:"rgba(52,211,153,.1)"},
+  {id:"exames", label:"🔬 Exames",color:"rgba(168,85,247,.1)"}
+];
+const built={};
+
+function setTab(tid){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  document.getElementById("tab-"+tid).classList.add("active");
+  document.getElementById("view-"+tid).classList.add("active");
+  if(!built[tid]){
+    built[tid]=true;
+    if(tid==="davidson") buildPersonView("davidson");
+    if(tid==="isabella") buildPersonView("isabella");
+    if(tid==="casal")    buildCasalView();
+    if(tid==="historico") buildHistoricoView();
+    if(tid==="checkin")  buildCheckinView();
+    if(tid==="exames")   buildExamsView();
   }
-  document.getElementById("d-measurements").innerHTML = buildRows(HEALTH_DATA.davidson_measurements, "d");
-  document.getElementById("i-measurements").innerHTML = buildRows(HEALTH_DATA.isabella_measurements, "i");
 }
 
-// ─── LAST CHECK-IN ────────────────────────────────────────────────────────────
-function renderCheckin() {
-  const lc = HEALTH_DATA.last_checkin;
-  document.getElementById("checkin-date-label").textContent = formatDate(lc.date);
+const tabBar=document.getElementById("tabBar");
+TABS.forEach(t=>{
+  const btn=document.createElement("div");
+  btn.className="tab";btn.id="tab-"+t.id;btn.textContent=t.label;
+  btn.onclick=()=>setTab(t.id);
+  tabBar.appendChild(btn);
+});
 
-  // Davidson
-  const d = lc.davidson;
-  const dRows = [
-    ["Peso", fmt(d.scale.weight_kg, " kg")],
-    ["Gordura", fmt(d.scale.fat_pct, "%")],
-    ["Músculo", fmt(d.scale.muscle_pct, "%")],
-    ["Visceral", fmt(d.scale.visceral)],
-    ["Mounjaro", d.adherence.mounjaro_on_time ? "✓ Em dia" : "✗ Atrasou"],
-    ["Dieta", fmt(d.adherence.diet_score, "/10")],
-    ["Treinos", fmt(d.adherence.workouts_count)],
-  ];
-  const dSyms = Object.entries(d.symptoms).map(([k,v]) => {
-    const cls = v === 0 ? "ok" : v > 0 ? "warn" : "";
-    return `<span class="sym ${cls}">${k}: ${v ?? "—"}</span>`;
-  }).join("");
+const lastCI=HEALTH_DATA.checkins[HEALTH_DATA.checkins.length-1];
+document.getElementById("hdrSub").textContent=
+  `Semana ${lastCI.week_number} · Atualizado em ${fd(lastCI.date)} · v${HEALTH_DATA.meta.version}`;
 
-  document.getElementById("d-checkin").innerHTML =
-    dRows.map(([l,v]) => `<div class="checkin-row"><span>${l}</span><span class="checkin-val">${v}</span></div>`).join("") +
-    (d.adherence.water_sleep_notes ? `<p style="font-size:12px;color:#94a3b8;margin-top:8px">${d.adherence.water_sleep_notes}</p>` : "") +
-    `<div class="sym-row">${dSyms}</div>`;
-
-  // Isabella
-  const ii = lc.isabella;
-  const iRows = [
-    ["Peso", fmt(ii.scale.weight_kg, " kg")],
-    ["Gordura", fmt(ii.scale.fat_pct, "%")],
-    ["Músculo esq.", fmt(ii.scale.skeletal_muscle_pct, "%")],
-    ["Visceral", fmt(ii.scale.visceral)],
-    ["Dieta", fmt(ii.adherence.diet_score, "/10")],
-    ["Treinos", fmt(ii.adherence.workouts_count)],
-  ];
-  const iSyms = Object.entries(ii.symptoms).map(([k,v]) => {
-    const cls = v === 0 ? "ok" : v > 0 ? "warn" : "";
-    return `<span class="sym ${cls}">${k}: ${v ?? "—"}</span>`;
-  }).join("");
-
-  document.getElementById("i-checkin").innerHTML =
-    iRows.map(([l,v]) => `<div class="checkin-row"><span>${l}</span><span class="checkin-val">${v}</span></div>`).join("") +
-    (ii.adherence.water_sleep_notes ? `<p style="font-size:12px;color:#94a3b8;margin-top:8px">${ii.adherence.water_sleep_notes}</p>` : "") +
-    `<div class="sym-row">${iSyms}</div>`;
-
-  // Summary notes
-  if (lc.summary.next_week_priority) {
-    document.getElementById("i-checkin").insertAdjacentHTML("beforeend",
-      `<p style="font-size:12px;color:#fbbf24;margin-top:10px">🎯 ${lc.summary.next_week_priority}</p>`);
-  }
-}
-
-// ─── HEADER ───────────────────────────────────────────────────────────────────
-function renderHeader() {
-  const lc = HEALTH_DATA.last_checkin;
-  document.getElementById("subtitleDate").textContent =
-    `Semana ${getWeekNumber(new Date(lc.date))} · Início: 04/02/2026`;
-  document.getElementById("lastUpdated").textContent =
-    `Atualizado em ${formatDate(lc.date)}`;
-}
-function getWeekNumber(d) {
-  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
-  const y = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-  return Math.ceil((((d-y)/86400000)+1)/7);
-}
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-renderHeader();
-renderKPIs();
-renderProgress();
-renderCharts();
-renderMeasurements();
-renderCheckin();
+setTab("davidson");
 </script>
 </body>
 </html>
