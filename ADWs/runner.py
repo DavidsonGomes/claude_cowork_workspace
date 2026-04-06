@@ -1,29 +1,19 @@
 #!/usr/bin/env python3
-# /// script
-# requires-python = ">=3.11"
-# dependencies = [
-#   "rich>=13.0",
-# ]
-# ///
 """
-Core runner para ADWs — executa Claude Code CLI com output visual e logs estruturados.
+Core runner para ADWs — executa Claude Code CLI com agentes, output visual e logs estruturados.
 """
 
 import subprocess
 import os
 import sys
 import json
-import signal
 from datetime import datetime
 from pathlib import Path
 
 from rich.console import Console
 from rich.panel import Panel
-from rich.live import Live
-from rich.text import Text
 from rich.theme import Theme
 
-# Theme
 theme = Theme({
     "info": "cyan",
     "success": "bold green",
@@ -44,8 +34,8 @@ def _timestamp():
     return datetime.now().strftime("%Y%m%d-%H%M%S")
 
 
-def _log_to_file(log_name: str, prompt: str, stdout: str, stderr: str, returncode: int, duration: float):
-    """Salva log estruturado em JSONL."""
+def _log_to_file(log_name, prompt, stdout, stderr, returncode, duration):
+    """Salva log estruturado em JSONL + arquivo detalhado."""
     log_file = LOGS_DIR / f"{datetime.now().strftime('%Y-%m-%d')}.jsonl"
     entry = {
         "timestamp": datetime.now().isoformat(),
@@ -59,7 +49,6 @@ def _log_to_file(log_name: str, prompt: str, stdout: str, stderr: str, returncod
     with open(log_file, "a") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
-    # Salva output completo em arquivo separado
     detail_dir = LOGS_DIR / "detail"
     detail_dir.mkdir(exist_ok=True)
     detail_file = detail_dir / f"{_timestamp()}-{log_name}.log"
@@ -73,44 +62,46 @@ def _log_to_file(log_name: str, prompt: str, stdout: str, stderr: str, returncod
             f.write(f"{'='*60}\nSTDERR:\n{'='*60}\n{stderr}\n")
 
 
-def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600) -> dict:
+def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600, agent: str = None) -> dict:
     """
-    Executa Claude Code CLI com streaming de output no terminal.
-    Mostra o que o Claude está fazendo em tempo real.
-    """
-    cmd = [
-        "claude",
-        "--print",
-        "--dangerously-skip-permissions",
-        prompt
-    ]
+    Executa Claude Code CLI com streaming de output.
 
-    console.print(f"  [step]▶[/step] [dim]{log_name}[/dim]", end="")
+    Args:
+        prompt: O prompt a executar
+        log_name: Nome para logs
+        timeout: Timeout em segundos
+        agent: Nome do agente (.claude/agents/*.md) — se None, roda sem agente
+    """
+    cmd = ["claude", "--print", "--dangerously-skip-permissions"]
+
+    if agent:
+        cmd.extend(["--agent", agent])
+
+    cmd.append(prompt)
+
+    agent_label = f"@{agent}" if agent else ""
+    console.print(f"  [step]▶[/step] {log_name} [dim]{agent_label}[/dim]", end="")
 
     start_time = datetime.now()
 
     try:
-        # Usa Popen para streaming
         process = subprocess.Popen(
             cmd,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             text=True,
             cwd=str(WORKSPACE),
-            env={**os.environ, "TERM": "dumb"},  # Evita escape codes do Claude
+            env={**os.environ, "TERM": "dumb"},
         )
 
         stdout_lines = []
         line_count = 0
 
-        # Stream stdout em tempo real
         for line in process.stdout:
             stdout_lines.append(line)
             line_count += 1
-            # Mostra preview compacto (última linha útil)
             stripped = line.strip()
             if stripped and not stripped.startswith("{") and len(stripped) > 3:
-                # Trunca linhas longas
                 display = stripped[:80] + "..." if len(stripped) > 80 else stripped
                 console.print(f"\r  [dim]  → {display}[/dim]", end="")
 
@@ -120,10 +111,9 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600) -> di
         stdout = "".join(stdout_lines)
         duration = (datetime.now() - start_time).total_seconds()
 
-        # Log
-        _log_to_file(log_name, prompt, stdout, stderr, process.returncode, duration)
+        full_prompt = f"[agent:{agent}] {prompt}" if agent else prompt
+        _log_to_file(log_name, full_prompt, stdout, stderr, process.returncode, duration)
 
-        # Status final
         if process.returncode == 0:
             console.print(f"\r  [success]✓[/success] {log_name} [dim]({duration:.0f}s, {line_count} linhas)[/dim]")
         else:
@@ -161,31 +151,26 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600) -> di
         return {"success": False, "stdout": "", "stderr": str(e), "returncode": -3, "duration": duration}
 
 
-def run_skill(skill_name: str, args: str = "", log_name: str = None, timeout: int = 600) -> dict:
-    """Executa uma skill do Claude Code via CLI."""
+def run_skill(skill_name: str, args: str = "", log_name: str = None, timeout: int = 600, agent: str = None) -> dict:
+    """Executa uma skill via CLI, opcionalmente com um agente."""
     prompt = f"Execute a skill /{skill_name} {args}".strip()
-    return run_claude(prompt, log_name or skill_name, timeout)
+    return run_claude(prompt, log_name or skill_name, timeout, agent=agent)
 
 
 def banner(title: str, subtitle: str = "", color: str = "cyan"):
-    """Mostra banner de início de rotina."""
     content = f"[bold white]{title}[/bold white]"
     if subtitle:
         content += f"\n[dim]{subtitle}[/dim]"
     console.print(Panel(content, border_style=color, padding=(0, 2)))
 
 
-def summary(results: list[dict], title: str = "Concluído"):
-    """Mostra resumo final da rotina."""
+def summary(results: list, title: str = "Concluído"):
     total_duration = sum(r.get("duration", 0) for r in results)
     success = sum(1 for r in results if r.get("success"))
     failed = len(results) - success
-
     status = "[success]✅ Tudo OK[/success]" if failed == 0 else f"[warning]⚠ {failed} falha(s)[/warning]"
-
     console.print(Panel(
-        f"{status}\n"
-        f"[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s[/dim]",
+        f"{status}\n[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s[/dim]",
         title=f"[bold]{title}[/bold]",
         border_style="green" if failed == 0 else "yellow",
         padding=(0, 2)

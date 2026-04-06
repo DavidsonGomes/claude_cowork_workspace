@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""ADW: Memory Sync — Consolida memória a partir de sessões e reuniões"""
+"""ADW: Memory Sync — Consolida memória via Clawdia"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -21,9 +21,9 @@ Reportar no final: quantas memórias criadas/atualizadas por tipo.
 Ser conciso — não criar memórias para coisas óbvias ou já documentadas no código."""
 
 def main():
-    banner("🧠 Memory Sync", "Logs • Reuniões → Memória persistente")
+    banner("🧠 Memory Sync", "Logs • Reuniões → Memória | @clawdia")
     results = []
-    results.append(run_claude(PROMPT, log_name="memory-sync", timeout=600))
+    results.append(run_claude(PROMPT, log_name="memory-sync", timeout=600, agent="clawdia-assistant"))
     summary(results, "Memory Sync")
 
 if __name__ == "__main__":

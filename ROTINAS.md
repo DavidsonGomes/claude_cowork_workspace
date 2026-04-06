@@ -1,0 +1,60 @@
+# Rotinas Automatizadas
+
+Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
+
+---
+
+## Rotinas Diárias
+
+| Horário (BRT) | Rotina | Comando | Agente | O que faz |
+|:---:|--------|---------|--------|-----------|
+| **06:50** | Review Todoist | `make review` | @clawdia | Categoriza, traduz e organiza tarefas do projeto Evolution |
+| **07:00** | Good Morning | `make morning` | @clawdia | Briefing: agenda do dia + emails importantes + tarefas prioritárias |
+| **07:15** | Email Triage | `make triage` | @clawdia | Classifica emails não lidos por urgência, propõe ações |
+| **a cada 30min** | Sync Meetings | `make sync` | @clawdia | Puxa reuniões do Fathom, salva summaries, cria tarefas no Todoist |
+| **21:00** | End of Day | `make eod` | @clawdia | Consolida memória dos agentes, logs ADW, tarefas, aprendizados → gera daily log |
+| **21:15** | Memory Sync | `make memory` | @clawdia | Extrai decisões/pessoas/feedbacks dos logs e reuniões → atualiza memória persistente |
+
+## Rotinas Semanais
+
+| Dia/Horário | Rotina | Comando | Agente | O que faz |
+|:---:|--------|---------|--------|-----------|
+| **Sexta 08:00** | Weekly Review | `make weekly` | @clawdia | Revisão completa: reuniões, tarefas, agenda, memória → relatório semanal |
+| **Domingo 10:00** | Health Check-in | `make health` | @kai | Check-in de saúde: peso, alimentação, treino, sono, energia, Mounjaro |
+
+---
+
+## Como funciona
+
+Cada rotina é um ADW (AI Developer Workflow) em `ADWs/rotinas/` que:
+1. Chama o Claude Code CLI com o **agente correto** (`--agent`)
+2. Executa a **skill correspondente** (prompt estruturado)
+3. Mostra **output em tempo real** no terminal (Rich)
+4. Salva **logs estruturados** em `ADWs/logs/` (JSONL + detalhado)
+
+## Logs
+
+```bash
+make logs          # Últimas entradas do JSONL
+make logs-detail   # Lista logs detalhados
+make logs-tail     # Mostra último log completo
+make clean-logs    # Remove logs > 30 dias
+```
+
+## Agentes usados
+
+| Agente | Rotinas |
+|--------|---------|
+| **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly |
+| **@kai** | Health Check-in |
+
+## Arquivos gerados
+
+| Rotina | Onde salva |
+|--------|-----------|
+| Good Morning | `01 Daily Logs/[C] YYYY-MM-DD-morning.md` |
+| End of Day | `01 Daily Logs/[C] YYYY-MM-DD.md` |
+| Weekly Review | `01 Daily Logs/[C] YYYY-WXX-weekly-review.md` |
+| Sync Meetings | `09 Reuniões/summaries/{projeto}/` + `09 Reuniões/fathom/` |
+| Health Check-in | `08 Pessoal/health-checkins/reports/YYYY-MM-DD.md` |
+| Memory Sync | `memory/` (arquivos individuais) |
