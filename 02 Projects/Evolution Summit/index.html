@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolution Summit — Content Calendar</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: #0a0a0a;
+  color: #a0a0b0;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0a0a; }
+::-webkit-scrollbar-thumb { background: #2a2a3e; border-radius: 3px; }
+
+/* ── Header ── */
+.header {
+  background: #0f0f1a;
+  border-bottom: 1px solid #2a2a3e;
+  padding: 20px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+.header-logo {
+  height: 36px;
+  width: auto;
+}
+.header-title {
+  color: #ffffff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.header-spacer { flex: 1; }
+.progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+}
+.progress-label {
+  font-size: 0.8rem;
+  color: #6b7280;
+  white-space: nowrap;
+}
+.progress-label strong { color: #00DC82; }
+.progress-bar-bg {
+  flex: 1;
+  height: 6px;
+  background: #1a1a2e;
+  border-radius: 3px;
+  overflow: hidden;
+  min-width: 100px;
+}
+.progress-bar-fill {
+  height: 100%;
+  background: #00DC82;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #2a2a3e;
+  background: #1a1a2e;
+  color: #a0a0b0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.filter-btn:hover { border-color: #00DC82; color: #ffffff; }
+.filter-btn.active {
+  background: #00DC82;
+  color: #0a0a0a;
+  border-color: #00DC82;
+  font-weight: 600;
+}
+.filter-btn.active-blue { background: #3b82f6; color: #fff; border-color: #3b82f6; font-weight: 600; }
+.filter-btn.active-orange { background: #f59e0b; color: #0a0a0a; border-color: #f59e0b; font-weight: 600; }
+.filter-btn.active-red { background: #ef4444; color: #fff; border-color: #ef4444; font-weight: 600; }
+
+.channel-select {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #2a2a3e;
+  background: #1a1a2e;
+  color: #a0a0b0;
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a0a0b0' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+.channel-select:focus { outline: none; border-color: #00DC82; }
+
+/* ── Main layout ── */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  padding: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* ── Calendar ── */
+.calendar-section {
+  background: #0f0f1a;
+  border: 1px solid #2a2a3e;
+  border-radius: 12px;
+  padding: 20px;
+}
+.calendar-month {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+.calendar-dow {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #6b7280;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 4px 0 8px;
+}
+.calendar-cell {
+  aspect-ratio: 1;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: #111122;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  cursor: default;
+  transition: all 0.2s;
+  padding: 4px 2px;
+  min-height: 68px;
+}
+.calendar-cell.empty { background: transparent; }
+.calendar-cell.has-posts {
+  cursor: pointer;
+  border-color: #2a2a3e;
+}
+.calendar-cell.has-posts:hover {
+  border-color: #00DC82;
+  background: #1a1a2e;
+}
+.calendar-cell.dimmed { opacity: 0.35; }
+.calendar-cell.selected {
+  border-color: #00DC82;
+  box-shadow: 0 0 12px rgba(0, 220, 130, 0.25);
+  background: #1a1a2e;
+}
+.calendar-cell.today .day-number {
+  background: rgba(0, 220, 130, 0.15);
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.day-number {
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.day-dots {
+  display: flex;
+  gap: 3px;
+}
+.day-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.day-dot.captura { background: #00DC82; }
+.day-dot.aquecimento { background: #3b82f6; }
+.day-dot.evento { background: #f59e0b; }
+.day-dot.venda { background: #ef4444; }
+.day-post-count {
+  font-size: 0.6rem;
+  color: #6b7280;
+}
+.day-progress {
+  font-size: 0.55rem;
+  color: #00DC82;
+}
+
+/* ── Detail Panel ── */
+.detail-section {
+  min-height: 400px;
+}
+.detail-placeholder {
+  background: #0f0f1a;
+  border: 1px solid #2a2a3e;
+  border-radius: 12px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.detail-header {
+  background: #0f0f1a;
+  border: 1px solid #2a2a3e;
+  border-radius: 12px 12px 0 0;
+  padding: 20px;
+  position: sticky;
+  top: 86px;
+  z-index: 10;
+}
+.detail-date {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.detail-angle {
+  color: #a0a0b0;
+  font-size: 0.82rem;
+  margin-top: 4px;
+  font-style: italic;
+}
+.detail-body {
+  background: #0f0f1a;
+  border: 1px solid #2a2a3e;
+  border-top: none;
+  border-radius: 0 0 12px 12px;
+  padding: 12px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Phase Group ── */
+.phase-group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.phase-badge {
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.phase-badge.captura { background: rgba(0,220,130,0.15); color: #00DC82; }
+.phase-badge.aquecimento { background: rgba(59,130,246,0.15); color: #3b82f6; }
+.phase-badge.evento { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.phase-badge.venda { background: rgba(239,68,68,0.15); color: #ef4444; }
+.content-block-header { display: flex; justify-content: space-between; align-items: center; }
+.copy-btn { background: rgba(255,255,255,0.08); border: 1px solid #2a2a3e; color: #a0a0b0; padding: 3px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
+.copy-btn:hover { background: rgba(0,220,130,0.15); color: #00DC82; border-color: #00DC82; }
+.copy-btn.copied { background: rgba(0,220,130,0.2); color: #00DC82; border-color: #00DC82; }
+.image-wrap { position: relative; display: inline-block; }
+.img-download-btn { position: absolute; top: 4px; left: 4px; background: rgba(0,220,130,0.9); color: #fff; text-decoration: none; border-radius: 50%; width: 22px; height: 22px; font-size: 16px; line-height: 22px; text-align: center; cursor: pointer; opacity: 0; transition: opacity 0.2s; }
+.img-delete-btn { position: absolute; top: 4px; right: 4px; background: rgba(239,68,68,0.9); color: #fff; border: none; border-radius: 50%; width: 22px; height: 22px; font-size: 14px; line-height: 22px; text-align: center; cursor: pointer; opacity: 0; transition: opacity 0.2s; padding: 0; }
+.image-wrap:hover .img-delete-btn, .image-wrap:hover .img-download-btn { opacity: 1; }
+.upload-btn { display: inline-flex; align-items: center; gap: 4px; }
+.edit-btn { background: rgba(255,255,255,0.08); border: 1px solid #2a2a3e; color: #a0a0b0; padding: 3px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; transition: all 0.2s; }
+.edit-btn:hover { background: rgba(96,165,250,0.15); color: #60a5fa; border-color: #60a5fa; }
+.save-btn { background: rgba(0,220,130,0.2); border: 1px solid #00DC82; color: #00DC82; padding: 3px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; font-weight: 600; }
+.cancel-edit-btn { background: rgba(255,255,255,0.05); border: 1px solid #2a2a3e; color: #6b7280; padding: 3px 10px; border-radius: 6px; font-size: 0.7rem; cursor: pointer; }
+.edit-textarea { width: 100%; min-height: 120px; background: #0f0f1a; border: 1px solid #00DC82; border-radius: 8px; color: #e0e0e0; padding: 10px; font-family: inherit; font-size: 0.82rem; line-height: 1.5; resize: vertical; outline: none; }
+.edit-input { width: 100%; background: #0f0f1a; border: 1px solid #00DC82; border-radius: 6px; color: #e0e0e0; padding: 6px 10px; font-family: inherit; font-size: 0.82rem; outline: none; }
+.edit-actions { display: flex; gap: 6px; margin-top: 6px; justify-content: flex-end; }
+.content-block-btns { display: flex; gap: 4px; }
+
+/* Alerts Panel */
+.alerts-panel { max-width: 1200px; margin: 0 auto 16px; padding: 0 20px; }
+.alerts-header { background: #1a1a2e; border: 1px solid #2a2a3e; border-radius: 12px 12px 0 0; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
+.alerts-header:hover { background: #222240; }
+.alerts-panel.collapsed .alerts-header { border-radius: 12px; }
+.alerts-panel.collapsed .alerts-body { display: none !important; }
+.alerts-title { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #fff; font-size: 0.9rem; }
+.alerts-icon { font-size: 1.1rem; }
+.alerts-count { background: #ef4444; color: #fff; border-radius: 10px; padding: 1px 8px; font-size: 0.75rem; font-weight: 700; }
+.alerts-count.ok { background: #00DC82; }
+.alerts-toggle { color: #a0a0b0; transition: transform 0.2s; }
+.alerts-panel.collapsed .alerts-toggle { transform: rotate(-90deg); }
+.alerts-body { background: #12121e; border: 1px solid #2a2a3e; border-top: none; border-radius: 0 0 12px 12px; max-height: 400px; overflow-y: auto; padding: 8px; }
+.alert-group { margin-bottom: 8px; }
+.alert-group-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 10px; color: #a0a0b0; }
+.alert-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 12px; border-radius: 8px; margin: 2px 4px; cursor: pointer; transition: background 0.15s; font-size: 0.82rem; }
+.alert-item:hover { background: #1a1a2e; }
+.alert-type { flex-shrink: 0; padding: 2px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 600; white-space: nowrap; }
+.alert-type.missing-img { background: rgba(239,68,68,0.15); color: #ef4444; }
+.alert-type.missing-copy { background: rgba(251,146,60,0.15); color: #fb923c; }
+.alert-type.conflict { background: rgba(251,191,36,0.15); color: #fbbf24; }
+.alert-type.sequence { background: rgba(96,165,250,0.15); color: #60a5fa; }
+.alert-type.placeholder { background: rgba(168,85,247,0.15); color: #a855f7; }
+.alert-detail { color: #a0a0b0; line-height: 1.4; }
+.alert-detail strong { color: #fff; }
+.alert-day { color: #6b7280; font-size: 0.75rem; white-space: nowrap; }
+.phase-group-line {
+  flex: 1;
+  height: 1px;
+  background: #2a2a3e;
+}
+
+/* ── Post Card ── */
+.post-card {
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.25s;
+  position: relative;
+  border-left: 3px solid transparent;
+}
+.post-card.done {
+  border-left-color: #00DC82;
+  opacity: 0.7;
+}
+.post-card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.post-card-top-left { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+
+.channel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  width: fit-content;
+}
+.channel-badge.instagram-feed { background: rgba(225,48,108,0.15); color: #E1306C; }
+.channel-badge.instagram-stories { background: rgba(193,53,132,0.15); color: #C13584; }
+.channel-badge.linkedin { background: rgba(0,119,181,0.15); color: #0077B5; }
+.channel-badge.email { background: rgba(99,102,241,0.15); color: #6366f1; }
+.channel-badge.email-aquecimento { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+.channel-badge.whatsapp-comunidade { background: rgba(37,211,102,0.15); color: #25D366; }
+.channel-badge.whatsapp-inscritos { background: rgba(18,140,126,0.15); color: #128C7E; }
+.channel-badge.discord { background: rgba(88,101,242,0.15); color: #5865F2; }
+.channel-badge.youtube { background: rgba(255,0,0,0.15); color: #FF0000; }
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+.post-meta span { white-space: nowrap; }
+.post-meta .meta-label { color: #4b5563; }
+
+.checkbox-wrap {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.post-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 2px solid #2a2a3e;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  font-size: 12px;
+}
+.post-checkbox:hover { border-color: #00DC82; }
+.post-checkbox.checked {
+  background: #00DC82;
+  border-color: #00DC82;
+  color: #0a0a0a;
+}
+
+/* ── Expandable Content ── */
+.expand-toggle {
+  margin-top: 10px;
+  background: none;
+  border: none;
+  color: #00DC82;
+  font-size: 0.78rem;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+}
+.expand-toggle:hover { text-decoration: underline; }
+.expand-arrow {
+  display: inline-block;
+  transition: transform 0.25s;
+  font-size: 0.65rem;
+}
+.expand-arrow.open { transform: rotate(90deg); }
+
+.expand-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, opacity 0.25s ease;
+  opacity: 0;
+}
+.expand-content.open {
+  max-height: 5000px;
+  opacity: 1;
+}
+.expand-inner {
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.content-block-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #6b7280;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+.script-block {
+  background: #111122;
+  border-left: 3px solid #00DC82;
+  border-radius: 0 8px 8px 0;
+  padding: 12px;
+  font-size: 0.8rem;
+  color: #c0c0d0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.6;
+}
+.caption-block {
+  background: #111122;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.8rem;
+  color: #c0c0d0;
+  line-height: 1.6;
+  word-break: break-word;
+}
+.art-block {
+  background: #111122;
+  border-left: 3px solid #f59e0b;
+  border-radius: 0 8px 8px 0;
+  padding: 12px;
+  font-size: 0.8rem;
+  color: #c0c0d0;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
+.email-meta-block {
+  background: #111122;
+  border-left: 3px solid #6366f1;
+  border-radius: 0 8px 8px 0;
+  padding: 12px;
+  font-size: 0.8rem;
+}
+.email-meta-block .em-label { color: #6b7280; font-weight: 600; }
+.email-meta-block .em-value { color: #c0c0d0; }
+
+.image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.image-thumb {
+  max-width: 200px;
+  max-height: 150px;
+  border-radius: 8px;
+  border: 1px solid #2a2a3e;
+  cursor: pointer;
+  transition: transform 0.2s;
+  object-fit: cover;
+}
+.image-thumb:hover { transform: scale(1.03); }
+.image-thumb.enlarged {
+  max-width: 100%;
+  max-height: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .main {
+    grid-template-columns: 1fr;
+    padding: 12px;
+    gap: 16px;
+  }
+  .header { padding: 14px 16px; }
+  .header-top { gap: 10px; }
+  .header-title { font-size: 1rem; }
+  .progress-wrap { min-width: 160px; }
+  .filters { gap: 6px; }
+  .filter-btn { padding: 5px 10px; font-size: 0.72rem; }
+
+  .calendar-cell {
+    min-height: 48px;
+    padding: 2px 1px;
+  }
+  .day-number { font-size: 0.75rem; }
+  .day-dot { width: 4px; height: 4px; }
+  .day-post-count { display: none; }
+  .day-progress { font-size: 0.5rem; }
+  .calendar-dow { font-size: 0.6rem; }
+
+  .detail-header { position: static; }
+  .post-meta { gap: 4px 8px; }
+}
+
+@media (max-width: 480px) {
+  .calendar-cell { min-height: 40px; aspect-ratio: auto; }
+  .day-progress { display: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <img src="logo-evolution-summit.png" alt="Evolution Summit" class="header-logo">
+    <div class="header-spacer"></div>
+    <div class="progress-wrap">
+      <span class="progress-label"><strong id="progress-done">0</strong> / <span id="progress-total">131</span> posts</span>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="filters">
+    <button class="filter-btn active" data-phase="todas" onclick="togglePhase(this)">Todas</button>
+    <button class="filter-btn" data-phase="captura" onclick="togglePhase(this)">Captura</button>
+    <button class="filter-btn" data-phase="aquecimento" onclick="togglePhase(this)">Aquecimento</button>
+    <button class="filter-btn" data-phase="evento" onclick="togglePhase(this)">Evento</button>
+    <button class="filter-btn" data-phase="venda" onclick="togglePhase(this)">Venda</button>
+    <select class="channel-select" id="channel-filter" onchange="applyFilters()">
+      <option value="todos">Todos os canais</option>
+    </select>
+  </div>
+</header>
+
+<section class="alerts-panel" id="alerts-panel" style="display:none">
+  <div class="alerts-header" onclick="toggleAlertsPanel()">
+    <span class="alerts-title"><span class="alerts-icon">&#9888;</span> Painel de Alertas <span class="alerts-count" id="alerts-count">0</span></span>
+    <span class="alerts-toggle" id="alerts-toggle">&#9660;</span>
+  </div>
+  <div class="alerts-body" id="alerts-body"></div>
+</section>
+
+<main class="main">
+  <section class="calendar-section">
+    <div class="calendar-month">Abril 2026</div>
+    <div class="calendar-grid" id="calendar-grid"></div>
+  </section>
+  <section class="detail-section" id="detail-section">
+    <div class="detail-placeholder">Selecione um dia no calendario</div>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ── State ──
+  const STORAGE_KEY = 'summit-calendar-status';
+  let statusMap = {};
+  try { statusMap = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch (e) { statusMap = {}; }
+
+  let activePhases = new Set(['captura', 'aquecimento', 'evento', 'venda']);
+  let activeChannel = 'todos';
+  let selectedDay = null;
+
+  const CHANNEL_COLORS = {
+    'instagram-feed': '#E1306C',
+    'instagram-stories': '#C13584',
+    'linkedin': '#0077B5',
+    'email': '#6366f1',
+    'email-aquecimento': '#8b5cf6',
+    'whatsapp-comunidade': '#25D366',
+    'whatsapp-inscritos': '#128C7E',
+    'discord': '#5865F2',
+    'youtube': '#FF0000'
+  };
+
+  const DAYS_OF_WEEK = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+  const APRIL_2026_START_DOW = 3; // Wednesday = index 3
+  const DAYS_IN_APRIL = 30;
+  const ACTIVE_DAYS = new Set([6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]);
+  const TODAY = 2;
+
+  // ── Helpers ──
+  function saveStatus() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(statusMap));
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML.replace(/\n/g, '<br>');
+  }
+
+  function getFilteredPosts() {
+    return POSTS_DATA.filter(p => {
+      if (!activePhases.has(p.phase)) return false;
+      if (activeChannel !== 'todos' && p.channel !== activeChannel) return false;
+      return true;
+    });
+  }
+
+  function getPostsForDay(day) {
+    return getFilteredPosts().filter(p => p.day === day);
+  }
+
+  function getAllPostsForDay(day) {
+    return POSTS_DATA.filter(p => p.day === day);
+  }
+
+  // ── Channel dropdown ──
+  function buildChannelDropdown() {
+    const channels = [...new Set(POSTS_DATA.map(p => p.channel))];
+    const select = document.getElementById('channel-filter');
+    channels.forEach(ch => {
+      const label = POSTS_DATA.find(p => p.channel === ch)?.channelLabel || ch;
+      const opt = document.createElement('option');
+      opt.value = ch;
+      opt.textContent = label;
+      select.appendChild(opt);
+    });
+  }
+
+  // ── Phase Filter ──
+  window.togglePhase = function (btn) {
+    const phase = btn.dataset.phase;
+    if (phase === 'todas') {
+      activePhases = new Set(['captura', 'aquecimento', 'evento', 'venda']);
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('active', 'active-blue', 'active-orange', 'active-red');
+      });
+      btn.classList.add('active');
+    } else {
+      // Deactivate "Todas"
+      const todasBtn = document.querySelector('[data-phase="todas"]');
+      todasBtn.classList.remove('active');
+
+      if (activePhases.size === 4 && !document.querySelector('[data-phase="captura"]').classList.contains('active')) {
+        // First specific click after "Todas" — start fresh
+        activePhases.clear();
+      }
+
+      if (activePhases.has(phase)) {
+        activePhases.delete(phase);
+        btn.classList.remove('active', 'active-blue', 'active-orange', 'active-red');
+      } else {
+        activePhases.add(phase);
+        const cls = phase === 'aquecimento' ? 'active-blue' : phase === 'evento' ? 'active-orange' : phase === 'venda' ? 'active-red' : 'active';
+        btn.classList.add(cls);
+      }
+
+      if (activePhases.size === 0) {
+        activePhases = new Set(['captura', 'aquecimento', 'evento', 'venda']);
+        todasBtn.classList.add('active');
+        document.querySelectorAll('.filter-btn[data-phase]:not([data-phase="todas"])').forEach(b => {
+          b.classList.remove('active', 'active-blue', 'active-orange', 'active-red');
+        });
+      } else if (activePhases.size === 4) {
+        todasBtn.classList.add('active');
+        document.querySelectorAll('.filter-btn[data-phase]:not([data-phase="todas"])').forEach(b => {
+          b.classList.remove('active', 'active-blue', 'active-orange', 'active-red');
+        });
+      }
+    }
+    applyFilters();
+  };
+
+  window.applyFilters = function () {
+    activeChannel = document.getElementById('channel-filter').value;
+    renderCalendar();
+    if (selectedDay !== null) renderDetail(selectedDay);
+    updateProgress();
+  };
+
+  // ── Progress ──
+  function updateProgress() {
+    const filtered = getFilteredPosts();
+    const total = filtered.length;
+    const done = filtered.filter(p => statusMap[p.id]).length;
+    document.getElementById('progress-done').textContent = done;
+    document.getElementById('progress-total').textContent = total;
+    const pct = total > 0 ? (done / total * 100) : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+  }
+
+  // ── Calendar ──
+  function renderCalendar() {
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = '';
+
+    // Day-of-week headers
+    DAYS_OF_WEEK.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'calendar-dow';
+      el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    // Empty cells before April 1
+    for (let i = 0; i < APRIL_2026_START_DOW; i++) {
+      const el = document.createElement('div');
+      el.className = 'calendar-cell empty';
+      grid.appendChild(el);
+    }
+
+    // Day cells
+    for (let day = 1; day <= DAYS_IN_APRIL; day++) {
+      const el = document.createElement('div');
+      const dayPosts = getPostsForDay(day);
+      const allDayPosts = getAllPostsForDay(day);
+      const hasFilteredPosts = dayPosts.length > 0;
+      const hasAnyPosts = allDayPosts.length > 0;
+      const isActive = ACTIVE_DAYS.has(day);
+
+      let cls = 'calendar-cell';
+      if (!isActive) cls += ' dimmed';
+      if (hasAnyPosts) cls += ' has-posts';
+      if (day === selectedDay) cls += ' selected';
+      if (day === TODAY) cls += ' today';
+      el.className = cls;
+
+      // Day number
+      const numEl = document.createElement('div');
+      numEl.className = 'day-number';
+      numEl.textContent = day;
+      el.appendChild(numEl);
+
+      if (hasAnyPosts) {
+        // Phase dots
+        const dotsEl = document.createElement('div');
+        dotsEl.className = 'day-dots';
+        const phases = [...new Set(dayPosts.map(p => p.phase))];
+        const allPhases = [...new Set(allDayPosts.map(p => p.phase))];
+        const phasesToShow = phases.length > 0 ? phases : allPhases;
+        phasesToShow.forEach(ph => {
+          const dot = document.createElement('div');
+          dot.className = 'day-dot ' + ph;
+          if (!activePhases.has(ph)) dot.style.opacity = '0.3';
+          dotsEl.appendChild(dot);
+        });
+        el.appendChild(dotsEl);
+
+        // Post count
+        if (hasFilteredPosts) {
+          const countEl = document.createElement('div');
+          countEl.className = 'day-post-count';
+          countEl.textContent = dayPosts.length + ' post' + (dayPosts.length !== 1 ? 's' : '');
+          el.appendChild(countEl);
+
+          // Progress
+          const doneCount = dayPosts.filter(p => statusMap[p.id]).length;
+          const progEl = document.createElement('div');
+          progEl.className = 'day-progress';
+          progEl.textContent = doneCount + '/' + dayPosts.length;
+          el.appendChild(progEl);
+        }
+
+        el.addEventListener('click', () => selectDay(day));
+      }
+
+      grid.appendChild(el);
+    }
+  }
+
+  function selectDay(day) {
+    selectedDay = day;
+    renderCalendar();
+    renderDetail(day);
+    const detailEl = document.getElementById('detail-section');
+    if (window.innerWidth <= 768) {
+      detailEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+
+  // ── Detail Panel ──
+  function renderDetail(day) {
+    const section = document.getElementById('detail-section');
+    const posts = getPostsForDay(day);
+
+    if (posts.length === 0) {
+      section.innerHTML = '<div class="detail-placeholder">Nenhum post encontrado para este dia com os filtros atuais</div>';
+      return;
+    }
+
+    const weekday = posts[0].weekday;
+    const dayStr = String(day).padStart(2, '0') + '/04';
+
+    // Collect unique angles for the day
+    const angles = [...new Set(posts.map(p => p.angle))];
+
+    // Group by time slot
+    function timeToNum(t) {
+      if (!t || t.includes('A partir')) return 0;
+      return parseFloat(t.replace('h30','.5').replace('h15','.25').replace('h45','.75').replace('h','')) || 0;
+    }
+    const timeSlots = [];
+    const timeMap = {};
+    posts.forEach(p => {
+      if (!timeMap[p.time]) { timeMap[p.time] = []; timeSlots.push(p.time); }
+      timeMap[p.time].push(p);
+    });
+    timeSlots.sort((a, b) => timeToNum(a) - timeToNum(b));
+
+    let html = '';
+    html += '<div class="detail-header">';
+    html += '<div class="detail-date">' + dayStr + ' — ' + escapeHtml(weekday) + '</div>';
+    html += '<div class="detail-angle">' + escapeHtml(angles[0]) + '</div>';
+    // Show phase badges for the day
+    const dayPhases = [...new Set(posts.map(p => p.phase))];
+    html += '<div style="display:flex;gap:6px;margin-top:6px">';
+    dayPhases.forEach(ph => {
+      const label = posts.find(p => p.phase === ph).phaseLabel;
+      html += '<span class="phase-badge ' + ph + '">' + label + '</span>';
+    });
+    html += '</div>';
+    html += '</div>';
+    html += '<div class="detail-body">';
+
+    timeSlots.forEach(time => {
+      const slotPosts = timeMap[time];
+      html += '<div class="phase-group">';
+      html += '<div class="phase-group-header">';
+      html += '<span class="phase-badge" style="background:rgba(255,255,255,0.08);color:#fff;font-size:0.85rem;padding:4px 12px">' + escapeHtml(time) + '</span>';
+      html += '<div class="phase-group-line"></div>';
+      html += '<span style="color:#6b7280;font-size:0.75rem">' + slotPosts.length + ' post' + (slotPosts.length > 1 ? 's' : '') + '</span>';
+      html += '</div>';
+
+      slotPosts.forEach(post => {
+        const isDone = !!statusMap[post.id];
+        html += '<div class="post-card' + (isDone ? ' done' : '') + '" data-id="' + post.id + '">';
+        html += '<div class="post-card-top">';
+        html += '<div class="post-card-top-left">';
+
+        // Phase badge + Channel badge
+        html += '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">';
+        html += '<span class="phase-badge ' + post.phase + '" style="font-size:0.6rem;padding:2px 6px">' + escapeHtml(post.phaseLabel) + '</span>';
+        html += '<span class="channel-badge ' + post.channel + '">' + escapeHtml(post.channelLabel) + '</span>';
+        html += '</div>';
+
+        // Meta row
+        html += '<div class="post-meta">';
+        if (post.format) html += '<span><span class="meta-label">Formato:</span> ' + escapeHtml(post.format) + '</span>';
+        if (post.audience) html += '<span><span class="meta-label">Audiencia:</span> ' + escapeHtml(post.audience) + '</span>';
+        if (post.action) html += '<span><span class="meta-label">Acao:</span> ' + escapeHtml(post.action) + '</span>';
+        html += '</div>';
+
+        html += '</div>'; // top-left
+
+        // Checkbox
+        html += '<div class="checkbox-wrap">';
+        html += '<div class="post-checkbox' + (isDone ? ' checked' : '') + '" onclick="toggleDone(\'' + post.id + '\')" role="checkbox" aria-checked="' + isDone + '" aria-label="Marcar como concluido" tabindex="0">';
+        html += isDone ? '&#10003;' : '';
+        html += '</div>';
+        html += '</div>';
+
+        html += '</div>'; // card-top
+
+        // Expandable content
+        const hasContent = post.script || post.caption || post.artContent || post.emailSubject || (post.images && post.images.length > 0);
+        if (hasContent) {
+          html += '<button class="expand-toggle" onclick="toggleExpand(this)">';
+          html += '<span class="expand-arrow">&#9654;</span> Ver conteudo';
+          html += '</button>';
+          html += '<div class="expand-content">';
+          html += '<div class="expand-inner">';
+
+          function textBlock(label, field, value, cssClass) {
+            if (!value) return '';
+            var h = '<div><div class="content-block-header"><span class="content-block-label">' + label + '</span>';
+            h += '<div class="content-block-btns">';
+            h += '<button class="copy-btn" onclick="copyText(this,\'' + post.id + '-' + field + '\')">Copiar</button>';
+            h += '<button class="edit-btn" onclick="startEdit(this,\'' + post.id + '\',\'' + field + '\')">Editar</button>';
+            h += '</div></div>';
+            h += '<div class="' + cssClass + '" data-copy="' + post.id + '-' + field + '" data-field="' + field + '" data-post-id="' + post.id + '">' + escapeHtml(value) + '</div></div>';
+            return h;
+          }
+
+          if (post.script) html += textBlock('Script', 'script', post.script, 'script-block');
+
+          if (post.caption && post.caption !== 'Stories — sem legenda de feed.') {
+            html += textBlock('Caption / Copy', 'caption', post.caption, 'caption-block');
+          } else if (post.caption) {
+            html += '<div><div class="content-block-label">Nota</div>';
+            html += '<div class="caption-block" style="font-style:italic;color:#6b7280">' + escapeHtml(post.caption) + '</div></div>';
+          }
+
+          if (post.artContent) html += textBlock('Conteudo da Arte', 'artContent', post.artContent, 'art-block');
+
+          if (post.emailSubject || post.emailPreview) {
+            html += '<div><div class="content-block-header"><span class="content-block-label">Email</span>';
+            html += '<div class="content-block-btns">';
+            html += '<button class="copy-btn" onclick="copyText(this,\'' + post.id + '-email\')">Copiar tudo</button>';
+            html += '</div></div>';
+            if (post.emailSubject) {
+              html += '<div style="margin-bottom:6px"><div class="content-block-header" style="margin-bottom:4px"><span style="color:#6b7280;font-size:0.75rem">Assunto</span>';
+              html += '<button class="edit-btn" onclick="startEdit(this,\'' + post.id + '\',\'emailSubject\',true)" style="font-size:0.65rem;padding:2px 6px">Editar</button></div>';
+              html += '<div class="em-value" data-field="emailSubject" data-post-id="' + post.id + '" data-copy="' + post.id + '-emailSubject">' + escapeHtml(post.emailSubject) + '</div></div>';
+            }
+            if (post.emailPreview) {
+              html += '<div style="margin-bottom:6px"><div class="content-block-header" style="margin-bottom:4px"><span style="color:#6b7280;font-size:0.75rem">Preview</span>';
+              html += '<button class="edit-btn" onclick="startEdit(this,\'' + post.id + '\',\'emailPreview\',true)" style="font-size:0.65rem;padding:2px 6px">Editar</button></div>';
+              html += '<div class="em-value" data-field="emailPreview" data-post-id="' + post.id + '" data-copy="' + post.id + '-emailPreview">' + escapeHtml(post.emailPreview) + '</div></div>';
+            }
+            html += '</div>';
+          }
+
+          // Caption for email posts (editable)
+          if ((post.emailSubject || post.emailPreview) && post.caption) {
+            html += textBlock('Corpo do Email', 'caption', post.caption, 'caption-block');
+          }
+
+          // Images section (always show for upload capability)
+          html += '<div><div class="content-block-header"><span class="content-block-label">Imagens</span>';
+          html += '<label class="copy-btn upload-btn" style="cursor:pointer"><input type="file" accept="image/*" multiple style="display:none" onchange="uploadImages(this,\'' + post.id + '\',' + post.day + ',\'' + post.time + '\',\'' + post.channel + '\',\'' + post.phase + '\')">+ Adicionar</label>';
+          html += '</div>';
+          if (post.images && post.images.length > 0) {
+            html += '<div class="image-gallery">';
+            post.images.forEach(src => {
+              html += '<div class="image-wrap">';
+              html += '<img src="' + escapeHtml(src) + '" class="image-thumb" onclick="toggleImage(this)" alt="Imagem do post" loading="lazy">';
+              html += '<a class="img-download-btn" href="' + escapeHtml(src) + '" download title="Baixar imagem">&#8681;</a>';
+              html += '<button class="img-delete-btn" onclick="deleteImage(event,\'' + escapeHtml(src) + '\',\'' + post.id + '\')" title="Remover imagem">&times;</button>';
+              html += '</div>';
+            });
+            html += '</div>';
+          } else {
+            html += '<div style="padding:12px;border:1px dashed #2a2a3e;border-radius:8px;text-align:center;color:#6b7280;font-size:0.8rem">Nenhuma imagem vinculada. Clique em "+ Adicionar" acima.</div>';
+          }
+          html += '</div>';
+
+          html += '</div>'; // expand-inner
+          html += '</div>'; // expand-content
+        }
+
+        html += '</div>'; // post-card
+      });
+
+      html += '</div>'; // phase-group
+    });
+
+    html += '</div>'; // detail-body
+    section.innerHTML = html;
+  }
+
+  // ── Interactions ──
+  window.toggleDone = function (id) {
+    if (statusMap[id]) {
+      delete statusMap[id];
+    } else {
+      statusMap[id] = true;
+    }
+    saveStatus();
+    updateProgress();
+    renderCalendar();
+    if (selectedDay !== null) renderDetail(selectedDay);
+  };
+
+  window.toggleExpand = function (btn) {
+    const arrow = btn.querySelector('.expand-arrow');
+    const content = btn.nextElementSibling;
+    const isOpen = content.classList.contains('open');
+    if (isOpen) {
+      content.classList.remove('open');
+      arrow.classList.remove('open');
+      btn.innerHTML = '<span class="expand-arrow">&#9654;</span> Ver conteudo';
+    } else {
+      content.classList.add('open');
+      arrow.classList.add('open');
+      btn.innerHTML = '<span class="expand-arrow open">&#9654;</span> Ocultar conteudo';
+    }
+  };
+
+  window.toggleImage = function (img) {
+    img.classList.toggle('enlarged');
+  };
+
+  // ── Alerts Panel ──
+  function buildAlerts() {
+    const alerts = [];
+
+    // 1. Posts without images: IG Feed/Stories (static/carousel/sequence), LinkedIn, YouTube
+    POSTS_DATA.forEach(p => {
+      if (!p.images || p.images.length > 0) return;
+      const isIGVisual = (p.channel === 'instagram-feed' || p.channel === 'instagram-stories') && (p.format.includes('Estatico') || p.format.includes('Arte') || p.format.includes('carrossel') || p.action.includes('sequencia'));
+      const isLinkedin = p.channel === 'linkedin';
+      const isYoutube = p.channel === 'youtube';
+      if (isIGVisual || isLinkedin || isYoutube) {
+        alerts.push({ type: 'missing-img', label: 'Sem imagem', day: p.day, channel: p.channelLabel, phase: p.phaseLabel, id: p.id, detail: isLinkedin ? 'Post LinkedIn sem imagem de acompanhamento' : isYoutube ? 'Live sem thumbnail' : 'Post visual sem arte/imagem vinculada' });
+      }
+    });
+
+    // 2. Posts with placeholder text
+    POSTS_DATA.forEach(p => {
+      if (p.script && p.script.includes('[ROTEIRO A SER ADICIONADO]')) {
+        alerts.push({ type: 'placeholder', label: 'Roteiro pendente', day: p.day, channel: p.channelLabel, phase: p.phaseLabel, id: p.id, detail: 'Roteiro ainda nao foi adicionado' });
+      }
+      if (p.artContent && p.artContent.includes('[THUMBNAIL A SER ADICIONADA]')) {
+        alerts.push({ type: 'placeholder', label: 'Thumbnail pendente', day: p.day, channel: p.channelLabel, phase: p.phaseLabel, id: p.id, detail: 'Thumbnail da live ainda nao foi adicionada' });
+      }
+    });
+
+    // 3. Posts without any caption/copy content
+    POSTS_DATA.forEach(p => {
+      const hasCopy = p.script || (p.caption && p.caption !== 'Stories — sem legenda de feed.') || p.artContent || p.emailSubject;
+      if (!hasCopy && p.channel !== 'youtube') {
+        alerts.push({ type: 'missing-copy', label: 'Sem copy', day: p.day, channel: p.channelLabel, phase: p.phaseLabel, id: p.id, detail: 'Post sem nenhum conteudo de texto' });
+      }
+    });
+
+    // (Conflicts resolved in data — no conflict detection needed)
+
+    // Sort alerts: by type priority, then by day
+    const typePriority = { 'missing-img': 0, 'placeholder': 1, 'missing-copy': 2 };
+    alerts.sort((a, b) => {
+      if (typePriority[a.type] !== typePriority[b.type]) return typePriority[a.type] - typePriority[b.type];
+      return a.day - b.day;
+    });
+
+    // Render
+    const panel = document.getElementById('alerts-panel');
+    const body = document.getElementById('alerts-body');
+    const countEl = document.getElementById('alerts-count');
+
+    if (alerts.length === 0) {
+      panel.style.display = 'block';
+      countEl.textContent = '0';
+      countEl.classList.add('ok');
+      body.innerHTML = '<div style="padding:16px;text-align:center;color:#00DC82;font-weight:600">Tudo pronto! Nenhum alerta pendente.</div>';
+      panel.classList.add('collapsed');
+      return;
+    }
+
+    panel.style.display = 'block';
+    countEl.textContent = alerts.length;
+    countEl.classList.remove('ok');
+
+    // Group by type
+    const typeLabels = { 'missing-img': 'Imagens faltando', 'placeholder': 'Conteudo pendente', 'missing-copy': 'Copy faltando' };
+    const grouped = {};
+    alerts.forEach(a => {
+      if (!grouped[a.type]) grouped[a.type] = [];
+      grouped[a.type].push(a);
+    });
+
+    let html = '';
+    for (const [type, items] of Object.entries(grouped)) {
+      html += '<div class="alert-group">';
+      html += '<div class="alert-group-title">' + typeLabels[type] + ' (' + items.length + ')</div>';
+      items.forEach(a => {
+        html += '<div class="alert-item" onclick="goToPost(' + a.day + ',\'' + a.id + '\')">';
+        html += '<span class="alert-day">Dia ' + a.day + '</span>';
+        html += '<span class="alert-type ' + a.type + '">' + a.label + '</span>';
+        html += '<span class="alert-detail"><strong>' + escapeHtml(a.channel) + '</strong> — ' + escapeHtml(a.phase) + '<br>' + escapeHtml(a.detail) + '</span>';
+        html += '</div>';
+      });
+      html += '</div>';
+    }
+
+    body.innerHTML = html;
+    panel.classList.add('collapsed');
+  }
+
+  function reloadData(cb) {
+    fetch('/data.js?t=' + Date.now())
+      .then(function(r) { return r.text(); })
+      .then(function(text) {
+        // Re-evaluate to update POSTS_DATA
+        var fn = new Function(text + '; return POSTS_DATA;');
+        POSTS_DATA = fn();
+        renderCalendar();
+        renderDetail(selectedDay);
+        updateProgress();
+        buildAlerts();
+        if (cb) cb();
+      });
+  }
+
+  window.startEdit = function(btn, postId, field, isInline) {
+    // Find the display element
+    var displayEl = document.querySelector('[data-field="' + field + '"][data-post-id="' + postId + '"]');
+    if (!displayEl) return;
+    var currentText = displayEl.innerText;
+    var parent = displayEl.parentElement;
+
+    if (isInline) {
+      // Single-line input for short fields
+      displayEl.style.display = 'none';
+      var editHtml = '<div class="edit-area" data-editing="' + postId + '-' + field + '">';
+      editHtml += '<input class="edit-input" value="' + currentText.replace(/"/g, '&quot;') + '">';
+      editHtml += '<div class="edit-actions"><button class="cancel-edit-btn" onclick="cancelEdit(\'' + postId + '\',\'' + field + '\')">Cancelar</button>';
+      editHtml += '<button class="save-btn" onclick="saveField(\'' + postId + '\',\'' + field + '\')">Salvar</button></div></div>';
+      displayEl.insertAdjacentHTML('afterend', editHtml);
+    } else {
+      // Textarea for long fields
+      displayEl.style.display = 'none';
+      var editHtml = '<div class="edit-area" data-editing="' + postId + '-' + field + '">';
+      editHtml += '<textarea class="edit-textarea">' + currentText + '</textarea>';
+      editHtml += '<div class="edit-actions"><button class="cancel-edit-btn" onclick="cancelEdit(\'' + postId + '\',\'' + field + '\')">Cancelar</button>';
+      editHtml += '<button class="save-btn" onclick="saveField(\'' + postId + '\',\'' + field + '\')">Salvar</button></div></div>';
+      displayEl.insertAdjacentHTML('afterend', editHtml);
+    }
+    btn.style.display = 'none';
+  };
+
+  window.saveField = function(postId, field) {
+    var editArea = document.querySelector('[data-editing="' + postId + '-' + field + '"]');
+    if (!editArea) return;
+    var input = editArea.querySelector('textarea') || editArea.querySelector('input');
+    var newValue = input.value;
+
+    fetch('/api/update-field', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ postId: postId, field: field, value: newValue })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        reloadData();
+      } else {
+        alert('Erro ao salvar: ' + (data.error || 'desconhecido'));
+      }
+    })
+    .catch(function(err) { alert('Erro: ' + err.message); });
+  };
+
+  window.cancelEdit = function(postId, field) {
+    var editArea = document.querySelector('[data-editing="' + postId + '-' + field + '"]');
+    var displayEl = document.querySelector('[data-field="' + field + '"][data-post-id="' + postId + '"]');
+    if (editArea) editArea.remove();
+    if (displayEl) displayEl.style.display = '';
+    // Show edit button again
+    var card = displayEl.closest('.expand-inner');
+    if (card) card.querySelectorAll('.edit-btn').forEach(function(b) { b.style.display = ''; });
+  };
+
+  window.uploadImages = function(input, postId, day, time, channel, phase) {
+    const files = input.files;
+    if (!files.length) return;
+    let uploaded = 0;
+    Array.from(files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function() {
+        const base64 = reader.result.split(',')[1];
+        fetch('/api/upload', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ postId, day, time, channel, phase, filename: file.name, base64 })
+        })
+        .then(r => r.json())
+        .then(data => {
+          uploaded++;
+          if (uploaded === files.length) {
+            reloadData();
+          }
+        })
+        .catch(err => alert('Erro no upload: ' + err.message));
+      };
+      reader.readAsDataURL(file);
+    });
+    input.value = '';
+  };
+
+  window.deleteImage = function(event, imgPath, postId) {
+    event.stopPropagation();
+    if (!confirm('Remover esta imagem?')) return;
+    fetch('/api/image?path=' + encodeURIComponent(imgPath) + '&postId=' + encodeURIComponent(postId), { method: 'DELETE' })
+      .then(r => r.json())
+      .then(data => { if (data.ok) reloadData(); })
+      .catch(err => alert('Erro ao remover: ' + err.message));
+  };
+
+  window.copyText = function(btn, copyId) {
+    const el = document.querySelector('[data-copy="' + copyId + '"]');
+    if (!el) return;
+    var text = el.getAttribute('data-copy-text') || el.innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      btn.textContent = 'Copiado!';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+
+  window.toggleAlertsPanel = function() {
+    document.getElementById('alerts-panel').classList.toggle('collapsed');
+  };
+
+  window.goToPost = function(day, postId) {
+    selectDay(day);
+    setTimeout(function() {
+      const card = document.querySelector('.post-card[data-id="' + postId + '"]');
+      if (!card) return;
+      // Expand the card if not already open
+      const toggle = card.querySelector('.expand-toggle');
+      if (toggle) {
+        const expandContent = toggle.nextElementSibling;
+        if (expandContent && !expandContent.classList.contains('open')) {
+          toggleExpand(toggle);
+        }
+      }
+      // Scroll to card with highlight flash
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.style.transition = 'box-shadow 0.3s';
+      card.style.boxShadow = '0 0 0 2px #fbbf24, 0 0 20px rgba(251,191,36,0.3)';
+      setTimeout(function() { card.style.boxShadow = ''; }, 3000);
+    }, 150);
+  };
+
+  // ── Init ──
+  buildChannelDropdown();
+  buildAlerts();
+  renderCalendar();
+  updateProgress();
+  selectDay(6);
+
+})();
+</script>
+
+</body>
+</html>

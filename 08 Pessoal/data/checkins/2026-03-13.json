@@ -1,0 +1,76 @@
+{
+  "date": "2026-03-13",
+  "week_number": 11,
+  "davidson": {
+    "scale": {
+      "weight_kg": 95.55,
+      "fat_pct": null,
+      "muscle_pct": null,
+      "visceral": null
+    },
+    "trend": {
+      "weight": "↓",
+      "fat": "↓",
+      "muscle": "↑",
+      "visceral": "↓"
+    },
+    "adherence": {
+      "mounjaro_on_time": true,
+      "diet_score": 9,
+      "workouts_count": 4,
+      "water_sleep_notes": "Energia e força muito boas. Constipação controlada com PegLax 17g diário."
+    },
+    "symptoms": {
+      "nausea": 0,
+      "reflux": 0,
+      "constipation": 1,
+      "diarrhea": 0,
+      "headache": 0,
+      "low_energy": 0,
+      "other": ""
+    }
+  },
+  "isabella": {
+    "scale": {
+      "weight_kg": 75.5,
+      "fat_pct": 35.6,
+      "muscle_pct": 37.6,
+      "visceral": 12
+    },
+    "trend": {
+      "weight": "↓",
+      "fat": "↓",
+      "muscle": "↑",
+      "visceral": "↓"
+    },
+    "adherence": {
+      "diet_score": null,
+      "workouts_count": null,
+      "water_sleep_notes": ""
+    },
+    "symptoms": {
+      "bloating": null,
+      "headache": null,
+      "fatigue": null,
+      "anxiety_stress": null,
+      "poor_sleep": null,
+      "other": ""
+    }
+  },
+  "performance": {
+    "workouts": { "davidson": 4, "isabella": null },
+    "avg_steps": { "davidson": null, "isabella": null },
+    "sleep_quality": { "davidson": null, "isabella": null },
+    "focus_disposition": { "davidson": null, "isabella": null }
+  },
+  "alerts": {
+    "out_of_pattern": "",
+    "monitor_next_week": "",
+    "routine_adjustment": ""
+  },
+  "summary": {
+    "what_worked": "Davidson: dieta sem erros, 4 treinos, sem efeitos colaterais relevantes.",
+    "what_hindered": "",
+    "next_week_priority": "Davidson: possível subida para Mounjaro 5mg (~2 semanas)."
+  }
+}

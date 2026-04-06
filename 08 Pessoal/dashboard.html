@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard Saúde — Davidson & Isabella</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #080e1c;
+      --surface: #0f1929;
+      --border: #1e2d45;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --d: #38bdf8;
+      --d-dim: rgba(56,189,248,.12);
+      --i: #f472b6;
+      --i-dim: rgba(244,114,182,.12);
+      --green: #34d399;
+      --amber: #fbbf24;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.5; }
+    h1, h2, h3 { font-weight: 600; }
+
+    /* Layout */
+    .page { max-width: 1400px; margin: 0 auto; padding: 24px 16px; }
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .header h1 { font-size: 20px; }
+    .header .subtitle { color: var(--muted); font-size: 13px; margin-top: 2px; }
+    .last-updated { color: var(--muted); font-size: 12px; }
+
+    .section { margin-bottom: 32px; }
+    .section-title { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 12px; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .grid-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .card.d-accent { border-color: rgba(56,189,248,.3); }
+    .card.i-accent { border-color: rgba(244,114,182,.3); }
+
+    .person-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .person-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+    .person-dot.d { background: var(--d); }
+    .person-dot.i { background: var(--i); }
+    .person-header h2 { font-size: 15px; }
+
+    /* KPI */
+    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 12px 14px; }
+    .kpi .label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .kpi .value { font-size: 22px; font-weight: 700; }
+    .kpi .delta { font-size: 11px; margin-top: 2px; }
+    .kpi.d .value { color: var(--d); }
+    .kpi.i .value { color: var(--i); }
+    .delta.down { color: var(--green); }
+    .delta.up-bad { color: #f87171; }
+    .delta.up-good { color: var(--green); }
+    .delta.neutral { color: var(--muted); }
+
+    /* Progress bar */
+    .progress-wrap { margin-bottom: 8px; }
+    .progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .progress-track { height: 8px; background: var(--border); border-radius: 99px; position: relative; }
+    .progress-fill { height: 100%; border-radius: 99px; transition: width .4s; }
+    .progress-fill.d { background: var(--d); }
+    .progress-fill.i { background: var(--i); }
+    .progress-marker {
+      position: absolute; top: 50%; transform: translate(-50%, -50%);
+      width: 3px; height: 14px; border-radius: 2px; background: var(--amber);
+    }
+    .milestone-labels { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-top: 4px; }
+
+    /* Trend pills */
+    .trend-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+    .trend-pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; padding: 3px 10px; border-radius: 99px;
+      background: var(--border);
+    }
+    .trend-pill.down-good { background: rgba(52,211,153,.12); color: #34d399; }
+    .trend-pill.up-good  { background: rgba(52,211,153,.12); color: #34d399; }
+    .trend-pill.neutral  { background: var(--border); color: var(--muted); }
+
+    /* Chart */
+    .chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px; }
+    .chart-title { font-size: 13px; font-weight: 600; margin-bottom: 14px; color: var(--text); }
+    .chart-wrap { position: relative; height: 200px; }
+
+    /* Measurements table */
+    table { width: 100%; border-collapse: collapse; }
+    th { text-align: left; font-size: 11px; font-weight: 500; color: var(--muted); padding: 6px 8px; }
+    td { padding: 6px 8px; font-size: 13px; border-top: 1px solid var(--border); }
+    .badge { display: inline-block; padding: 1px 8px; border-radius: 99px; font-size: 11px; }
+    .badge.d { background: var(--d-dim); color: var(--d); }
+    .badge.i { background: var(--i-dim); color: var(--i); }
+
+    /* Last checkin */
+    .checkin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .checkin-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .checkin-row:last-child { border-bottom: none; }
+    .checkin-val { font-weight: 600; }
+
+    /* Symptom dots */
+    .sym-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .sym { font-size: 11px; padding: 3px 8px; border-radius: 99px; border: 1px solid var(--border); color: var(--muted); }
+    .sym.ok { color: var(--green); border-color: rgba(52,211,153,.3); background: rgba(52,211,153,.06); }
+    .sym.warn { color: var(--amber); border-color: rgba(251,191,36,.3); background: rgba(251,191,36,.06); }
+
+    @media (max-width: 900px) {
+      .grid-2, .grid-charts, .checkin-grid { grid-template-columns: 1fr; }
+      .kpi-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div>
+      <h1>Dashboard Saúde — Davidson &amp; Isabella</h1>
+      <div class="subtitle" id="subtitleDate"></div>
+    </div>
+    <div class="last-updated" id="lastUpdated"></div>
+  </div>
+
+  <!-- KPIs Davidson -->
+  <div class="section">
+    <div class="section-title">Davidson — Indicadores</div>
+    <div class="kpi-grid">
+      <div class="kpi d"><div class="label">Peso atual</div><div class="value" id="d-weight">—</div><div class="delta" id="d-weight-delta"></div></div>
+      <div class="kpi d"><div class="label">Gordura corporal</div><div class="value" id="d-fat">—</div><div class="delta" id="d-fat-delta"></div></div>
+      <div class="kpi d"><div class="label">Massa muscular</div><div class="value" id="d-muscle">—</div><div class="delta" id="d-muscle-delta"></div></div>
+      <div class="kpi d"><div class="label">Gordura visceral</div><div class="value" id="d-visceral">—</div><div class="delta" id="d-visceral-delta"></div></div>
+    </div>
+  </div>
+
+  <!-- Meta gordura Davidson -->
+  <div class="section">
+    <div class="section-title">Davidson — Progresso meta gordura corporal</div>
+    <div class="card d-accent">
+      <div class="progress-wrap">
+        <div class="progress-label"><span>Baseline: 26,8%</span><span id="d-fat-label">—</span></div>
+        <div class="progress-track">
+          <div class="progress-fill d" id="d-fat-bar" style="width:0%"></div>
+          <div class="progress-marker" id="d-fat-intermediate-marker"></div>
+        </div>
+        <div class="milestone-labels"><span>26,8% (início)</span><span>20% (intermediário)</span><span>15% (meta)</span></div>
+      </div>
+      <div class="trend-row" id="d-trends"></div>
+    </div>
+  </div>
+
+  <!-- KPIs Isabella -->
+  <div class="section">
+    <div class="section-title">Isabella — Indicadores</div>
+    <div class="kpi-grid">
+      <div class="kpi i"><div class="label">Peso atual</div><div class="value" id="i-weight">—</div><div class="delta" id="i-weight-delta"></div></div>
+      <div class="kpi i"><div class="label">Gordura corporal</div><div class="value" id="i-fat">—</div><div class="delta" id="i-fat-delta"></div></div>
+      <div class="kpi i"><div class="label">Músculo esquelético</div><div class="value" id="i-muscle">—</div><div class="delta" id="i-muscle-delta"></div></div>
+      <div class="kpi i"><div class="label">Gordura visceral</div><div class="value" id="i-visceral">—</div><div class="delta" id="i-visceral-delta"></div></div>
+    </div>
+  </div>
+
+  <!-- Isabella progresso -->
+  <div class="section">
+    <div class="section-title">Isabella — Progresso composição corporal</div>
+    <div class="card i-accent">
+      <div class="progress-wrap">
+        <div class="progress-label"><span>Baseline: 38,8%</span><span id="i-fat-label">—</span></div>
+        <div class="progress-track">
+          <div class="progress-fill i" id="i-fat-bar" style="width:0%"></div>
+        </div>
+        <div class="milestone-labels"><span>38,8% (início)</span><span>30% (objetivo)</span></div>
+      </div>
+      <div class="trend-row" id="i-trends"></div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="section">
+    <div class="section-title">Evolução — Gráficos</div>
+    <div class="grid-charts">
+      <div class="chart-card"><div class="chart-title">Peso — Davidson (kg)</div><div class="chart-wrap"><canvas id="chartDWeight"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Peso — Isabella (kg)</div><div class="chart-wrap"><canvas id="chartIWeight"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Gordura corporal % — Ambos</div><div class="chart-wrap"><canvas id="chartFat"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">Músculo esquelético % — Ambos</div><div class="chart-wrap"><canvas id="chartMuscle"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- Medidas -->
+  <div class="section">
+    <div class="section-title">Medidas corporais (cm)</div>
+    <div class="grid-2">
+      <div class="card d-accent">
+        <div class="person-header"><div class="person-dot d"></div><h2>Davidson</h2></div>
+        <table>
+          <thead><tr><th>Data</th><th>Cintura</th><th>Peito</th><th>Braços</th><th>Ombros</th><th>Quadril</th><th>Coxas</th><th>Pant.</th></tr></thead>
+          <tbody id="d-measurements"></tbody>
+        </table>
+      </div>
+      <div class="card i-accent">
+        <div class="person-header"><div class="person-dot i"></div><h2>Isabella</h2></div>
+        <table>
+          <thead><tr><th>Data</th><th>Cintura</th><th>Peito</th><th>Braços</th><th>Ombros</th><th>Quadril</th><th>Coxas</th><th>Pant.</th></tr></thead>
+          <tbody id="i-measurements"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Último check-in -->
+  <div class="section">
+    <div class="section-title">Último check-in semanal — <span id="checkin-date-label"></span></div>
+    <div class="checkin-grid">
+      <div class="card d-accent">
+        <div class="person-header"><div class="person-dot d"></div><h2>Davidson</h2></div>
+        <div id="d-checkin"></div>
+      </div>
+      <div class="card i-accent">
+        <div class="person-header"><div class="person-dot i"></div><h2>Isabella</h2></div>
+        <div id="i-checkin"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── FONTE DE DADOS ────────────────────────────────────────────────────────────
+// Atualizado automaticamente pelo agente de check-in toda semana (domingo).
+const HEALTH_DATA = {
+  baselines: {
+    davidson: { date: "2026-02-04", weight_kg: 102.5, fat_pct: 26.8, muscle_pct: 69.5, skeletal_muscle_pct: 47.3, visceral: 13.4 },
+    isabella: { date: "2026-02-04", weight_kg: 80.55, fat_pct: 38.8, skeletal_muscle_pct: 35.7, visceral: 14 }
+  },
+  goals: {
+    davidson: { fat_pct_intermediate: 20.0, fat_pct_main: 15.0 },
+    isabella: { fat_pct_target: 30.0 }
+  },
+
+  // Histórico de peso e composição — Davidson
+  davidson_history: [
+    { date: "2026-02-04", weight_kg: 102.5,  fat_pct: 26.8, muscle_pct: 69.5, skeletal_muscle_pct: 47.3, visceral: 13.4 },
+    { date: "2026-02-13", weight_kg: 99.85,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-02-20", weight_kg: 98.45,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-02-27", weight_kg: 97.5,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-03-06", weight_kg: 96.8,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-03-13", weight_kg: 95.55,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-03-20", weight_kg: 94.9,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-03-27", weight_kg: 94.2,   fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-04-01", weight_kg: 93.5,   fat_pct: 23.8, muscle_pct: 71.2, skeletal_muscle_pct: 48.5, visceral: 12.1 },
+    { date: "2026-04-04", weight_kg: 92.95,  fat_pct: null, muscle_pct: null,  skeletal_muscle_pct: null, visceral: null },
+    { date: "2026-04-06", weight_kg: 92.7,   fat_pct: 22.5, muscle_pct: 72.1, skeletal_muscle_pct: 49.2, visceral: 11.5 }
+  ],
+
+  // Histórico de peso e composição — Isabella
+  isabella_history: [
+    { date: "2026-02-04", weight_kg: 80.55, fat_pct: 38.8, skeletal_muscle_pct: 35.7, visceral: 14 },
+    { date: "2026-02-13", weight_kg: 79.8,  fat_pct: 38.1, skeletal_muscle_pct: 35.9, visceral: 13.8 },
+    { date: "2026-02-20", weight_kg: 79.1,  fat_pct: 37.8, skeletal_muscle_pct: 36.1, visceral: 13.5 },
+    { date: "2026-02-27", weight_kg: 78.4,  fat_pct: 37.4, skeletal_muscle_pct: 36.3, visceral: 13.3 },
+    { date: "2026-03-06", weight_kg: 77.6,  fat_pct: 36.9, skeletal_muscle_pct: 36.5, visceral: 13.1 },
+    { date: "2026-03-13", weight_kg: 75.5,  fat_pct: 35.6, skeletal_muscle_pct: 37.6, visceral: 12 },
+    { date: "2026-03-20", weight_kg: 76.3,  fat_pct: 36.0, skeletal_muscle_pct: 37.2, visceral: 12.2 },
+    { date: "2026-03-27", weight_kg: 75.9,  fat_pct: 35.8, skeletal_muscle_pct: 37.4, visceral: 12.1 },
+    { date: "2026-04-01", weight_kg: 75.7,  fat_pct: 35.7, skeletal_muscle_pct: 37.5, visceral: 12.0 },
+    { date: "2026-04-06", weight_kg: 75.5,  fat_pct: 35.6, skeletal_muscle_pct: 37.6, visceral: 12.0 }
+  ],
+
+  // Medidas corporais — Davidson
+  davidson_measurements: [
+    { date: "2026-02-04", cintura: 107, peito: 114, bracos: 42, ombros: 131, quadril: 110, coxas: 64, panturrilhas: 41 },
+    { date: "2026-03-04", cintura: 103, peito: 112, bracos: 41, ombros: 130, quadril: 108, coxas: 63, panturrilhas: 40 },
+    { date: "2026-04-04", cintura: 100, peito: 110, bracos: 41, ombros: 129, quadril: 107, coxas: 62, panturrilhas: 40 }
+  ],
+
+  // Medidas corporais — Isabella
+  isabella_measurements: [
+    { date: "2026-02-04", cintura: 87,  peito: 97,  bracos: 36, ombros: 107, quadril: 117, coxas: 71, panturrilhas: 41 },
+    { date: "2026-03-23", cintura: 83,  peito: 93,  bracos: 35, ombros: 104, quadril: 114, coxas: 69, panturrilhas: 40 }
+  ],
+
+  // Último check-in
+  last_checkin: {
+    date: "2026-04-06",
+    davidson: {
+      scale: { weight_kg: 92.7, fat_pct: 22.5, muscle_pct: 72.1, visceral: 11.5 },
+      trend: { weight: "↓", fat: "↓", muscle: "↑", visceral: "↓" },
+      adherence: { mounjaro_on_time: true, diet_score: 9, workouts_count: 4, water_sleep_notes: "Energia e força muito boas. Constipação controlada com PegLax 17g diário." },
+      symptoms: { nausea: 0, reflux: 0, constipation: 1, diarrhea: 0, headache: 0, low_energy: 0 }
+    },
+    isabella: {
+      scale: { weight_kg: 75.5, fat_pct: 35.6, skeletal_muscle_pct: 37.6, visceral: 12 },
+      trend: { weight: "↓", fat: "↓", muscle: "↑", visceral: "↓" },
+      adherence: { diet_score: null, workouts_count: null, water_sleep_notes: "" },
+      symptoms: { bloating: 0, headache: 0, fatigue: 0, anxiety_stress: 0, poor_sleep: 0 }
+    },
+    summary: {
+      what_worked: "Davidson: dieta sem erros, 4 treinos, sem efeitos colaterais relevantes.",
+      what_hindered: "",
+      next_week_priority: "Davidson: possível subida para Mounjaro 5mg (~2 semanas)."
+    }
+  }
+};
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+function fmt(v, unit = "") { return v != null ? v + unit : "—"; }
+function delta(current, baseline, invert = false) {
+  if (current == null || baseline == null) return { text: "—", cls: "neutral" };
+  const diff = (current - baseline).toFixed(1);
+  const isDown = diff < 0;
+  const isGood = invert ? !isDown : isDown;
+  return { text: (diff > 0 ? "+" : "") + diff + (invert ? " ↑" : " ↓"), cls: isGood ? "down" : "up-bad" };
+}
+function lastNonNull(arr, key) {
+  for (let i = arr.length - 1; i >= 0; i--) {
+    if (arr[i][key] != null) return arr[i][key];
+  }
+  return null;
+}
+function formatDate(d) {
+  const [y, m, day] = d.split("-");
+  return `${day}/${m}/${y}`;
+}
+
+// ─── RENDER KPIs ──────────────────────────────────────────────────────────────
+function renderKPIs() {
+  const db = HEALTH_DATA.baselines.davidson;
+  const ib = HEALTH_DATA.baselines.isabella;
+  const dh = HEALTH_DATA.davidson_history;
+  const ih = HEALTH_DATA.isabella_history;
+
+  // Davidson
+  const dWeight = lastNonNull(dh, "weight_kg");
+  const dFat    = lastNonNull(dh, "fat_pct");
+  const dMuscle = lastNonNull(dh, "muscle_pct");
+  const dVisc   = lastNonNull(dh, "visceral");
+
+  document.getElementById("d-weight").textContent  = fmt(dWeight, " kg");
+  document.getElementById("d-fat").textContent     = fmt(dFat, "%");
+  document.getElementById("d-muscle").textContent  = fmt(dMuscle, "%");
+  document.getElementById("d-visceral").textContent = fmt(dVisc);
+
+  const dwd = delta(dWeight, db.weight_kg);
+  document.getElementById("d-weight-delta").innerHTML = `<span class="delta ${dwd.cls}">vs baseline ${dwd.text}</span>`;
+  const dfd = delta(dFat, db.fat_pct);
+  document.getElementById("d-fat-delta").innerHTML = `<span class="delta ${dfd.cls}">vs baseline ${dfd.text}%</span>`;
+  const dmd = delta(dMuscle, db.muscle_pct, true);
+  document.getElementById("d-muscle-delta").innerHTML = `<span class="delta ${dmd.cls}">vs baseline ${dmd.text}%</span>`;
+  const dvd = delta(dVisc, db.visceral);
+  document.getElementById("d-visceral-delta").innerHTML = `<span class="delta ${dvd.cls}">vs baseline ${dvd.text}</span>`;
+
+  // Isabella
+  const iWeight = lastNonNull(ih, "weight_kg");
+  const iFat    = lastNonNull(ih, "fat_pct");
+  const iMuscle = lastNonNull(ih, "skeletal_muscle_pct");
+  const iVisc   = lastNonNull(ih, "visceral");
+
+  document.getElementById("i-weight").textContent  = fmt(iWeight, " kg");
+  document.getElementById("i-fat").textContent     = fmt(iFat, "%");
+  document.getElementById("i-muscle").textContent  = fmt(iMuscle, "%");
+  document.getElementById("i-visceral").textContent = fmt(iVisc);
+
+  const iwd = delta(iWeight, ib.weight_kg);
+  document.getElementById("i-weight-delta").innerHTML = `<span class="delta ${iwd.cls}">vs baseline ${iwd.text}</span>`;
+  const ifd = delta(iFat, ib.fat_pct);
+  document.getElementById("i-fat-delta").innerHTML = `<span class="delta ${ifd.cls}">vs baseline ${ifd.text}%</span>`;
+  const imd = delta(iMuscle, ib.skeletal_muscle_pct, true);
+  document.getElementById("i-muscle-delta").innerHTML = `<span class="delta ${imd.cls}">vs baseline ${imd.text}%</span>`;
+  const ivd = delta(iVisc, ib.visceral);
+  document.getElementById("i-visceral-delta").innerHTML = `<span class="delta ${ivd.cls}">vs baseline ${ivd.text}</span>`;
+}
+
+// ─── PROGRESS BARS ────────────────────────────────────────────────────────────
+function renderProgress() {
+  const dh = HEALTH_DATA.davidson_history;
+  const ih = HEALTH_DATA.isabella_history;
+  const dg = HEALTH_DATA.goals.davidson;
+  const ig = HEALTH_DATA.goals.isabella;
+
+  // Davidson fat% progress: 26.8% → 15% (range = 11.8pp)
+  const dFat = lastNonNull(dh, "fat_pct");
+  if (dFat != null) {
+    const range = 26.8 - 15;
+    const pct = Math.min(100, Math.max(0, ((26.8 - dFat) / range) * 100));
+    document.getElementById("d-fat-bar").style.width = pct + "%";
+    document.getElementById("d-fat-label").textContent = `Atual: ${dFat}% → Meta: 15%`;
+    // intermediate marker at 20% = (26.8-20)/11.8 of full width
+    const interPct = ((26.8 - 20) / range) * 100;
+    document.getElementById("d-fat-intermediate-marker").style.left = interPct + "%";
+  }
+
+  // Davidson trends
+  const lc = HEALTH_DATA.last_checkin.davidson.trend;
+  const dTrends = [
+    { label: "Peso", v: lc.weight },
+    { label: "Gordura", v: lc.fat },
+    { label: "Músculo", v: lc.muscle },
+    { label: "Visceral", v: lc.visceral }
+  ];
+  const dTrendEl = document.getElementById("d-trends");
+  dTrendEl.innerHTML = dTrends.map(t => {
+    const cls = (t.v === "↓" && t.label !== "Músculo") ? "down-good" :
+                (t.v === "↑" && t.label === "Músculo") ? "up-good" : "neutral";
+    return `<span class="trend-pill ${cls}">${t.label} ${t.v}</span>`;
+  }).join("");
+
+  // Isabella fat%: 38.8% → 30%
+  const iFat = lastNonNull(ih, "fat_pct");
+  if (iFat != null) {
+    const range = 38.8 - 30;
+    const pct = Math.min(100, Math.max(0, ((38.8 - iFat) / range) * 100));
+    document.getElementById("i-fat-bar").style.width = pct + "%";
+    document.getElementById("i-fat-label").textContent = `Atual: ${iFat}% → Meta: 30%`;
+  }
+
+  // Isabella trends
+  const ilc = HEALTH_DATA.last_checkin.isabella.trend;
+  const iTrends = [
+    { label: "Peso", v: ilc.weight },
+    { label: "Gordura", v: ilc.fat },
+    { label: "Músculo", v: ilc.muscle },
+    { label: "Visceral", v: ilc.visceral }
+  ];
+  const iTrendEl = document.getElementById("i-trends");
+  iTrendEl.innerHTML = iTrends.map(t => {
+    const cls = (t.v === "↓" && t.label !== "Músculo") ? "down-good" :
+                (t.v === "↑" && t.label === "Músculo") ? "up-good" : "neutral";
+    return `<span class="trend-pill ${cls}">${t.label} ${t.v}</span>`;
+  }).join("");
+}
+
+// ─── CHARTS ───────────────────────────────────────────────────────────────────
+const chartDefaults = {
+  responsive: true, maintainAspectRatio: false,
+  plugins: { legend: { display: false } },
+  scales: {
+    x: { ticks: { color: "#64748b", font: { size: 10 }, maxTicksLimit: 6 }, grid: { color: "#1e2d45" } },
+    y: { ticks: { color: "#64748b", font: { size: 10 } }, grid: { color: "#1e2d45" } }
+  }
+};
+
+function mkLine(ctx, labels, datasets) {
+  new Chart(ctx, {
+    type: "line",
+    data: { labels, datasets },
+    options: { ...chartDefaults, elements: { point: { radius: 3 }, line: { tension: .35 } } }
+  });
+}
+
+function renderCharts() {
+  const dh = HEALTH_DATA.davidson_history;
+  const ih = HEALTH_DATA.isabella_history;
+
+  // Davidson weight
+  mkLine(
+    document.getElementById("chartDWeight"),
+    dh.map(d => formatDate(d.date)),
+    [{ data: dh.map(d => d.weight_kg), borderColor: "#38bdf8", backgroundColor: "rgba(56,189,248,.08)", fill: true, borderWidth: 2 }]
+  );
+
+  // Isabella weight
+  mkLine(
+    document.getElementById("chartIWeight"),
+    ih.map(d => formatDate(d.date)),
+    [{ data: ih.map(d => d.weight_kg), borderColor: "#f472b6", backgroundColor: "rgba(244,114,182,.08)", fill: true, borderWidth: 2 }]
+  );
+
+  // Fat% combined
+  const fatLabels = [...new Set([...dh.map(d=>d.date), ...ih.map(d=>d.date)])].sort();
+  const dFatMap = Object.fromEntries(dh.filter(d=>d.fat_pct!=null).map(d=>[d.date,d.fat_pct]));
+  const iFatMap = Object.fromEntries(ih.filter(d=>d.fat_pct!=null).map(d=>[d.date,d.fat_pct]));
+  mkLine(
+    document.getElementById("chartFat"),
+    fatLabels.map(formatDate),
+    [
+      { label: "Davidson", data: fatLabels.map(d=>dFatMap[d]??null), borderColor: "#38bdf8", borderWidth: 2, spanGaps: true },
+      { label: "Isabella", data: fatLabels.map(d=>iFatMap[d]??null), borderColor: "#f472b6", borderWidth: 2, spanGaps: true }
+    ]
+  );
+  // override legend for fat chart
+  const fatChart = Chart.getChart("chartFat");
+  if (fatChart) fatChart.options.plugins.legend.display = true;
+
+  // Muscle% combined
+  const muscLabels = fatLabels;
+  const dMuscMap = Object.fromEntries(dh.filter(d=>d.muscle_pct!=null).map(d=>[d.date,d.muscle_pct]));
+  const iMuscMap = Object.fromEntries(ih.filter(d=>d.skeletal_muscle_pct!=null).map(d=>[d.date,d.skeletal_muscle_pct]));
+  const muscChart = new Chart(document.getElementById("chartMuscle"), {
+    type: "line",
+    data: {
+      labels: muscLabels.map(formatDate),
+      datasets: [
+        { label: "Davidson (total)", data: muscLabels.map(d=>dMuscMap[d]??null), borderColor: "#38bdf8", borderWidth: 2, spanGaps: true },
+        { label: "Isabella (esq.)",  data: muscLabels.map(d=>iMuscMap[d]??null), borderColor: "#f472b6", borderWidth: 2, spanGaps: true }
+      ]
+    },
+    options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: true, labels: { color: "#94a3b8", font: { size: 11 } } } }, elements: { point: { radius: 3 }, line: { tension: .35 } } }
+  });
+}
+
+// ─── MEASUREMENTS ─────────────────────────────────────────────────────────────
+function renderMeasurements() {
+  const fields = ["cintura","peito","bracos","ombros","quadril","coxas","panturrilhas"];
+  function buildRows(arr, cls) {
+    return arr.map((row, i) => {
+      const prev = i > 0 ? arr[i-1] : null;
+      const cells = fields.map(f => {
+        const v = row[f];
+        const p = prev ? prev[f] : null;
+        let tag = `<td>${v ?? "—"}</td>`;
+        if (v != null && p != null) {
+          const d = v - p;
+          if (d !== 0) tag = `<td>${v} <small style="color:${d<0?"#34d399":"#f87171"}">(${d>0?"+":""}${d})</small></td>`;
+        }
+        return tag;
+      }).join("");
+      return `<tr><td><span class="badge ${cls}">${formatDate(row.date)}</span></td>${cells}</tr>`;
+    }).join("");
+  }
+  document.getElementById("d-measurements").innerHTML = buildRows(HEALTH_DATA.davidson_measurements, "d");
+  document.getElementById("i-measurements").innerHTML = buildRows(HEALTH_DATA.isabella_measurements, "i");
+}
+
+// ─── LAST CHECK-IN ────────────────────────────────────────────────────────────
+function renderCheckin() {
+  const lc = HEALTH_DATA.last_checkin;
+  document.getElementById("checkin-date-label").textContent = formatDate(lc.date);
+
+  // Davidson
+  const d = lc.davidson;
+  const dRows = [
+    ["Peso", fmt(d.scale.weight_kg, " kg")],
+    ["Gordura", fmt(d.scale.fat_pct, "%")],
+    ["Músculo", fmt(d.scale.muscle_pct, "%")],
+    ["Visceral", fmt(d.scale.visceral)],
+    ["Mounjaro", d.adherence.mounjaro_on_time ? "✓ Em dia" : "✗ Atrasou"],
+    ["Dieta", fmt(d.adherence.diet_score, "/10")],
+    ["Treinos", fmt(d.adherence.workouts_count)],
+  ];
+  const dSyms = Object.entries(d.symptoms).map(([k,v]) => {
+    const cls = v === 0 ? "ok" : v > 0 ? "warn" : "";
+    return `<span class="sym ${cls}">${k}: ${v ?? "—"}</span>`;
+  }).join("");
+
+  document.getElementById("d-checkin").innerHTML =
+    dRows.map(([l,v]) => `<div class="checkin-row"><span>${l}</span><span class="checkin-val">${v}</span></div>`).join("") +
+    (d.adherence.water_sleep_notes ? `<p style="font-size:12px;color:#94a3b8;margin-top:8px">${d.adherence.water_sleep_notes}</p>` : "") +
+    `<div class="sym-row">${dSyms}</div>`;
+
+  // Isabella
+  const ii = lc.isabella;
+  const iRows = [
+    ["Peso", fmt(ii.scale.weight_kg, " kg")],
+    ["Gordura", fmt(ii.scale.fat_pct, "%")],
+    ["Músculo esq.", fmt(ii.scale.skeletal_muscle_pct, "%")],
+    ["Visceral", fmt(ii.scale.visceral)],
+    ["Dieta", fmt(ii.adherence.diet_score, "/10")],
+    ["Treinos", fmt(ii.adherence.workouts_count)],
+  ];
+  const iSyms = Object.entries(ii.symptoms).map(([k,v]) => {
+    const cls = v === 0 ? "ok" : v > 0 ? "warn" : "";
+    return `<span class="sym ${cls}">${k}: ${v ?? "—"}</span>`;
+  }).join("");
+
+  document.getElementById("i-checkin").innerHTML =
+    iRows.map(([l,v]) => `<div class="checkin-row"><span>${l}</span><span class="checkin-val">${v}</span></div>`).join("") +
+    (ii.adherence.water_sleep_notes ? `<p style="font-size:12px;color:#94a3b8;margin-top:8px">${ii.adherence.water_sleep_notes}</p>` : "") +
+    `<div class="sym-row">${iSyms}</div>`;
+
+  // Summary notes
+  if (lc.summary.next_week_priority) {
+    document.getElementById("i-checkin").insertAdjacentHTML("beforeend",
+      `<p style="font-size:12px;color:#fbbf24;margin-top:10px">🎯 ${lc.summary.next_week_priority}</p>`);
+  }
+}
+
+// ─── HEADER ───────────────────────────────────────────────────────────────────
+function renderHeader() {
+  const lc = HEALTH_DATA.last_checkin;
+  document.getElementById("subtitleDate").textContent =
+    `Semana ${getWeekNumber(new Date(lc.date))} · Início: 04/02/2026`;
+  document.getElementById("lastUpdated").textContent =
+    `Atualizado em ${formatDate(lc.date)}`;
+}
+function getWeekNumber(d) {
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  const y = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  return Math.ceil((((d-y)/86400000)+1)/7);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+renderHeader();
+renderKPIs();
+renderProgress();
+renderCharts();
+renderMeasurements();
+renderCheckin();
+</script>
+</body>
+</html>

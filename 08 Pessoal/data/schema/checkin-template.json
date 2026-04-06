@@ -1,0 +1,78 @@
+{
+  "_comment": "Check-in semanal do casal. Preencher todo domingo. Salvar como YYYY-MM-DD.json em data/checkins/",
+  "date": "YYYY-MM-DD",
+  "week_number": null,
+  "davidson": {
+    "scale": {
+      "weight_kg": null,
+      "fat_pct": null,
+      "muscle_pct": null,
+      "visceral": null
+    },
+    "trend": {
+      "weight": null,
+      "fat": null,
+      "muscle": null,
+      "visceral": null,
+      "_values": ["↓", "↑", "="]
+    },
+    "adherence": {
+      "mounjaro_on_time": null,
+      "diet_score": null,
+      "workouts_count": null,
+      "water_sleep_notes": ""
+    },
+    "symptoms": {
+      "nausea": null,
+      "reflux": null,
+      "constipation": null,
+      "diarrhea": null,
+      "headache": null,
+      "low_energy": null,
+      "other": ""
+    }
+  },
+  "isabella": {
+    "scale": {
+      "weight_kg": null,
+      "fat_pct": null,
+      "muscle_pct": null,
+      "visceral": null
+    },
+    "trend": {
+      "weight": null,
+      "fat": null,
+      "muscle": null,
+      "visceral": null
+    },
+    "adherence": {
+      "diet_score": null,
+      "workouts_count": null,
+      "water_sleep_notes": ""
+    },
+    "symptoms": {
+      "bloating": null,
+      "headache": null,
+      "fatigue": null,
+      "anxiety_stress": null,
+      "poor_sleep": null,
+      "other": ""
+    }
+  },
+  "performance": {
+    "workouts": { "davidson": null, "isabella": null },
+    "avg_steps": { "davidson": null, "isabella": null },
+    "sleep_quality": { "davidson": null, "isabella": null },
+    "focus_disposition": { "davidson": null, "isabella": null }
+  },
+  "alerts": {
+    "out_of_pattern": "",
+    "monitor_next_week": "",
+    "routine_adjustment": ""
+  },
+  "summary": {
+    "what_worked": "",
+    "what_hindered": "",
+    "next_week_priority": ""
+  }
+}
