@@ -13,6 +13,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | **07:15** | Email Triage | `make triage` | @clawdia | Classifica emails não lidos por urgência, propõe ações |
 | **a cada 30min** | Sync Meetings | `make sync` | @clawdia | Puxa reuniões do Fathom, salva summaries, cria tarefas no Todoist |
 | **20:00** | Community Pulse | `make community` | @pulse | Lê Discord 24h → atividade, sentimento, suporte, tópicos → relatório HTML |
+| **20:15** | FAQ Sync | `make faq` | @pulse | Atualiza FAQ com perguntas do Discord + GitHub → `03 Comunidade/[C] FAQ.md` |
 | **21:00** | End of Day | `make eod` | @clawdia | Consolida memória dos agentes, logs ADW, tarefas, aprendizados → gera daily log |
 | **21:15** | Memory Sync | `make memory` | @clawdia | Extrai decisões/pessoas/feedbacks dos logs e reuniões → atualiza memória persistente |
 
@@ -51,7 +52,7 @@ make clean-logs    # Remove logs > 30 dias
 |--------|---------|
 | **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly |
 | **@atlas** | Linear Review, GitHub Review |
-| **@pulse** | Community Pulse (diário), Community Weekly |
+| **@pulse** | Community Pulse (diário), Community Weekly, FAQ Sync |
 | **@kai** | Health Check-in |
 
 ## Arquivos gerados

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal da Comunidade — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 40%, rgba(0,255,167,0.03) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .header-top { display: flex; align-items: center; gap: 16px; margin-bottom: 4px; }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+  }
+
+  .header h1 span { color: var(--evo-green); }
+
+  .header .period {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .header .exec-summary {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .exec-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+  }
+
+  .exec-item .exec-icon { margin-right: 6px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Metric cards */
+  .metrics-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .m-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+  }
+
+  .m-card:hover { border-color: var(--evo-green); }
+
+  .m-card .m-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .m-card .m-value { font-size: 28px; font-weight: 700; margin: 6px 0 4px; }
+  .m-card .m-sub { font-size: 12px; color: var(--text-muted); }
+  .m-card .m-delta { font-size: 12px; font-weight: 600; }
+  .m-card .m-delta.up { color: var(--green); }
+  .m-card .m-delta.down { color: var(--red); }
+
+  /* Sections */
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .badge { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .trend-up { color: var(--green); }
+  .trend-down { color: var(--red); }
+  .trend-flat { color: var(--text-muted); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Topic sentiment bars */
+  .topic-row { padding: 14px 20px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .topic-row:last-child { border-bottom: none; }
+  .topic-row .topic-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .topic-row .topic-name { font-size: 14px; font-weight: 600; }
+  .topic-row .topic-msgs { font-size: 12px; color: var(--text-muted); }
+  .topic-row .sentiment-bar { display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px; }
+  .topic-row .s-positive { background: var(--green); }
+  .topic-row .s-neutral { background: var(--text-muted); }
+  .topic-row .s-negative { background: var(--red); }
+  .topic-row .topic-desc { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+  /* Members */
+  .member-row { padding: 10px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .member-row:last-child { border-bottom: none; }
+  .member-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--evo-green); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--bg-primary); flex-shrink: 0; }
+  .member-avatar.purple { background: var(--evo-purple); color: white; }
+  .member-info .member-name { font-size: 14px; font-weight: 600; }
+  .member-info .member-stat { font-size: 12px; color: var(--text-muted); }
+  .member-badge { margin-left: auto; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; }
+  .member-badge.top { background: rgba(0,255,167,0.15); color: var(--evo-green); }
+  .member-badge.new { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .member-badge.risk { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  /* Comparativo */
+  .compare-row td:nth-child(4) { font-weight: 600; }
+
+  /* Product insights */
+  .insight-item { padding: 14px 20px; border-bottom: 1px solid rgba(52,64,84,0.5); display: flex; gap: 12px; align-items: flex-start; }
+  .insight-item:last-child { border-bottom: none; }
+  .insight-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .insight-text { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+  .insight-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .insight-label.feature { color: var(--evo-green); }
+  .insight-label.bug { color: var(--red); }
+  .insight-label.docs { color: var(--blue); }
+
+  /* Actions */
+  .action-item { padding: 12px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .action-item:last-child { border-bottom: none; }
+  .action-checkbox { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; }
+  .action-text { font-size: 14px; color: var(--text-secondary); flex: 1; }
+  .action-owner { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+  .action-due { font-size: 12px; color: var(--evo-green); font-weight: 500; white-space: nowrap; }
+
+  /* Activity chart */
+  .activity-chart { padding: 20px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 80px; }
+  .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .chart-bar { width: 100%; background: var(--evo-green); border-radius: 4px 4px 0 0; opacity: 0.7; transition: opacity 0.2s; }
+  .chart-bar:hover { opacity: 1; }
+  .chart-label { font-size: 10px; color: var(--text-muted); }
+  .chart-value { font-size: 10px; color: var(--text-secondary); font-weight: 600; }
+
+  .sentiment-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 100px; font-size: 13px; font-weight: 600; }
+  .sentiment-pill.positive { background: rgba(18,183,106,0.15); color: var(--green); }
+  .sentiment-pill.neutral { background: rgba(102,112,133,0.2); color: var(--text-muted); }
+  .sentiment-pill.negative { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+
+  .alert-banner { background: rgba(247,144,9,0.1); border: 1px solid rgba(247,144,9,0.3); border-radius: 8px; padding: 12px 16px; margin-bottom: 24px; display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--yellow); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <h1><span>evo</span>lution — Relatório Semanal da Comunidade</h1>
+    <span class="sentiment-pill positive">🟢 Sentimento Positivo</span>
+  </div>
+  <div class="period">Semana W14 — 30 de março a 06 de abril de 2026</div>
+
+  <div class="exec-summary">
+    <div class="exec-item"><span class="exec-icon">✅</span> <strong>78 novos membros</strong> em 7 dias — crescimento sólido impulsionado pelo anúncio do Evolution Summit (14–16/abr). Membro <strong>jorgenosantos</strong> destacou-se com apresentação calorosa citando as lives do Davidson.</div>
+    <div class="exec-item"><span class="exec-icon">⚠️</span> <strong>15 instâncias bloqueadas em 1 semana</strong> (relato de guilherme.cosme.lima_81922 com 30 instâncias). Bug de duplicação de eventos webhook no Evo Go com 5 tickets abertos. Issue de senha incorreta no Evo Go surgindo do nada.</div>
+    <div class="exec-item"><span class="exec-icon">💡</span> Oportunidade: <strong>integração nativa Evo Go + Chatwoot</strong> é a funcionalidade mais pedida da semana (5+ pedidos). Library open source de bridge já foi criada pela comunidade (yuricaetano) — base para documentação oficial.</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- ALERT -->
+  <div class="alert-banner">
+    ⚠️ <strong>Atenção:</strong> Volume de bloqueios de instâncias subiu esta semana — múltiplos usuários relatando 15+ bans em 7 dias. Pode indicar mudança de política do WhatsApp. Recomenda-se comunicado proativo da equipe.
+  </div>
+
+  <!-- MÉTRICAS PRINCIPAIS -->
+  <div class="metrics-row">
+    <div class="m-card">
+      <div class="m-label">Novos membros</div>
+      <div class="m-value" style="color: var(--evo-green)">78</div>
+      <div class="m-delta up">↑ esta semana</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">WAM</div>
+      <div class="m-value">81</div>
+      <div class="m-sub">membros únicos ativos</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Total mensagens</div>
+      <div class="m-value">497</div>
+      <div class="m-sub">nos canais de chat</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Msgs / membro</div>
+      <div class="m-value" style="color: var(--evo-green)">6,1</div>
+      <div class="m-sub">meta: &gt;4 ✅</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Threads Help</div>
+      <div class="m-value">29</div>
+      <div class="m-sub">ativos no fórum</div>
+    </div>
+  </div>
+
+  <!-- ACTIVITY CHART -->
+  <div class="section" style="margin-bottom: 24px;">
+    <div class="section-header">
+      <h2>📊 Atividade Diária — Mensagens nos chats</h2>
+    </div>
+    <div class="activity-chart">
+      <div class="chart-bars">
+        <div class="chart-bar-wrap">
+          <div class="chart-value">9</div>
+          <div class="chart-bar" style="height: 6px; background: var(--text-muted);"></div>
+          <div class="chart-label">30/mar</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">87</div>
+          <div class="chart-bar" style="height: 55px;"></div>
+          <div class="chart-label">31/mar</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">86</div>
+          <div class="chart-bar" style="height: 54px;"></div>
+          <div class="chart-label">01/abr</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">53</div>
+          <div class="chart-bar" style="height: 34px;"></div>
+          <div class="chart-label">02/abr</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">62</div>
+          <div class="chart-bar" style="height: 39px;"></div>
+          <div class="chart-label">03/abr</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">56</div>
+          <div class="chart-bar" style="height: 35px;"></div>
+          <div class="chart-label">04/abr</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">20</div>
+          <div class="chart-bar" style="height: 13px;"></div>
+          <div class="chart-label">05/abr</div>
+        </div>
+        <div class="chart-bar-wrap">
+          <div class="chart-value">124</div>
+          <div class="chart-bar" style="height: 78px; background: var(--evo-green);"></div>
+          <div class="chart-label">06/abr ⭐</div>
+        </div>
+      </div>
+      <div style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">⭐ 06/abr: Pico de atividade coincide com anúncio do Evolution Summit no canal #news</div>
+    </div>
+  </div>
+
+  <!-- TOP TÓPICOS + MEMBROS -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header">
+        <h2>🔥 Top 5 Tópicos</h2>
+      </div>
+      <div class="section-body">
+        <div class="topic-row">
+          <div class="topic-header">
+            <div class="topic-name">QR Code não gerado / falha de conexão</div>
+            <div class="topic-msgs">~45 msgs</div>
+          </div>
+          <div class="sentiment-bar">
+            <div class="s-positive" style="width:20%"></div>
+            <div class="s-neutral" style="width:30%"></div>
+            <div class="s-negative" style="width:50%"></div>
+          </div>
+          <div class="topic-desc">Problema recorrente com versões antigas (v2.2.3). Solução: atualizar para v2.3.7.</div>
+        </div>
+        <div class="topic-row">
+          <div class="topic-header">
+            <div class="topic-name">Evo Go — adoção e dúvidas técnicas</div>
+            <div class="topic-msgs">~80 msgs</div>
+          </div>
+          <div class="sentiment-bar">
+            <div class="s-positive" style="width:55%"></div>
+            <div class="s-neutral" style="width:35%"></div>
+            <div class="s-negative" style="width:10%"></div>
+          </div>
+          <div class="topic-desc">Alto interesse na migração. Dúvidas sobre chatwoot, licença, Easypanel e parâmetro "type" no /send/media.</div>
+        </div>
+        <div class="topic-row">
+          <div class="topic-header">
+            <div class="topic-name">Bloqueios e bans de instâncias</div>
+            <div class="topic-msgs">~35 msgs</div>
+          </div>
+          <div class="sentiment-bar">
+            <div class="s-positive" style="width:10%"></div>
+            <div class="s-neutral" style="width:20%"></div>
+            <div class="s-negative" style="width:70%"></div>
+          </div>
+          <div class="topic-desc">Relato crítico: 15 bloqueios em 1 semana. Discussão sobre proxy, delay, simulação de digitação.</div>
+        </div>
+        <div class="topic-row">
+          <div class="topic-header">
+            <div class="topic-name">Evo Go + Chatwoot (integração)</div>
+            <div class="topic-msgs">~25 msgs</div>
+          </div>
+          <div class="sentiment-bar">
+            <div class="s-positive" style="width:40%"></div>
+            <div class="s-neutral" style="width:45%"></div>
+            <div class="s-negative" style="width:15%"></div>
+          </div>
+          <div class="topic-desc">Feature mais pedida da semana. yuricaetano lançou library open source de bridge como solução da comunidade.</div>
+        </div>
+        <div class="topic-row">
+          <div class="topic-header">
+            <div class="topic-name">Evo CRM / Evo v3 — quando lança?</div>
+            <div class="topic-msgs">~20 msgs</div>
+          </div>
+          <div class="sentiment-bar">
+            <div class="s-positive" style="width:30%"></div>
+            <div class="s-neutral" style="width:55%"></div>
+            <div class="s-negative" style="width:15%"></div>
+          </div>
+          <div class="topic-desc">Expectativa alta. Comunidade confundindo Evo AI, Evo CRM e Evo v3 — necessidade de comunicação clara sobre o roadmap.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MEMBROS DESTAQUE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>⭐ Membros Destaque</h2>
+      </div>
+      <div class="section-body">
+        <div class="member-row">
+          <div class="member-avatar">O</div>
+          <div class="member-info">
+            <div class="member-name">oismaelash</div>
+            <div class="member-stat">117 msgs • principal suporte técnico da semana</div>
+          </div>
+          <div class="member-badge top">🏆 MVP</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar">D</div>
+          <div class="member-info">
+            <div class="member-name">d_paes</div>
+            <div class="member-stat">50 msgs • moderação e suporte técnico avançado</div>
+          </div>
+          <div class="member-badge top">Top Helper</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar" style="background: var(--blue); color: white;">Y</div>
+          <div class="member-info">
+            <div class="member-name">yuricaetano</div>
+            <div class="member-stat">Lançou library OSS de bridge Evo Go + Chatwoot</div>
+          </div>
+          <div class="member-badge top">🚀 Contributor</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar" style="background: var(--yellow); color: var(--bg-primary);">L</div>
+          <div class="member-info">
+            <div class="member-name">leonardrodri</div>
+            <div class="member-stat">Abriu PR #2493 com correção de bug no GitHub</div>
+          </div>
+          <div class="member-badge top">🔧 Contributor</div>
+        </div>
+        <div class="member-row">
+          <div class="member-avatar purple">J</div>
+          <div class="member-info">
+            <div class="member-name">jorgenosantos</div>
+            <div class="member-stat">Novo membro — apresentação inspiradora sobre as lives do Davidson</div>
+          </div>
+          <div class="member-badge new">✨ Novo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO SEMANAL -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📈 Comparativo Semanal</h2>
+      <span class="badge">1ª semana coletada — baseline</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Métrica</th>
+            <th>Esta semana (W14)</th>
+            <th>Semana anterior</th>
+            <th>Tendência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="compare-row">
+            <td>Novos membros</td>
+            <td>78</td>
+            <td>N/A (1ª coleta)</td>
+            <td class="trend-flat">— Baseline</td>
+          </tr>
+          <tr class="compare-row">
+            <td>WAM (membros ativos)</td>
+            <td>81</td>
+            <td>N/A</td>
+            <td class="trend-flat">— Baseline</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Total mensagens (chat)</td>
+            <td>497</td>
+            <td>N/A</td>
+            <td class="trend-flat">— Baseline</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Msgs por membro ativo</td>
+            <td>6,1</td>
+            <td>N/A</td>
+            <td class="trend-up">✅ Acima da meta (>4)</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Threads Help ativos</td>
+            <td>29</td>
+            <td>N/A</td>
+            <td class="trend-flat">— Baseline</td>
+          </tr>
+          <tr class="compare-row">
+            <td>Distribuição chat-pt</td>
+            <td>92% (456 msgs)</td>
+            <td>N/A</td>
+            <td class="trend-flat">Comunidade ainda predominantemente BR</td>
+          </tr>
+          <tr class="compare-row">
+            <td>chat-en</td>
+            <td>4% (19 msgs)</td>
+            <td>N/A</td>
+            <td class="trend-flat">— Oportunidade de crescimento internacional</td>
+          </tr>
+          <tr class="compare-row">
+            <td>chat-es</td>
+            <td>4% (22 msgs)</td>
+            <td>N/A</td>
+            <td class="trend-flat">— Latam com interesse em Evo Go</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INSIGHTS PARA O PRODUTO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🧠 Insights para o Produto</h2>
+      <span class="badge">3 features • 4 bugs • 6 docs gaps</span>
+    </div>
+    <div class="section-body">
+      <div class="insight-item">
+        <div class="insight-icon">✨</div>
+        <div>
+          <div class="insight-label feature">Feature Request — Alta demanda</div>
+          <div class="insight-text"><strong>Integração nativa Evo Go + Chatwoot:</strong> 5+ pedidos explícitos esta semana. A comunidade já criou uma library OSS (yuricaetano) como workaround, mas espera solução oficial. Considerar como prioridade no roadmap do Evo Go.</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">✨</div>
+        <div>
+          <div class="insight-label feature">Feature Request — Média demanda</div>
+          <div class="insight-text"><strong>Documentação do parâmetro "type" em /send/media (Evo Go):</strong> Múltiplos usuários confusos sobre quais valores aceitos ("image", "video", "document"). Campo obrigatório sem exemplos na doc atual.</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">✨</div>
+        <div>
+          <div class="insight-label feature">Feature Request — Baixa demanda</div>
+          <div class="insight-text"><strong>Envio de stickers para grupos via API:</strong> Endpoint retorna timeout sem resposta. Usuário luiz0067 reportou e testou diretamente no Insomnia. Pode ser limitação não documentada do WhatsApp.</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🐛</div>
+        <div>
+          <div class="insight-label bug">Bug — Urgência Alta</div>
+          <div class="insight-text"><strong>Evo Go duplicando todos os eventos webhook:</strong> Thread aberta com 5 mensagens (ID: 1488636205859078294). Usuários reportam duplicação mesmo após recriar instância. Afeta lógica de automação dos clientes.</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🐛</div>
+        <div>
+          <div class="insight-label bug">Bug — Urgência Alta</div>
+          <div class="insight-text"><strong>Evo Go: senha incorreta aleatória (nandocosta):</strong> Credenciais paravam de funcionar sem causa aparente. Issue aberta no GitHub. Afeta usuários em produção.</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🐛</div>
+        <div>
+          <div class="insight-label bug">Bug — Urgência Média</div>
+          <div class="insight-text"><strong>setPresence "unavailable" não persiste:</strong> Mesmo chamando o endpoint, o status do WhatsApp volta para "online" em alguns minutos. Afeta múltiplos usuários com clientes. Pode ser comportamento do WhatsApp Web ou bug na evolution-api.</div>
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🐛</div>
+        <div>
+          <div class="insight-label bug">Bug — Urgência Baixa</div>
+          <div class="insight-text"><strong>Webhook não salva ao criar instância via endpoint:</strong> Parâmetros de webhook passados na criação da instância não persistem. Workaround: configurar webhook separadamente após criar a instância.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DOCS GAP -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📚 Docs Gap — Perguntas sem documentação</h2>
+      <span class="badge">6 gaps identificados</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Pergunta recorrente</th>
+            <th>Frequência</th>
+            <th>Canal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Como atualizar a versão da Evolution API? (usuários em v2.2.3 precisam ir para v2.3.7)</td>
+            <td>8x</td>
+            <td>chat-pt, chat-en, chat-es</td>
+          </tr>
+          <tr>
+            <td>Como instalar Evo Go no Easypanel?</td>
+            <td>4x</td>
+            <td>chat-pt</td>
+          </tr>
+          <tr>
+            <td>Qual a diferença entre Baileys e WhatsApp Cloud API (Meta Oficial)?</td>
+            <td>3x</td>
+            <td>chat-pt, chat-en</td>
+          </tr>
+          <tr>
+            <td>Como configurar Evo Go com Chatwoot? (integração não documentada oficialmente)</td>
+            <td>5x</td>
+            <td>chat-pt, chat-es</td>
+          </tr>
+          <tr>
+            <td>O que é Evo CRM? Quando vai lançar? É diferente do Evo AI?</td>
+            <td>4x</td>
+            <td>chat-pt</td>
+          </tr>
+          <tr>
+            <td>Como funciona o parâmetro "type" no endpoint /send/media do Evo Go?</td>
+            <td>3x</td>
+            <td>chat-pt</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- NOVOS MEMBROS DESTAQUE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🆕 Novos Membros — Destaques da semana</h2>
+      <span class="badge">78 entradas</span>
+    </div>
+    <div class="section-body">
+      <div class="member-row">
+        <div class="member-avatar purple">J</div>
+        <div class="member-info">
+          <div class="member-name">jorgenosantos</div>
+          <div class="member-stat">Apresentação inspiradora: "vendo as lives do Davidson na YouTube, com o brilho nos olhos que ele apresenta os avanços, quero fazer parte disso"</div>
+        </div>
+        <div class="member-badge new">✨ Destaque</div>
+      </div>
+      <div class="member-row">
+        <div class="member-avatar purple">Y</div>
+        <div class="member-info">
+          <div class="member-name">yuricaetano</div>
+          <div class="member-stat">Novo membro que já contribuiu com library open source Evo Go + Chatwoot bridge</div>
+        </div>
+        <div class="member-badge new">🚀 Contributor imediato</div>
+      </div>
+      <div class="member-row">
+        <div class="member-avatar purple">D</div>
+        <div class="member-info">
+          <div class="member-name">dario.andrade</div>
+          <div class="member-stat">Entrou perguntando sobre diferença Baileys vs Cloud API — perfil de desenvolvedor que está migrando de arquitetura</div>
+        </div>
+        <div class="member-badge new">Novo dev</div>
+      </div>
+      <div style="padding: 12px 20px; font-size: 13px; color: var(--text-muted);">
+        + 75 outros membros entraram esta semana. Taxa de entrada: ~11/dia (pico 15 no dia 31/mar e 06/abr).
+      </div>
+    </div>
+  </div>
+
+  <!-- AÇÕES PARA PRÓXIMA SEMANA -->
+  <div class="section">
+    <div class="section-header">
+      <h2>✅ Ações para Próxima Semana</h2>
+    </div>
+    <div class="section-body">
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Criar FAQ no Notion: "Como atualizar para Evolution API v2.3.7" — resposta pronta para o problema mais recorrente da semana (8x perguntado)</div>
+        <div class="action-owner">Pulse</div>
+        <div class="action-due">Até 10/abr</div>
+      </div>
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Criar FAQ: "Evo Go + Chatwoot — como integrar?" referenciando a library OSS do yuricaetano e indicando status de integração oficial</div>
+        <div class="action-owner">Pulse + Davidson</div>
+        <div class="action-due">Até 10/abr</div>
+      </div>
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Publicar comunicado explicando a diferença entre Evo AI, Evo CRM e Evo v3 — comunidade está confusa sobre o roadmap de produtos</div>
+        <div class="action-owner">Davidson</div>
+        <div class="action-due">Antes do Summit</div>
+      </div>
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Investigar escalada de bloqueios de instâncias — possível mudança de comportamento do WhatsApp. Avaliar comunicado preventivo com melhores práticas anti-ban</div>
+        <div class="action-owner">Equipe Técnica</div>
+        <div class="action-due">Urgente</div>
+      </div>
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Reconhecer publicamente oismaelash e d_paes como top helpers da semana — ambos sustentaram o suporte técnico praticamente sozinhos (167 msgs combinadas)</div>
+        <div class="action-owner">Davidson</div>
+        <div class="action-due">Até 08/abr</div>
+      </div>
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Reportar bug "webhook não salva ao criar instância" e "setPresence não persiste" como issues prioritárias para o time de dev</div>
+        <div class="action-owner">Danilo / Dev</div>
+        <div class="action-due">Até 09/abr</div>
+      </div>
+      <div class="action-item">
+        <div class="action-checkbox"></div>
+        <div class="action-text">Preparar aquecimento da comunidade para o Evolution Summit (14–16/abr) — criar thread de expectativas, divulgar temas das sessões</div>
+        <div class="action-owner">Pulse + Davidson</div>
+        <div class="action-due">Até 10/abr</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pulse — 06 de abril de 2026, 22:30 BRT<br>
+  Dados coletados de: chat-pt (456 msgs) · chat-en (19 msgs) · chat-es (22 msgs) · new-members (78 entradas) · introduce (13 msgs) · fórum help (29 threads ativos)
+</div>
+
+</body>
+</html>
