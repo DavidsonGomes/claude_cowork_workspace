@@ -98,9 +98,11 @@ Classificação do health geral:
 - Mix de 🟢 e 🟡: `mixed` — "Atenção"
 - Qualquer 🔴: `risk` — "Risco"
 
+**OBRIGATÓRIO:** Sempre gerar o HTML primeiro. Ler o template, substituir os placeholders, e salvar o arquivo HTML completo. Isso vale inclusive na primeira execução (baseline) — mesmo sem comparativo, preencher o scorecard com os valores atuais e "—" no anterior.
+
 Salvar HTML em `01 Daily Logs/[C] YYYY-WXX-trends.html`.
 
-Também salvar versão markdown resumida em `01 Daily Logs/[C] YYYY-WXX-trends.md`:
+Depois, salvar também uma versão markdown resumida em `01 Daily Logs/[C] YYYY-WXX-trends.md`:
 
 ```markdown
 # Análise de Tendências — Semana {WXX}

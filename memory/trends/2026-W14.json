@@ -1,0 +1,56 @@
+{
+  "week": "2026-W14",
+  "date": "2026-04-06",
+  "note": "baseline — primeira execução, sem comparativo anterior",
+  "community": {
+    "wam": 81,
+    "new_members_week": 78,
+    "messages_24h": 117,
+    "messages_week": 497,
+    "msgs_per_active_member": 6.1,
+    "active_help_threads": 29,
+    "unanswered_estimate": null,
+    "sentiment": "misto",
+    "top_topics": [
+      "bloqueios de instâncias WhatsApp",
+      "Evo Go + Chatwoot integração",
+      "atualização v2.2.3 → v2.3.7",
+      "stream:error 515 / QR code",
+      "Evo CRM lançamento"
+    ],
+    "highlight_event": "Anúncio Evolution Summit impulsionou +78 membros"
+  },
+  "github": {
+    "evolution_api": {
+      "stars": 7785,
+      "forks": 5929,
+      "issues_open": 408,
+      "prs_open": 10,
+      "last_push": "2026-02-24"
+    },
+    "evo_ai": {
+      "issues_open": 17,
+      "prs_open": null
+    },
+    "evolution_go": {
+      "stars": 169,
+      "forks": 76,
+      "issues_open": 13,
+      "created_at": "2026-03-25"
+    }
+  },
+  "financial": {
+    "mrr": null,
+    "subscriptions": null,
+    "note": "Stripe não consultado nesta execução"
+  },
+  "operational": {
+    "adw_runs": 2,
+    "adw_success_rate": 100.0,
+    "adw_avg_seconds": {
+      "community-weekly": 399.1,
+      "faq-sync": 139.5
+    },
+    "adw_note": "Apenas 2 rotinas com dados (community-weekly, faq-sync)"
+  }
+}
