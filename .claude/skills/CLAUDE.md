@@ -1,144 +1,165 @@
 # Skills Index
 
-Navegacao rapida para todas as skills disponíveis neste workspace.
+Navegação rápida para todas as skills disponíveis neste workspace.
+Prefixos: `prod-` produtividade | `gog-` email/calendar | `int-` integrações | `fin-` financeiro | `mkt-` marketing | `obs-` obsidian | `evo-` dev method
 
 ---
 
-## Produtividade (`produtividade/`)
-
-Rituais diários, gestão de tarefas e memória.
+## Produtividade (`prod-`)
 
 | Skill | Comando | Descrição |
 |---|---|---|
-| [good-morning](produtividade/good-morning/SKILL.md) | `/good-morning` | Revisão do dia, agenda e prioridades |
-| [end-of-day](produtividade/end-of-day/SKILL.md) | `/end-of-day` | Log da sessão para memória contínua |
-| [task-management](produtividade/task-management/SKILL.md) | `/task-management` | Gestão de tarefas via TASKS.md |
-| [review-todoist](produtividade/review-todoist/SKILL.md) | `/review-todoist` | Organiza tarefas no Todoist |
-| [memory-management](produtividade/memory-management/SKILL.md) | `/memory-management` | Sistema de memória persistente |
-| [set-feature](produtividade/set-feature/SKILL.md) | `/set-feature` | Define feature ativa para artefatos |
+| prod-good-morning | `/prod-good-morning` | Briefing matinal: agenda, emails, meetings, tarefas |
+| prod-end-of-day | `/prod-end-of-day` | Sync + organiza + log do dia |
+| prod-review-todoist | `/prod-review-todoist` | Organiza tarefas no Todoist |
+| prod-task-management | `/prod-task-management` | Gestão de tarefas via TASKS.md |
+| prod-memory-management | `/prod-memory-management` | Sistema de memória persistente |
+| prod-set-feature | `/prod-set-feature` | Define feature ativa para artefatos |
 
 ---
 
-## GOG — Gmail, Outlook, Google (`gog/`)
-
-Skills de email, calendario e tarefas via MCPs do Google.
+## GOG — Gmail, Calendar (`gog-`)
 
 | Skill | Comando | Descrição |
 |---|---|---|
-| [gog-calendar](gog/gog-calendar/SKILL.md) | `/gog-calendar` | Agenda, horários livres, criar eventos |
-| [gog-email-triage](gog/gog-email-triage/SKILL.md) | `/gog-email-triage` | Triagem e priorização de inbox |
-| [gog-email-draft](gog/gog-email-draft/SKILL.md) | `/gog-email-draft` | Rascunho de respostas e emails novos |
-| [gog-email-send](gog/gog-email-send/SKILL.md) | `/gog-email-send` | Envio de emails com confirmação explícita |
-| [gog-followups](gog/gog-followups/SKILL.md) | `/gog-followups` | Rastreia follow-ups pendentes |
-| [gog-tasks](gog/gog-tasks/SKILL.md) | `/gog-tasks` | Criação e gestão de tarefas a partir de emails |
+| gog-calendar | `/gog-calendar` | Agenda, horários livres, criar eventos |
+| gog-email-triage | `/gog-email-triage` | Triagem e priorização de inbox |
+| gog-email-draft | `/gog-email-draft` | Rascunho de respostas e emails novos |
+| gog-email-send | `/gog-email-send` | Envio de emails com confirmação explícita |
+| gog-followups | `/gog-followups` | Rastreia follow-ups pendentes |
+| gog-tasks | `/gog-tasks` | Criação e gestão de tarefas a partir de emails |
 
 ---
 
-## Integrações (`integracoes/`)
-
-Conexões com serviços externos.
+## Integrações (`int-`)
 
 | Skill | Comando | Descrição |
 |---|---|---|
-| [omie](integracoes/omie/SKILL.md) | `/omie` | ERP Omie — clientes, NF-e, financeiro, estoque |
-| [stripe](integracoes/stripe/SKILL.md) | `/stripe` | Cobranças, clientes, assinaturas, invoices |
-| [todoist](integracoes/todoist/SKILL.md) | `/todoist` | Gestão de tarefas e projetos no Todoist |
-| [fathom](integracoes/fathom/SKILL.md) | `/fathom` | Reuniões, transcrições e action items |
-| [sync-meetings](integracoes/sync-meetings/SKILL.md) | `/sync-meetings` | Sync de gravações do Fathom |
-| [agent-discord-skills](integracoes/agent-discord-skills/SKILL.md) | `/agent-discord-skills` | Discord — canais, mensagens, moderação |
+| int-fathom | `/int-fathom` | Reuniões, transcrições e action items |
+| int-sync-meetings | `/int-sync-meetings` | Sync Fathom → JSON + summary + Todoist |
+| int-todoist | `/int-todoist` | Gestão de tarefas e projetos no Todoist |
+| int-stripe | `/int-stripe` | Cobranças, clientes, assinaturas, invoices |
+| int-omie | `/int-omie` | ERP Omie — clientes, NF-e, financeiro, estoque |
+| int-discord | `/int-discord` | Discord — canais, mensagens, moderação |
 
 ---
 
-## Obsidian (`obsidian-skills/`)
-
-Skills para interagir com vaults Obsidian — markdown, canvas, bases e CLI.
+## Financeiro (`fin-`)
 
 | Skill | Comando | Descrição |
 |---|---|---|
-| [obsidian-cli](obsidian-skills/obsidian-cli/SKILL.md) | `/obsidian-cli` | Ler, criar, buscar e gerenciar notas via CLI |
-| [obsidian-markdown](obsidian-skills/obsidian-markdown/SKILL.md) | `/obsidian-markdown` | Markdown com wikilinks, embeds, callouts, properties |
-| [obsidian-bases](obsidian-skills/obsidian-bases/SKILL.md) | `/obsidian-bases` | Criar/editar Bases (.base) com views, filtros, fórmulas |
-| [json-canvas](obsidian-skills/json-canvas/SKILL.md) | `/json-canvas` | Canvas (.canvas) com nós, edges e grupos |
-| [defuddle](obsidian-skills/defuddle/SKILL.md) | `/defuddle` | Extrair markdown limpo de páginas web |
+| fin-financial-statements | `/fin-financial-statements` | DRE, balanço, fluxo de caixa |
+| fin-journal-entry | `/fin-journal-entry` | Lançamentos contábeis |
+| fin-journal-entry-prep | `/fin-journal-entry-prep` | Preparação de lançamentos |
+| fin-reconciliation | `/fin-reconciliation` | Conciliação bancária e de contas |
+| fin-variance-analysis | `/fin-variance-analysis` | Análise de variação orçado vs realizado |
+| fin-close-management | `/fin-close-management` | Gestão do fechamento mensal |
+| fin-audit-support | `/fin-audit-support` | Suporte a auditoria SOX 404 |
+| fin-sox-testing | `/fin-sox-testing` | Testes de controles SOX |
 
 ---
 
-## Evo Method (`evo-method/`)
+## Marketing (`mkt-`)
 
-Framework completo de desenvolvimento de produto.
+| Skill | Comando | Descrição |
+|---|---|---|
+| mkt-content-creation | `/mkt-content-creation` | Criação de conteúdo multicanal |
+| mkt-draft-content | `/mkt-draft-content` | Rascunhos de blog, social, email, LP |
+| mkt-campaign-plan | `/mkt-campaign-plan` | Planejamento de campanhas |
+| mkt-email-sequence | `/mkt-email-sequence` | Sequências de email automatizadas |
+| mkt-brand-review | `/mkt-brand-review` | Revisão de voz de marca |
+| mkt-competitive-brief | `/mkt-competitive-brief` | Análise competitiva |
+| mkt-seo-audit | `/mkt-seo-audit` | Auditoria SEO |
+| mkt-performance-report | `/mkt-performance-report` | Relatório de performance |
+
+---
+
+## Obsidian (`obs-`)
+
+| Skill | Comando | Descrição |
+|---|---|---|
+| obs-obsidian-cli | `/obs-obsidian-cli` | CLI para gerenciar vaults |
+| obs-obsidian-markdown | `/obs-obsidian-markdown` | Markdown com wikilinks, callouts, embeds |
+| obs-obsidian-bases | `/obs-obsidian-bases` | Bases (.base) com views, filtros, fórmulas |
+| obs-json-canvas | `/obs-json-canvas` | Canvas (.canvas) com nós e edges |
+| obs-defuddle | `/obs-defuddle` | Extrair markdown limpo de páginas web |
+
+---
+
+## Evo Method (`evo-`)
 
 ### Produto & Estratégia
 | Skill | Comando |
 |---|---|
-| [evo-master](evo-method/evo-master/SKILL.md) | `/evo-master` |
-| [evo-pm](evo-method/evo-pm/SKILL.md) | `/evo-pm` |
-| [evo-create-product-brief](evo-method/evo-create-product-brief/SKILL.md) | `/evo-create-product-brief` |
-| [evo-create-prd](evo-method/evo-create-prd/SKILL.md) | `/evo-create-prd` |
-| [evo-edit-prd](evo-method/evo-edit-prd/SKILL.md) | `/evo-edit-prd` |
-| [evo-validate-prd](evo-method/evo-validate-prd/SKILL.md) | `/evo-validate-prd` |
-| [evo-create-epics-and-stories](evo-method/evo-create-epics-and-stories/SKILL.md) | `/evo-create-epics-and-stories` |
-| [evo-create-story](evo-method/evo-create-story/SKILL.md) | `/evo-create-story` |
-| [evo-market-research](evo-method/evo-market-research/SKILL.md) | `/evo-market-research` |
-| [evo-domain-research](evo-method/evo-domain-research/SKILL.md) | `/evo-domain-research` |
+| evo-master | `/evo-master` |
+| evo-pm | `/evo-pm` |
+| evo-create-product-brief | `/evo-create-product-brief` |
+| evo-create-prd | `/evo-create-prd` |
+| evo-edit-prd | `/evo-edit-prd` |
+| evo-validate-prd | `/evo-validate-prd` |
+| evo-create-epics-and-stories | `/evo-create-epics-and-stories` |
+| evo-create-story | `/evo-create-story` |
+| evo-market-research | `/evo-market-research` |
+| evo-domain-research | `/evo-domain-research` |
 
 ### Arquitetura & Design
 | Skill | Comando |
 |---|---|
-| [evo-architect](evo-method/evo-architect/SKILL.md) | `/evo-architect` |
-| [evo-create-architecture](evo-method/evo-create-architecture/SKILL.md) | `/evo-create-architecture` |
-| [evo-create-ux-design](evo-method/evo-create-ux-design/SKILL.md) | `/evo-create-ux-design` |
-| [evo-ux-designer](evo-method/evo-ux-designer/SKILL.md) | `/evo-ux-designer` |
+| evo-architect | `/evo-architect` |
+| evo-create-architecture | `/evo-create-architecture` |
+| evo-create-ux-design | `/evo-create-ux-design` |
+| evo-ux-designer | `/evo-ux-designer` |
 
 ### Desenvolvimento
 | Skill | Comando |
 |---|---|
-| [evo-dev](evo-method/evo-dev/SKILL.md) | `/evo-dev` |
-| [evo-dev-story](evo-method/evo-dev-story/SKILL.md) | `/evo-dev-story` |
-| [evo-quick-dev](evo-method/evo-quick-dev/SKILL.md) | `/evo-quick-dev` |
-| [evo-quick-dev-new-preview](evo-method/evo-quick-dev-new-preview/SKILL.md) | `/evo-quick-dev-new-preview` |
-| [evo-quick-flow-solo-dev](evo-method/evo-quick-flow-solo-dev/SKILL.md) | `/evo-quick-flow-solo-dev` |
-| [evo-quick-spec](evo-method/evo-quick-spec/SKILL.md) | `/evo-quick-spec` |
-| [evo-check-implementation-readiness](evo-method/evo-check-implementation-readiness/SKILL.md) | `/evo-check-implementation-readiness` |
-| [evo-technical-research](evo-method/evo-technical-research/SKILL.md) | `/evo-technical-research` |
+| evo-dev | `/evo-dev` |
+| evo-dev-story | `/evo-dev-story` |
+| evo-quick-dev | `/evo-quick-dev` |
+| evo-quick-dev-new-preview | `/evo-quick-dev-new-preview` |
+| evo-quick-flow-solo-dev | `/evo-quick-flow-solo-dev` |
+| evo-quick-spec | `/evo-quick-spec` |
+| evo-check-implementation-readiness | `/evo-check-implementation-readiness` |
+| evo-technical-research | `/evo-technical-research` |
 
 ### Qualidade & Review
 | Skill | Comando |
 |---|---|
-| [evo-code-review](evo-method/evo-code-review/SKILL.md) | `/evo-code-review` |
-| [evo-qa](evo-method/evo-qa/SKILL.md) | `/evo-qa` |
-| [evo-qa-generate-e2e-tests](evo-method/evo-qa-generate-e2e-tests/SKILL.md) | `/evo-qa-generate-e2e-tests` |
-| [evo-review-adversarial-general](evo-method/evo-review-adversarial-general/SKILL.md) | `/evo-review-adversarial-general` |
-| [evo-review-edge-case-hunter](evo-method/evo-review-edge-case-hunter/SKILL.md) | `/evo-review-edge-case-hunter` |
+| evo-code-review | `/evo-code-review` |
+| evo-qa | `/evo-qa` |
+| evo-qa-generate-e2e-tests | `/evo-qa-generate-e2e-tests` |
+| evo-review-adversarial-general | `/evo-review-adversarial-general` |
+| evo-review-edge-case-hunter | `/evo-review-edge-case-hunter` |
 
 ### Documentação & Escrita
 | Skill | Comando |
 |---|---|
-| [evo-tech-writer](evo-method/evo-tech-writer/SKILL.md) | `/evo-tech-writer` |
-| [evo-document-project](evo-method/evo-document-project/SKILL.md) | `/evo-document-project` |
-| [evo-index-docs](evo-method/evo-index-docs/SKILL.md) | `/evo-index-docs` |
-| [evo-shard-doc](evo-method/evo-shard-doc/SKILL.md) | `/evo-shard-doc` |
-| [evo-editorial-review-prose](evo-method/evo-editorial-review-prose/SKILL.md) | `/evo-editorial-review-prose` |
-| [evo-editorial-review-structure](evo-method/evo-editorial-review-structure/SKILL.md) | `/evo-editorial-review-structure` |
-| [evo-generate-project-context](evo-method/evo-generate-project-context/SKILL.md) | `/evo-generate-project-context` |
+| evo-tech-writer | `/evo-tech-writer` |
+| evo-document-project | `/evo-document-project` |
+| evo-index-docs | `/evo-index-docs` |
+| evo-shard-doc | `/evo-shard-doc` |
+| evo-editorial-review-prose | `/evo-editorial-review-prose` |
+| evo-editorial-review-structure | `/evo-editorial-review-structure` |
+| evo-generate-project-context | `/evo-generate-project-context` |
 
 ### Gestão de Sprint & Projeto
 | Skill | Comando |
 |---|---|
-| [evo-sm](evo-method/evo-sm/SKILL.md) | `/evo-sm` |
-| [evo-sprint-planning](evo-method/evo-sprint-planning/SKILL.md) | `/evo-sprint-planning` |
-| [evo-sprint-status](evo-method/evo-sprint-status/SKILL.md) | `/evo-sprint-status` |
-| [evo-retrospective](evo-method/evo-retrospective/SKILL.md) | `/evo-retrospective` |
-| [evo-correct-course](evo-method/evo-correct-course/SKILL.md) | `/evo-correct-course` |
+| evo-sm | `/evo-sm` |
+| evo-sprint-planning | `/evo-sprint-planning` |
+| evo-sprint-status | `/evo-sprint-status` |
+| evo-retrospective | `/evo-retrospective` |
+| evo-correct-course | `/evo-correct-course` |
 
 ### Análise & Pesquisa
 | Skill | Comando |
 |---|---|
-| [evo-analyst](evo-method/evo-analyst/SKILL.md) | `/evo-analyst` |
-| [evo-advanced-elicitation](evo-method/evo-advanced-elicitation/SKILL.md) | `/evo-advanced-elicitation` |
-| [evo-brainstorming](evo-method/evo-brainstorming/SKILL.md) | `/evo-brainstorming` |
+| evo-analyst | `/evo-analyst` |
+| evo-advanced-elicitation | `/evo-advanced-elicitation` |
+| evo-brainstorming | `/evo-brainstorming` |
 
 ### Utilitários
 | Skill | Comando |
 |---|---|
-| [evo-help](evo-method/evo-help/SKILL.md) | `/evo-help` |
-| [evo-party-mode](evo-method/evo-party-mode/SKILL.md) | `/evo-party-mode` |
+| evo-help | `/evo-help` |
+| evo-party-mode | `/evo-party-mode` |
