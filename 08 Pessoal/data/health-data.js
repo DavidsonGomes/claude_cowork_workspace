@@ -571,8 +571,8 @@ const HEALTH_DATA = {
         "body_age": 33
       },
       "goals": {
-        "fat_pct_target": 30,
-        "fat_pct_intermediate": null
+        "fat_pct_target": 23,
+        "fat_pct_intermediate": 30
       },
       "treatment": {
         "label": "Medicação",
@@ -1287,7 +1287,239 @@ const HEALTH_DATA = {
         "notes": "Excelente resposta ao clomifeno: testosterona total subiu de 304 → 737 ng/dL (+142%). FSH 2.8→4.6, LH 3.4→4.4 — eixo respondendo bem."
       }
     ],
-    "isabella": []
+    "isabella": [
+      {
+        "date": "2026-01-29",
+        "label": "Painel completo — Laboratório São Marcos",
+        "results": [
+          {
+            "name": "Eritrócitos",
+            "value": 4.58,
+            "unit": "10^6/μL",
+            "ref": "3.80–4.80",
+            "status": "ok"
+          },
+          {
+            "name": "Hemoglobina",
+            "value": 13.8,
+            "unit": "g/dL",
+            "ref": "12.0–15.0",
+            "status": "ok"
+          },
+          {
+            "name": "Hematócrito",
+            "value": 39.1,
+            "unit": "%",
+            "ref": "36.0–46.0",
+            "status": "ok"
+          },
+          {
+            "name": "VCM",
+            "value": 85.3,
+            "unit": "fL",
+            "ref": "83.0–101.0",
+            "status": "ok"
+          },
+          {
+            "name": "HCM",
+            "value": 30.2,
+            "unit": "pg",
+            "ref": "27.0–32.0",
+            "status": "ok"
+          },
+          {
+            "name": "CHCM",
+            "value": 35.3,
+            "unit": "g/dL",
+            "ref": "31.0–35.0",
+            "status": "warn"
+          },
+          {
+            "name": "RDW",
+            "value": 13.6,
+            "unit": "%",
+            "ref": "11.6–14.0",
+            "status": "ok"
+          },
+          {
+            "name": "Leucócitos",
+            "value": 8210,
+            "unit": "/μL",
+            "ref": "4000–10000",
+            "status": "ok"
+          },
+          {
+            "name": "Plaquetas",
+            "value": 269000,
+            "unit": "/μL",
+            "ref": "150000–450000",
+            "status": "ok"
+          },
+          {
+            "name": "Ferritina",
+            "value": 54.4,
+            "unit": "ng/mL",
+            "ref": "10.0–291.0",
+            "status": "ok"
+          },
+          {
+            "name": "Vitamina B12",
+            "value": 244.0,
+            "unit": "pg/mL",
+            "ref": "223.0–672.0",
+            "status": "ok"
+          },
+          {
+            "name": "Vitamina D (25-OH)",
+            "value": 42,
+            "unit": "ng/mL",
+            "ref": ">20 (>30 grupo risco)",
+            "status": "ok"
+          },
+          {
+            "name": "Creatinina",
+            "value": 0.75,
+            "unit": "mg/dL",
+            "ref": "0.50–1.10",
+            "status": "ok"
+          },
+          {
+            "name": "eGFR (CKD-EPI)",
+            "value": "Superior a 90",
+            "unit": "mL/min/1.73m²",
+            "ref": ">90",
+            "status": "ok"
+          },
+          {
+            "name": "Glicose jejum",
+            "value": 79,
+            "unit": "mg/dL",
+            "ref": "70–99",
+            "status": "ok"
+          },
+          {
+            "name": "HbA1c",
+            "value": 5.6,
+            "unit": "%",
+            "ref": "<5.7 normal",
+            "status": "ok"
+          },
+          {
+            "name": "Glicose média estimada",
+            "value": 114,
+            "unit": "mg/dL",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "LDL (calculado)",
+            "value": 108,
+            "unit": "mg/dL",
+            "ref": "<130 intermed.",
+            "status": "ok"
+          },
+          {
+            "name": "HDL",
+            "value": 81,
+            "unit": "mg/dL",
+            "ref": ">40",
+            "status": "ok"
+          },
+          {
+            "name": "VLDL",
+            "value": 28,
+            "unit": "mg/dL",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "Triglicérides",
+            "value": 165,
+            "unit": "mg/dL",
+            "ref": "<150 jejum",
+            "status": "warn"
+          },
+          {
+            "name": "TGO (AST)",
+            "value": 17,
+            "unit": "U/L",
+            "ref": "<34",
+            "status": "ok"
+          },
+          {
+            "name": "TGP (ALT)",
+            "value": 11,
+            "unit": "U/L",
+            "ref": "10–49",
+            "status": "ok"
+          },
+          {
+            "name": "TSH",
+            "value": 1.49,
+            "unit": "μUI/mL",
+            "ref": "0.40–4.30",
+            "status": "ok"
+          },
+          {
+            "name": "Grupo ABO / Rh",
+            "value": "O Positivo",
+            "unit": "",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "Anti HIV 1/2",
+            "value": "Não Reagente",
+            "unit": "",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "HBsAg (Hepatite B)",
+            "value": "Não Reagente",
+            "unit": "",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "Anti-HBs",
+            "value": 40.5,
+            "unit": "mUI/mL",
+            "ref": "≥10 = protegida",
+            "status": "ok"
+          },
+          {
+            "name": "Anti-HCV (Hepatite C)",
+            "value": "Não Reagente",
+            "unit": "",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "Rubéola IgG",
+            "value": 42.5,
+            "unit": "UI/mL",
+            "ref": "≥10 = Reagente",
+            "status": "ok"
+          },
+          {
+            "name": "Sífilis",
+            "value": "Não Reagente",
+            "unit": "",
+            "ref": "",
+            "status": "ok"
+          },
+          {
+            "name": "Toxoplasmose IgG",
+            "value": "<0.2",
+            "unit": "UI/mL",
+            "ref": "<1.6 = Não reagente",
+            "status": "ok"
+          }
+        ],
+        "notes": "Painel pré-nupcial/gestacional completo. CHCM 35.3 levemente acima (ref 35.0). Triglicérides 165 acima do ideal (<150). HDL excelente (81). Sorologias negativas. Imunidade Rubéola e Hepatite B confirmada. Tipo sanguíneo O+."
+      }
+    ]
   },
   "decision_rules": {
     "davidson": [
@@ -1341,7 +1573,7 @@ const HEALTH_DATA = {
         "since": "2026-01"
       },
       {
-        "type": "monitor",
+        "type": "ok",
         "text": "Testosterona respondeu ao clomifeno (304→737 ng/dL), manter acompanhamento",
         "since": "2026-03"
       },
@@ -1351,7 +1583,38 @@ const HEALTH_DATA = {
         "since": "2026-04"
       }
     ],
-    "isabella": []
+    "isabella": [
+      {
+        "type": "monitor",
+        "text": "Triglicérides 165 — acima do ideal (<150), acompanhar dieta",
+        "since": "2026-01"
+      },
+      {
+        "type": "monitor",
+        "text": "CHCM 35.3 — levemente acima do ref (31–35), sem ação imediata",
+        "since": "2026-01"
+      },
+      {
+        "type": "monitor",
+        "text": "Vitamina B12 244 — na faixa baixa (ref 223–672), considerar suplementação",
+        "since": "2026-01"
+      },
+      {
+        "type": "ok",
+        "text": "Toxoplasmose IgG não reagente — sem imunidade, evitar carne crua/gatos",
+        "since": "2026-01"
+      },
+      {
+        "type": "ok",
+        "text": "Sorologias (HIV, Hepatite B/C, Sífilis) — todas negativas",
+        "since": "2026-01"
+      },
+      {
+        "type": "ok",
+        "text": "Tipo sanguíneo: O Positivo · Imunidade Rubéola e Hepatite B confirmada",
+        "since": "2026-01"
+      }
+    ]
   },
   "upcoming_exams": {
     "davidson": [
