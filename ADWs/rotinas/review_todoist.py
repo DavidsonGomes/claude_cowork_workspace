@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""
-ADW: Review Todoist — Organiza tarefas do projeto Evolution
-Skills: review-todoist (todoist)
-"""
+"""ADW: Review Todoist — Organiza tarefas do Evolution"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from runner import run_skill
+from runner import run_skill, banner, summary
 
 def main():
-    print("📋 Review Todoist — Organizando tarefas...")
-    run_skill("review-todoist", log_name="review-todoist", timeout=300)
-    print("✅ Triagem concluída.")
+    banner("📋 Review Todoist", "Categorizar • Traduzir • Organizar")
+    results = []
+    results.append(run_skill("prod-review-todoist", log_name="review-todoist", timeout=300))
+    summary(results, "Review Todoist")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠ Cancelado.")

@@ -1,5 +1,5 @@
 ---
-name: sync-meetings
+name: int-sync-meetings
 description: "Sync meetings from Fathom — fetch new recordings, save JSON, generate transcripts and summaries, update indexes. Use when user says 'sync meetings', 'sync fathom', 'puxa as reuniões', 'atualiza meetings', 'sync calls' or similar."
 ---
 

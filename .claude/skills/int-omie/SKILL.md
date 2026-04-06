@@ -1,5 +1,5 @@
 ---
-name: omie
+name: int-omie
 description: "Omie ERP integration via API. Manage clients, products, orders, invoices (NF-e), financials (contas a receber/pagar), and stock. Use when users ask about ERP data, financials, orders, invoices, stock, or clients from Omie. Also handles webhooks for real-time events."
 ---
 

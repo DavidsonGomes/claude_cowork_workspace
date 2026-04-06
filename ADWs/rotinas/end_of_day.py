@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""
-ADW: End of Day — Encerramento do dia
-Skills: sync-meetings + review-todoist + log
-"""
+"""ADW: End of Day — Encerramento do dia"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from runner import run_skill
+from runner import run_skill, banner, summary
 
 def main():
-    print("🌙 End of Day — Encerrando o dia...")
-    run_skill("end-of-day", log_name="end-of-day", timeout=600)
-    print("✅ Dia encerrado.")
+    banner("🌙 End of Day", "Sync • Organiza • Log")
+    results = []
+    results.append(run_skill("prod-end-of-day", log_name="end-of-day", timeout=600))
+    summary(results, "End of Day")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠ Cancelado.")

@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""
-ADW: Follow-ups — Detecta emails sem resposta e gera lembretes
-Skills: gog-followups
-"""
+"""ADW: Follow-ups — Emails pendentes de resposta"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from runner import run_skill
+from runner import run_skill, banner, summary
 
 def main():
-    print("🔔 Follow-ups — Checando emails pendentes...")
-    run_skill("gog-followups", log_name="followups", timeout=300)
-    print("✅ Follow-ups checados.")
+    banner("🔔 Follow-ups", "Emails sem resposta • Lembretes")
+    results = []
+    results.append(run_skill("gog-followups", log_name="followups", timeout=300))
+    summary(results, "Follow-ups")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠ Cancelado.")

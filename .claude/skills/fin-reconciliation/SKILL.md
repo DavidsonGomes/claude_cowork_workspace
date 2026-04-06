@@ -1,5 +1,5 @@
 ---
-name: reconciliation
+name: fin-reconciliation
 description: Reconcile accounts by comparing GL balances to subledgers, bank statements, or third-party data. Use when performing bank reconciliations, GL-to-subledger recs, intercompany reconciliations, or identifying and categorizing reconciling items.
 argument-hint: "<account> [period]"
 ---

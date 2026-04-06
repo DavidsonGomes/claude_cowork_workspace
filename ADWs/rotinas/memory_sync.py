@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
-"""
-ADW: Memory Sync — Consolida memória a partir de sessões e reuniões recentes
-Skills: memory-management + leitura de daily logs + summaries
-"""
+"""ADW: Memory Sync — Consolida memória a partir de sessões e reuniões"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from runner import run_claude
+from runner import run_claude, banner, summary
 
 PROMPT = """Execute a rotina de consolidação de memória:
 
@@ -21,13 +18,16 @@ PROMPT = """Execute a rotina de consolidação de memória:
 5. Atualizar MEMORY.md com ponteiros para novos arquivos
 
 Reportar no final: quantas memórias criadas/atualizadas por tipo.
-Ser conciso — não criar memórias para coisas óbvias ou já documentadas no código.
-"""
+Ser conciso — não criar memórias para coisas óbvias ou já documentadas no código."""
 
 def main():
-    print("🧠 Memory Sync — Consolidando memória...")
-    run_claude(PROMPT, log_name="memory-sync", timeout=600)
-    print("✅ Memória consolidada.")
+    banner("🧠 Memory Sync", "Logs • Reuniões → Memória persistente")
+    results = []
+    results.append(run_claude(PROMPT, log_name="memory-sync", timeout=600))
+    summary(results, "Memory Sync")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠ Cancelado.")

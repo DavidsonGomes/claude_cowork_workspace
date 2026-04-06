@@ -1,5 +1,5 @@
 ---
-name: end-of-day
+name: prod-end-of-day
 description: "End-of-day shutdown that syncs meetings, organizes tasks, and logs what was worked on so the next session can pick up. Trigger when user says 'end of day', 'wrap up', 'encerra o dia', 'finaliza', 'done for today', 'goodnight', 'boa noite', 'shutdown', or anything that signals finishing a work session."
 ---
 

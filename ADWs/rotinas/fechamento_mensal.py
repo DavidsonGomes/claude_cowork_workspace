@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
-"""
-ADW: Fechamento Mensal — Consolida receitas, despesas e gera relatório
-Skills: stripe + omie + todoist (via agente Flux)
-"""
+"""ADW: Fechamento Mensal — Relatório financeiro consolidado"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from runner import run_claude
+from runner import run_claude, banner, summary
 
 PROMPT = """Execute o fechamento financeiro do mês usando o agente @flux-financeiro:
 
@@ -20,13 +17,16 @@ PROMPT = """Execute o fechamento financeiro do mês usando o agente @flux-financ
 4. Gerar relatório em '07 Financeiro/reports/monthly/YYYY-MM.md'
 5. Alertar sobre anomalias ou desvios >10%
 
-Formato do relatório: resumo executivo + tabelas + riscos + próximos passos.
-"""
+Formato do relatório: resumo executivo + tabelas + riscos + próximos passos."""
 
 def main():
-    print("💰 Fechamento Mensal — Consolidando financeiro...")
-    run_claude(PROMPT, log_name="fechamento-mensal", timeout=900)
-    print("✅ Fechamento concluído.")
+    banner("💰 Fechamento Mensal", "Stripe • Omie • Relatório")
+    results = []
+    results.append(run_claude(PROMPT, log_name="fechamento-mensal", timeout=900))
+    summary(results, "Fechamento Mensal")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠ Cancelado.")

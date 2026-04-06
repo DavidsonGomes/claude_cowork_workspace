@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
-"""
-ADW: Good Morning — Briefing matinal
-Skills: gog-calendar + gog-email-triage + sync-meetings + todoist
-"""
+"""ADW: Good Morning — Briefing matinal"""
 
 import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from runner import run_skill
+from runner import run_skill, banner, summary
 
 def main():
-    print("☀️  Good Morning — Iniciando briefing...")
-    run_skill("good-morning", log_name="good-morning", timeout=600)
-    print("✅ Briefing concluído.")
+    banner("☀️  Good Morning", "Agenda • Emails • Meetings • Tarefas")
+    results = []
+    results.append(run_skill("prod-good-morning", log_name="good-morning", timeout=600))
+    summary(results, "Good Morning")
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print("\n⚠ Cancelado.")

@@ -1,22 +1,83 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#   "rich>=13.0",
+# ]
+# ///
 """
-Core runner para ADWs — wrapper do Claude Code CLI.
-Todos os ADWs de rotina usam este módulo.
+Core runner para ADWs — executa Claude Code CLI com output visual e logs estruturados.
 """
 
 import subprocess
 import os
+import sys
 import json
+import signal
 from datetime import datetime
+from pathlib import Path
+
+from rich.console import Console
+from rich.panel import Panel
+from rich.live import Live
+from rich.text import Text
+from rich.theme import Theme
+
+# Theme
+theme = Theme({
+    "info": "cyan",
+    "success": "bold green",
+    "warning": "yellow",
+    "error": "bold red",
+    "step": "bold blue",
+    "dim": "dim white",
+})
+
+console = Console(theme=theme)
+
+WORKSPACE = Path(__file__).parent.parent
+LOGS_DIR = Path(__file__).parent / "logs"
+LOGS_DIR.mkdir(exist_ok=True)
 
 
-WORKSPACE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-LOGS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs")
-os.makedirs(LOGS_DIR, exist_ok=True)
+def _timestamp():
+    return datetime.now().strftime("%Y%m%d-%H%M%S")
 
 
-def run_claude(prompt: str, log_name: str = None, timeout: int = 300) -> dict:
-    """Executa Claude Code CLI programaticamente."""
+def _log_to_file(log_name: str, prompt: str, stdout: str, stderr: str, returncode: int, duration: float):
+    """Salva log estruturado em JSONL."""
+    log_file = LOGS_DIR / f"{datetime.now().strftime('%Y-%m-%d')}.jsonl"
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "run": log_name,
+        "prompt": prompt[:500],
+        "returncode": returncode,
+        "duration_seconds": round(duration, 1),
+        "stdout_lines": len(stdout.splitlines()),
+        "stderr_lines": len(stderr.splitlines()),
+    }
+    with open(log_file, "a") as f:
+        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+    # Salva output completo em arquivo separado
+    detail_dir = LOGS_DIR / "detail"
+    detail_dir.mkdir(exist_ok=True)
+    detail_file = detail_dir / f"{_timestamp()}-{log_name}.log"
+    with open(detail_file, "w") as f:
+        f.write(f"TIMESTAMP: {datetime.now().isoformat()}\n")
+        f.write(f"DURATION: {duration:.1f}s\n")
+        f.write(f"RETURNCODE: {returncode}\n")
+        f.write(f"PROMPT:\n{prompt}\n\n")
+        f.write(f"{'='*60}\nSTDOUT:\n{'='*60}\n{stdout}\n\n")
+        if stderr:
+            f.write(f"{'='*60}\nSTDERR:\n{'='*60}\n{stderr}\n")
+
+
+def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600) -> dict:
+    """
+    Executa Claude Code CLI com streaming de output no terminal.
+    Mostra o que o Claude está fazendo em tempo real.
+    """
     cmd = [
         "claude",
         "--print",
@@ -24,41 +85,108 @@ def run_claude(prompt: str, log_name: str = None, timeout: int = 300) -> dict:
         prompt
     ]
 
-    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    console.print(f"  [step]▶[/step] [dim]{log_name}[/dim]", end="")
+
+    start_time = datetime.now()
 
     try:
-        result = subprocess.run(
+        # Usa Popen para streaming
+        process = subprocess.Popen(
             cmd,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            cwd=WORKSPACE,
-            timeout=timeout
+            cwd=str(WORKSPACE),
+            env={**os.environ, "TERM": "dumb"},  # Evita escape codes do Claude
         )
 
-        output = {
-            "success": result.returncode == 0,
-            "stdout": result.stdout,
-            "stderr": result.stderr,
-            "returncode": result.returncode
+        stdout_lines = []
+        line_count = 0
+
+        # Stream stdout em tempo real
+        for line in process.stdout:
+            stdout_lines.append(line)
+            line_count += 1
+            # Mostra preview compacto (última linha útil)
+            stripped = line.strip()
+            if stripped and not stripped.startswith("{") and len(stripped) > 3:
+                # Trunca linhas longas
+                display = stripped[:80] + "..." if len(stripped) > 80 else stripped
+                console.print(f"\r  [dim]  → {display}[/dim]", end="")
+
+        process.wait(timeout=timeout)
+
+        stderr = process.stderr.read() if process.stderr else ""
+        stdout = "".join(stdout_lines)
+        duration = (datetime.now() - start_time).total_seconds()
+
+        # Log
+        _log_to_file(log_name, prompt, stdout, stderr, process.returncode, duration)
+
+        # Status final
+        if process.returncode == 0:
+            console.print(f"\r  [success]✓[/success] {log_name} [dim]({duration:.0f}s, {line_count} linhas)[/dim]")
+        else:
+            console.print(f"\r  [error]✗[/error] {log_name} [dim](exit {process.returncode}, {duration:.0f}s)[/dim]")
+            if stderr:
+                for err_line in stderr.strip().splitlines()[:3]:
+                    console.print(f"    [error]{err_line}[/error]")
+
+        return {
+            "success": process.returncode == 0,
+            "stdout": stdout,
+            "stderr": stderr,
+            "returncode": process.returncode,
+            "duration": duration,
         }
 
-        if log_name:
-            log_path = os.path.join(LOGS_DIR, f"{timestamp}-{log_name}.log")
-            with open(log_path, "w") as f:
-                f.write(f"TIMESTAMP: {timestamp}\n")
-                f.write(f"PROMPT: {prompt[:500]}\n\n")
-                f.write(f"STDOUT:\n{result.stdout}\n\n")
-                f.write(f"STDERR:\n{result.stderr}\n")
-
-        return output
-
     except subprocess.TimeoutExpired:
-        return {"success": False, "stdout": "", "stderr": f"Timeout após {timeout}s"}
+        process.kill()
+        duration = (datetime.now() - start_time).total_seconds()
+        console.print(f"\r  [error]✗[/error] {log_name} [warning](timeout {timeout}s)[/warning]")
+        _log_to_file(log_name, prompt, "", f"Timeout after {timeout}s", -1, duration)
+        return {"success": False, "stdout": "", "stderr": f"Timeout após {timeout}s", "returncode": -1, "duration": duration}
+
+    except KeyboardInterrupt:
+        process.kill()
+        duration = (datetime.now() - start_time).total_seconds()
+        console.print(f"\n  [warning]⚠ Cancelado pelo usuário[/warning]")
+        _log_to_file(log_name, prompt, "", "Cancelled by user", -2, duration)
+        raise
+
     except Exception as e:
-        return {"success": False, "stdout": "", "stderr": str(e)}
+        duration = (datetime.now() - start_time).total_seconds()
+        console.print(f"\r  [error]✗[/error] {log_name} [error]({e})[/error]")
+        _log_to_file(log_name, prompt, "", str(e), -3, duration)
+        return {"success": False, "stdout": "", "stderr": str(e), "returncode": -3, "duration": duration}
 
 
-def run_skill(skill_name: str, args: str = "", log_name: str = None, timeout: int = 300) -> dict:
+def run_skill(skill_name: str, args: str = "", log_name: str = None, timeout: int = 600) -> dict:
     """Executa uma skill do Claude Code via CLI."""
     prompt = f"Execute a skill /{skill_name} {args}".strip()
     return run_claude(prompt, log_name or skill_name, timeout)
+
+
+def banner(title: str, subtitle: str = "", color: str = "cyan"):
+    """Mostra banner de início de rotina."""
+    content = f"[bold white]{title}[/bold white]"
+    if subtitle:
+        content += f"\n[dim]{subtitle}[/dim]"
+    console.print(Panel(content, border_style=color, padding=(0, 2)))
+
+
+def summary(results: list[dict], title: str = "Concluído"):
+    """Mostra resumo final da rotina."""
+    total_duration = sum(r.get("duration", 0) for r in results)
+    success = sum(1 for r in results if r.get("success"))
+    failed = len(results) - success
+
+    status = "[success]✅ Tudo OK[/success]" if failed == 0 else f"[warning]⚠ {failed} falha(s)[/warning]"
+
+    console.print(Panel(
+        f"{status}\n"
+        f"[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s[/dim]",
+        title=f"[bold]{title}[/bold]",
+        border_style="green" if failed == 0 else "yellow",
+        padding=(0, 2)
+    ))

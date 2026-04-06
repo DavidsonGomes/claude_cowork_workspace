@@ -1,5 +1,5 @@
 ---
-name: review-todoist
+name: prod-review-todoist
 description: "Review and organize Todoist tasks in the Evolution project. Finds uncategorized, untranslated, or messy tasks and organizes them with proper categories, PT-BR translation, and actionable titles. Use when user says 'review todoist', 'organiza tarefas', 'triagem todoist', 'limpa o todoist', 'organiza o Evolution' or similar."
 ---
 

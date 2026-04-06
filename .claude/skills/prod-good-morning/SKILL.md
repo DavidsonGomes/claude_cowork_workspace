@@ -1,5 +1,5 @@
 ---
-name: good-morning
+name: prod-good-morning
 description: "Morning orientation that recaps recent work, checks agenda, emails, meetings and tasks, then helps decide what to work on. Trigger when user says 'good morning', 'bom dia', 'morning', 'start my day', 'o que tenho hoje?', or anything that signals beginning of a work session. Use it proactively — if a user opens with a greeting at the start of a session, run this skill before doing anything else."
 ---
 

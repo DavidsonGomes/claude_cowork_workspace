@@ -1,0 +1,67 @@
+TIMESTAMP: 2026-04-06T17:34:33.946433
+DURATION: 55.6s
+RETURNCODE: 0
+PROMPT:
+Execute a skill /prod-good-morning
+
+============================================================
+STDOUT:
+============================================================
+Agora tenho tudo que preciso. Sem reuniões novas de ontem no Fathom.
+
+---
+
+Bom dia, Davidson!
+
+## Briefing — Segunda-feira, 6 de Abril de 2026
+
+### Agenda de hoje
+
+| Horário | Evento | Participantes |
+|---------|--------|---------------|
+| 11:00–13:00 | **Planejamentos** | Bloco reservado |
+| 13:00–14:00 | **Ocupado** (auto-recusa ativa) | — |
+| 15:00–16:00 | **Planning Evolution** (Google Meet) | Danilo, Nickolas, Guilherme, Daniel, Marcelo, Raphael, Matheus |
+| 18:00–19:00 | **AA + EVO (quinzenal)** (Google Meet) | Anne, Alexandre |
+
+Blocos livres: **manhã inteira até 11h** e **14h–15h**.
+
+### Emails que pedem atenção
+
+| Prioridade | De | Assunto |
+|---|---|---|
+| **Alta** | RunPod | Low Balance Warning (3x nos últimos dias) — precisa recarregar |
+| **Alta** | DigitalOcean | Manutenção de infraestrutura em todas as regiões — verificar impacto |
+| **Alta** | Supabase | Projeto **Evo Finance** foi pausado por inatividade |
+| Média | Fathom | 2 recaps de reuniões de hoje (já sincronizadas) |
+| Média | Ana (mLabs) | Re: como conectar 2 Instagram — resposta pendente |
+| Média | Figma | Recibo de pagamento da assinatura (04/abr) |
+| Média | iFood Benefícios | Atualização na forma de pagamento |
+| Baixa | Comitês IAB Brasil | Pauta do Comitê de Retail Media (amanhã) |
+| Baixa | Claude Team | Crédito para o time + descontos |
+
+### Sync Fathom (ontem)
+
+Nenhuma reunião nova de ontem para sincronizar.
+
+### Tarefas de hoje (Todoist)
+
+Você tem **33 tarefas**, sendo a maioria atrasada. As de **hoje** especificamente:
+
+- **[Financeiro]** Validar painel financeiro (MRR, CAC, taxa de conversão)
+- **[Marketing]** Integrar Instagram na automação da comunidade via Orion
+- **[Marketing]** Gravar vídeo de abertura de 15s para o Summit
+- **[Operação]** Criar grupo WhatsApp de avisos do Summit + link na página do Rappet
+- **[Operação]** Publicar links dos documentos de execução do Summit no grupo
+
+Além disso, há **28+ tarefas atrasadas** acumuladas — muitas do final de março.
+
+### Recomendação
+
+Hoje é dia de **Planning** e tem o **Summit em andamento**. Foque nas tarefas operacionais do Summit (grupo WhatsApp, vídeo de abertura, links) antes do Planning das 15h. E urgente: **recarregue o saldo do RunPod** — são 3 alertas seguidos.
+
+---
+
+Quer pular para algum projeto ou começar algo novo?
+
+

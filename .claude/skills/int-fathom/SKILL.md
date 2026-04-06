@@ -1,5 +1,5 @@
 ---
-name: fathom
+name: int-fathom
 description: Search, retrieve, and summarize Fathom meeting recordings — transcripts, summaries, action items, and team info. Use this skill whenever the user mentions meetings, calls, recordings, meeting notes, transcripts, action items, follow-ups from calls, or anything related to Fathom. Also trigger on "o que foi discutido na reuniao", "resumo da call", "quem participou", "proximos passos da reuniao", "meeting recap", or any reference to past conversations/calls that might be recorded.
 homepage: https://fathom.video
 metadata: {"clawdis":{"emoji":"🎙️","requires":{"config":["skills.entries.fathom.apiKey"]}}}

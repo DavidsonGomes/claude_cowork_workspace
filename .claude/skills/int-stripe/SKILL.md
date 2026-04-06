@@ -1,5 +1,5 @@
 ---
-name: stripe
+name: int-stripe
 description: "Query and manage Stripe data via the Stripe API. Use when you need to list charges, customers, invoices, subscriptions, payment intents, refunds, products, or prices. Supports filtering, pagination, and creating/updating customers and refunds. Calls api.stripe.com directly with no third-party proxy."
 metadata:
   openclaw:

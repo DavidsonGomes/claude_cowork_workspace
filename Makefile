@@ -5,7 +5,7 @@
 # Logs: ADWs/logs/
 # ============================================================
 
-PYTHON := python3
+PYTHON := uv run python
 ADW_DIR := ADWs/rotinas
 
 # --- Rotinas diárias ---
@@ -49,14 +49,20 @@ full-eod: sync review memory eod  ## Combo completo de fim de dia
 
 # --- Utilitários ---
 
-logs:               ## 📝 Mostra os últimos 10 logs
-	@ls -lt ADWs/logs/ | head -11
+logs:               ## 📝 Mostra os últimos 10 logs (JSONL)
+	@tail -20 ADWs/logs/$$(ls -t ADWs/logs/*.jsonl 2>/dev/null | head -1) 2>/dev/null || echo "Nenhum log ainda."
+
+logs-detail:        ## 📝 Lista logs detalhados
+	@ls -lt ADWs/logs/detail/ 2>/dev/null | head -11 || echo "Nenhum log ainda."
+
+logs-tail:          ## 📝 Mostra último log detalhado completo
+	@cat ADWs/logs/detail/$$(ls -t ADWs/logs/detail/ 2>/dev/null | head -1) 2>/dev/null || echo "Nenhum log ainda."
 
 clean-logs:         ## 🗑️  Remove logs com mais de 30 dias
-	@find ADWs/logs/ -name "*.log" -mtime +30 -delete && echo "Logs antigos removidos."
+	@find ADWs/logs/ -name "*.log" -mtime +30 -delete 2>/dev/null; find ADWs/logs/ -name "*.jsonl" -mtime +30 -delete 2>/dev/null; echo "Logs antigos removidos."
 
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning eod sync triage review followups weekly memory fechamento daily full-morning full-eod logs clean-logs help
+.PHONY: morning eod sync triage review followups weekly memory fechamento daily full-morning full-eod logs logs-detail logs-tail clean-logs help
 .DEFAULT_GOAL := help
