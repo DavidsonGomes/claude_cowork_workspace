@@ -101,8 +101,25 @@ metrics:            ## 📈 Mostra métricas acumuladas por rotina
 clean-logs:         ## 🗑️  Remove logs > 30 dias
 	@find ADWs/logs/ -name "*.log" -mtime +30 -delete 2>/dev/null; find ADWs/logs/ -name "*.jsonl" -mtime +30 -delete 2>/dev/null; echo "Logs antigos removidos."
 
+# --- Docker (VPS) ---
+
+docker-up:          ## 🐳 Sobe scheduler + telegram em Docker
+	docker compose up -d scheduler telegram
+
+docker-down:        ## 🐳 Para todos os containers
+	docker compose down
+
+docker-logs:        ## 🐳 Logs dos containers
+	docker compose logs -f --tail=50
+
+docker-run:         ## 🐳 Roda rotina manualmente (ex: make docker-run ADW=good_morning.py)
+	docker compose run --rm runner ADWs/rotinas/$(ADW)
+
+docker-build:       ## 🐳 Build da imagem
+	docker compose build
+
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq strategy daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs help
+.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq strategy daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
 .DEFAULT_GOAL := help
