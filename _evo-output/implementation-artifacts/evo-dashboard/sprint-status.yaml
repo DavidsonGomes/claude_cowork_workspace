@@ -61,9 +61,9 @@ development_status:
   epic-2-retrospective: optional
 
   # Epic 3: Monitoramento de Comunidade
-  epic-3: in-progress
-  3-1-community-collector: in-progress
-  3-2-api-e-frontend-comunidade: ready-for-dev
+  epic-3: done
+  3-1-community-collector: done
+  3-2-api-e-frontend-comunidade: done
   epic-3-retrospective: optional
 
   # Epic 4: Acompanhamento de Projetos

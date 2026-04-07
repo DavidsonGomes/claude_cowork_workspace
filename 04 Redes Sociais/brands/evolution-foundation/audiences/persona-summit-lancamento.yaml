@@ -1,0 +1,82 @@
+# Audience: Persona Central do Lançamento — Evolution Summit (Abril 2026)
+# Fonte: Base Narrativa DPR × Evolution (março 2026), Visão.md v2.2
+# Criado por: Pixel (Agente Social Media) — 2026-04-06
+name: "Profissional da Nova Economia de IA"
+icon: "🚀"
+
+context: >
+  Esta é a persona protagonista do lançamento do Evolution Summit (14-16/04/2026).
+  Não é um desenvolvedor entusiasta nem um gestor corporativo. É um profissional
+  que está de olho no que está acontecendo com IA e entende que precisa agir agora
+  — seja para empreender com isso, seja para levar para dentro do seu negócio.
+  O lançamento não é de aquisição fria: é ativação de demanda reprimida que já
+  existe dentro da base da Evolution.
+
+profile:
+  - Profissional ou empreendedor de tecnologia / digital
+  - Já ouviu falar da Evolution ou usa alguma ferramenta do ecossistema
+  - Quer se posicionar na nova economia de IA
+  - Pensa em montar agência, vender implementação ou automatizar a própria operação
+  - Sente que o mercado está se movendo rápido e não quer ficar para trás
+  - Perfil mais acadêmico/executivo — busca solução, não quer construir do zero
+  - Tem recursos para investir quando percebe valor real
+
+what_they_want:
+  - Um caminho claro para crescer com IA — prático, não só teoria
+  - Pertencer a algo maior do que uma ferramenta — um movimento
+  - Acesso a quem está na linha de frente do que está sendo feito
+  - Credibilidade e diferenciação no mercado de IA
+  - Suporte real quando travar — não só documentação
+  - Aprender e aplicar no mesmo ecossistema (sem sair para buscar cursos em outro lugar)
+
+emotional_tension: >
+  Tensão central: a janela está aberta agora. Quem não entrar logo vai encontrar
+  um mercado muito mais concorrido. O lançamento precisa ativar esse senso de
+  timing — não de urgência artificial, mas de oportunidade real e presente.
+
+problems:
+  - "Sente que a IA está transformando o mercado mas ainda não sabe por onde começar de forma estruturada"
+  - "Usa ferramentas isoladas mas não tem ecossistema integrado"
+  - "Não tem suporte real quando trava — documentação não é suficiente"
+  - "Falta credencial reconhecida para se posicionar no mercado de IA"
+  - "Quer empreender com IA mas não sabe como monetizar ou estruturar o negócio"
+  - "Percebe que o mercado está se formando agora e tem medo de chegar tarde"
+
+solutions:
+  - "Evo Community (Contributor) — pertencer ao movimento e votar no roadmap"
+  - "Evo Community (Pro Support) — suporte real com SLA e acesso direto à equipe"
+  - "Evo Academy — educação prática para construir negócios com o ecossistema"
+  - "Certificação Evolution — credencial reconhecida para se diferenciar no mercado"
+  - "Acesso antecipado a funcionalidades beta — estar na linha de frente"
+  - "Comunidade ativa — aprender com quem já está aplicando"
+
+objections:
+  - "Já pago muitas assinaturas — mais uma mensalidade precisa ter valor claro"
+  - "Vou ter tempo para aprender e aplicar isso?"
+  - "A Evolution vai continuar ativa e crescendo nos próximos anos?"
+  - "O suporte funciona mesmo ou é só promessa?"
+  - "Isso é só para desenvolvedor ou eu consigo aplicar mesmo sem saber programar?"
+  - "R$399/mês é caro para alguém que ainda está testando"
+  - "Quanto tempo até ver resultado prático no meu negócio?"
+
+summit_messaging:
+  live_1_hook: >
+    Mostrar que o mercado está se reorganizando e quem não acompanha fica para trás.
+    Ativar reconhecimento: 'isso é exatamente o que eu estou sentindo.'
+  live_2_hook: >
+    Cases e possibilidades concretas. Mostrar o que outros estão construindo com
+    o ecossistema. Fazer a persona visualizar seu próprio negócio no lugar deles.
+  live_3_hook: >
+    Apresentar a oferta como o caminho mais rápido para entrar agora, com todos
+    os recursos que vão acelerar a curva de aprendizado. Urgência real: 7 dias,
+    bônus só para quem entrar agora. Não é push — é convite para quem já decidiu.
+
+key_message: >
+  A janela está aberta agora. A Evolution é o ecossistema que te dá tecnologia,
+  educação e comunidade para ir de usuário de IA para construtor de negócio —
+  antes que o mercado fique mais concorrido.
+
+launch_offer_fit:
+  contributor: "Porta de entrada — quem quer fazer parte do movimento e acompanhar de perto"
+  pro_support: "Quem quer acelerar — suporte real + Academy + Fast Start Pro"
+  academy_oto: "Quem quer aprender agora e não quer esperar — caminho mais rápido para aplicar"

@@ -13,12 +13,14 @@ type: project
 | Empresas com operacao comercial/suporte WhatsApp | empresas-operacao-comercial-suporte-whatsapp.yaml | Boa |
 | Gestores de pequenas empresas | gestores-prequenas-empresas.yaml | Excelente — 20 problemas, 20 solucoes, 20 objections |
 
-## Persona faltante (urgente — Summit abril 2026)
+## Persona do Summit — CRIADA (2026-04-06)
 
-A Visao.md define a persona central do lancamento:
-"Profissional ou empreendedor de tecnologia/digital, que ja ouviu falar da Evolution ou usa alguma ferramenta do ecossistema, quer se posicionar na nova economia de IA, pensa em montar agencia ou automatizar a propria operacao, e sente que o mercado esta se movendo rapido. Tensao emocional central: a janela esta aberta agora."
+Arquivo criado: `audiences/persona-summit-lancamento.yaml`
+Persona central do lançamento de abril/2026 — completa com perfil, tensao emocional,
+problemas, solucoes, objections e mensagem por live do Summit.
 
-Arquivo a criar: `audiences/profissionais-nova-economia-ia.yaml`
+Frame da audiencia de donos-de-agencias tambem atualizado em 2026-04-06:
+white-label reposicionado como diferencial central ("construa sua empresa sobre a Evolution").
 
 ## Nota de arquivo
 

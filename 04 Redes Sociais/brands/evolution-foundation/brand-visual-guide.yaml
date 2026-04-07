@@ -3,20 +3,50 @@
 
 brand_core:
   concept: "computadores conversando com pessoas"
-  positioning: "integração entre tecnologia e pessoas com soluções de IA, automação, API e SaaS"
-  value_prop: "baixo custo + open source + comunidade + resultado prático"
-  tagline: "Foundation, all in one"
+  positioning: >
+    Ecossistema de referência em IA e automação que transforma profissionais e
+    empresas brasileiras — de usuários de tecnologia para construtores de negócio.
+    Tecnologia + educação + comunidade operando juntos.
+  value_prop: "open source + educação + parceiros + resultado prático"
+  tagline: "A tecnologia que muda negócios, agora ao alcance de todos."
+  tagline_secondary:
+    persona: "Construído para quem quer crescer com IA, e não apenas utilizá-la."
+    origem: "A origem é open source. O destino é transformar negócios."
+    movimento: "Quem lidera o mercado de amanhã está aqui, construindo junto hoje."
+  positioning_line: >
+    "A Evolution é o ecossistema de IA e automação que transforma profissionais
+    e empresas brasileiras. De usuários de tecnologia para construtores de negócio."
+  manifesto_hook: >
+    Não somos um produto. Somos um caminho — com mais acesso e menos barreiras.
+    Tecnologia que funciona. Educação que forma. Comunidade que impulsiona.
 
 voice:
-  style: "profissional, inovador, acessível, claro e orientado a solução"
+  style: "profissional, inovador, acessível, claro, orientado a solução e transformador"
   do:
     - "usar linguagem prática e objetiva"
     - "destacar integração, comunidade e eficiência operacional"
     - "mostrar tecnologia aplicada a problemas reais"
+    - "comunicar transformação de carreira e negócio, não apenas funcionalidades"
+    - "reforçar que o ecossistema forma e capacita, não apenas fornece ferramenta"
+    - "usar tom de parceiro estratégico, não de fornecedor de software"
+    - "ancorar mensagens nos valores da marca: liberdade, transparência, brio"
+    - "falar de negócio, mercado e impacto — não só de código e features"
+    - "convidar, não vender — compartilhar visão, deixar a oferta como consequência natural"
   dont:
     - "promessas absolutas (100%, garantido, sem esforço)"
     - "hype sem contexto técnico"
     - "linguagem confusa ou excessivamente rebuscada"
+    - "posicionar 'baixo custo' como atributo — deprecia o posicionamento premium"
+    - "tratar a Evolution como 'alternativa barata' a outras ferramentas"
+    - "comunicação corporativa fria sem personalidade"
+
+  # Alinhamento com os valores da marca
+  values_alignment:
+    liberdade: "voz autônoma, sem amarras de linguagem corporativa. Tom de quem age."
+    transparencia: "reconhece limitações, fala com clareza técnica, sem omitir problemas."
+    brio: "linguagem com energia e convicção — 'quando dizem não dá, é aí que a gente brilha'."
+    felicidade: "tom humano, próximo, que valoriza quem está do outro lado."
+    sonho: "comunicação aspiracional — quem sonha evolui. Ativa senso de oportunidade, não urgência artificial."
 
 colors:
   primary:

@@ -31,6 +31,12 @@ async def auto_commit_eod():
     await auto_commit_daily_outputs()
 
 
+async def collect_community():
+    from app.collectors.community_collector import CommunityCollector
+    collector = CommunityCollector()
+    await collector.safe_collect()
+
+
 async def collect_routines():
     from app.collectors.routine_collector import RoutineCollector
     collector = RoutineCollector()
@@ -72,6 +78,13 @@ def start_scheduler():
         replace_existing=True,
     )
     _scheduler.add_job(
+        collect_community,
+        "interval",
+        minutes=5,
+        id="collect-community",
+        replace_existing=True,
+    )
+    _scheduler.add_job(
         auto_commit_eod,
         "cron",
         hour=21,
@@ -81,7 +94,7 @@ def start_scheduler():
         replace_existing=True,
     )
     _scheduler.start()
-    logger.info("Scheduler started: heartbeat, routine collector (5min), auto-commit (21:30 BRT)")
+    logger.info("Scheduler started: heartbeat, routine collector (5min), collect-community (5min), auto-commit (21:30 BRT)")
 
 
 def stop_scheduler():

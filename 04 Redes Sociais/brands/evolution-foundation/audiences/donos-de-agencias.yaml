@@ -2,22 +2,42 @@
 name: "Donos de agências"
 icon: "🏢"
 
+positioning_frame: >
+  O frame correto para esta audiência não é "use a Evolution", mas "construa sua
+  empresa sobre a Evolution." White-label é o diferencial central — não uma opção
+  entre outras. A Evolution oferece um business-in-a-box: base tecnológica,
+  educação, certificação, marketplace e suporte para quem quer construir sua
+  agência sobre nossa plataforma.
+
 problems:
-  - "Dificuldade para escalar entrega para clientes"
-  - "Muito retrabalho entre projetos"
-  - "Precisa de solução white label"
-  - "Quer aumentar margem com produto próprio"
-  - "Depende demais de ferramentas terceiras"
+  - "Dificuldade para escalar entrega sem escalar equipe proporcionalmente"
+  - "Muito retrabalho entre projetos — cada cliente exige setup do zero"
+  - "Depende demais de ferramentas terceiras que podem subir preço ou fechar"
+  - "Quer produto próprio com marca da agência, não revender produto alheio"
+  - "Margem baixa porque entrega serviço, não produto"
+  - "Falta de diferencial claro para ganhar clientes maiores"
+  - "Sem autoridade técnica reconhecida no mercado"
 
 solutions:
-  - "White label"
-  - "Automações via N8N/Make"
-  - "APIs de mensageria"
-  - "CRM + IA integrados"
-  - "Evolution como base de operação"
+  - "Construir sua agência sobre a Evolution (white-label total — business-in-a-box)"
+  - "Certificação Evolution para reforçar autoridade no mercado e justificar preço premium"
+  - "Automações via N8N/Make com base tecnológica estável e open source"
+  - "APIs de mensageria com documentação sólida e comunidade ativa"
+  - "CRM + IA integrados para entregar mais com menos recurso"
+  - "Acesso ao marketplace de parceiros para geração de leads qualificados"
+  - "Suporte técnico com SLA e comunidade ativa para escalar entrega com segurança"
+  - "Evo Academy para capacitar equipe e formar novos colaboradores no ecossistema"
 
 objections:
-  - "Vai me dar suporte suficiente?"
-  - "Consigo revender com minha marca?"
-  - "Consigo manter margem?"
-  - "A plataforma é estável para cliente final?"
+  - "Vai me dar suporte suficiente quando meu cliente travar?"
+  - "Consigo revender com minha marca sem expor que uso a Evolution?"
+  - "Consigo manter margem com o preço da plataforma?"
+  - "A plataforma é estável para o cliente final — não vai me envergonhar?"
+  - "E se a Evolution mudar o modelo ou encerrar o produto?"
+  - "Tenho que aprender tudo do zero para implementar?"
+  - "Meu cliente vai aceitar pagar mais caro por uma solução que não é 'gringa'?"
+
+key_message: >
+  Com a Evolution, você não usa uma plataforma — você constrói sua empresa
+  sobre ela. White-label, certificação, suporte e marketplace: tudo para
+  você vender sua solução, com sua marca, com margem real.

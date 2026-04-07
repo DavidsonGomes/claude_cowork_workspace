@@ -21,14 +21,27 @@ A Evolution e um ecossistema de IA, automacao e educacao — nao apenas uma ferr
 - Deve soar como: parceiro estrategico, nao fornecedor de software
 - Ancorar em valores: Liberdade, Transparencia ("Quem sabe joga limpo"), Brio, Sonho
 
-## Gaps criticos identificados no brand review
+## Status das correcoes (aplicadas em 2026-04-06)
 
-1. Evo Academy invisivel no brand-profile.yaml — produto central sem representacao na identidade
-2. Tagline desatualizada: "Foundation, all in one" deve ser substituida
-3. Value prop "baixo custo" deve ser removido — atrai perfil de cliente errado
-4. Persona do lancamento de abril/2026 sem arquivo de audiencia
-5. Competitors.yaml sem Chatwoot, Botpress, Typebot, n8n, Rocket.Chat
-6. Valores da empresa desconectados do guia de voz
+Todas as correcoes urgentes foram aplicadas diretamente nos YAMLs:
+
+1. [FEITO] brand-profile.yaml atualizado — descricao, missao, visao, produtos (Community/Academy/Cloud) com pricing
+2. [FEITO] brand-visual-guide.yaml atualizado — tagline trocada, value_prop corrigido, voice expandido com pilar educacional, values_alignment adicionado
+3. [FEITO] donos-de-agencias.yaml reposicionado — white-label como diferencial central, frame "construa sua empresa sobre a Evolution"
+4. [FEITO] persona-summit-lancamento.yaml criado — persona central do Summit de abril/2026
+5. [FEITO] competitors.yaml expandido — Chatwoot, Botpress, Typebot, n8n, Rocket.Chat, Voiceflow adicionados
+6. [PENDENTE] Valores desconectados do guia de voz — values_alignment adicionado no brand-visual-guide, mas nao ha arquivo separado de valores no brand guide ainda
+
+## ALERTA DE PRICING (06/04/2026)
+
+Reuniao com Alberto/Xandao/Anny definiu pivot para 3 tiers: Free / Mensal / Anual.
+O modelo de 2 tiers (Contributor R$89 + Pro Support R$399) foi questionado.
+Valores exatos dos novos tiers ainda nao definidos.
+NAO USAR o modelo antigo de 2 tiers em materiais de venda/landing page.
+Brand-profile.yaml ja inclui nota de aviso sobre isso.
+
+**Why:** Reuniao AA + EVO de 06/04/2026 mudou o modelo de pricing antes do lançamento.
+**How to apply:** Para qualquer material de lançamento, verificar se pricing foi finalizado antes de publicar.
 
 ## Compliance
 

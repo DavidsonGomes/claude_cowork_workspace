@@ -4,16 +4,69 @@
 name: "Evolution Foundation"
 language: "Português"
 country: "Brasil"
+mission: >
+  Democratizar o acesso — trazer tecnologia de IA e automação multicanal, muitas
+  vezes de difícil acesso ou difícil aprendizado, para pequenas e médias empresas
+  de forma acessível e simplificada para aplicar no dia a dia do seu negócio.
+
+vision: >
+  Liderar uma nova geração — ser o ecossistema de referência que forma, treina e
+  lança os profissionais e negócios que vão levar IA ao mercado brasileiro. Não é
+  apenas uma ferramenta, mas sim o guia dessa transformação.
+
 description: >
-  A Evolution Foundation é um ecossistema brasileiro de tecnologia
-  criado para democratizar o acesso à automação, integração de sistemas
-  e inteligência artificial no dia a dia de empresas e profissionais.
-  Reunimos soluções, conhecimento e comunidade para ajudar pequenas e médias
-  empresas, agências, desenvolvedores e operações digitais a centralizar canais,
-  automatizar processos, escalar atendimento e aplicar IA de forma prática.
-  Nosso foco é transformar tecnologias antes complexas ou restritas em ferramentas
-  acessíveis, flexíveis e úteis para negócios reais, conectando pessoas, sistemas
-  e oportunidades de crescimento.
+  A Evolution Foundation é o ecossistema brasileiro de referência em IA e automação
+  para profissionais e empresas emergentes. Unimos tecnologia open source, educação
+  prática e comunidade ativa para transformar quem usa tecnologia em quem constrói
+  negócios com ela. Por meio da Evo AI (plataforma CRM + agentes + omnichannel),
+  da Evo Academy (cursos, certificações e marketplace de parceiros) e de um programa
+  de parceiros white-label, democratizamos o acesso a ferramentas que antes eram
+  privilégio de grandes empresas — tornando qualquer profissional ou PME capaz de
+  aplicar IA no seu negócio de forma real, escalável e sustentável.
+
+products:
+  evo_community:
+    name: "Evo Community"
+    description: "Comunidade paga com dois níveis: Contributor e Pro Support. Ponto de entrada da comunidade Evolution."
+    tiers:
+      contributor:
+        price: "R$89/mês ou R$890/ano"
+        benefits:
+          - "Participação e voto no roadmap"
+          - "Acesso antecipado a funcionalidades beta"
+          - "Canal de anúncios exclusivos"
+          - "Badge de contribuidor"
+      pro_support:
+        price: "R$399/mês"
+        benefits:
+          - "Todos os benefícios do Contributor"
+          - "Canal direto com a equipe via Discord"
+          - "Tickets técnicos com SLA de 48h"
+          - "Calls mensais com o time de desenvolvimento"
+    note: "Modelo de 3 tiers (Free/Mensal/Anual) em definição. Valores exatos dos novos tiers a confirmar antes do lançamento."
+
+  evo_academy:
+    name: "Evo Academy"
+    description: >
+      Plataforma de cursos para aprender a construir negócios usando o ecossistema
+      Evolution. Foco em educação prática e visão de negócios, não apenas técnica.
+      Coração do ecossistema — hub central onde comunidade aprende, evolui e se conecta.
+    price: "R$149/mês ou R$950/ano (~R$79/mês)"
+    highlights:
+      - "Cursos em vídeo sobre o ecossistema Evolution e visão de negócios"
+      - "Lives abertas no YouTube que viram aulas (conteúdo evergreen)"
+      - "Cursos estruturados por tema com progressão definida"
+      - "Certificações Evolution para reforçar autoridade no mercado"
+      - "Marketplace de parceiros e oportunidades"
+      - "Conteúdo em expansão contínua ao longo do ano"
+
+  evo_cloud:
+    name: "Evo Cloud"
+    description: >
+      Infraestrutura gerenciada para agências e operadores levarem a Evolution ao
+      mercado como produto próprio. White-label, autoconfiguração plug & play.
+    status: "standby — aguardando validação completa da plataforma open source"
+    pricing: "a definir"
 
 visual_guide: "brand-visual-guide.yaml"
 
@@ -57,6 +110,7 @@ assets:
         svg: "assets/logos/EVO_ACADEMY/SVG/EVO_ACADEMY.svg"
 
 concepts:
+  # Tecnologia e plataforma
   - "Automação de processos"
   - "Inteligência artificial para negócios"
   - "Agentes de IA"
@@ -67,9 +121,18 @@ concepts:
   - "CRM"
   - "Workflow automation"
   - "Atendimento multicanal"
-  - "No Code"
-  - "Low Code"
   - "Chatbots inteligentes"
   - "Orquestração de agentes"
   - "Produtividade com IA"
   - "Transformação digital para PMEs"
+  # Educação e ecossistema
+  - "Educação em IA e automação"
+  - "Certificações Evolution"
+  - "Marketplace de parceiros"
+  - "Formação de profissionais de tecnologia"
+  - "Comunidade de construtores de negócio"
+  # Modelo de negócio
+  - "Plataformas sem código para operações"
+  - "White-label para agências"
+  - "Open source como base"
+  - "Ecossistema de parceiros"

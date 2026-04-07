@@ -124,3 +124,216 @@ competitors:
       - "Custo escala significativamente com volume de contatos"
       - "Sem controle sobre dados e infraestrutura"
     positioning: "Líder em automação de Instagram DM e marketing conversacional para criadores. Concorre com Evolution em WhatsApp, mas sem a profundidade técnica, agentes de IA avançados e flexibilidade open-source."
+
+# ============================================================
+# CONCORRENTES OPEN SOURCE E DE IA — adicionados em 2026-04-06
+# Fonte: Brand Review (Pixel) + estratégia DPR × Evolution
+# ============================================================
+
+  - name: "Chatwoot"
+    url: "https://www.chatwoot.com/"
+    type: "open source"
+    description: >
+      Plataforma open source de atendimento ao cliente omnichannel. Permite
+      gerenciar conversas de WhatsApp, email, live chat, Twitter, Facebook e
+      outros canais em uma caixa de entrada unificada. Muito popular entre
+      equipes de suporte que querem fugir do Zendesk e Intercom pagos.
+    main_products:
+      - "Caixa de entrada unificada (omnichannel)"
+      - "Atribuição e automação de conversas"
+      - "Reports e analytics de atendimento"
+      - "Self-hosted ou cloud (Chatwoot Cloud)"
+      - "Integrações via API e webhooks"
+    target_audience: "Equipes de suporte e atendimento, startups, agências que precisam de atendimento multicanal sem custo de SaaS premium"
+    pricing: "Self-hosted gratuito. Cloud: Starter gratuito (2 agentes), Team ~US$25/mês, Business ~US$65/mês"
+    strengths:
+      - "Open source com comunidade ativa — sem vendor lock-in"
+      - "UI moderna e polida para atendimento"
+      - "Boa integração com WhatsApp Business API"
+      - "Fácil de hospedar com Docker"
+      - "Custo zero para self-hosted"
+    weaknesses:
+      - "Focado em atendimento, não em automação ou agentes de IA"
+      - "Sem CRM, campanhas ou marketing automation nativo"
+      - "Sem orquestração de agentes de IA"
+      - "Comunidade menor comparado a Evolution"
+      - "Educação e onboarding limitados"
+    evolution_differential: >
+      Chatwoot é forte em atendimento reativo (fila de tickets), mas não tem
+      automação proativa, campanhas, agentes de IA ou CRM. A Evolution entrega
+      tudo isso integrado — e ainda forma o profissional via Academy. Para quem
+      quer apenas caixa de entrada, Chatwoot serve. Para quem quer construir
+      operações completas de IA e automação, Evolution é o ecossistema completo.
+
+  - name: "Botpress"
+    url: "https://botpress.com/"
+    type: "open source / SaaS"
+    description: >
+      Plataforma open source de construção de agentes de IA conversacionais.
+      Voltada para desenvolvedores que querem criar chatbots e agentes com LLMs
+      integrados. Tem versão self-hosted e cloud com camadas pagas.
+    main_products:
+      - "Bot Builder visual com fluxos e nós de IA"
+      - "Integração nativa com GPT-4, Claude, Gemini"
+      - "Canais: web, WhatsApp, Telegram, Slack, Teams"
+      - "Botpress Cloud (hospedagem gerenciada)"
+      - "Analytics de conversas"
+    target_audience: "Desenvolvedores e agências que constroem chatbots e agentes de IA, empresas que querem automação conversacional sem contratar dev especializado"
+    pricing: "Self-hosted gratuito. Cloud: Pay-as-you-go. Team ~US$495/mês. Enterprise sob consulta."
+    strengths:
+      - "Open source com foco específico em agentes de IA"
+      - "Integração fácil com múltiplos LLMs"
+      - "Interface visual para construir fluxos complexos"
+      - "Comunidade global ativa"
+      - "Deploy rápido para vários canais"
+    weaknesses:
+      - "Sem CRM integrado — precisa integrar via API"
+      - "Sem omnichannel nativo de vendas e marketing"
+      - "Sem campanhas ou automação de marketing"
+      - "Curva de aprendizado alta para não-devs"
+      - "Educação e formação de mercado limitada"
+      - "Precificação cloud cara em escala"
+    evolution_differential: >
+      Botpress é excelente para construir agentes de IA isolados, mas não é um
+      ecossistema. Falta CRM, omnichannel, campanhas e o pilar educacional.
+      A Evolution integra tudo — a plataforma, a educação e a comunidade —
+      em um único ecossistema. Quem usa Botpress ainda precisa de 3 ou 4
+      outras ferramentas para ter o que a Evolution entrega integrado.
+
+  - name: "Typebot"
+    url: "https://typebot.io/"
+    type: "open source"
+    description: >
+      Construtor de chatbots open source com interface visual drag-and-drop.
+      Muito popular no Brasil para criar formulários conversacionais, bots
+      de captação de leads e fluxos de atendimento simples. Concorre
+      diretamente com Typeform e Manychat no segmento de não-devs.
+    main_products:
+      - "Builder visual de chatbots (drag-and-drop)"
+      - "Embed em sites e landing pages"
+      - "Integração com WhatsApp, Facebook Messenger"
+      - "Integrações com Zapier, Make, n8n"
+      - "Typebot Cloud (hospedagem gerenciada)"
+    target_audience: "Criadores de conteúdo, marketeiros digitais, agências de inbound, PMEs que querem formulários conversacionais sem código"
+    pricing: "Self-hosted gratuito. Cloud: Starter gratuito (200 chats/mês), Pro ~US$39/mês, Unlimited ~US$89/mês"
+    strengths:
+      - "Interface extremamente fácil — zero código para chatbots simples"
+      - "Open source com comunidade brasileira ativa"
+      - "Ótimo para captação de leads e formulários conversacionais"
+      - "Custo baixo para volume moderado"
+      - "Integra com praticamente qualquer ferramenta via Zapier/Make/n8n"
+    weaknesses:
+      - "Limitado a chatbots simples — sem agentes de IA reais"
+      - "Sem CRM, campanhas ou omnichannel nativo"
+      - "Sem orquestração de múltiplos agentes"
+      - "Não serve para operações complexas de automação"
+      - "Comunidade menor e ecossistema educacional ausente"
+    evolution_differential: >
+      Typebot resolve o problema de formulários conversacionais e bots simples.
+      A Evolution resolve operações completas de IA, CRM e omnichannel. São
+      produtos para momentos diferentes de maturidade. Muitos usuários da Evolution
+      usaram Typebot antes de precisar de algo mais poderoso — a migração natural
+      é para a Evolution quando o negócio escala.
+
+  - name: "n8n"
+    url: "https://n8n.io/"
+    type: "open source"
+    description: >
+      Plataforma de automação de workflows open source (alternativa ao Zapier/Make).
+      Permite criar automações complexas conectando centenas de apps via nós visuais.
+      Muito usado por devs e equipes técnicas para orquestrar fluxos de dados.
+      Frequentemente integrado com a Evolution API para automações de WhatsApp.
+    main_products:
+      - "Workflow builder visual (nós e conexões)"
+      - "400+ integrações nativas (Google, Slack, CRMs, bancos de dados)"
+      - "Triggers de webhooks, schedule, eventos"
+      - "Execução de código JavaScript/Python nos fluxos"
+      - "n8n Cloud (hospedagem gerenciada)"
+      - "Agentes de IA com LLM integrado (AI Nodes)"
+    target_audience: "Desenvolvedores, devops, times técnicos que automatizam operações internas, agências que vendem automação como serviço"
+    pricing: "Self-hosted gratuito. Cloud: Starter ~US$24/mês, Pro ~US$60/mês, Enterprise sob consulta"
+    strengths:
+      - "Flexibilidade máxima para automações complexas"
+      - "Open source com comunidade global enorme"
+      - "Custo muito menor que Zapier/Make em escala"
+      - "Execução de código nativo nos fluxos"
+      - "Integra com praticamente tudo"
+    weaknesses:
+      - "Curva de aprendizado alta para não-devs"
+      - "Sem CRM, omnichannel ou frontend para o usuário final"
+      - "É uma ferramenta de integração, não um produto de negócio"
+      - "Sem pilar educacional focado em negócios"
+      - "Não resolve o problema do cliente final — só o do integrador"
+    evolution_differential: >
+      n8n é uma ferramenta de plomagem — conecta sistemas. A Evolution é o sistema
+      que o cliente final usa. São complementares, não substitutos: muitos parceiros
+      da Evolution usam n8n para automações avançadas dentro do ecossistema.
+      O diferencial da Evolution é entregar o produto acabado — CRM, agentes, canais
+      e educação — enquanto o n8n fica na camada de integração técnica.
+
+  - name: "Rocket.Chat"
+    url: "https://www.rocket.chat/"
+    type: "open source"
+    description: >
+      Plataforma open source de comunicação empresarial omnichannel. Combina
+      mensageria interna (como Slack) com atendimento externo ao cliente via
+      WhatsApp, email, live chat e outros canais. Popular em empresas que
+      precisam de controle total sobre dados e infraestrutura.
+    main_products:
+      - "Workspace de mensageria interna (canais, DMs, threads)"
+      - "Omnichannel de atendimento ao cliente"
+      - "Integração com WhatsApp Business API"
+      - "Bots e automações via Rocket.Chat Apps"
+      - "Self-hosted ou Rocket.Chat Cloud"
+    target_audience: "Empresas mid-market e enterprise com requisitos de privacidade e compliance, equipes técnicas, governos e setor público"
+    pricing: "Community (self-hosted) gratuito. Pro ~US$4/usuário/mês, Enterprise sob consulta"
+    strengths:
+      - "Open source com foco em privacidade e compliance"
+      - "Mensageria interna + atendimento externo em uma plataforma"
+      - "Comunidade ativa e longa história no mercado"
+      - "Controle total sobre dados e infraestrutura"
+    weaknesses:
+      - "Interface datada comparada a concorrentes modernos"
+      - "Setup complexo e manutenção pesada"
+      - "Sem CRM, campanhas ou marketing automation"
+      - "IA limitada — sem agentes autônomos"
+      - "Foco em enterprise, não em PMEs ou empreendedores"
+      - "Comunidade e ecossistema educacional muito limitados no Brasil"
+    evolution_differential: >
+      Rocket.Chat serve empresas que precisam de controle de comunicação interna
+      com canal de atendimento. A Evolution serve profissionais e PMEs que querem
+      crescer com IA e automação, com comunidade, educação e modelo de negócio
+      estruturado. Públicos e momentos completamente diferentes.
+
+  - name: "Voiceflow"
+    url: "https://www.voiceflow.com/"
+    type: "SaaS"
+    description: >
+      Plataforma SaaS de design e deploy de agentes de IA conversacionais.
+      Voltada para equipes de produto que querem criar assistentes de voz e chat
+      com fluxos complexos de IA. Interface de design no estilo Figma para agentes.
+    main_products:
+      - "Designer visual de agentes de IA (canvas colaborativo)"
+      - "Runtime de agentes (deploy em produção)"
+      - "Knowledge base integrada (RAG)"
+      - "Integrações via API com canais de chat"
+      - "Analytics de conversas e intent"
+    target_audience: "Times de produto, UX designers de conversational AI, empresas que criam assistentes ao cliente"
+    pricing: "Sandbox gratuito. Pro ~US$50/editor/mês. Team ~US$125/editor/mês. Enterprise sob consulta."
+    strengths:
+      - "Interface de design mais sofisticada do mercado para agentes"
+      - "Colaboração em tempo real (como Figma)"
+      - "Excelente para times de produto e design"
+      - "RAG integrado para knowledge bases"
+    weaknesses:
+      - "SaaS fechado com custo alto por editor"
+      - "Sem omnichannel nativo — foca em design, não em distribuição"
+      - "Sem CRM ou marketing automation"
+      - "Muito focado em grandes times — pouco acessível para PMEs"
+      - "Sem comunidade open source ou pilar educacional"
+      - "Irrelevante para o mercado brasileiro de mensageria"
+    evolution_differential: >
+      Voiceflow é uma ferramenta de design premium para times grandes. A Evolution
+      é um ecossistema para PMEs e empreendedores construírem negócios com IA.
+      Sem sobreposição direta de público. Relevante conhecer para posicionar a
+      Evolution como alternativa mais acessível e completa para o mercado brasileiro.

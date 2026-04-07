@@ -13,23 +13,23 @@ type: project
 | HubSpot | CRM + Inbound global | Muito caro, WhatsApp secundario, vendor lock-in |
 | ManyChat | Chat marketing (Instagram DM) | Sem CRM real, sem agentes autonomos, fechado |
 
-## Concorrentes FALTANTES (gaps criticos)
+## Concorrentes adicionados em 2026-04-06
 
-### Open Source / Tecnico (concorrentes diretos para devs)
-- **Chatwoot** — CRM omnichannel open source, concorrente direto na categoria
-- **Rocket.Chat** — omnichannel open source
-- **Typebot** — chatbot builder open source, muito popular no Brasil
+Arquivo competitors.yaml expandido com 6 novos players:
 
-### IA / Agentes
-- **Botpress** — plataforma de agentes de IA open source
-- **Voiceflow** — plataforma de agentes, mais enterprise
+| Concorrente | Tipo | Diferencial Evolution |
+|-------------|------|----------------------|
+| Chatwoot | Open source | Atendimento reativo, sem IA/CRM/campanhas |
+| Botpress | Open source / SaaS | Agentes isolados, sem ecossistema integrado |
+| Typebot | Open source | Chatbots simples, sem operacoes complexas de IA |
+| n8n | Open source | Ferramenta de integracao, complementar (nao substituto) |
+| Rocket.Chat | Open source | Foco enterprise, sem PME, sem educacao |
+| Voiceflow | SaaS | Design premium para grandes times, inacessivel para PME BR |
 
-### Integracao / Automacao
-- **n8n** — automacao open source que integra com Evolution E compete pelo budget de automacao
+## Concorrentes no pilar educacional — AINDA FALTAM
 
-### Educacao (pilar Evo Academy)
-- **Hotmart** — plataforma de cursos, concorrente no pilar educacional
-- **Udemy** — cursos de tecnologia/automacao
+- Hotmart e Udemy: concorrem com Evo Academy
+- Nao adicionados ao arquivo oficial — baixa prioridade imediata, mas relevante para conteudo de diferenciacao do Academy
 
-**Why:** Identificado no brand review 2026-04-07. O arquivo atual tem apenas concorrentes SaaS fechados, ignorando o ecossistema open source e de IA que e o territorio principal da Evolution.
-**How to apply:** Ao criar conteudo de diferenciacao ou posicionamento, considerar esses players que nao estao no arquivo oficial. Nao atacar diretamente — posicionar pelo diferencial (open source + ecossistema + educacao).
+**Why:** Brand review identificou que o territorio principal da Evolution (open source + IA) estava sem representacao no arquivo.
+**How to apply:** n8n e Typebot sao ferramentas que usuarios migram DA Evolution ou PARA a Evolution. Usar em conteudo de diferenciacao posicionando a Evolution como ecossistema completo vs. ferramentas pontuais.

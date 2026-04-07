@@ -29,7 +29,9 @@ app = FastAPI(title="EVO Dashboard API", lifespan=lifespan)
 
 # API routers
 from app.api.routines import router as routines_router
+from app.api.community import router as community_router
 app.include_router(routines_router)
+app.include_router(community_router)
 
 
 @app.get("/health")

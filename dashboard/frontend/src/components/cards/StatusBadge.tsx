@@ -7,6 +7,9 @@ const statusConfig: Record<string, { bg: string; text: string; label: string }> 
   failure: { bg: 'bg-red-500/10', text: 'text-red-500', label: 'Failure' },
   timeout: { bg: 'bg-amber-500/10', text: 'text-amber-500', label: 'Timeout' },
   retrying: { bg: 'bg-blue-500/10', text: 'text-blue-500', label: 'Retrying' },
+  warning: { bg: 'bg-amber-500/10', text: 'text-amber-500', label: 'Atenção' },
+  error: { bg: 'bg-red-500/10', text: 'text-red-500', label: 'Crítico' },
+  normal: { bg: 'bg-[#00FFA7]/10', text: 'text-[#00FFA7]', label: 'Normal' },
 };
 
 export function StatusBadge({ status }: StatusBadgeProps) {

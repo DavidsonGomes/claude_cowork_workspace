@@ -515,6 +515,21 @@ const HEALTH_DATA = {
           "water_pct": 55.9,
           "bmr_kcal": 1922,
           "body_age": 30
+        },
+        {
+          "date": "2026-04-07",
+          "weight_kg": 92.0,
+          "fat_pct": 22.2,
+          "subcutaneous_fat_pct": 19.1,
+          "skeletal_muscle_pct": 73.9,
+          "muscle_mass_kg": 68.0,
+          "bone_mass_kg": 3.6,
+          "protein_pct": 17.7,
+          "visceral": 10.5,
+          "bmi": 27.8,
+          "water_pct": 56.2,
+          "bmr_kcal": 1915,
+          "body_age": 29
         }
       ],
       "measurements": [
