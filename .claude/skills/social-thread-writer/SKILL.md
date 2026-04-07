@@ -239,9 +239,9 @@ The algorithm rewards engagement rate, not volume.
 
 ---
 
-## Publishing with BlackTwist
+## Publishing with ferramenta externa
 
-When BlackTwist MCP tools are available, offer to publish or schedule the thread directly:
+When ferramenta de agendamento tools are available, offer to publish or schedule the thread directly:
 
 > "Want me to schedule this thread? I can queue it for your next available slot or set a specific time."
 
@@ -272,7 +272,7 @@ Before delivering the final thread, verify:
 - Does not write carousels or slide decks — see **social-carousel-writer** for slide-by-slide content
 - Does not analyze post performance or metrics — see **social-performance-analyzer** for analytics
 - Does not define content strategy or decide what to post — see **social-content-strategy** for planning
-- Does not execute code or access external APIs unless BlackTwist MCP is connected
+- Does not execute code or access external APIs sem integração de publicação automática — salvar como rascunho
 - Does not produce visual design or images — output is text copy for each thread post only
 
 ## Related Skills

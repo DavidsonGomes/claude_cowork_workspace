@@ -210,9 +210,9 @@ If the context file has example posts, open with: "I'll match the style from you
 
 ---
 
-## Publishing with BlackTwist
+## Publishing with ferramenta externa
 
-When the BlackTwist MCP tools are available, offer to publish or schedule the post directly:
+O conteúdo criado deve ser salvo em 04 Redes Sociais/ com prefixo [C]. O Davidson publica manualmente ou agenda via ferramenta externa:
 
 > "Want me to schedule this? I can queue it for your next available slot or pick a specific time."
 
@@ -242,7 +242,7 @@ Before delivering the final post, verify:
 - Does not write carousels or slide decks — see **social-carousel-writer** for slide-by-slide content
 - Does not analyze post performance or metrics — see **social-performance-analyzer** for analytics
 - Does not define content strategy or decide what to post — see **social-content-strategy** for planning
-- Does not execute code or access external APIs unless BlackTwist MCP is connected
+- Does not execute code or access external APIs sem integração de publicação automática — salvar como rascunho
 - Does not produce visual design or images — output is text copy only, ready to paste
 
 ## Related Skills

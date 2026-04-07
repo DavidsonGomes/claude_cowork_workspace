@@ -323,7 +323,7 @@ Same voice, different register. Use your authentic perspective everywhere — ad
 - Does not define overall content strategy or pillars — see **social-content-strategy** for strategic planning
 - Does not analyze post performance or metrics — see **social-performance-analyzer** for analytics
 - Does not schedule or plan a content calendar — see **social-content-calendar** for posting schedules
-- Does not execute code or access external APIs unless BlackTwist MCP is connected
+- Does not execute code or access external APIs sem integração de publicação automática — salvar como rascunho
 - Does not cover Instagram, TikTok, or YouTube — focuses on LinkedIn, Twitter/X, Threads, and Bluesky only
 
 ## See also

@@ -18,7 +18,7 @@ metadata:
 
 You are an expert social media content planner. Your job is to help the user build a practical, balanced posting schedule — mapping their content pillars to specific days, platforms, and formats so they always know what to post and when.
 
-This skill produces a **content calendar** the user can follow, schedule in advance, or hand off to a tool like BlackTwist.
+This skill produces a **content calendar** the user can follow, schedule in advance, or hand off to a tool like ferramenta externa.
 
 ---
 
@@ -109,7 +109,7 @@ Batching content in advance reduces daily decision fatigue and protects posting 
 | Weekly planning (Monday AM) | 30 min | Review calendar, confirm topics, note any news to react to |
 | Platform batch (e.g., all LinkedIn for the week) | 90 min | 3–5 posts drafted and ready to schedule |
 | Platform batch (e.g., all Threads/Twitter for the week) | 60 min | 5–8 short posts drafted |
-| Review and schedule (Friday) | 30 min | Queue approved posts in BlackTwist or scheduler |
+| Review and schedule (Friday) | 30 min | Queue approved posts in ferramenta externa or scheduler |
 
 **Batching by platform vs. batching by pillar:**
 
@@ -135,9 +135,9 @@ Posts drafted: 4
 
 ---
 
-## Step 5 — Scheduling with BlackTwist
+## Step 5 — Scheduling with ferramenta externa
 
-**If the BlackTwist MCP is available:**
+**If the ferramenta de agendamento is available:**
 
 1. Call `list_time_slots` to retrieve optimal posting windows for each platform.
 2. Map calendar entries to the best available slots.
@@ -145,7 +145,7 @@ Posts drafted: 4
 4. Confirm with the user before scheduling any post: show the draft, slot, and platform.
 5. After scheduling, summarize: "Scheduled X posts across Y platforms for the week of [date]."
 
-**If BlackTwist is not available:**
+**If ferramenta externa is not available:**
 
 Output the complete calendar as a markdown table with an additional **Suggested time** column based on general best practices:
 
@@ -156,7 +156,7 @@ Output the complete calendar as a markdown table with an additional **Suggested 
 | Twitter/X | Morning (8–10 AM), lunch (12–1 PM), or evening (6–8 PM) |
 | Bluesky | Morning (8–10 AM) or mid-afternoon (2–4 PM) |
 
-Tell the user: "Connect BlackTwist to schedule directly from this calendar. For now, use this table to schedule manually in your tool of choice."
+Tell the user: "Connect ferramenta externa to schedule directly from this calendar. For now, use this table to schedule manually in your tool of choice."
 
 ---
 
@@ -200,7 +200,7 @@ Weekly Review — March 24
 - Adjust frequency per platform if engagement trends shifted.
 - Update the calendar template for the next month.
 
-Use the **post-analytics** data (via BlackTwist `get_post_analytics`) to guide these decisions when available.
+Use the **post-analytics** data (via ferramenta externa `get_post_analytics`) to guide these decisions when available.
 
 ---
 
@@ -234,7 +234,7 @@ Present the final calendar in this format:
 [List of flexible slots and their purpose]
 ```
 
-After presenting: "Ready to start filling in post drafts? Use **social-post-writer** to write content for any of these slots. Or connect BlackTwist to schedule directly."
+After presenting: "Ready to start filling in post drafts? Use **social-post-writer** to write content for any of these slots. Or connect ferramenta externa to schedule directly."
 
 ---
 
@@ -244,7 +244,7 @@ After presenting: "Ready to start filling in post drafts? Use **social-post-writ
 - Does not define content pillars or strategy from scratch — see **social-content-strategy** for that
 - Does not analyze past post performance — see **social-performance-analyzer** for analytics
 - Does not provide platform-specific algorithm tactics — see **social-platform-strategy** for platform guidance
-- Does not execute code or access external APIs unless BlackTwist MCP is connected
+- Does not execute code or access external APIs sem integração de publicação automática — salvar como rascunho
 - Does not manage cross-posting or content adaptation — see **social-content-repurposer** for reformatting across platforms
 
 ## See also
