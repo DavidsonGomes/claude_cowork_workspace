@@ -1,0 +1,32 @@
+TIMESTAMP: 2026-04-07T13:33:21.112596
+DURATION: 223.7s
+RETURNCODE: 0
+PROMPT:
+[agent:flux-financeiro] Execute a skill /fin-daily-pulse
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Financial Pulse gerado ✅
+
+**Arquivo:** `05 Financeiro/reports/daily/[C] 2026-04-07-financial-pulse.html`
+
+| Métrica | Valor |
+|---|---|
+| **MRR estimado** | ~R$ 28.950 (USD $4.972 + BRL R$112) |
+| **Assinaturas ativas** | 209 |
+| **Receita hoje** | R$ 112,26 |
+| **Churn (30d)** | 9,6% — ⚠️ Atenção |
+
+**4 alertas identificados:**
+
+1. **⚠️ Churn 9,6%** — 20 cancelamentos nos últimos 30 dias. Feedback recorrente: `low_quality`. Requer investigação de produto/suporte.
+2. **⚠️ 5 assinaturas cancelando ao fim do período** — `cancel_at_period_end = true`. Janela de retenção ainda aberta.
+3. **⚠️ 1 falha de pagamento** — Charge em Lira Turca (TRY 679,55) falhou hoje. Cliente pode precisar de novo método de pagamento.
+4. **⚠️ Omie indisponível** — Todos os endpoints retornaram HTTP 404. Verificar credenciais da API com a **Samara Cruz** antes do fechamento do mês.
+
+Notificação enviada no Telegram. ✓
+
+

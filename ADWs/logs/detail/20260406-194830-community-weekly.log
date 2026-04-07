@@ -1,0 +1,53 @@
+TIMESTAMP: 2026-04-06T19:48:30.375241
+DURATION: 399.1s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-weekly
+
+============================================================
+STDOUT:
+============================================================
+Relatório gerado com sucesso. Aqui está o resumo executivo:
+
+---
+
+## Relatório Semanal — Semana W14 (30/mar–06/abr/2026)
+
+**Membros:** 78 novos | **WAM:** 81 ativos | **Msgs:** 497 total
+
+**Sentimento:** 🟢 Positivo — animação em torno do Evolution Summit (14–16/abr) puxou o maior pico de atividade da semana: **124 msgs em 06/abr**, exatamente no dia do anúncio.
+
+---
+
+### Números-chave
+| Métrica | Valor | Status |
+|---|---|---|
+| Novos membros | 78 | ✅ Sólido |
+| WAM | 81 únicos | Baseline |
+| Msgs/membro ativo | 6,1 | ✅ Meta >4 |
+| Threads Help ativos | 29 | Monitorar |
+
+### Top 3 Tópicos
+1. **QR Code / falha de conexão** — 8x (versão antiga v2.2.3)
+2. **Evo Go + Chatwoot integration** — 5x pedidos (mais demandada)
+3. **Bloqueios de instâncias** — alerta: 15 bans em 1 semana (1 usuário)
+
+### Destaques da Semana
+- 🏆 **oismaelash** — 117 msgs de suporte técnico (MVP absoluto)
+- 🚀 **yuricaetano** — lançou library OSS de bridge Evo Go + Chatwoot
+- 🔧 **leonardrodri** — abriu PR #2493 com correção de bug no GitHub
+
+### Bugs Críticos Identificados
+- Evo Go: duplicação de eventos webhook
+- Evo Go: senha incorreta aleatória
+- `setPresence "unavailable"` não persiste
+
+### 6 Docs Gaps prioritários identificados para transformar em FAQ
+
+**Relatório HTML salvo em:** `03 Comunidade/reports/weekly/[C] 2026-W14-community-report.html`
+
+---
+
+> ⚠️ **Ação urgente sugerida:** Comunicado sobre escalada de bloqueios de instâncias + clarificação do roadmap (Evo AI vs Evo CRM vs v3) antes do Evolution Summit.
+
+

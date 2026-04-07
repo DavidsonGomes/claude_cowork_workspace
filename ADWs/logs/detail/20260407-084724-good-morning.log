@@ -1,0 +1,48 @@
+TIMESTAMP: 2026-04-07T08:47:24.355968
+DURATION: 79.6s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-good-morning
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## ☀️ Bom dia, Davidson — Terça, 07 de Abril
+
+### O que rolou ontem
+- **Planning Evolution** feito com todo o time — protocolo de testes do Evo CRM definido (Fase 1 agora: só reportar, não corrigir)
+- **Summit**: campanha de captura iniciada, divisão de canais acertada com Willian
+- **AA + Evo**: pivot confirmado para 3 tiers (Free/Monthly/Annual), posicionamento "Marketing Automation"
+- 3 reuniões, 13+ commits, community pulse, trends W15 — dia denso
+
+### Agenda de hoje
+| Horário | Evento |
+|---------|--------|
+| 10:00 | **Alinhamento Evolution Estratégia** (Diego, Filipe Reis) |
+| 10:00 | **⚠️ CONFLITO** — [IAB] Comitê Retail Media *(aguarda resposta)* |
+| 11:00–13:00 | Planejamentos *(bloqueado)* |
+| 14:00–16:00 | 🟢 Bloco livre |
+| 16:00–17:30 | **ETUS + Praça** *(presencial)* |
+
+### Emails que pedem ação
+- 🔴 **Anne Carvalho** — Convite AA + EVO reagendado para **quinta 09/04 às 18h** → confirmar
+- 🔴 **RunPod** — Saldo baixo, risco de perda de dados → verificar agora
+- 🟡 **Fathom** — Recap AA + EVO de ontem disponível
+
+### Pendências críticas
+- Plano financeiro 3 tiers *(era pra hoje, reunião moveu pra quinta — mas não deixa acumular)*
+- Link de inscrição do Summit → Willian
+- Emails da semana do Summit (campanha de captura ativa)
+- PR do Evo CRM → revisar (Danilo)
+
+---
+
+**Recomendação:** Resolve o conflito de agenda das 10h agora (IAB provavelmente não é prioridade vs. Alinhamento com Diego/Filipe). Depois, bloco 14h–16h: plano financeiro dos 3 tiers. Quinta tem reunião com AA e esse doc precisa estar pronto antes.
+
+---
+
+Quer mergulhar em algum projeto específico, ou tem algo urgente que precisa atacar primeiro?
+
+

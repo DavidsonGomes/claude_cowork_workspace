@@ -1,0 +1,45 @@
+TIMESTAMP: 2026-04-07T11:49:41.969064
+DURATION: 166.1s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-faq-sync
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## FAQ Sync — 07/04/2026
+
+**Sync concluída.** Resumo:
+
+| Métrica | Valor |
+|---------|-------|
+| Total no FAQ | **21 perguntas** |
+| Novas adicionadas | **7** |
+| Atualizadas | 0 |
+
+### Novas entradas adicionadas
+
+**Discord #chat-pt (hoje):**
+- Erro "canal de envio fechado" ao usar N8N — causa: falso positivo de conexão
+- Evolution API não recebe mídias, só texto — bug v2.3.7
+- Como pegar nome real do contato via API
+
+**GitHub evolution-api:**
+- Página de Integrações retorna erro 400 (#2499)
+- `sendWhatsAppAudio` não respeita `quoted` (#2485)
+
+**GitHub evolution-go:**
+- Stickers falham no upload S3 — erro "webp: invalid format" (#5)
+- Sem endpoint para histórico de conversas (confirmado pela comunidade)
+- Botões/menus interativos intermitentes (confirmado)
+
+**GitHub evo-ai:**
+- Azure OpenAI ainda não suportado (#37) — workaround via proxy LiteLLM
+- DeepSeek ainda não suportado (#30) — workaround via base URL compatível
+- Bug crítico no seeder de admin — senha não sincroniza com env (#38)
+
+**Notificação enviada** para o Davidson via Telegram. ✅
+
+

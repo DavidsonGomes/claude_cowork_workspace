@@ -1,0 +1,36 @@
+TIMESTAMP: 2026-04-07T13:59:57.390250
+DURATION: 676.8s
+RETURNCODE: 0
+PROMPT:
+[agent:flux-financeiro] Execute a skill /fin-weekly-report
+
+============================================================
+STDOUT:
+============================================================
+## Financial Weekly gerado ✅
+
+**Arquivo:** `05 Financeiro/reports/weekly/[C] 2026-W15-financial-weekly.html`
+
+---
+
+### Resumo Executivo — Semana W15 (30/03 – 06/04/2026)
+
+| Métrica | Valor | Variação |
+|---|---|---|
+| **Receita Stripe** | R$ 7.228,22 | ▲ +0,9% vs W14 |
+| **MRR** | R$ 29.198 | 209 assinaturas |
+| **Charges aprovadas** | 51 | de 68 tentativas |
+| **Falhas pagamento** | 17 charges | R$ 2.625,95 em risco |
+| **Cancel at period end** | **33 assinaturas** | ⚠️ ALERTA |
+| **Inadimplência Omie** | R$ 2.129,52 | 5 registros |
+
+---
+
+### 🚨 Principais Alertas
+
+1. **33 assinaturas na fila de cancelamento** — potencial perda de ~R$ 4.619/mês no MRR se confirmados. Ponto mais crítico da semana.
+2. **Taxa de falha de pagamento em 25%** — 17 de 68 cobranças falharam. Requer retentativa ou contato com clientes.
+3. **Despesas não mapeadas** — Omie retornou apenas lançamentos PAGO, sem contas abertas visíveis. Acionar **Samara Cruz** para confirmar estrutura de custos.
+4. **NF-e indisponível via API** — endpoint retornando 500. Samara precisa confirmar NFs da semana manualmente.
+
+

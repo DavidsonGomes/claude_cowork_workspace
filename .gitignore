@@ -8,7 +8,6 @@ __pycache__/
 *.pyc
 
 # ADW logs
-ADWs/logs/
 ADWs/__pycache__/
 
 # OS

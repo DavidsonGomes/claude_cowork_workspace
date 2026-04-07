@@ -1,0 +1,40 @@
+TIMESTAMP: 2026-04-06T20:56:32.722885
+DURATION: 234.2s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-trends
+
+============================================================
+STDOUT:
+============================================================
+Pronto. Aqui está o resumo da análise W15:
+
+---
+
+## 📈 Tendências W15 — 06/04/2026
+
+**Health geral: 🟡 Atenção** (mix de 🟢 e 🔴)
+
+### O que está bem
+- Comunidade: WAM estável (81), sentimento **subiu** de misto → positivo, 78 novos membros pelo Summit
+- ADWs: 100% success rate nas 3 rotinas ativas
+
+### O que preocupa
+- 🔴 **evolution-api parado há 40+ dias** — último push em 24/02, issues acumulando (+20 na semana, 408 → 428). Bug crítico stream:error 515 com solução proposta sem merge
+- 🟡 **6 docs gaps** não resolvidos gerando fila de suporte no Discord
+- 🟡 **Financeiro cego** — Stripe nunca foi integrado às rotinas ADW
+- 🟡 **evo-ai com fila de PRs degradada** — 2 spam, 1 com 9+ meses parado
+
+### Top 5 ações recomendadas
+1. Integrar Stripe à rotina de trends para ter MRR nas próximas execuções
+2. Avaliar fix stream:error 515 no evolution-api (PR #2498, solução pronta)
+3. Fechar PRs spam #40 e #43 no evo-ai; revisar #46 (AG2 engine) com Danilo
+4. Criar guia oficial Evo Go + Chatwoot (lib da comunidade já existe)
+5. Preparar onboarding pós-Summit para o pico esperado de 14-20/abr
+
+**Arquivos gerados:**
+- `01 Daily Logs/[C] 2026-W15-trends.html`
+- `01 Daily Logs/[C] 2026-W15-trends.md`
+- `memory/trends/2026-W15.json`
+
+

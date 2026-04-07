@@ -1,0 +1,20 @@
+TIMESTAMP: 2026-04-06T18:49:32.540534
+DURATION: 29.0s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /int-sync-meetings
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Sync Fathom — Concluído
+
+**Período:** 06/04/2026
+**Novos:** 0 reuniões processadas
+**Já processados:** 1 ignorado (Planning Evolution — `135624447`)
+
+A reunião de hoje já estava sincronizada de uma sessão anterior. Nada novo para processar.
+
+

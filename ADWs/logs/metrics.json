@@ -1,0 +1,141 @@
+{
+  "community-weekly": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 399.1,
+    "avg_seconds": 399.1,
+    "last_run": "2026-04-06T19:48:30.375401",
+    "agent": "pulse-community",
+    "success_rate": 100.0
+  },
+  "faq-sync": {
+    "runs": 2,
+    "successes": 2,
+    "failures": 0,
+    "total_seconds": 305.6,
+    "avg_seconds": 152.8,
+    "last_run": "2026-04-07T11:49:41.969506",
+    "agent": "pulse-community",
+    "success_rate": 100.0
+  },
+  "trends": {
+    "runs": 3,
+    "successes": 3,
+    "failures": 0,
+    "total_seconds": 453.8,
+    "avg_seconds": 151.3,
+    "last_run": "2026-04-06T20:56:32.723280",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "end-of-day": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 129.1,
+    "avg_seconds": 129.1,
+    "last_run": "2026-04-06T20:58:59.231639",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "memory-sync": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 120.4,
+    "avg_seconds": 120.4,
+    "last_run": "2026-04-06T21:01:06.781106",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "review-todoist": {
+    "runs": 2,
+    "successes": 2,
+    "failures": 0,
+    "total_seconds": 80.9,
+    "avg_seconds": 40.5,
+    "last_run": "2026-04-07T14:19:46.687694",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0,
+    "total_input_tokens": 13,
+    "total_output_tokens": 1532,
+    "total_cache_creation_tokens": 22815,
+    "total_cache_read_tokens": 237927,
+    "total_cost_usd": 0.17995,
+    "avg_cost_usd": 0.08997,
+    "last_input_tokens": 13,
+    "last_output_tokens": 1532,
+    "last_cost_usd": 0.17995
+  },
+  "good-morning": {
+    "runs": 2,
+    "successes": 2,
+    "failures": 0,
+    "total_seconds": 242.0,
+    "avg_seconds": 121.0,
+    "last_run": "2026-04-07T10:34:21.847345",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "email-triage": {
+    "runs": 2,
+    "successes": 2,
+    "failures": 0,
+    "total_seconds": 197.8,
+    "avg_seconds": 98.9,
+    "last_run": "2026-04-07T10:38:15.887609",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "sync-meetings": {
+    "runs": 9,
+    "successes": 9,
+    "failures": 0,
+    "total_seconds": 1035.1,
+    "avg_seconds": 115.0,
+    "last_run": "2026-04-07T13:50:41.181648",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "dashboard": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 239.0,
+    "avg_seconds": 239.0,
+    "last_run": "2026-04-07T13:14:18.621296",
+    "agent": "clawdia-assistant",
+    "success_rate": 100.0
+  },
+  "financial-pulse": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 223.7,
+    "avg_seconds": 223.7,
+    "last_run": "2026-04-07T13:33:21.112962",
+    "agent": "flux-financeiro",
+    "success_rate": 100.0
+  },
+  "financial-weekly": {
+    "runs": 2,
+    "successes": 2,
+    "failures": 0,
+    "total_seconds": 995.0,
+    "avg_seconds": 497.5,
+    "last_run": "2026-04-07T13:59:57.390605",
+    "agent": "flux-financeiro",
+    "success_rate": 100.0
+  },
+  "monthly-close": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 540.2,
+    "avg_seconds": 540.2,
+    "last_run": "2026-04-07T14:11:30.443500",
+    "agent": "flux-financeiro",
+    "success_rate": 100.0
+  }
+}

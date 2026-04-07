@@ -1,0 +1,36 @@
+TIMESTAMP: 2026-04-06T20:51:29.774712
+DURATION: 109.8s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-trends
+
+============================================================
+STDOUT:
+============================================================
+Pronto. Relatório e snapshot salvos. Aqui o resumo:
+
+---
+
+## 📊 Tendências — W14 (baseline)
+
+**Primeira execução — sem comparativo.** A partir da próxima semana tem delta.
+
+### 🟢 O que está bem
+- **Comunidade crescendo:** 78 novos membros, WAM 81, 497 msgs na semana — Summit impulsionando organicamente
+- **ADWs:** 100% de success rate nas rotinas rodando
+- **Evo Go decolando:** 169 stars em menos de 2 semanas de existência, 76 forks
+
+### 🔴 Riscos reais
+1. **Bloqueios em massa de WhatsApp** — 15+ instâncias baneadas em 7 dias, ban ocorrendo só ao escanear QR. Parece mudança de política Meta. **Precisa de comunicado urgente.**
+2. **GitHub evolution-api:** 408 issues abertas. Issue pública (#2492) acusando abandono do projeto. Comunidade parcheando `dist/main.js` em produção.
+
+### 🟡 PRs esperando merge
+Quatro fixes com diagnóstico completo aguardando: stream:error 515 (#2498), fileName case (#2471), mentionsEveryOne (#2470), archiveChat Prisma (#2495). Danilo deveria priorizar.
+
+### 💡 Oportunidade clara
+- **Evo Go + Chatwoot:** pedido mais frequente, bridge OSS já existe — só precisar documentar oficialmente
+- **FAQ Evo CRM** antes do lançamento desta semana — 4 perguntas/semana agora, vai explodir no lançamento
+
+**Próximo passo:** comunicado sobre bloqueios de WhatsApp no Discord + triagem dos PRs com Danilo.
+
+

@@ -1,0 +1,88 @@
+TIMESTAMP: 2026-04-07T08:48:20.788933
+DURATION: 50.2s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /gog-email-triage
+
+============================================================
+STDOUT:
+============================================================
+# Email Triage Summary
+
+📧 **Total não lidas**: 25 mensagens
+⚠️ **Urgente**: 1 | 🔴 **Alta**: 3 | 🟡 **Média**: 6 | 🟢 **Baixa**: 15
+
+---
+
+## Top 3 Prioridades
+
+1. **Low Balance Warning** — RunPod (3x alertas recorrentes)
+   - Urgência: **urgente**
+   - Motivo: Alertas repetidos de saldo baixo podem derrubar workloads de GPU ativos
+   - Ação sugerida: verificar saldo e recarregar
+
+2. **Alinhamento Evolution Estratégia** — Diego Lerina confirmou para hoje 9h30–11h
+   - Urgência: **alta**
+   - Motivo: Reunião em breve (hoje), confirmação recebida — verificar se está preparado
+   - Ação sugerida: revisar pauta antes da reunião
+
+3. **Re: como conectar 2 instagram?** — Ana (mLabs)
+   - Urgência: **alta**
+   - Motivo: Mensagem direta de parceira/serviço — provavelmente aguarda resposta
+   - Ação sugerida: responder
+
+---
+
+## Tabela Completa
+
+| ID | De | Assunto | Urgência | Categoria | Ação | Racional |
+|----|----|---------|---------|-----------|----|---------|
+| b534346 | IAB Brasil | Programação dos Comitês – Abril | baixa | newsletter | archive | Informativo de eventos |
+| a0e3 | Todoist | Tarefas para abr. 7 — 1, 10+ atrasadas | média | fyi | create-task | Sinal de backlog acumulado |
+| af6bd8 | Obsidian/Stripe | Recibo Obsidian #1754-8586 | baixa | fyi | archive | Recibo de assinatura |
+| c10648 | RunPod | Low Balance Warning (07/04) | urgente | action-required | reply | Saldo baixo — risco de perda de workload |
+| ea0e3 | Diego Lerina | Aceito: Alinhamento Evolution Estratégia — hoje 9h30 | alta | meeting | fyi | Confirmação de presença na reunião de hoje |
+| a49f | Anne Caroline | Convite: AA + EVO — qui. 9/04 18h | média | meeting | schedule-meeting | Confirmar presença na reunião quinzenal |
+| b535f1 | Anne Caroline | Convite: ETUS + Praça — ter. 7/04 16h | alta | meeting | schedule-meeting | Reunião hoje às 16h — confirmar |
+| 535f1 | Gemini | Anotações: AA + EVO (quinzenal) 6/04 | média | fyi | archive | Notas automáticas da reunião |
+| 092e1 | noreply@statuspage | Claude Incident — Sonnet 4.6 erros elevados | média | fyi | archive | Incidente em resolução (já passado) |
+| 08cbe | BRIUS | Novo cliente: David Cabral | média | fyi | fyi | Notificação interna de novo cliente Brius |
+| 9eda | IAB Brasil | Pauta Comitê Retail Media (7/04) | baixa | newsletter | archive | Comitê externo, informativo |
+| 89c4 | Fathom | Recap meeting com etus.com.br | média | fyi | archive | Summary automático de reunião |
+| 3b89c4 | iFood Benefícios | iPhone 17 ou R$10 mil? | baixa | spam | archive | Promoção irrelevante |
+| 3f9f | ClickUp | AI pilots to AI-native teams | baixa | newsletter | archive | Newsletter de ferramenta |
+| 7ce30 | noreply@statuspage | Claude Incident — elevated errors Claude.ai | baixa | fyi | archive | Incidente resolvido |
+| a7378 | Fathom | Recap "Impromptu Google Meet" | média | fyi | archive | Summary automático de reunião |
+| f8062 | DigitalOcean | Core Infrastructure Maintenance | média | fyi | fyi | Manutenção em todos os regions — monitorar |
+| 4ee2 | Slack (Brius) | 1 mensagem não lida | média | action-required | reply | Verificar o que foi enviado no Slack |
+| 9d21b | Ana - mLabs | Re: como conectar 2 instagram? | alta | action-required | reply | Aguarda resposta sobre integração Instagram |
+| 54175 | Panda News | Hotmart não custa apenas 9,9% | baixa | newsletter | archive | Newsletter promocional |
+| 035a65 | RunPod | Low Balance Warning (06/04 tarde) | alta | action-required | reply | Segundo alerta — saldo crítico |
+| eba72 | Todoist | Tarefas para abr. 6 — 4, 10+ atrasadas | baixa | fyi | archive | Digest de ontem |
+| 70d4af | Kiso/mLabs | TOP 3 posts dos últimos 3 meses | baixa | newsletter | archive | Relatório automático de social |
+| 28dc92 | Todoist | Tarefas para abr. 5 — 10+ atrasadas | baixa | fyi | archive | Digest de anteontem |
+| 821df6c | RunPod | Low Balance Warning (05/04) | baixa | fyi | archive | Primeiro alerta (já antigo) |
+
+---
+
+## Ações Sugeridas
+
+- [ ] **Recarregar saldo no RunPod** — 3 alertas consecutivos, saldo crítico
+- [ ] **Verificar pauta para reunião de hoje 9h30** — Alinhamento Estratégia com Diego Lerina
+- [ ] **Confirmar presença: ETUS + Praça hoje às 16h** (convite Anne)
+- [ ] **Responder Ana (mLabs)** — dúvida sobre conectar 2 Instagrams
+- [ ] **Aceitar/recusar convite AA + EVO** — qui. 9/04 18h
+- [ ] **Checar Slack Brius** — 1 mensagem pendente
+- [ ] **Arquivar ~15 emails** de newsletters, digests Todoist antigos, incidentes resolvidos
+
+---
+
+**Próximos passos:**
+- "Recarrega o RunPod" → te ajudo a verificar o dashboard
+- "Mostra o email da Ana" → busco o conteúdo completo
+- "Rascunha resposta para [assunto]" → abro o gog-email-draft
+- "Cria tarefa para [item]" → registro no Todoist
+
+Qual você quer resolver primeiro?
+
+

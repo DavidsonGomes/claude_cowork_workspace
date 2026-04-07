@@ -1,0 +1,49 @@
+TIMESTAMP: 2026-04-07T13:42:38.610657
+DURATION: 318.2s
+RETURNCODE: 0
+PROMPT:
+[agent:flux-financeiro] Execute a skill /fin-weekly-report
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Financial Weekly — W14 gerado ✅
+
+**Arquivo:** `05 Financeiro/reports/weekly/[C] 2026-W14-financial-weekly.html`
+
+---
+
+### Resumo Executivo
+
+| Métrica | Valor | Variação |
+|---------|-------|---------|
+| **Receita da Semana** | R$ 6.995 | **+128,1%** vs semana anterior |
+| **MRR Atual** | R$ 28.950 | ~209 assinaturas |
+| **Cobranças com sucesso** | 45 transações | — |
+| **Falhas de pagamento** | 15 transações | R$ 2.387 em risco |
+| **Despesas** | n/d | Omie fora do ar |
+
+---
+
+### 🔴 Alertas Críticos
+
+1. **Omie HTTP 404** — Segunda ocorrência registrada. Samara Cruz precisa verificar as credenciais (`app_key`/`app_secret`) da integração.
+
+2. **3 reincidentes com 3+ falhas Stripe:**
+   - `otaviopinheiro707` — Business Plan R$348,60 (3 falhas em 3 dias)
+   - `robertorabilero0` — Starter USD $19 (3 falhas)
+   - `ai@chttech.io` — TRY (3 falhas — saldo insuficiente)
+
+3. **Dunning não configurado** — Stripe não está retentando automaticamente. Configurar para reduzir churn involuntário.
+
+---
+
+### 🟡 Destaques Positivos
+
+- Receita cresceu +128% — entrada de novos clientes internacionais (USD, EUR, TRY, COP, etc.)
+- **13 moedas diferentes** processadas na semana — crescimento global orgânico forte
+- Fluxo de caixa projetado positivo nas próximas 4 semanas (~R$ 18.095 acumulado)
+
+

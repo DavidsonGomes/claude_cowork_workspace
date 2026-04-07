@@ -1,0 +1,35 @@
+TIMESTAMP: 2026-04-07T09:22:00.038703
+DURATION: 419.4s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /int-sync-meetings
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Sync Fathom — Concluído
+
+**Período:** 06/04/2026
+**Novos:** 3 reuniões processadas
+**Já processados:** 0 ignorados
+**Tarefas criadas:** 15 no Todoist (projeto Evolution)
+
+### Reuniões sincronizadas:
+
+| Data | Título | Projeto | Tarefas |
+|------|--------|---------|---------|
+| 06/04 13h | Impromptu Google Meet (Summit) | outros | 4 tarefas |
+| 06/04 18h | Planning Evolution | evo-ai | 6 tarefas |
+| 06/04 21h | AA + EVO (quinzenal) | comercial | 5 tarefas |
+
+### Destaques:
+
+- **Planning Evolution:** Lançamento Evo CRM semana que vem. Fase atual = só testes, sem corrigir bugs. Time precisa instalar via readme e reportar via painel admin.
+- **AA + EVO:** Pivô para 3 tiers (Free/Mensal/Anual) + posicionamento como "Marketing Automation". Plano revisado estava due hoje.
+- **Summit:** Willian (Orion) cuida de WhatsApp/Discord; Davidson cuida Email/LinkedIn. Grupo exclusivo recebe 15 min antes. Summit: 14-16 abril.
+
+**Tarefas p2 (urgentes) criadas para hoje:** revisar PR Danilo, coordenar testes CRM, finalizar plano de lançamento AA, enviar link/imagem Summit ao Willian.
+
+

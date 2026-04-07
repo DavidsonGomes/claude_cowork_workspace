@@ -1,0 +1,22 @@
+TIMESTAMP: 2026-04-07T14:19:46.687101
+DURATION: 44.8s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-review-todoist
+
+============================================================
+STDOUT:
+============================================================
+## Triagem Todoist — Concluído
+
+**Projeto:** Evolution
+**Tarefas revisadas:** 48
+**Organizadas:** 4 (categorizadas)
+**Já OK:** 44 (sem alteração necessária)
+
+As 4 tarefas que estavam sem prefixo ganharam categoria:
+- `[Estratégia]` — plano de lançamento para Xandão/Alberto/Anny
+- `[Comercial]` — consulta de preços com Sanja/Felipe/Rabelo
+- `[Produto & Tech]` — login Discord com tiers
+- `[Produto & Tech]` — avaliar multistream
+

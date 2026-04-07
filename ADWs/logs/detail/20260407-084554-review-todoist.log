@@ -1,0 +1,19 @@
+TIMESTAMP: 2026-04-07T08:45:54.363836
+DURATION: 36.1s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-review-todoist
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Triagem Todoist — Concluído
+
+**Projeto:** Evolution
+**Tarefas revisadas:** 50
+**Organizadas:** 5 (categorizadas)
+**Já OK:** 45 (sem alteração necessária)
+
+

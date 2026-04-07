@@ -1,0 +1,31 @@
+TIMESTAMP: 2026-04-06T18:55:30.448351
+DURATION: 192.6s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /int-sync-meetings
+
+============================================================
+STDOUT:
+============================================================
+Sync concluído. Aqui está o resultado:
+
+---
+
+## Sync Fathom — Concluído
+
+**Período:** 06/04/2026  
+**Novos:** 1 reunião processada  
+**Já processados:** 2 ignorados (Planning Evolution, Impromptu Meeting)  
+**Tarefas criadas:** 5 no Todoist (projeto Evolution)
+
+### Reuniões sincronizadas:
+
+| Data | Título | Projeto | Tarefas |
+|------|--------|---------|---------|
+| 06/04/2026 | AA + EVO (quinzenal) | comercial | 5 tarefas |
+
+---
+
+**Destaques da reunião AA + EVO:** pivô estratégico importante — plano de lançamento muda de 2 tiers para **3 tiers (Free / Mensal / Anual)**, posicionamento refinado para **"Marketing Automation"**, e a comunidade free fica no Discord enquanto a paga vai para a plataforma Evolution. Prazo crítico: plano financeiro revisado precisa ir amanhã (07/04) para Alberto/Xandão/Anny.
+
+

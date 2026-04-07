@@ -1,0 +1,54 @@
+TIMESTAMP: 2026-04-06T19:55:41.786090
+DURATION: 139.5s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-faq-sync
+
+============================================================
+STDOUT:
+============================================================
+Memória atualizada. Aqui está o resumo da sync:
+
+---
+
+## FAQ Sync — 2026-04-06
+
+**Perguntas no FAQ:** 14 (primeira sync — arquivo estava zerado)
+**Novas adicionadas:** 14
+**Atualizadas:** 0
+**Fontes:** Discord #chat-pt (50 msgs) + GitHub (30 issues: evolution-api, evo-ai, evolution-go)
+
+### Novas entradas por categoria:
+
+**Instalação & Setup (2)**
+- QR Code não gera → `#2488`, `#2489` + Discord recorrente
+- Como instalar via Docker → Discord recorrente
+
+**Configuração (3)**
+- Diferença Baileys vs WhatsApp Cloud API → Discord recorrente
+- Número banido ao conectar → `#2497`
+- Webhook respondendo para número errado → `#2496`
+
+**Integrações (4)**
+- Chatwoot "Falha ao enviar" + patch Docker → `#2494`
+- CHATWOOT_MESSAGE_READ=false sem efeito → `#2494`
+- syncFullHistory não importa tudo → `#2478`
+- TYPEBOT_START não disparado → `#2490`
+
+**Evolution API (2)**
+- archiveChat retorna 500 → `#2495`
+- stream:error 515 mata instância → `#2498`
+
+**Evo Go (3)**
+- Proxy HTTP trava QR → evolution-go `#12`
+- UI piscando a cada 5s → evolution-go `#11`
+- Erro de licença "invalid product slug" → Discord
+
+**Evo CRM (1)**
+- Sessão não persiste entre mensagens → evo-ai `#28`
+
+---
+
+⚠️ **Atenção Davidson:** A v2.3.7 acumula **9 bugs abertos** só no evolution-api, muitos críticos (archiveChat quebrado, stream:error matando instâncias, Chatwoot com múltiplos problemas). Vale priorizar uma release de correção ou comunicado para a comunidade sobre status das fixes.
+
+

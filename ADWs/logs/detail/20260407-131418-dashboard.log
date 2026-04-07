@@ -1,0 +1,28 @@
+TIMESTAMP: 2026-04-07T13:14:18.618720
+DURATION: 239.0s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-dashboard
+
+============================================================
+STDOUT:
+============================================================
+## Dashboard gerado
+
+**Arquivo:** `01 Daily Logs/[C] 2026-04-07-dashboard.html`
+
+**Health:** Produto 🟡 Misto | Comunidade 🟡 Misto | Financeiro 🟡 Misto | Rotinas ✅ Saudável
+
+**Alertas:** 5 pontos de atenção
+
+---
+
+**Destaques:**
+- **Agenda lotada** com conflito às 10h (Alinhamento Evolution vs IAB)
+- **Plano 3 tiers** precisa sair hoje — reunião AA+EVO é qui 18h
+- **EvoGo bug crítico** — 15 instâncias bloqueadas, webhook duplicando eventos (5 tickets)
+- **Financeiro** sem dados validados — tarefa #8 do dia pendente
+- **9 rotinas** todas com 100% de sucesso
+- **Evo CRM** em fase de testes — lançamento esta semana, campanha já rodando
+
+

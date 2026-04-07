@@ -1,0 +1,65 @@
+TIMESTAMP: 2026-04-07T14:11:30.443178
+DURATION: 540.2s
+RETURNCODE: 0
+PROMPT:
+[agent:flux-financeiro] Execute a skill /fin-monthly-close-kickoff
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Monthly Close Kickoff — Março/2026 ✅
+
+**Arquivo gerado:** `05 Financeiro/reports/monthly/[C] 2026-03-monthly-close.html`
+
+---
+
+### Resumo Executivo
+
+| Indicador | Valor |
+|-----------|-------|
+| **Receita Bruta (Omie)** | R$ 31.376,55 |
+| **Receita Stripe (charges)** | R$ 20.104,14 |
+| **Despesas Pagas** | R$ 23.395,08 |
+| **Resultado Operacional** | **R$ 7.981,47** ✅ |
+| **Margem** | **25,4%** |
+| **MRR Stripe** | R$ 29.087 |
+| **Assinaturas Ativas** | 208 |
+
+---
+
+### Checklist: 2/9 concluídos
+
+| # | Item | Status | Responsável |
+|---|------|--------|-------------|
+| 1 | Levantar receitas Stripe | ✅ Concluído | Auto |
+| 2 | Levantar receitas Omie | ✅ Concluído | Auto |
+| 3 | Conciliar Stripe x Omie | ◯ Pendente | Samara/Davidson |
+| 4 | Categorizar despesas | ◯ Pendente | Samara |
+| 5 | Emitir NFs pendentes | ◯ Pendente | Samara |
+| 6 | Cobrar inadimplentes | ◯ Pendente | Davidson |
+| 7 | Calcular impostos | ◯ Pendente | Samara |
+| 8 | Conciliar extratos bancários | ◯ Pendente | Samara |
+| 9 | Aprovar fechamento | ◯ Pendente | Davidson |
+
+---
+
+### Alertas Prioritários
+
+1. **Churn 10,5%** — 22 cancelamentos + 33 na fila de `cancel_at_period_end` → risco crítico para MRR de abril
+2. **A pagar em abril: R$ 33.012** concentrado em 27/04 — monitorar caixa
+3. **Divergência Omie x Stripe ~R$ 11.272** — conciliar antes do fechamento definitivo
+4. **Pessoal = 40,7% das despesas** (R$ 9.527) — confirmar se é padrão esperado
+
+---
+
+### Pendências para Samara Cruz
+
+- Conciliar 219 charges Stripe com NFs no Omie
+- 3 reembolsos (R$ 336,78) — emitir notas de crédito
+- Confirmar tratamento fiscal das cobranças em USD ($378,20)
+- Validar categorias de despesas (fornecedores reais por categoria)
+- Confirmar se R$ 1.033,17 em impostos cobre todas as obrigações de março
+
+
