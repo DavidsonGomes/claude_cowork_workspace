@@ -129,14 +129,14 @@ def pedidos_status(numero: int):
 # ── Financeiro ────────────────────────────────────────────
 
 def contas_receber(pagina=1, por_pagina=20):
-    data = api_call("financas/contasreceber", "ListarContasReceber", [
+    data = api_call("financas/contareceber", "ListarContasReceber", [
         {"pagina": pagina, "registros_por_pagina": por_pagina}
     ])
     return data
 
 
 def contas_pagar(pagina=1, por_pagina=20):
-    data = api_call("financas/contaspagar", "ListarContasPagar", [
+    data = api_call("financas/contapagar", "ListarContasPagar", [
         {"pagina": pagina, "registros_por_pagina": por_pagina}
     ])
     return data
@@ -144,7 +144,7 @@ def contas_pagar(pagina=1, por_pagina=20):
 
 def resumo_financeiro():
     hoje = datetime.now().strftime("%d/%m/%Y")
-    data = api_call("financas/contasreceber", "ListarContasReceber", [
+    data = api_call("financas/contareceber", "ListarContasReceber", [
         {"pagina": 1, "registros_por_pagina": 1}
     ])
     return {"data": hoje, "resumo": data}
@@ -153,14 +153,14 @@ def resumo_financeiro():
 # ── Notas Fiscais ─────────────────────────────────────────
 
 def nfe_listar(pagina=1, por_pagina=20):
-    data = api_call("produtos/nfe", "ListarNFe", [
+    data = api_call("produtos/nfconsultar", "ListarNF", [
         {"pagina": pagina, "registros_por_pagina": por_pagina}
     ])
     return data
 
 
 def nfe_detalhar(numero: int):
-    data = api_call("produtos/nfe", "ConsultarNFe", [
+    data = api_call("produtos/nfconsultar", "ConsultarNF", [
         {"numero_nfe": numero}
     ])
     return data
@@ -169,15 +169,17 @@ def nfe_detalhar(numero: int):
 # ── Estoque ───────────────────────────────────────────────
 
 def estoque_posicao(pagina=1, por_pagina=20):
-    data = api_call("estoque/saldo", "ConsultarSaldoEstoque", [
-        {"pagina": pagina, "registros_por_pagina": por_pagina}
+    from datetime import datetime as _dt
+    data = api_call("estoque/consulta", "ListarPosEstoque", [
+        {"nPagina": pagina, "nRegPorPagina": por_pagina, "dDataPosicao": _dt.now().strftime("%d/%m/%Y")}
     ])
     return data
 
 
 def estoque_produto(codigo: int):
-    data = api_call("estoque/saldo", "ConsultarSaldoEstoque", [
-        {"codigo_produto": codigo}
+    from datetime import datetime as _dt
+    data = api_call("estoque/consulta", "ListarPosEstoque", [
+        {"nPagina": 1, "nRegPorPagina": 1, "nCodProd": codigo, "dDataPosicao": _dt.now().strftime("%d/%m/%Y")}
     ])
     return data
 

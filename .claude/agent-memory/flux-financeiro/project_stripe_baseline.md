@@ -4,19 +4,22 @@ description: Métricas base do Stripe coletadas em 07/04/2026 — MRR, assinatur
 type: project
 ---
 
-Baseline coletado em 07/04/2026 via Financial Pulse diário.
+Baseline atualizado em 07/04/2026 via Financial Weekly W15.
 
-**Assinaturas ativas:** 209 (mistura de BRL e USD)
-**MRR BRL puro:** R$ 112,26 (assinaturas em BRL são minoria)
-**MRR USD:** $4.972,00/mês (~R$ 28.838 a R$ 5,80)
-**MRR Total estimado em BRL:** ~R$ 28.950
+**Assinaturas ativas:** 209 (208 USD + 1 BRL)
+**MRR USD:** $4.972,00/mês
+**MRR BRL:** R$ 112,26
+**MRR Total em BRL (câmbio R$ 5,85):** ~R$ 29.198
 
-**Churn (30 dias):** 20 cancelamentos = 9,6% — nível de ATENÇÃO (threshold: 5–10%)
-**Feedback de churn:** motivo recorrente reportado como `low_quality`
-**Cancelando ao fim do período (cancel_at_period_end):** 5 assinaturas
+**Receita semana W15 (30/03–06/04):** R$ 7.228,22 (+0,9% vs W14)
+**Receita semana W14 (23/03–29/03):** R$ 7.163,00
+**Charges aprovadas W15:** 51 de 68 tentativas
+**Falhas de pagamento W15:** 17 charges = R$ 2.625,95 (taxa 25% — ALERTA)
+**Cancelamentos na semana W15:** 2
+**Cancel at period end (fila de cancelamento):** 33 assinaturas — ALERTA CRÍTICO
 
-**Reembolsos (7d):** R$ 0,00
-**Novos clientes (7d):** 0 novas assinaturas
+**Churn histórico (30 dias):** ~9,6% — nível ATENÇÃO
+**Motivo churn recorrente:** low_quality
 
-**Why:** Referência para comparar mês a mês e detectar tendências de crescimento/queda.
-**How to apply:** Usar como baseline nas análises futuras. Alertar se churn > 10% ou MRR cair mais de 5% m/m.
+**Why:** Referência para comparar semana a semana e detectar tendências de crescimento/queda.
+**How to apply:** Alertar se churn > 10%, MRR cair > 5% m/m, ou cancel_at_period_end crescer. 33 pendentes de cancelamento é ponto crítico — acompanhar evolução na W16.

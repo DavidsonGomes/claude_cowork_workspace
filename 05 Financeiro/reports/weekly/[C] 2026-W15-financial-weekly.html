@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Weekly — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  th.right, td.right { text-align: right; }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  tr.total td { font-weight: 700; color: var(--text-primary); background: rgba(0,0,0,0.15); border-top: 2px solid var(--border); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .metric-row { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .mr-label { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+  .metric-row .mr-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; }
+  .progress-bar-fill.green { background: var(--green); }
+  .progress-bar-fill.yellow { background: var(--yellow); }
+  .progress-bar-fill.red { background: var(--red); }
+  .progress-bar-fill.evo { background: var(--evo-green); }
+  .var-positive { color: var(--green); }
+  .var-negative { color: var(--red); }
+  .var-neutral { color: var(--text-muted); }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>Financial</span> Weekly</h1>
+    <div class="subtitle">Semana W15 — 30/03/2026 a 06/04/2026 — Relatório semanal</div>
+  </div>
+  <div class="header-right">
+    <span class="badge yellow">⚠ Atenção</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KPIs DA SEMANA                                 -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Receita da Semana</div>
+      <div class="value">R$ 7.228</div>
+      <div class="delta up">▲ +0,9% vs semana anterior</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Despesas da Semana</div>
+      <div class="value">R$ —</div>
+      <div class="delta neutral">Sem dados Omie (CP pagos)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">MRR Atual</div>
+      <div class="value">R$ 29.198</div>
+      <div class="delta neutral">209 assinaturas ativas</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Saldo Projetado (30d)</div>
+      <div class="value">R$ 116.792</div>
+      <div class="delta up">▲ 4x MRR estimado</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- RECEITAS DA SEMANA                             -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Receitas</h2>
+      <span class="badge green">R$ 7.228,22</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th class="right">Valor</th>
+            <th class="right">% do Total</th>
+            <th class="right">vs Semana Ant.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Assinaturas Stripe — BRL</td>
+            <td class="right">R$ 4.257,62</td>
+            <td class="right">58,9%</td>
+            <td class="right var-positive">+0,9%</td>
+          </tr>
+          <tr>
+            <td>Assinaturas Stripe — USD (em BRL)</td>
+            <td class="right">R$ 900,90</td>
+            <td class="right">12,5%</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>Assinaturas Stripe — Outras moedas (em BRL)</td>
+            <td class="right">R$ 2.069,70</td>
+            <td class="right">28,6%</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>Omie — Recebimentos (semana)</td>
+            <td class="right">R$ 964,79</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">Omie parcial</td>
+          </tr>
+          <tr class="total">
+            <td>Total Receitas (Stripe)</td>
+            <td class="right">R$ 7.228,22</td>
+            <td class="right">100%</td>
+            <td class="right var-positive">▲ +0,9%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- DESPESAS DA SEMANA                             -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Despesas</h2>
+      <span class="badge muted">Sem dados abertos</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th class="right">Valor</th>
+            <th class="right">% do Total</th>
+            <th class="right">vs Semana Ant.</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colspan="4" style="text-align:center; color: var(--text-muted); padding: 24px;">
+              Omie retornou apenas lançamentos com status PAGO — sem contas abertas identificadas neste ciclo.<br>
+              Consultar Samara Cruz para confirmação de despesas da semana.
+            </td>
+          </tr>
+          <tr class="total">
+            <td>Total Despesas</td>
+            <td class="right">R$ —</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STRIPE + OMIE                                  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Stripe Semanal -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Stripe (Semana)</h2>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>MRR</div>
+          <div>
+            <div class="mr-value">R$ 29.198,46</div>
+            <div style="font-size:12px;color:var(--text-muted);text-align:right;">USD 4.972 + BRL 112,26</div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Assinaturas</div>
+          <div>
+            <div class="mr-value">209 ativas</div>
+            <div style="font-size:12px;color:var(--text-muted);text-align:right;">-2 canceladas na semana</div>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>Churn (semana)</div>
+          <div class="mr-value">2 cancelamentos</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>Cancel at period end</div>
+          <div class="mr-value" style="color: var(--yellow);">33 assinaturas</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Charges aprovadas</div>
+          <div class="mr-value">51 (R$ 7.228,22)</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot red"></span>Falhas pagamento</div>
+          <div class="mr-value" style="color: var(--red);">17 (R$ 2.625,95)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Omie Semanal -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Omie (Semana)</h2>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>A receber — ATRASADO</div>
+          <div class="mr-value" style="color: var(--yellow);">R$ 2.129,52 (5 reg.)</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>A pagar (próx. semana)</div>
+          <div class="mr-value">R$ 935,99</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot muted"></span>NFs pendentes</div>
+          <div class="mr-value">Endpoint indisponível</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>NFs emitidas (semana)</div>
+          <div class="mr-value">Endpoint indisponível</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Recebidos (semana)</div>
+          <div class="mr-value">R$ 964,79 (7 reg.)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- FLUXO DE CAIXA — PRÓXIMAS 4 SEMANAS            -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Projeção de Fluxo de Caixa (4 semanas)</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Semana</th>
+            <th class="right">Entradas Estimadas</th>
+            <th class="right">Saídas Estimadas</th>
+            <th class="right">Saldo</th>
+            <th class="right">Acumulado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>07/04 – 13/04 (W16)</td>
+            <td class="right">R$ 7.300</td>
+            <td class="right">R$ 936</td>
+            <td class="right" style="color:var(--green)">R$ 6.364</td>
+            <td class="right">R$ 6.364</td>
+          </tr>
+          <tr>
+            <td>14/04 – 20/04 (W17)</td>
+            <td class="right">R$ 7.300</td>
+            <td class="right">R$ 1.500</td>
+            <td class="right" style="color:var(--green)">R$ 5.800</td>
+            <td class="right">R$ 12.164</td>
+          </tr>
+          <tr>
+            <td>21/04 – 27/04 (W18)</td>
+            <td class="right">R$ 7.300</td>
+            <td class="right">R$ 1.500</td>
+            <td class="right" style="color:var(--green)">R$ 5.800</td>
+            <td class="right">R$ 17.964</td>
+          </tr>
+          <tr>
+            <td>28/04 – 04/05 (W19)</td>
+            <td class="right">R$ 7.300</td>
+            <td class="right">R$ 1.500</td>
+            <td class="right" style="color:var(--green)">R$ 5.800</td>
+            <td class="right">R$ 23.764</td>
+          </tr>
+          <tr class="total">
+            <td>Total 4 Semanas</td>
+            <td class="right">R$ 29.200</td>
+            <td class="right">R$ 5.436</td>
+            <td class="right" style="color:var(--green)">R$ 23.764</td>
+            <td class="right">R$ 23.764</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- INADIMPLÊNCIA / CONTAS VENCIDAS                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Contas Vencidas (Omie — A Receber)</h2>
+      <span class="count">5</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Cliente / Fornecedor</th>
+            <th>Tipo</th>
+            <th class="right">Valor</th>
+            <th>Vencimento</th>
+            <th>Dias Atraso</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="color:var(--text-muted)">Não identificado</span></td>
+            <td>A Receber</td>
+            <td class="right" style="color:var(--red)">R$ 1.731,00</td>
+            <td>15/03/2024</td>
+            <td><span style="color:var(--red)">752 dias</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--text-muted)">Não identificado</span></td>
+            <td>A Receber</td>
+            <td class="right" style="color:var(--yellow)">R$ 112,26</td>
+            <td>17/03/2025</td>
+            <td><span style="color:var(--yellow)">386 dias</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--text-muted)">Não identificado</span></td>
+            <td>A Receber</td>
+            <td class="right" style="color:var(--yellow)">R$ 95,42</td>
+            <td>28/01/2025</td>
+            <td><span style="color:var(--yellow)">434 dias</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--text-muted)">Não identificado</span></td>
+            <td>A Receber</td>
+            <td class="right" style="color:var(--yellow)">R$ 95,42</td>
+            <td>14/04/2025</td>
+            <td><span style="color:var(--yellow)">358 dias</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--text-muted)">Não identificado</span></td>
+            <td>A Receber</td>
+            <td class="right" style="color:var(--yellow)">R$ 95,42</td>
+            <td>14/04/2025</td>
+            <td><span style="color:var(--yellow)">358 dias</span></td>
+          </tr>
+          <tr class="total">
+            <td>Total Inadimplência</td>
+            <td>—</td>
+            <td class="right" style="color:var(--yellow)">R$ 2.129,52</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ANÁLISE & RECOMENDAÇÕES                        -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="highlight-card">
+    <div class="title">Análise da Semana</div>
+    <div class="body">
+      <strong>Receita estável.</strong> A receita Stripe da semana foi de R$ 7.228 (+0,9% vs semana anterior de R$ 7.163), demonstrando recorrência consistente. A base global com 209 assinaturas ativas mantém o MRR em R$ 29.198 (USD 4.972 + BRL 112).
+      <br><br>
+      <strong>Alerta: 33 assinaturas com cancel_at_period_end.</strong> Este é o ponto de maior atenção — 15,8% da base sinaliza intenção de cancelar. Se confirmados, o impacto potencial no MRR seria de ~R$ 4.619 (estimativa proporcional). Requer acompanhamento.
+      <br><br>
+      <strong>Falhas de pagamento elevadas.</strong> 17 charges falharam na semana, totalizando R$ 2.625,95 em risco. Taxa de falha de 25% (17 de 68 tentativas) está acima do aceitável (ideal: &lt;5%).
+      <br><br>
+      <strong>Inadimplência no Omie: baixa, mas antiga.</strong> R$ 2.129,52 em contas ATRASADAS, sendo R$ 1.731 com mais de 2 anos de atraso — provavelmente irrecuperável sem ação.
+      <br><br>
+      <strong>Despesas não mapeadas.</strong> O Omie retornou apenas lançamentos PAGO neste ciclo — sem contas abertas visíveis. Consultar Samara Cruz para confirmar estrutura de custos da semana.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">Ações Recomendadas</div>
+    <div class="body">
+      <strong>1. Urgente — Falhas de pagamento (Stripe):</strong> Investigar os 17 charges falhos (R$ 2.625,95). Acionar retentativa automática ou contatar clientes manualmente. Priorizar os de maior valor.
+      <br><br>
+      <strong>2. Urgente — Cancel at period end (33 assinaturas):</strong> Analisar quem está na fila de cancelamento. Acionar campanha de retenção ou identificar causa raiz (preço? qualidade? suporte?).
+      <br><br>
+      <strong>3. Omie — Contato com Samara Cruz:</strong> Solicitar detalhamento das despesas da semana (categorias, valores) e confirmar NFs emitidas (endpoint de NF-e retornou erro 500).
+      <br><br>
+      <strong>4. Inadimplência antiga — R$ 1.731,00 (desde 03/2024):</strong> Avaliar provisão para devedores duvidosos ou ação de cobrança. Mais de 2 anos sem recebimento indica perda potencial.
+      <br><br>
+      <strong>5. A pagar — R$ 935,99 (venc. 20/12/2026):</strong> Confirmar natureza do lançamento A VENCER identificado no Omie — verificar se há mais contas abertas não visíveis na paginação.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Flux — 07/04/2026 às 07:10 BRT
+</div>
+
+</body>
+</html>
