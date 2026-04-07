@@ -1,23 +1,27 @@
-# OpenClaw m01 — Produção de Aulas
+---
+module: M01
+name: Fundamentos
+status: draft
+---
+
+# M01 — Fundamentos
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai entender o que é a camada agentic, como o OpenClaw se encaixa nessa arquitetura e quais são os anti-padrões que devem ser evitados desde o início.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min)
-- [ ] Gerar 4 artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança (risco, stop condition, rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Padrão de nomes
-- `ALUNO_XX_Tema_v1.html`
-- `INSTRUTOR_XX_Tema_v1.html`
-- `PROMPTS_XX_Tema_v1.html`
-- `CAPSTONE_XX_Tema_v1.html`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | A nova camada agentic | 15 min | vídeo | draft |
+| 2 | O que é OpenClaw na prática | 15 min | vídeo | draft |
+| 3 | Arquitetura base | 15 min | vídeo | draft |
+| 4 | Anti-padrões iniciais | 15 min | vídeo | draft |
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+## Entregável do módulo
+Mapa mental ou diagrama da arquitetura base do OpenClaw com os componentes identificados.
+
+## Critérios de aprovação
+- [ ] Consegue explicar a diferença entre OpenClaw e uma integração comum
+- [ ] Identifica pelo menos 3 anti-padrões do módulo
+- [ ] Diagrama de arquitetura base correto e completo

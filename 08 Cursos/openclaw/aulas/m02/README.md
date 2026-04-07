@@ -1,23 +1,27 @@
-# OpenClaw m02 — Produção de Aulas
+---
+module: M02
+name: Setup e Runtime
+status: draft
+---
+
+# M02 — Setup e Runtime
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai ter o OpenClaw instalado e funcionando com Gateway, Runtime e workspace mínimo configurados e validados pelo checklist de setup.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min)
-- [ ] Gerar 4 artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança (risco, stop condition, rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Padrão de nomes
-- `ALUNO_XX_Tema_v1.html`
-- `INSTRUTOR_XX_Tema_v1.html`
-- `PROMPTS_XX_Tema_v1.html`
-- `CAPSTONE_XX_Tema_v1.html`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | Instalação e pré-requisitos | 20 min | vídeo + prática | draft |
+| 2 | Gateway + Runtime | 20 min | vídeo + prática | draft |
+| 3 | Estrutura mínima de workspace | 15 min | vídeo + prática | draft |
+| 4 | Checklist de setup | 15 min | prática | draft |
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+## Entregável do módulo
+OpenClaw rodando localmente com Gateway + Runtime ativos + checklist de setup preenchido e validado.
+
+## Critérios de aprovação
+- [ ] Gateway respondendo corretamente
+- [ ] Runtime ativo e conectado ao Gateway
+- [ ] Checklist de setup completo sem itens críticos abertos

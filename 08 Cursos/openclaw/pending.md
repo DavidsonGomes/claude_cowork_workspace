@@ -1,18 +1,20 @@
-# OpenClaw Curso — Pendências
+# OpenClaw — Pendências
 
-## Pendências imediatas
-1. Definir outcomes mensuráveis por módulo (Nível 1 e Nível 2).
-2. Definir critérios de aprovação por aula (rubrica padrão).
-3. Quebrar módulos em aulas graváveis com tempo alvo (15–25 min).
-4. Padronizar exercícios práticos por aula.
-5. Fechar estrutura comercial: Core (entrada), Scale (avançado), bundle.
-6. Mapear explicitamente cada aula do Core para um artefato real do stack OpenClaw (abordagem Build the Real Thing).
-7. Definir o projeto transversal do Core (escopo, entregas e checkpoints).
+## P0 — Crítico (esta semana)
+- [ ] Fechar outcomes mensuráveis por módulo do Nível 1 (M1..M7)
+- [ ] Mapear cada aula do Core para um artefato real do stack OpenClaw (Build the Real Thing)
+- [ ] Definir projeto transversal do Core (escopo, entregas e checkpoints)
 
-## Prioridade de execução
-- Prioridade 1: concluir Nível 1 (Core) ponta a ponta.
-- Prioridade 2: preparar trilha Nível 2 (Scale) a partir do capstone do Core.
+## P1 — Importante (próximas 2 semanas)
+- [ ] Definir critérios de aprovação por aula (rubrica padrão)
+- [ ] Converter módulos do Nível 1 em aulas graváveis (15–25 min)
+- [ ] Padronizar exercícios práticos por aula com evidência verificável
 
-## Riscos
-- Iniciar gravação sem outcomes/rubricas claros.
-- Misturar conteúdo de multiagente cedo demais e aumentar complexidade do aluno iniciante.
+## P2 — Planejado (próximo mês)
+- [ ] Fechar estrutura comercial: Core standalone + Scale avançado + bundle
+- [ ] Preparar trilha Nível 2 (Scale) a partir do capstone do Core
+- [ ] Fechar outcomes e critérios do Nível 2
+
+## Riscos identificados
+- Iniciar gravação sem outcomes/rubricas claros — **não gravar antes de fechar P0**
+- Misturar conteúdo de multiagente cedo demais — manter Nível 1 isolado durante produção

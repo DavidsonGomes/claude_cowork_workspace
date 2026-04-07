@@ -1,23 +1,27 @@
-# OpenClaw m05 — Produção de Aulas
+---
+module: M05
+name: Rotina Operacional
+status: draft
+---
+
+# M05 — Rotina Operacional
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai saber definir SLO para automações, executar auditoria periódica, manter higiene de workspace e acompanhar métricas de saúde operacional.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min)
-- [ ] Gerar 4 artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança (risco, stop condition, rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Padrão de nomes
-- `ALUNO_XX_Tema_v1.html`
-- `INSTRUTOR_XX_Tema_v1.html`
-- `PROMPTS_XX_Tema_v1.html`
-- `CAPSTONE_XX_Tema_v1.html`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | SLO de automações | 15 min | vídeo + prática | draft |
+| 2 | Auditoria semanal | 15 min | vídeo + prática | draft |
+| 3 | Higiene de workspace | 15 min | prática | draft |
+| 4 | Métricas de saúde | 15 min | vídeo + prática | draft |
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+## Entregável do módulo
+SLO documentado + primeira auditoria semanal executada e documentada + 1 métrica de saúde monitorada.
+
+## Critérios de aprovação
+- [ ] SLO com critério mensurável definido
+- [ ] Primeira auditoria semanal completa documentada
+- [ ] Pelo menos 1 métrica de saúde com threshold de alerta definido

@@ -1,7 +1,11 @@
-# Claude Code Curso — Feedback
+# Claude Code — Feedback
 
-## Sinais capturados
-- (preencher)
+Nenhum feedback de alunos registrado ainda.
 
-## Ajustes aplicados
-- Estrutura inicial criada no padrão oficial dos cursos
+---
+
+## Padrão de registro (quando houver)
+
+| Data | Fonte | Feedback | Ação tomada |
+|------|-------|----------|-------------|
+| YYYY-MM-DD | aluno / live / formulário | resumo | aplicado / pendente |

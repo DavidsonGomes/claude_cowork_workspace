@@ -1,23 +1,27 @@
-# OpenClaw m06 — Produção de Aulas
+---
+module: M06
+name: Integrações e Automações (single-agent)
+status: draft
+---
+
+# M06 — Integrações e Automações (single-agent)
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai saber criar fluxos de integração com modelo de eventos, aplicar segurança no fluxo, tratar erros e validar a operação.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min)
-- [ ] Gerar 4 artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança (risco, stop condition, rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Padrão de nomes
-- `ALUNO_XX_Tema_v1.html`
-- `INSTRUTOR_XX_Tema_v1.html`
-- `PROMPTS_XX_Tema_v1.html`
-- `CAPSTONE_XX_Tema_v1.html`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | Modelo de eventos | 15 min | vídeo | draft |
+| 2 | Fluxos de integração com segurança | 20 min | vídeo + prática | draft |
+| 3 | Tratamento de erro | 15 min | vídeo + prática | draft |
+| 4 | Validação operacional | 15 min | prática | draft |
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+## Entregável do módulo
+1 integração funcionando ponta a ponta com tratamento de erro implementado e validação operacional documentada.
+
+## Critérios de aprovação
+- [ ] Integração funcional com evento disparando corretamente
+- [ ] Pelo menos 1 cenário de erro tratado e testado
+- [ ] Validação operacional documentada com critério de sucesso definido

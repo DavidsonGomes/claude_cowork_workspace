@@ -1,17 +1,28 @@
-# Claude Code m03 — Produção de Aulas
+---
+module: M03
+name: Qualidade Técnica
+status: draft
+---
+
+# M03 — Qualidade Técnica
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai aplicar testes, lint e review técnico como parte natural do fluxo — não como etapas extras — e produzir commits limpos e rastreáveis.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15–25 min)
-- [ ] Gerar artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança operacional (riscos, stop condition e rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | Testes como trava de regressão | 20 min | vídeo + prática | draft |
+| 2 | Lint/format e consistência | 15 min | vídeo + prática | draft |
+| 3 | Review técnico orientado a risco | 15 min | vídeo | draft |
+| 4 | Commits limpos e rastreáveis | 15 min | vídeo + prática | draft |
+
+## Entregável do módulo
+PR com testes passando, lint zerado, review documentado e histórico de commits legível.
+
+## Critérios de aprovação
+- [ ] Pelo menos 1 teste por funcionalidade implementada
+- [ ] Lint passa sem erros no projeto
+- [ ] Review documentado com pelo menos 1 ponto de melhoria aplicado
+- [ ] Mensagens de commit descritivas e legíveis por terceiros

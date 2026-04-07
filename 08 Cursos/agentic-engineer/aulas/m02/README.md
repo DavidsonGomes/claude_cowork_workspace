@@ -1,17 +1,27 @@
-# Agentic Engineer m02 — Produção de Aulas
+---
+module: M02
+name: Execução Assistida por Agentes
+status: draft
+---
+
+# M02 — Execução Assistida por Agentes
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai saber implementar stories de forma incremental com rastreabilidade, usando agentes para acelerar sem perder o controle da entrega.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min quando formato curto)
-- [ ] Gerar artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança operacional e rollback
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | Implementação por story — nunca pulando etapas | 15 min | vídeo | draft |
+| 2 | Delegação ao agente com contexto mínimo eficiente | 15 min | vídeo + prática | draft |
+| 3 | Review técnico durante a execução (checkpoints) | 15 min | vídeo + prática | draft |
+| 4 | Ajustes pós-review sem quebrar o processo | 15 min | prática | draft |
+
+## Entregável do módulo
+Funcional principal rodando: pelo menos 1 story implementada com evidência de review e ajustes aplicados.
+
+## Critérios de aprovação
+- [ ] Cada story implementada tem evidência de review (checklist ou comentário formal)
+- [ ] Ajustes foram aplicados e registrados após review
+- [ ] Funcional demonstrável ao final do módulo

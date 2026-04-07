@@ -1,3 +1,11 @@
-# Agentic Engineer Curso — Feedback
+# Agentic Engineer — Feedback
 
-Ainda sem feedback consolidado de alunos neste workspace.
+Nenhum feedback de alunos registrado ainda.
+
+---
+
+## Padrão de registro (quando houver)
+
+| Data | Fonte | Feedback | Ação tomada |
+|------|-------|----------|-------------|
+| YYYY-MM-DD | aluno / live / formulário | resumo | aplicado / pendente |

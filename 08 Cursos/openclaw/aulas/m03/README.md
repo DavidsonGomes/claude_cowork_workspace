@@ -1,23 +1,27 @@
-# OpenClaw m03 — Produção de Aulas
+---
+module: M03
+name: Segurança Operacional
+status: draft
+---
+
+# M03 — Segurança Operacional
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai saber aplicar princípios de segurança operacional, executar gates pré-deploy e realizar rollback básico com procedimento documentado.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min)
-- [ ] Gerar 4 artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança (risco, stop condition, rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Padrão de nomes
-- `ALUNO_XX_Tema_v1.html`
-- `INSTRUTOR_XX_Tema_v1.html`
-- `PROMPTS_XX_Tema_v1.html`
-- `CAPSTONE_XX_Tema_v1.html`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | Princípios de segurança | 15 min | vídeo | draft |
+| 2 | Gates pré-deploy | 15 min | vídeo + prática | draft |
+| 3 | Checklist de segurança | 15 min | prática | draft |
+| 4 | Rollback básico | 15 min | vídeo + prática | draft |
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+## Entregável do módulo
+Checklist de segurança preenchido + procedimento de rollback documentado e testado pelo menos 1 vez.
+
+## Critérios de aprovação
+- [ ] Checklist de segurança sem falhas críticas abertas
+- [ ] Gates pré-deploy definidos para o projeto do curso
+- [ ] Rollback testado e documentado com passos reproduzíveis

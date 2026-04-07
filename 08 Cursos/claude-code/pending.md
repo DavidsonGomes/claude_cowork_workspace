@@ -1,16 +1,19 @@
-# Claude Code Curso — Pendências
+# Claude Code — Pendências
 
-## Pendências imediatas
-1. Definir outcomes mensuráveis por módulo (M1..M7).
-2. Definir critérios de aprovação por aula (rubrica padrão).
-3. Quebrar cada módulo em aulas graváveis com tempo alvo (15–25 min).
-4. Padronizar exercícios práticos por aula com evidência verificável.
-5. Definir projeto transversal e checkpoints do capstone.
+## P0 — Crítico (esta semana)
+- [ ] Definir outcomes mensuráveis por módulo (M1..M7)
+- [ ] Definir critérios de aprovação por aula (rubrica padrão)
 
-## Prioridade de execução
-- Prioridade 1: fechar M1->M3 com material completo para primeira turma.
-- Prioridade 2: consolidar M4->M7 e capstone final.
+## P1 — Importante (próximas 2 semanas)
+- [ ] Converter M1→M3 em aulas graváveis (15–25 min cada)
+- [ ] Padronizar exercícios práticos por aula com evidência verificável
+- [ ] Definir projeto transversal do curso (escopo e checkpoints do capstone)
 
-## Riscos
-- Iniciar gravação sem outcomes/rubricas claros.
-- Focar em prompt sem disciplina de engenharia (teste/lint/review).
+## P2 — Planejado (próximo mês)
+- [ ] Consolidar M4→M7 com material completo
+- [ ] Produzir artefatos por aula (ALUNO/INSTRUTOR/PROMPTS)
+- [ ] Fechar estrutura da rubrica de certificação final
+
+## Riscos identificados
+- Iniciar gravação sem outcomes/rubricas claros — **não gravar antes de fechar P0**
+- Focar em prompt sem disciplina de engenharia (testes/lint/review)

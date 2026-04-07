@@ -1,33 +1,48 @@
-# Claude Code — Index do Curso
+---
+name: claude-code
+status: em-planejamento
+created: 2026-03-18
+updated: 2026-04-06
+---
 
-## Objetivo
-Formar operador produtivo em Claude Code: sair do uso básico para execução profissional com qualidade, segurança e previsibilidade.
+# Claude Code
 
-## Status de produção
-- Estrutura macro: ✅
-- Roadmap inicial: ✅
-- Módulos base (M1..M7): ✅
-- Aulas detalhadas por módulo: ⏳ em produção
+## Visão Geral
+Curso prático para sair do uso casual do Claude Code e chegar à operação profissional com qualidade, segurança e previsibilidade em fluxos reais de entrega. O aluno aprende a usar Claude Code como ferramenta de engenharia — não apenas de geração de código.
 
-## Links canônicos
-- Roadmap: `memory/courses/claude-code/roadmap.md`
-- Módulos: `memory/courses/claude-code/modules.md`
-- Feedback: `memory/courses/claude-code/feedback.md`
-- Pending: `memory/courses/claude-code/pending.md`
+## Público-alvo
+Desenvolvedor que já conhece Claude Code ou ferramentas similares mas usa de forma informal, sem disciplina de testes, lint, review e rastreabilidade.
 
-## Estrutura operacional
-- `aulas/m01 ... aulas/m07`
-- `lives/`
-- `assets/`
+## Pré-requisitos
+- Familiaridade básica com desenvolvimento de software
+- Claude Code instalado e configurado
+- Git instalado
 
-## Regra de produção
-`HTML (fonte) -> PDF approved (final oficial)`
+## Objetivos de aprendizagem
+Ao final do curso, o aluno será capaz de:
+1. Operar Claude Code com fluxo de execução guiada (prompt → plano → implementação)
+2. Aplicar qualidade técnica: testes, lint, review e commit discipline no dia a dia
+3. Gerenciar contexto e memória de projeto com arquivos de contrato
+4. Debug, refatoração e documentação com assistência de agentes
+5. Construir playbooks e automações para tarefas repetíveis
 
-Referência visual oficial:
-- `shared/course-templates/pdf-approved/ALUNO_03_Permissoes_v3.approved.pdf`
+## Estrutura
+- **Módulos:** 7 (M1–M7)
+- **Aulas por módulo:** 4
+- **Duração estimada:** ~14h total
+- **Formato:** vídeo + exercícios práticos com artefato verificável
 
-## Backlog priorizado
-1. Fechar outcomes mensuráveis por módulo
-2. Quebrar módulos em aulas de 15–25 min com exercício prático
-3. Instanciar artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE)
-4. Validar rubrica N0–N3 por aula
+## Módulos
+| # | Módulo | Tema | Status |
+|---|--------|------|--------|
+| M1 | Fundamentos e Setup | O que é, instalação, fluxo básico | draft |
+| M2 | Execução Guiada | Briefing → plano → implementação com checkpoints | draft |
+| M3 | Qualidade Técnica | Testes, lint, review, commits | draft |
+| M4 | Contexto e Memória de Projeto | Arquivos de contrato, continuidade, drift | draft |
+| M5 | Operação no Dia a Dia | Debug, refactor, documentação | draft |
+| M6 | Automação e Escala | Playbooks, delegação, observabilidade | draft |
+| M7 | Capstone | Entrega ponta a ponta com critérios objetivos | draft |
+
+## Links
+- Plataforma: (a definir)
+- Repositório: (a definir)

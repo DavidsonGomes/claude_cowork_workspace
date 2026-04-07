@@ -1,23 +1,28 @@
-# OpenClaw m07 — Produção de Aulas
+---
+module: M07
+name: Capstone Core
+status: draft
+---
+
+# M07 — Capstone Core
 
 ## Objetivo do módulo
-{{OBJETIVO_MODULO}}
+Ao final deste módulo, o aluno vai entregar um sistema single-agent funcional em produção usando todos os artefatos e práticas dos módulos M1 a M6 do Nível 1.
 
-## Checklist rápido
-- [ ] Definir outcomes mensuráveis do módulo
-- [ ] Instanciar aulas (até 15 min)
-- [ ] Gerar 4 artefatos por aula (ALUNO/INSTRUTOR/PROMPTS/CAPSTONE quando aplicável)
-- [ ] Validar segurança (risco, stop condition, rollback)
-- [ ] Aplicar rubrica N0–N3
-- [ ] Publicar PDF final como `*.approved.pdf`
+## Aulas
 
-## Padrão de nomes
-- `ALUNO_XX_Tema_v1.html`
-- `INSTRUTOR_XX_Tema_v1.html`
-- `PROMPTS_XX_Tema_v1.html`
-- `CAPSTONE_XX_Tema_v1.html`
+| # | Aula | Duração | Formato | Status |
+|---|------|---------|---------|--------|
+| 1 | Briefing e escopo do projeto final | 20 min | vídeo + prática | draft |
+| 2 | Implementação incremental | 30 min | prática | draft |
+| 3 | Hardening — segurança, rollback, SLO | 20 min | prática | draft |
+| 4 | Defesa técnica com evidências | 20 min | prática | draft |
 
-## Referências
-- `shared/course-templates/master-v1/`
-- `memory/courses/TEMPLATE-INSTRUCOES.md`
-- `memory/courses/TEMPLATE-QA-CHECKLIST.md`
+## Entregável do módulo
+Sistema single-agent em produção + documentação completa + rubrica de avaliação preenchida com todas as evidências.
+
+## Critérios de aprovação
+- [ ] Sistema funcional rodando em produção (não apenas local)
+- [ ] Contrato de agente configurado + memória organizada + SLO definido
+- [ ] Checklist de segurança sem falhas críticas
+- [ ] Rubrica preenchida e DoD completo

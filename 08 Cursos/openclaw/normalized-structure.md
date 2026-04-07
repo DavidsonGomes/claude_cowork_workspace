@@ -1,13 +1,21 @@
-# OpenClaw — Estrutura normalizada (padrão v1)
+# OpenClaw — Estrutura normalizada
 
-Referência: `memory/courses/course-core-template-v1.md`
+> Este arquivo é um índice de referência rápida. A fonte de verdade está em `modules.md`.
 
-## Mapeamento atual
-- Curso: definido
-- Módulos: definidos em Core (N1) e Scale (N2)
-- Aulas/Lives: parcialmente produzidas (A1/A2 já com material)
-- Operação: pendente consolidar checklist/rubrica/DoD por trilha
+## Estrutura atual
 
-## Próximo ajuste recomendado
-- Criar `lives.md` para OpenClaw no mesmo formato do Agentic Engineer
-- Padronizar gate de qualidade por módulo (outcome + exercício + evidência)
+- **Nível 1 — Core (single-agent):** M1 a M7 — foco em operar com confiabilidade usando um agente principal
+- **Nível 2 — Scale (multiagentes):** M1 a M7 — foco em coordenação, roteamento e governança distribuída
+
+## Estado de produção
+
+| Componente | Status |
+|-----------|--------|
+| Módulos definidos | Nível 1 e Nível 2 |
+| Aulas/Lives produzidas | A1/A2 do Nível 1 (Setup/Gateway) aproveitáveis |
+| Checklist/rubrica/DoD por módulo | Pendente |
+| Projeto transversal (capstone) | Pendente definir escopo |
+
+## Próximos ajustes recomendados
+- Padronizar gate de qualidade por módulo: outcome + exercício + evidência
+- Criar lives no padrão do Agentic Engineer conforme forem acontecendo (`lives.md`)
