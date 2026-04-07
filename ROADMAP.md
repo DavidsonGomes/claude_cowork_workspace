@@ -59,7 +59,7 @@ Foco: trazer os agentes restantes do OpenClaw que fazem sentido.
   - Skills: `mkt-*` já existem, falta o agente orquestrador
   - Command: `/pixel`
 
-- [ ] **Nex (@nex)** — Comercial / pipeline
+- [X] **Nex (@nex)** — Comercial / pipeline
   - Pipeline de vendas (lead → fechamento)
   - Qualificação de leads (ICP, ticket, fit)
   - Playbooks de discovery e objeções
