@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Triage — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --evo-green: #00FFA7;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .section-accent-red .section-header { border-left: 3px solid var(--red); }
+  .section-accent-yellow .section-header { border-left: 3px solid var(--yellow); }
+  .section-accent-muted .section-header { border-left: 3px solid var(--border); }
+  .action-item { padding: 12px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .action-item:last-child { border-bottom: none; }
+  .action-item .checkbox { width: 18px; height: 18px; border: 2px solid var(--border); border-radius: 4px; flex-shrink: 0; }
+  .action-item .action-text { font-size: 14px; color: var(--text-secondary); flex: 1; }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div>
+        <h1>Email <span>Triage</span></h1>
+        <div class="subtitle">07 de abril de 2026 — 10:30 BRT</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- MÉTRICAS -->
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="label">Total Não Lidos</div>
+      <div class="value">25</div>
+      <div class="delta neutral">25 no inbox</div>
+    </div>
+    <div class="metric-card" style="border-color:rgba(240,68,56,0.3);">
+      <div class="label">Alta Prioridade</div>
+      <div class="value" style="color:var(--red);">5</div>
+      <div class="delta down">1 urgente(s)</div>
+    </div>
+    <div class="metric-card" style="border-color:rgba(247,144,9,0.3);">
+      <div class="label">Ação Necessária</div>
+      <div class="value" style="color:var(--yellow);">5</div>
+      <div class="delta neutral">1 aguardando resposta</div>
+    </div>
+  </div>
+
+  <!-- ALTA PRIORIDADE -->
+  <div class="section section-accent-red">
+    <div class="section-header">
+      <h2 style="color:var(--text-primary);">Alta Prioridade</h2>
+      <span style="background:rgba(240,68,56,0.15);color:var(--red);font-size:12px;font-weight:600;padding:2px 10px;border-radius:100px;">5 emails</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>De</th>
+            <th>Assunto</th>
+            <th>Ação Sugerida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--red);font-weight:600;white-space:nowrap;">⚠️ noreply@runpod.io</td>
+            <td>Low Balance Warning — 3 alertas consecutivos</td>
+            <td style="font-size:13px;color:var(--text-muted);">Verificar e recarregar saldo urgente</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Diego Lerina</td>
+            <td>Aceito: Alinhamento Evolution Estratégia — HOJE 9h30</td>
+            <td style="font-size:13px;color:var(--text-muted);">Preparar pauta para reunião de hoje</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Anne Caroline Carvalho</td>
+            <td>Convite: AA + EVO — qui. 9/04 18h–19h</td>
+            <td style="font-size:13px;color:var(--text-muted);">Aceitar ou recusar convite</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Anne Caroline Carvalho</td>
+            <td>Convite: ETUS + Praça — HOJE 16h–17h30</td>
+            <td style="font-size:13px;color:var(--text-muted);">Confirmar presença — reunião hoje à tarde</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">BRIUS FOR PUBLISHER</td>
+            <td>Novo cliente na BRIUS: David Cabral</td>
+            <td style="font-size:13px;color:var(--text-muted);">Ler e acompanhar — novo cliente</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MÉDIA PRIORIDADE -->
+  <div class="section section-accent-yellow">
+    <div class="section-header">
+      <h2 style="color:var(--text-primary);">Média Prioridade</h2>
+      <span style="background:rgba(247,144,9,0.15);color:var(--yellow);font-size:12px;font-weight:600;padding:2px 10px;border-radius:100px;">5 emails</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>De</th>
+            <th>Assunto</th>
+            <th>Ação Sugerida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Fathom</td>
+            <td>Recap of your meeting with etus.com.br</td>
+            <td style="font-size:13px;color:var(--text-muted);">Ler resumo da reunião</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">DigitalOcean Support</td>
+            <td>Core Infrastructure Maintenance in All Regions</td>
+            <td style="font-size:13px;color:var(--text-muted);">Ler — verificar impacto na infraestrutura</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Ana — mLabs</td>
+            <td>Re: como conectar 2 instagram?</td>
+            <td style="font-size:13px;color:var(--text-muted);">Responder — suporte pendente</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Gemini</td>
+            <td>Anotações: AA + EVO (quinzenal) — 6 abr.</td>
+            <td style="font-size:13px;color:var(--text-muted);">Ler notas da reunião de ontem</td>
+          </tr>
+          <tr>
+            <td style="color:var(--text-primary);font-weight:500;white-space:nowrap;">Fathom</td>
+            <td>Recap for "Impromptu Google Meet Meeting"</td>
+            <td style="font-size:13px;color:var(--text-muted);">Ler recap do meet informal</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BAIXA PRIORIDADE -->
+  <div class="section section-accent-muted">
+    <div class="section-header">
+      <h2 style="color:var(--text-primary);">Baixa Prioridade</h2>
+      <span style="background:rgba(102,112,133,0.15);color:var(--text-muted);font-size:12px;font-weight:600;padding:2px 10px;border-radius:100px;">15 emails</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>De</th>
+            <th>Assunto</th>
+            <th>Ação Sugerida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="white-space:nowrap;">Todoist (x2)</td>
+            <td>Tarefas atrasadas — abr. 5 e 6</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — checar Todoist direto</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">noreply@statuspage.io (x2)</td>
+            <td>Claude Incident — Sonnet 4.6 / elevated errors</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — incidentes já resolvidos</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Figma</td>
+            <td>Receipt for subscription payment Apr 04, 2026</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — comprovante de pagamento</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Kiso / mLabs</td>
+            <td>Descubra seus TOP 3 posts dos últimos 3 meses</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — relatório automático social</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">iFood Benefícios</td>
+            <td>iPhone 17 ou R$ 10 mil. O que você prefere?</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — promoção</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Comitês IAB Brasil</td>
+            <td>Pauta do Comitê de Retail Media (7 de abril)</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — newsletter de comitê</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Brius (via Slack)</td>
+            <td>Você tem 1 mensagem não lida</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — verificar Slack direto</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Agentforce Sales</td>
+            <td>Mais de 50 tendências de vendas...</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — marketing Salesforce</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Evolution Foundation</td>
+            <td>O timing importa tanto quanto a competência</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — newsletter própria</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">ClickUp Team</td>
+            <td>This week: From AI pilots to AI-native teams</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — newsletter ClickUp</td>
+          </tr>
+          <tr>
+            <td style="white-space:nowrap;">Panda News</td>
+            <td>Hotmart não custa apenas 9,9%</td>
+            <td style="font-size:13px;color:var(--text-muted);">Arquivar — newsletter Panda Video</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- AÇÕES SUGERIDAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Ações Sugeridas</h2>
+    </div>
+    <div class="section-body">
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Recarregar saldo RunPod</strong> — 3 alertas consecutivos de Low Balance, infra de GPU pode travar</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Preparar pauta para reunião com Diego Lerina</strong> — HOJE 9h30–11h BRT (Alinhamento Evolution Estratégia)</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Confirmar ou recusar: ETUS + Praça</strong> — HOJE 16h–17h30 BRT</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Responder convite AA + EVO</strong> — qui. 9/04 18h–19h (Anne Caroline)</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Responder Ana (mLabs)</strong> — suporte pendente sobre conectar 2 contas Instagram</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Ler recap Fathom</strong> da reunião etus.com.br + Google Meet impromptu</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text"><strong>Arquivar ~15 newsletters e notificações automáticas</strong> — zero valor acionável</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Clawdia — 07/04/2026 10:30 BRT
+</div>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing Matinal — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .section-header h2 { font-size: 16px; font-weight: 600; }
+  .count { font-size: 13px; color: var(--text-muted); background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { font-size: 12px; font-weight: 500; color: var(--text-muted); text-align: left; padding: 12px 24px; border-bottom: 1px solid var(--border); text-transform: uppercase; letter-spacing: 0.5px; }
+  td { padding: 14px 24px; font-size: 14px; color: var(--text-secondary); border-bottom: 1px solid rgba(52,64,84,0.5); }
+  tr:last-child td { border-bottom: none; }
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.gray { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .badge.purple { background: rgba(129,51,170,0.2); color: #c084fc; }
+  .list-item { display: flex; align-items: center; padding: 14px 24px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.08) 0%, rgba(0,255,167,0.03) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-primary); line-height: 1.6; }
+  .footer { text-align: center; padding: 24px; font-size: 12px; color: var(--text-muted); border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  .conflict-warning { background: rgba(240,68,56,0.08); border: 1px solid rgba(240,68,56,0.3); border-radius: 8px; padding: 12px 16px; margin: 8px 24px 16px; font-size: 13px; color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div>
+        <h1>Briefing <span>Matinal</span></h1>
+        <div class="subtitle">07 de Abril de 2026 — Terça-feira</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:right;">
+    <div style="font-size:28px;font-weight:700;color:var(--evo-green)">07:00</div>
+    <div style="font-size:12px;color:var(--text-muted)">Brasília (BRT)</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- MÉTRICAS -->
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="label">Eventos do Dia</div>
+      <div class="value">5</div>
+      <div class="delta neutral">Primeiro às 10h00</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Emails Pendentes</div>
+      <div class="value">3</div>
+      <div class="delta down">2 urgente(s)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Tarefas Prioritárias</div>
+      <div class="value">8</div>
+      <div class="delta down">5 atrasada(s)</div>
+    </div>
+  </div>
+
+  <!-- AGENDA -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Agenda do Dia</h2>
+      <span class="count">5 eventos</span>
+    </div>
+    <div class="section-body">
+      <div class="conflict-warning">⚠️ Conflito às 10h: "Alinhamento Evolution Estratégia" (10h–11h30) e "[IAB] Comitê de Retail Media" (10h–12h) se sobrepõem. IAB ainda aguarda resposta sua.</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Horário</th>
+            <th>Evento</th>
+            <th>Participantes</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="color:var(--red);font-weight:600;white-space:nowrap;">10:00–11:30</td>
+            <td style="color:var(--text-primary);font-weight:500;">Alinhamento Evolution Estratégia</td>
+            <td>Diego Lerina (dpr.ag), Filipe Reis (Supersonic)</td>
+            <td><span class="badge green">Confirmado</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--red);font-weight:600;white-space:nowrap;">10:00–12:00</td>
+            <td style="color:var(--text-primary);font-weight:500;">[IAB] Comitê de Retail Media (Online)</td>
+            <td>IAB Brasil — Zoom</td>
+            <td><span class="badge yellow">Aguardando resposta</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--evo-green);font-weight:600;white-space:nowrap;">11:00–13:00</td>
+            <td style="color:var(--text-primary);font-weight:500;">Planejamentos</td>
+            <td>—</td>
+            <td><span class="badge gray">Bloqueado</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--evo-green);font-weight:600;white-space:nowrap;">13:00–14:00</td>
+            <td style="color:var(--text-primary);font-weight:500;">Ocupado</td>
+            <td>—</td>
+            <td><span class="badge gray">Bloqueado</span></td>
+          </tr>
+          <tr>
+            <td style="color:var(--evo-green);font-weight:600;white-space:nowrap;">16:00–17:30</td>
+            <td style="color:var(--text-primary);font-weight:500;">ETUS + Praça</td>
+            <td>Anne Carvalho, Alberto André, Alexandre Ribeiro, time Praça — Sede ETUS</td>
+            <td><span class="badge green">Confirmado · Presencial</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- EMAILS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Emails que Precisam Atenção</h2>
+      <span class="count">3 pendentes</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Prioridade</th>
+            <th>De</th>
+            <th>Assunto</th>
+            <th>Ação Sugerida</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge red">Alta</span></td>
+            <td>RunPod</td>
+            <td style="color:var(--text-primary);">Low Balance Warning — saldo baixo</td>
+            <td style="color:var(--text-muted);font-size:13px;">Adicionar crédito para evitar perda de dados</td>
+          </tr>
+          <tr>
+            <td><span class="badge red">Alta</span></td>
+            <td>Anne Carvalho</td>
+            <td style="color:var(--text-primary);">Convite: AA + EVO — qui. 9/04 às 18h</td>
+            <td style="color:var(--text-muted);font-size:13px;">Confirmar presença (responder convite)</td>
+          </tr>
+          <tr>
+            <td><span class="badge yellow">Média</span></td>
+            <td>Fathom</td>
+            <td style="color:var(--text-primary);">Recap "AA + EVO (quinzenal)" — 6/04</td>
+            <td style="color:var(--text-muted);font-size:13px;">Revisar anotações automáticas da reunião de ontem</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TAREFAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Tarefas Prioritárias de Hoje</h2>
+      <span class="count">8 tarefas</span>
+    </div>
+    <div class="section-body">
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Finalizar plano de lançamento (3 tiers, preços, bônus, metas) e enviar para Xandão/Alberto/Anny</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge purple">Estratégia</span>
+          <span class="badge red">Urgente</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Coordenar testes do Evo CRM — coletar bugs até 07/04 às 12h</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge blue">Produto</span>
+          <span class="badge red">Hoje</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Revisar PR do Evo CRM do Danilo</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge blue">Produto</span>
+          <span class="badge yellow">Hoje</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Testar fluxo single-account e Telegram no Evo CRM</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge blue">Produto</span>
+          <span class="badge yellow">Hoje</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Enviar link de inscrição do Evolution Summit 01 para Willian</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge green">Summit</span>
+          <span class="badge yellow">Hoje</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Subir painel web do calendário de lançamento e dar acesso ao Willian</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge green">Summit</span>
+          <span class="badge yellow">Hoje</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>Agendar emails da semana do Evolution Summit 01</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge green">Summit</span>
+          <span class="badge yellow">Hoje</span>
+        </div>
+      </div>
+      <div class="list-item" style="justify-content:space-between;">
+        <span>[Financeiro] Validar painel financeiro (MRR, CAC, taxa de conversão)</span>
+        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0;margin-left:16px;">
+          <span class="badge gray">Financeiro</span>
+          <span class="badge yellow">Hoje</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECOMENDAÇÃO -->
+  <div class="highlight-card">
+    <div class="title">Recomendação do Dia</div>
+    <div class="body">Antes de qualquer coisa: resolva o conflito de agenda das 10h — o IAB ainda aguarda resposta, mas o "Alinhamento Evolution Estratégia" é claramente a prioridade. Depois, use o bloco 14h–16h (único espaço livre do dia) para entregar o plano de 3 tiers para Alberto/Xandão/Anne — a reunião AA+EVO foi reagendada para quinta às 18h, mas o plano precisa estar pronto antes. Não deixe para última hora: você também tem a reunião ETUS + Praça às 16h presencial.</div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Clawdia — 07/04/2026 às 07:00 BRT
+</div>
+
+</body>
+</html>
