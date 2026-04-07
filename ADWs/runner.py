@@ -33,7 +33,19 @@ def _timestamp():
     return datetime.now().strftime("%Y%m%d-%H%M%S")
 
 
-def _save_metrics(log_name, duration, returncode, agent, stdout):
+def _parse_usage(json_result: dict) -> dict:
+    """Extrai dados de tokens e custo do JSON result do Claude CLI."""
+    usage = json_result.get("usage", {})
+    return {
+        "input_tokens": usage.get("input_tokens", 0),
+        "output_tokens": usage.get("output_tokens", 0),
+        "cache_creation_tokens": usage.get("cache_creation_input_tokens", 0),
+        "cache_read_tokens": usage.get("cache_read_input_tokens", 0),
+        "cost_usd": json_result.get("total_cost_usd", 0),
+    }
+
+
+def _save_metrics(log_name, duration, returncode, agent, stdout, usage=None):
     """Salva métricas acumuladas por rotina em metrics.json."""
     metrics_file = LOGS_DIR / "metrics.json"
     try:
@@ -43,7 +55,14 @@ def _save_metrics(log_name, duration, returncode, agent, stdout):
 
     key = log_name
     if key not in metrics:
-        metrics[key] = {"runs": 0, "successes": 0, "failures": 0, "total_seconds": 0, "avg_seconds": 0, "last_run": None, "agent": agent or "none"}
+        metrics[key] = {
+            "runs": 0, "successes": 0, "failures": 0,
+            "total_seconds": 0, "avg_seconds": 0,
+            "last_run": None, "agent": agent or "none",
+            "total_input_tokens": 0, "total_output_tokens": 0,
+            "total_cache_creation_tokens": 0, "total_cache_read_tokens": 0,
+            "total_cost_usd": 0, "avg_cost_usd": 0,
+        }
 
     m = metrics[key]
     m["runs"] += 1
@@ -59,10 +78,21 @@ def _save_metrics(log_name, duration, returncode, agent, stdout):
 
     m["success_rate"] = round((m["successes"] / m["runs"]) * 100, 1)
 
+    if usage:
+        m["total_input_tokens"] = m.get("total_input_tokens", 0) + usage["input_tokens"]
+        m["total_output_tokens"] = m.get("total_output_tokens", 0) + usage["output_tokens"]
+        m["total_cache_creation_tokens"] = m.get("total_cache_creation_tokens", 0) + usage["cache_creation_tokens"]
+        m["total_cache_read_tokens"] = m.get("total_cache_read_tokens", 0) + usage["cache_read_tokens"]
+        m["total_cost_usd"] = round(m.get("total_cost_usd", 0) + usage["cost_usd"], 5)
+        m["avg_cost_usd"] = round(m["total_cost_usd"] / m["runs"], 5)
+        m["last_input_tokens"] = usage["input_tokens"]
+        m["last_output_tokens"] = usage["output_tokens"]
+        m["last_cost_usd"] = round(usage["cost_usd"], 5)
+
     metrics_file.write_text(json.dumps(metrics, indent=2, ensure_ascii=False))
 
 
-def _log_to_file(log_name, prompt, stdout, stderr, returncode, duration):
+def _log_to_file(log_name, prompt, stdout, stderr, returncode, duration, usage=None):
     """Salva log estruturado em JSONL + arquivo detalhado."""
     log_file = LOGS_DIR / f"{datetime.now().strftime('%Y-%m-%d')}.jsonl"
     entry = {
@@ -74,6 +104,10 @@ def _log_to_file(log_name, prompt, stdout, stderr, returncode, duration):
         "stdout_lines": len(stdout.splitlines()),
         "stderr_lines": len(stderr.splitlines()),
     }
+    if usage:
+        entry["input_tokens"] = usage["input_tokens"]
+        entry["output_tokens"] = usage["output_tokens"]
+        entry["cost_usd"] = round(usage["cost_usd"], 5)
     with open(log_file, "a") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
 
@@ -100,7 +134,7 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600, agent
         timeout: Timeout em segundos
         agent: Nome do agente (.claude/agents/*.md) — se None, roda sem agente
     """
-    cmd = ["claude", "--print", "--dangerously-skip-permissions"]
+    cmd = ["claude", "--print", "--dangerously-skip-permissions", "--output-format", "json"]
 
     if agent:
         cmd.extend(["--agent", agent])
@@ -128,10 +162,6 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600, agent
         for line in process.stdout:
             stdout_lines.append(line)
             line_count += 1
-            stripped = line.strip()
-            if stripped and not stripped.startswith("{") and len(stripped) > 3:
-                display = stripped[:80] + "..." if len(stripped) > 80 else stripped
-                console.print(f"\r  [dim]  → {display}[/dim]", end="")
 
         process.wait(timeout=timeout)
 
@@ -139,12 +169,26 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600, agent
         stdout = "".join(stdout_lines)
         duration = (datetime.now() - start_time).total_seconds()
 
+        # Parse JSON output para extrair resultado e usage
+        usage = None
+        result_text = stdout
+        try:
+            json_result = json.loads(stdout)
+            usage = _parse_usage(json_result)
+            result_text = json_result.get("result", stdout)
+        except (json.JSONDecodeError, TypeError):
+            pass
+
         full_prompt = f"[agent:{agent}] {prompt}" if agent else prompt
-        _log_to_file(log_name, full_prompt, stdout, stderr, process.returncode, duration)
-        _save_metrics(log_name, duration, process.returncode, agent, stdout)
+        _log_to_file(log_name, full_prompt, result_text, stderr, process.returncode, duration, usage)
+        _save_metrics(log_name, duration, process.returncode, agent, result_text, usage)
 
         if process.returncode == 0:
-            console.print(f"\r  [success]✓[/success] {log_name} [dim]({duration:.0f}s, {line_count} linhas)[/dim]")
+            cost_str = ""
+            if usage:
+                tokens_total = usage["input_tokens"] + usage["output_tokens"]
+                cost_str = f" | {tokens_total:,}tok | ${usage['cost_usd']:.2f}"
+            console.print(f"\r  [success]✓[/success] {log_name} [dim]({duration:.0f}s{cost_str})[/dim]")
         else:
             console.print(f"\r  [error]✗[/error] {log_name} [dim](exit {process.returncode}, {duration:.0f}s)[/dim]")
             if stderr:
@@ -153,10 +197,11 @@ def run_claude(prompt: str, log_name: str = "unnamed", timeout: int = 600, agent
 
         return {
             "success": process.returncode == 0,
-            "stdout": stdout,
+            "stdout": result_text,
             "stderr": stderr,
             "returncode": process.returncode,
             "duration": duration,
+            "usage": usage,
         }
 
     except subprocess.TimeoutExpired:
@@ -198,9 +243,17 @@ def summary(results: list, title: str = "Concluído"):
     total_duration = sum(r.get("duration", 0) for r in results)
     success = sum(1 for r in results if r.get("success"))
     failed = len(results) - success
+
+    total_cost = sum(r.get("usage", {}).get("cost_usd", 0) for r in results if r.get("usage"))
+    total_tokens = sum(
+        (r.get("usage", {}).get("input_tokens", 0) + r.get("usage", {}).get("output_tokens", 0))
+        for r in results if r.get("usage")
+    )
+
     status = "[success]✅ Tudo OK[/success]" if failed == 0 else f"[warning]⚠ {failed} falha(s)[/warning]"
+    cost_line = f" | {total_tokens:,} tokens | ${total_cost:.2f}" if total_tokens > 0 else ""
     console.print(Panel(
-        f"{status}\n[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s[/dim]",
+        f"{status}\n[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s{cost_line}[/dim]",
         title=f"[bold]{title}[/bold]",
         border_style="green" if failed == 0 else "yellow",
         padding=(0, 2)

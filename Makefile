@@ -115,8 +115,8 @@ logs-detail:        ## 📝 Lista logs detalhados
 logs-tail:          ## 📝 Mostra último log completo
 	@cat ADWs/logs/detail/$$(ls -t ADWs/logs/detail/ 2>/dev/null | head -1) 2>/dev/null || echo "Nenhum log ainda."
 
-metrics:            ## 📈 Mostra métricas acumuladas por rotina
-	@python3 -c "import json; d=json.load(open('ADWs/logs/metrics.json')); [print(f'  {k:20s} runs:{v[\"runs\"]:3d}  ok:{v[\"success_rate\"]:5.1f}%  avg:{v[\"avg_seconds\"]:5.0f}s  last:{v[\"last_run\"][:16]}') for k,v in sorted(d.items())]" 2>/dev/null || echo "Nenhuma métrica ainda."
+metrics:            ## 📈 Mostra métricas acumuladas por rotina (tokens + custo)
+	@python3 -c "import json; d=json.load(open('ADWs/logs/metrics.json')); [print(f'  {k:22s} runs:{v[\"runs\"]:3d}  ok:{v[\"success_rate\"]:5.1f}%  avg:{v[\"avg_seconds\"]:5.0f}s  cost:\$${v.get(\"total_cost_usd\",0):7.2f}  avg:\$${v.get(\"avg_cost_usd\",0):.2f}  tok:{v.get(\"total_input_tokens\",0)+v.get(\"total_output_tokens\",0):>9,}  last:{v[\"last_run\"][:16]}') for k,v in sorted(d.items())]" 2>/dev/null || echo "Nenhuma métrica ainda."
 
 clean-logs:         ## 🗑️  Remove logs > 30 dias
 	@find ADWs/logs/ -name "*.log" -mtime +30 -delete 2>/dev/null; find ADWs/logs/ -name "*.jsonl" -mtime +30 -delete 2>/dev/null; echo "Logs antigos removidos."
