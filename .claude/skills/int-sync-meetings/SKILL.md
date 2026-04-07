@@ -33,7 +33,7 @@ Se o usuário especificar um período diferente (ex: "sync da semana", "sync de 
 
 A API já retorna `default_summary.markdown_formatted` e `action_items` completos — não precisa de chamadas extras.
 
-### Passo 2 — Filtrar não processadas
+### Passo 2 — Filtrar não processadas (CRÍTICO — anti-duplicação)
 
 Ler o arquivo de IDs já processados:
 ```
@@ -42,7 +42,9 @@ Ler o arquivo de IDs já processados:
 
 Comparar com os `recording_id` retornados. Processar apenas os IDs que **não existem** nesse arquivo.
 
-Se não houver meetings novos, informar ao usuário e parar.
+**IMPORTANTE:** Este passo é obrigatório e não pode ser pulado. Se o ID já existe no arquivo, a reunião **NÃO deve ser reprocessada** em hipótese alguma — nem summary, nem tarefas, nem notificação.
+
+Se não houver meetings novos, enviar no Telegram "🎙️ Sync Meetings — Nenhuma reunião nova." e **parar imediatamente**. Não continuar para os passos seguintes.
 
 ### Passo 3 — Salvar JSON bruto
 
@@ -108,7 +110,21 @@ people: [{nomes dos calendar_invitees}]
 
 Para cada meeting processado, extrair os `action_items` e criar tarefas no Todoist.
 
-**Regras de triagem:**
+**ANTES DE CRIAR QUALQUER TAREFA — verificação anti-duplicação obrigatória:**
+
+1. Verificar no arquivo de estado local:
+   ```
+   {project-root}/09 Reuniões/.state/fathom-todoist-sync.json
+   ```
+   Se o `recording_id` já tem tarefas sincronizadas, **NÃO criar novas tarefas**. Pular para o Passo 7.
+
+2. Buscar no Todoist se já existem tarefas com o título da reunião ou recording_id no comentário:
+   ```bash
+   todoist list --filter "search: {titulo da reunião}"
+   ```
+   Se encontrar tarefas que claramente correspondem aos mesmos action items, **NÃO duplicar**. Registrar os IDs existentes no `fathom-todoist-sync.json` e pular.
+
+**Regras de triagem (só se passou na verificação acima):**
 
 1. **Traduzir para PT-BR** — todos os action items devem ser traduzidos para português brasileiro
 2. **Projeto padrão: `Evolution`** — todas as tarefas vão pro projeto Evolution no Todoist, salvo instrução explícita diferente
@@ -117,11 +133,6 @@ Para cada meeting processado, extrair os `action_items` e criar tarefas no Todoi
    - Comentário com contexto concreto: origem (reunião + data), objetivo, próximo passo e link do recording
 4. **Agrupar por reunião** — usar seções/labels para identificar de qual reunião veio
 5. **Filtrar por responsável** — criar tarefas apenas para action items atribuídos ao Davidson (ou sem assignee). Itens atribuídos a outras pessoas são registrados apenas no summary como referência
-6. **Não duplicar** — verificar no arquivo de estado antes de criar:
-   ```
-   {project-root}/09 Reuniões/.state/fathom-todoist-sync.json
-   ```
-   Formato: `{ "synced_ids": { "{recording_id}": ["task_id_1", "task_id_2"] } }`
 
 **Formato da tarefa Todoist:**
 
@@ -138,7 +149,9 @@ Comentário:
 
 **Executar direto, sem relatório intermediário.** Não listar as tarefas antes de criar — criar e confirmar no final.
 
-### Passo 7 — Marcar como processado
+### Passo 7 — Marcar como processado (IMEDIATAMENTE após cada reunião)
+
+**CRÍTICO:** Este passo deve ser executado **imediatamente após processar CADA reunião individualmente**, NÃO no final de todas. Isso evita que um crash no meio do processamento cause reprocessamento.
 
 Adicionar o `recording_id` ao arquivo de estado:
 ```
@@ -148,6 +161,8 @@ Adicionar o `recording_id` ao arquivo de estado:
 Um ID por linha. Append, não sobrescrever.
 
 Atualizar também o `fathom-todoist-sync.json` com os IDs das tarefas criadas.
+
+**Ordem por reunião:** Passo 3 → 4 → 5 → 6 → **7 (gravar state)** → próxima reunião.
 
 ### Passo 8 — Relatório final
 

@@ -1,0 +1,31 @@
+TIMESTAMP: 2026-04-07T15:18:01.377628
+DURATION: 237.0s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /int-sync-meetings
+
+============================================================
+STDOUT:
+============================================================
+A memória já está atualizada com o contexto correto desta reunião. 
+
+---
+
+## Sync Fathom — Concluído
+
+**Período:** 2026-04-07
+**Novos:** 1 reunião processada
+**Já processados:** 3 ignorados
+**Tarefas criadas:** 2 no Todoist (projeto Evolution)
+
+### Reuniões sincronizadas:
+| Data | Título | Projeto | Tarefas |
+|------|--------|---------|---------|
+| 07/04 | Alinhamento Evolution Estrategia | comercial | 2 |
+
+**Tarefas criadas para o Davidson:**
+1. **[P2]** Definir precificação dos tiers Contributor e Member → Diego faz as projeções
+2. **[P3]** Enviar transcrição da reunião para Diego e Filipe
+
+*Itens de Diego (documentar modelo 3 tiers + agendar follow-up) ficaram apenas no summary.*
+
