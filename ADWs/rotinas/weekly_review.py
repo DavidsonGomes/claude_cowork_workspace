@@ -12,8 +12,11 @@ PROMPT = """Execute a revisão semanal completa:
 3. **Agenda próxima semana** — use /gog-calendar para listar eventos
 4. **Memória** — revise daily logs da semana, consolide decisões/aprendizados
 
-Apresentar relatório consolidado usando o template em .claude/templates/weekly-review.md
-Salvar em '01 Daily Logs/[C] YYYY-WXX-weekly-review.md'"""
+Salvar o relatório em dois formatos:
+- **HTML:** leia o template '.claude/templates/html/weekly-review.html', preencha todos os {{PLACEHOLDER}} com os dados coletados e salve em '01 Daily Logs/[C] YYYY-WXX-weekly-review.html'
+- **MD:** salve também a versão markdown em '01 Daily Logs/[C] YYYY-WXX-weekly-review.md' usando o template em .claude/templates/weekly-review.md
+
+Criar o diretório '01 Daily Logs/' se não existir."""
 
 def main():
     banner("📊 Weekly Review", "Reuniões • Tarefas • Agenda • Memória | @clawdia")

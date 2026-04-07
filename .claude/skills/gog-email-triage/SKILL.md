@@ -146,7 +146,13 @@ Output in this format:
 - To see email content: "Show me email [ID]"
 ```
 
-### Step 4: Offer Follow-Up
+### Step 4: Save HTML Artifact
+
+Read the template at `.claude/templates/html/email-triage.html`, fill all `{{PLACEHOLDER}}` values with the data from Step 3 (email counts, priority groups, suggested actions), and save the completed HTML to `01 Daily Logs/[C] YYYY-MM-DD-email-triage.html`.
+
+Create the `01 Daily Logs/` directory if it does not exist.
+
+### Step 5: Offer Follow-Up
 
 After presenting the triage:
 - Ask: "Which email would you like to tackle first?"

@@ -81,11 +81,11 @@ Apresentar no formato:
 - Risco: {alto/médio/baixo}
 ```
 
-### Passo 4 — Salvar
+### Passo 4 — Salvar artefato HTML
 
-Salvar relatório em `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.md`.
+Ler o template em `.claude/templates/html/linear-review.html`, preencher todos os `{{PLACEHOLDER}}` com os dados coletados nos passos anteriores e salvar o HTML completo em `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.html`.
 
-Criar diretório se não existir.
+Criar o diretório `02 Projects/linear-reviews/` se não existir.
 
 ## Regras
 

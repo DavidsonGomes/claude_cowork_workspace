@@ -43,9 +43,11 @@ Cruzar os dados e responder:
 5. **Riscos** — o que pode dar errado nas próximas 2-4 semanas?
 6. **Oportunidades** — o que devemos considerar fazer?
 
-### Passo 3 — Gerar digest
+### Passo 3 — Gerar digest (HTML + MD)
 
-Salvar em `09 Estrategia/digests/[C] YYYY-WXX-strategy-digest.md`:
+**HTML:** Ler o template em `.claude/templates/html/strategy-digest.html`, preencher todos os `{{PLACEHOLDER}}` com os dados coletados e salvar em `09 Estrategia/digests/[C] YYYY-WXX-strategy-digest.html`. Criar o diretório se não existir.
+
+**MD:** Também salvar versão markdown em `09 Estrategia/digests/[C] YYYY-WXX-strategy-digest.md` com o seguinte formato:
 
 ```markdown
 # Strategy Digest — Semana {WXX}

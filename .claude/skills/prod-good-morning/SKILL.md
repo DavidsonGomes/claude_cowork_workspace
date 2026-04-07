@@ -57,7 +57,9 @@ Tell them to say "new project" and the new-project skill will walk them through 
 
 ## Step 5 — Save briefing
 
-Save the briefing output to `01 Daily Logs/[C] YYYY-MM-DD-morning.md` using the template at `.claude/templates/morning-briefing.md`. Fill in the template with the data gathered in Step 2-3.
+Read the template at `.claude/templates/html/morning-briefing.html`, fill all `{{PLACEHOLDER}}` values with the data gathered in Steps 2–3 (agenda, emails, tasks, recommendation), and save the completed HTML to `01 Daily Logs/[C] YYYY-MM-DD-morning.html`.
+
+Create the `01 Daily Logs/` directory if it does not exist.
 
 ## Tone
 

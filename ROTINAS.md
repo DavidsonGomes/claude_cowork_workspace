@@ -60,16 +60,37 @@ make clean-logs    # Remove logs > 30 dias
 
 ## Arquivos gerados
 
-| Rotina | Onde salva |
-|--------|-----------|
-| Good Morning | `01 Daily Logs/[C] YYYY-MM-DD-morning.md` |
-| End of Day | `01 Daily Logs/[C] YYYY-MM-DD.md` |
-| Weekly Review | `01 Daily Logs/[C] YYYY-WXX-weekly-review.md` |
-| Sync Meetings | `07 Reuniões/summaries/{projeto}/` + `09 Reuniões/fathom/` |
-| Health Check-in | `06 Pessoal/health-checkins/reports/YYYY-MM-DD.md` |
-| Linear Review | `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.md` |
-| Community Pulse | `03 Comunidade/reports/daily/[C] YYYY-MM-DD-community-pulse.html` |
-| Community Weekly | `03 Comunidade/reports/weekly/[C] YYYY-WXX-community-report.html` |
-| GitHub Review | `02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.html` |
-| Strategy Digest | `09 Estrategia/digests/[C] YYYY-WXX-strategy-digest.md` |
-| Memory Sync | `memory/` (arquivos individuais) |
+| Rotina | Formato | Onde salva |
+|--------|---------|-----------|
+| Good Morning | HTML | `01 Daily Logs/[C] YYYY-MM-DD-morning.html` |
+| Email Triage | HTML | `01 Daily Logs/[C] YYYY-MM-DD-email-triage.html` |
+| Review Todoist | MD | `01 Daily Logs/[C] YYYY-MM-DD-todoist-review.md` |
+| Sync Meetings | JSON + MD | `07 Reuniões/fathom/` + `summaries/` |
+| End of Day | MD | `01 Daily Logs/[C] YYYY-MM-DD.md` |
+| Memory Sync | MD | `memory/` (arquivos individuais) |
+| Weekly Review | HTML + MD | `01 Daily Logs/[C] YYYY-WXX-weekly-review.html` |
+| Trends | HTML + MD | `01 Daily Logs/[C] YYYY-WXX-trends.html` |
+| Strategy Digest | HTML + MD | `09 Estrategia/digests/[C] YYYY-WXX-strategy-digest.html` |
+| Linear Review | HTML | `02 Projects/linear-reviews/[C] YYYY-MM-DD-linear-review.html` |
+| GitHub Review | HTML | `02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.html` |
+| Community Pulse | HTML | `03 Comunidade/reports/daily/[C] YYYY-MM-DD-community-pulse.html` |
+| Community Weekly | HTML | `03 Comunidade/reports/weekly/[C] YYYY-WXX-community-report.html` |
+| FAQ Sync | MD | `03 Comunidade/[C] FAQ.md` (atualiza) |
+| Health Check-in | HTML + MD | `06 Pessoal/health-checkins/reports/[C] YYYY-MM-DD-health.html` |
+
+### Templates HTML disponíveis
+
+Todos em `.claude/templates/html/`, dark theme Evolution (verde `#00FFA7`, Inter):
+
+| Template | Usado por |
+|----------|-----------|
+| `morning-briefing.html` | Good Morning |
+| `email-triage.html` | Email Triage |
+| `weekly-review.html` | Weekly Review |
+| `trends-report.html` | Trends |
+| `strategy-digest.html` | Strategy Digest |
+| `linear-review.html` | Linear Review |
+| `github-review.html` | GitHub Review |
+| `community-daily-pulse.html` | Community Pulse |
+| `community-weekly-report.html` | Community Weekly |
+| `health-checkin.html` | Health Check-in |

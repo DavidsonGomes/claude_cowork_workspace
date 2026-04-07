@@ -18,8 +18,9 @@ PROMPT = """Execute o check-in semanal de saúde do Davidson:
    - Aplicação do Mounjaro (se aplicável na semana)
 3. Compare com o último check-in e identifique tendências
 4. Gere um relatório curto com semáforo (verde/amarelo/vermelho) para cada item
-5. Salve o check-in em '06 Pessoal/health-checkins/reports/YYYY-MM-DD.md'
-6. Atualize o arquivo de evolução se houver mudanças relevantes
+5. Salve o check-in em HTML: leia o template '.claude/templates/html/health-checkin.html', preencha todos os {{PLACEHOLDER}} com os dados coletados, e salve o HTML completo em '06 Pessoal/health-checkins/reports/[C] YYYY-MM-DD-health.html'. Criar o diretório se não existir.
+6. Salve também a versão markdown em '06 Pessoal/health-checkins/reports/YYYY-MM-DD.md'
+7. Atualize o arquivo de evolução se houver mudanças relevantes
 
 Ser direto e prático — como um amigo próximo que se preocupa com a saúde do Davidson."""
 

@@ -77,7 +77,28 @@ todoist update <task-id> --content "[Categoria] Título traduzido e acionável"
 
 Não listar as tarefas antes de organizar. Não pedir confirmação para cada uma. Organizar todas de uma vez e confirmar no final.
 
-### Passo 5 — Relatório final (curto)
+### Passo 5 — Salvar artefato
+
+Salvar um relatório curto em `01 Daily Logs/[C] YYYY-MM-DD-todoist-review.md` com:
+
+```markdown
+# Triagem Todoist — YYYY-MM-DD
+
+**Projeto:** Evolution
+**Tarefas revisadas:** {N}
+**Organizadas:** {M} (categorizadas, traduzidas ou reescritas)
+**Já OK:** {K} (sem alteração necessária)
+
+## Tarefas Organizadas
+
+| Tarefa | Antes | Depois |
+|--------|-------|--------|
+| ... | ... | ... |
+```
+
+Criar o diretório `01 Daily Logs/` se não existir.
+
+### Passo 6 — Relatório final (curto)
 
 Ao terminar, apresentar apenas:
 
