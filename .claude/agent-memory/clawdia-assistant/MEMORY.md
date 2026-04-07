@@ -1,6 +1,6 @@
 # Clawdia — Memória Consolidada
 
-Última atualização: 2026-04-06 (consolidação de memória — daily log + 3 summaries)
+Última atualização: 2026-04-07
 
 ---
 
@@ -26,7 +26,7 @@
 
 ## Estratégia Comercial
 
-- [AA + Evo — Pivot 3 tiers / Marketing Automation](project-aa-evo-strategy-pivot.md) — Free/Monthly/Annual; meta R$150k/300 users; Panda Video p/ dublagem; consultar Sanja/Felipe Reis/Rabelo
+- [AA + Evo — Pivot 3 tiers / Marketing Automation](project-aa-evo-strategy-pivot.md) — Contributor/Member/Pro-Support; Pro-Support só upsell pós-compra; preços pendentes (Davidson → Diego para projeções)
 - [EvoGo + API V3 — Manager Unificado](project-evogo-api-v3-unified-manager.md) — EvoGo Manager adaptado para servir também API V3; não será open-source
 - [EvoGo — Fluxo de merge de PRs](project-evogo-pr-flow.md) — PRs públicos → repo privado → rebuild → público; Matheus responsável
 

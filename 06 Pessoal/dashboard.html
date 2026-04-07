@@ -416,7 +416,7 @@ function updateProgressBar(pid){
   const p=HEALTH_DATA.pessoas[pid];
   const g=p.goals;
   const cf=lastVal(p.history,"fat_pct");
-  const b=p.baseline;
+  const b=(p.history&&p.history.length>0)?p.history[0]:p.baseline;
   if(cf==null||!g.fat_pct_target) return;
   const range=b.fat_pct-g.fat_pct_target;
   const pct=Math.min(100,Math.max(0,((b.fat_pct-cf)/range)*100));
@@ -548,7 +548,7 @@ function buildPersonView(pid){
   const p=HEALTH_DATA.pessoas[pid],c=p.color;
   const lastCI=HEALTH_DATA.checkins[HEALTH_DATA.checkins.length-1];
   const pCI=lastCI[pid];
-  const b=p.baseline,g=p.goals;
+  const b=(p.history&&p.history.length>0)?p.history[0]:p.baseline,g=p.goals;
   const cw=lastVal(p.history,"weight_kg"),cf=lastVal(p.history,"fat_pct"),
         cm=lastVal(p.history,"skeletal_muscle_pct"),cv=lastVal(p.history,"visceral");
   const rw=diffStr(cw,b.weight_kg),rf=diffStr(cf,b.fat_pct),rm=diffStr(cm,b.skeletal_muscle_pct,true),rv=diffStr(cv,b.visceral);

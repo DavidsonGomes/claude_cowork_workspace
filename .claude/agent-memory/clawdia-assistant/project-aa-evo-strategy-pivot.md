@@ -1,48 +1,45 @@
 ---
 name: AA + Evo — Pivot Estratégico (3 tiers, Marketing Automation)
-description: Reunião 06/04 com Alberto/Xandão/Anny — modelo de tiers revisado e posicionamento redefinido como Marketing Automation
+description: Modelo 3 tiers definitivo decidido em 07/04 — Contributor/Member/Pro-Support com nomes, preços e lógica de upsell definidos
 type: project
 ---
 
-## Decisão (referência: 2026-04-06)
+## Decisão mais recente (referência: 2026-04-07)
 
-Reunião quinzenal com AA (Alberto André, Xandão, Anne) definiu pivot estratégico:
+Reunião "Alinhamento Evolution Estrategia" com Diego Lerina e Filipe Reis (Supersonic) finalizou a estrutura de tiers para o lançamento:
 
-### Modelo de pricing
-- **Antes:** 2 tiers (R$499/mo como barreira alta)
-- **Depois:** 3 tiers — **Free, Monthly, Annual**
-  - Free tier → permanece no Discord (aproveita engajamento existente)
-  - Pago → plataforma Evolution (controle de dados + SLA)
-  - Annual deve ser o foco de conversão
+### Modelo de pricing final — 3 tiers
+- **Contributor (~R$29–49/mês):** Entrada de baixo custo. Benefícios: beta antecipado, votação de roadmap, canal exclusivo. **Sem bônus de lançamento.**
+- **Member (preço a definir — mensal + anual):** Tier principal. Todos os bônus de lançamento (6 meses Academy, Blueprint Pack, imersão Fast Start Pro) + entregáveis mensais (templates, cursos). Annual = "2 meses grátis".
+- **Pro-Support (~R$399/mês):** Upsell high-ticket. Todos os benefícios Member + suporte técnico direto, grupo privado, calls mensais com dev team. **Apresentado apenas pós-compra (não na oferta inicial).**
 
-### Posicionamento
-- Antes: ambíguo (mensageria? marketing? AI? dev?)
-- Depois: **"Marketing Automation" community** — escopo mais amplo permite expansão futura (ex: email marketing open-source sob o brand Evo)
+### Jornada de decisão do usuário
+1. Contributor vs. Member
+2. Mensal vs. Anual (só para Member)
+3. Upsell Pro-Support (pós-compra)
 
-### Meta de receita
-R$150k com ~300 usuários pagantes para cobrir operações e desenvolvimento
+### Lógica estratégica
+- Todos os bônus ficam no Member — cria incentivo forte para não escolher o Contributor
+- Pro-Support fora da decisão inicial — reduz carga cognitiva no momento de compra
+- Entregáveis mensais no Member = combate churn (evita consumir tudo em 1 mês e cancelar)
 
-### Próximo passo crítico
-Davidson entrega plano financeiro revisado **07/04** antes da reunião de revisão com AA às **16h30**
-Pipeline de conteúdo: **multistream** (YouTube/Twitch/TikTok) para lives → editar gravações como módulos da Academy
+### Pendências Davidson (07/04)
+- Definir preços exatos do Contributor e Member → passar ao Diego para projeções
+- Enviar transcript da reunião ao Diego e Filipe
 
-### Meta de receita
-- **R$150k** com ~300 usuários pagantes para cobrir operações e desenvolvimento futuro
+### Follow-up agendado
+Diego agenda call com Davidson + Filipe para revisar precificação, projeções e nomes dos tiers.
 
-### Infraestrutura de conteúdo
-- Vídeos de conteúdo dublados em 3 idiomas via **Panda Video**
-- Alberto pediu demo do Panda Video player
+---
 
-### Consultores a validar o plano revisado
-- **Sanja** (estratégia/preços)
-- **Felipe Reis** (preços/planos/bônus)
-- **Rabelo** (preços/upsell Academy)
+## Contexto anterior (referência: 2026-04-06)
 
-### Pessoas envolvidas
-- Alberto André (Alberto Santos)
-- Alexandre Ribeiro (Xandão) — alexandre.ribeiro@brius.com.br
-- Anne Carvalho — anne.carvalho@etus.com.br
+Reunião quinzenal com AA (Alberto André, Xandão, Anne):
+- Pivot de posicionamento: **"Marketing Automation" community**
+- Meta: R$150k com ~300 usuários pagantes
+- Infraestrutura de conteúdo: multistream + Panda Video (dublagem 3 idiomas)
+- Consultores a validar: Sanja, Felipe Reis, Rabelo
 
-**Why:** Reunião concluiu que R$499/mo é barreira alta para público open-source (freelancers, devs). Free tier é essencial para construir base para monetização futura.
+**Why:** R$499/mo era barreira alta para público open-source. Modelo 3 tiers com upsell pós-compra resolve carga cognitiva no momento de decisão.
 
-**How to apply:** Ao falar sobre pricing da Academy ou da plataforma Evolution, usar modelo de 3 tiers. Free → Discord; Pago → plataforma própria.
+**How to apply:** Ao falar de pricing Evolution/Academy, usar Contributor/Member/Pro-Support. Pro-Support não aparece na oferta inicial — só como upsell após compra.
