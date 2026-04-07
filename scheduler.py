@@ -76,6 +76,7 @@ def setup_schedule():
     schedule.every().day.at("20:15").do(run_adw, "FAQ Sync", "faq_sync.py")
     schedule.every().day.at("21:00").do(run_adw, "End of Day", "end_of_day.py")
     schedule.every().day.at("21:15").do(run_adw, "Memory Sync", "memory_sync.py")
+    schedule.every().day.at("19:00").do(run_adw, "Financial Pulse", "financial_pulse.py")
     schedule.every().day.at("21:30").do(run_adw, "Dashboard Consolidado", "dashboard.py")
 
     # --- Semanais ---
@@ -89,7 +90,11 @@ def setup_schedule():
     schedule.every().wednesday.at("09:15").do(run_adw, "GitHub Review", "github_review.py")
     schedule.every().friday.at("09:15").do(run_adw, "GitHub Review", "github_review.py")
     schedule.every().monday.at("09:30").do(run_adw, "Community Weekly", "community_weekly.py")
+    schedule.every().friday.at("07:30").do(run_adw, "Financial Weekly", "financial_weekly.py")
     schedule.every().sunday.at("10:00").do(run_adw, "Health Check-in", "health_checkin.py")
+
+    # --- Mensais (dia 1) ---
+    # Monthly close roda via check no loop principal (ver abaixo)
 
 
 def show_schedule():
@@ -134,9 +139,21 @@ def main():
     signal.signal(signal.SIGINT, shutdown)
     signal.signal(signal.SIGTERM, shutdown)
 
+    # Controle de rotinas mensais
+    monthly_close_ran = False
+
     # Loop principal
     while True:
         schedule.run_pending()
+
+        # Monthly Close — roda no dia 1 às 08:00
+        now = datetime.now()
+        if now.day == 1 and now.hour == 8 and not monthly_close_ran:
+            run_adw("Monthly Close Kickoff", "monthly_close.py")
+            monthly_close_ran = True
+        elif now.day != 1:
+            monthly_close_ran = False
+
         time.sleep(30)
 
 
