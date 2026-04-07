@@ -52,7 +52,7 @@ Foco: transformar o Telegram na interface principal de interação rápida.
 
 Foco: trazer os agentes restantes do OpenClaw que fazem sentido.
 
-- [ ] **Pixel (@pixel)** — Social media / conteúdo multicanal
+- [X] **Pixel (@pixel)** — Social media / conteúdo multicanal
   - Planejamento editorial
   - Criação de conteúdo por canal (IG, LinkedIn, X, YouTube)
   - Release review obrigatório antes de publicação
