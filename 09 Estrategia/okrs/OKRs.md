@@ -301,7 +301,7 @@ tags:
   - **Q2 corrigido:** Marketplace + White-Label (desenvolvimento Q2) + Certificação + 20 cursos premium
   - **Metas de MRR atualizadas:** Q1: R$ 80-85k, Q2: R$ 132-174k, Q3: R$ 195-265k, Q4: R$ 260-330k
   - **Produtos especificados:** App Evo Academy, 12 cursos free (Q1), 20 premium (Q2), total 70 planejados
-  - **Planos atualizados:** Individual (R$ 89/146/215), Corporativo (R$ 500/2k/5k/10k)
+  - **Planos vigentes à época (Q4 2025, descontinuados):** Individual (R$ 89/146/215), Corporativo (R$ 500/2k/5k/10k)
   - **Consultorias removidas:** Substituídas por certificação de parceiros (Q2)
   - **674 contribuidores** (não 649) em todas as referências
   - **Substituição de termo:** "Sistema Operacional" → "ecossistema"

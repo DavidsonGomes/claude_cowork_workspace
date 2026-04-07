@@ -64,11 +64,11 @@ Este roadmap traduz a [[Visão]] estratégica da Evolution em **entregas prátic
 
 **Planos Individuais:**
 - [ ] **[PRIORITÁRIO]** Transformar crowdfunding em assinaturas recorrentes
-  - **Contributor:** R$ 89/mês
-  - **Supporter:** R$ 146/mês (Mais Popular)
-  - **Pro Supporter:** R$ 215/mês
-  - **Ticket médio:** ~R$ 148/mês (foco tier Supporter)
-- [ ] **Meta Q1:** Converter 60% dos 674 contribuidores (~404 assinantes) = R$ 60k MRR
+  - **Evo Community Contributor:** R$ 89/mês (ou R$ 890/ano)
+  - **Evo Pro Support:** R$ 399/mês
+  - *(Pricing Q4 2025 — descontinuado: Supporter R$ 146/mês, Pro Supporter R$ 215/mês)*
+  - **Ticket médio:** ~R$ 89/mês (foco tier Contributor)
+- [ ] **Meta Q1:** Converter 60% dos 674 contribuidores (~404 assinantes) = R$ 36k MRR
 
 **Planos Corporativos:**
 - [ ] Estruturar e lançar planos corporativos para empresas

@@ -505,7 +505,7 @@ Parceiro paga % da receita gerada. Requer integração de billing mais robusta.
 Evolution Foundation
 ├── 📱 Evo Academy App (Comunidade)
 │   ├── Tier Gratuito (anúncios)
-│   ├── Assinaturas Individuais (R$ 89/146/215/mês)
+│   ├── Assinaturas Individuais (Contributor R$ 89/mês | Pro Support R$ 399/mês)
 │   ├── Assinaturas Corporativas (R$ 500/2k/5k/10k/mês)
 │   └── Cursos Premium (70 totais planejados)
 │
@@ -689,7 +689,7 @@ A execução do modelo de negócio está estruturada em fases trimestrais ao lon
   - **Foco do documento:** Modelo de negócio, proposta de valor, fontes de receita, estratégia GTM e métricas
   - **Substituição de termo:** "sistema operacional" → "ecossistema" em toda proposta de valor
 - **v3.1 (15/01/2026)**: Revisão completa alinhada com Roadmap v3.1 (verdade absoluta)
-  - **Planos de assinatura corrigidos:** Contributor (R$ 89), Supporter (R$ 146), Pro Supporter (R$ 215)
+  - **Planos de assinatura vigentes à época (Q4 2025, descontinuados):** Contributor (R$ 89), Supporter (R$ 146), Pro Supporter (R$ 215)
   - **Planos corporativos adicionados:** Bronze (R$ 500), Silver (R$ 2k), Gold (R$ 5k), Patron (R$ 10k)
   - **Cursos especificados:** 12 gratuitos Q1 + 20 premium Q2 (total 70 planejados)
   - **Timeline Q1/Q2 separada claramente:**
