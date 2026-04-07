@@ -27,6 +27,10 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(title="EVO Dashboard API", lifespan=lifespan)
 
+# API routers
+from app.api.routines import router as routines_router
+app.include_router(routines_router)
+
 
 @app.get("/health")
 async def health():

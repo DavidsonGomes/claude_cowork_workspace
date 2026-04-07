@@ -1,0 +1,75 @@
+# Brand Profile — Evolution Foundation
+# SEED DATA: criado manualmente com dados da tela de referência
+# Para novas brands, usar o workflow setup (NB)
+name: "Evolution Foundation"
+language: "Português"
+country: "Brasil"
+description: >
+  A Evolution Foundation é um ecossistema brasileiro de tecnologia
+  criado para democratizar o acesso à automação, integração de sistemas
+  e inteligência artificial no dia a dia de empresas e profissionais.
+  Reunimos soluções, conhecimento e comunidade para ajudar pequenas e médias
+  empresas, agências, desenvolvedores e operações digitais a centralizar canais,
+  automatizar processos, escalar atendimento e aplicar IA de forma prática.
+  Nosso foco é transformar tecnologias antes complexas ou restritas em ferramentas
+  acessíveis, flexíveis e úteis para negócios reais, conectando pessoas, sistemas
+  e oportunidades de crescimento.
+
+visual_guide: "brand-visual-guide.yaml"
+
+assets:
+  logos_directory: "assets/logos/"
+  library_images: "library/images/"
+  library_references: "library/references/"
+  founder_photos: "library/images/DAVIDSON-*.jpg"
+  product_screenshots: "library/images/"
+  reference_covers: "library/references/"
+  logos:
+    main:
+      png: "assets/logos/Main logo/PNG/Main.png"
+      svg: "assets/logos/Main logo/SVG/Main.svg"
+      dark_png: "assets/logos/Main logo/PNG/Main Dark.png"
+      light_png: "assets/logos/Main logo/PNG/Main Light 500.png"
+    short:
+      png: "assets/logos/Short Logo/PNG/Reduzida.png"
+      svg: "assets/logos/Short Logo/SVG/Reduzida.svg"
+      dark_png: "assets/logos/Short Logo/PNG/Reduzida Dark.png"
+      light_png: "assets/logos/Short Logo/PNG/Reduzida Light 500.png"
+    square:
+      png: "assets/logos/Square logo/PNG/Square.png"
+      svg: "assets/logos/Square logo/SVG/Square.svg"
+      dark_png: "assets/logos/Square logo/PNG/Square Dark.png"
+      light_png: "assets/logos/Square logo/PNG/Square light 500.png"
+    favicon:
+      png: "assets/logos/Favicon logo/PNG/Favicon.png"
+      svg: "assets/logos/Favicon logo/SVG/Favicon.svg"
+      dark_png: "assets/logos/Favicon logo/PNG/Favicon Dark.png"
+      light_png: "assets/logos/Favicon logo/PNG/Favicon Light 500.png"
+    products:
+      evo_api:
+        png: "assets/logos/EVO_API/PNG/EVO_API.png"
+        svg: "assets/logos/EVO_API/SVG/EVO_API.svg"
+      evo_crm:
+        png: "assets/logos/EVO_CRM/PNG/EVO_CRM.png"
+        svg: "assets/logos/EVO_CRM/SVG/EVO_CRM.svg"
+      evo_academy:
+        png: "assets/logos/EVO_ACADEMY/PNG/EVO_ACADEMY.png"
+        svg: "assets/logos/EVO_ACADEMY/SVG/EVO_ACADEMY.svg"
+
+concepts:
+  - "Automação de processos"
+  - "Inteligência artificial para negócios"
+  - "Agentes de IA"
+  - "Automação de atendimento"
+  - "Omnichannel"
+  - "Integração de sistemas"
+  - "API para WhatsApp"
+  - "CRM"
+  - "Workflow automation"
+  - "Atendimento multicanal"
+  - "No Code"
+  - "Low Code"
+  - "Chatbots inteligentes"
+  - "Orquestração de agentes"
+  - "Produtividade com IA"
+  - "Transformação digital para PMEs"

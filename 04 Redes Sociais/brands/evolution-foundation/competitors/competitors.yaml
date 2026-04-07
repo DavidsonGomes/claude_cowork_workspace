@@ -1,0 +1,126 @@
+# competitors.yaml — Concorrentes mapeados para estratégia de conteúdo Evolution Foundation
+competitors:
+
+  - name: "Active Campaign"
+    url: "https://www.activecampaign.com/"
+    seo_stats:
+      top_artigos_mapeados: 75
+      palavras_chave_ranqueadas: 47927
+      cliques_por_mes: 449823
+      trafego_equivalente: "R$6.052.609/mês"
+    description: "Plataforma SaaS de automação de marketing, email marketing e CRM voltada para PMEs. Combina automação de campanhas multicanal com gestão de relacionamento com clientes."
+    main_products:
+      - "Email Marketing (campanhas, templates, segmentação, testes A/B)"
+      - "Automação de Marketing (workflows visuais com triggers e condições)"
+      - "CRM com automação de vendas (pipeline visual, lead scoring)"
+      - "Mensagens e chat (SMS marketing, site messaging)"
+      - "Landing pages e formulários"
+      - "Inteligência preditiva"
+      - "900+ integrações (Shopify, WordPress, Zapier, Salesforce)"
+    target_audience: "PMEs, e-commerces, SaaS, agências, infoprodutores, consultorias"
+    pricing: "Baseado em nº de contatos + tier. Starter ~US$15/mês, Plus ~US$49/mês, Pro ~US$79/mês, Enterprise ~US$145/mês (1.000 contatos). Escala com volume."
+    strengths:
+      - "Excelente automação de email marketing e nurturing"
+      - "CRM robusto integrado"
+      - "900+ integrações nativas"
+      - "Inteligência preditiva para otimização"
+      - "Interface amigável para não-técnicos"
+    weaknesses:
+      - "WhatsApp: integração limitada (via parceiros)"
+      - "IA básica (conteúdo preditivo, segmentação) — sem agentes autônomos"
+      - "SaaS fechado com vendor lock-in"
+      - "Custo escala com contatos — pode ficar caro"
+      - "Customização limitada ao que a plataforma oferece"
+    positioning: "Forte em email marketing e automação de nurturing para PMEs, mas fraco em mensageria instantânea (WhatsApp) e IA conversacional — exatamente onde a Evolution se destaca."
+
+  - name: "RD Station"
+    url: "https://www.rdstation.com/"
+    seo_stats:
+      top_artigos_mapeados: 137
+      palavras_chave_ranqueadas: 29854
+      cliques_por_mes: 1710696
+      trafego_equivalente: "R$13.932.348/mês"
+    description: "Principal plataforma brasileira de automação de marketing digital e vendas para PMEs (parte do grupo TOTVS). Ferramentas integradas de inbound marketing, CRM e conversão."
+    main_products:
+      - "RD Station Marketing (landing pages, email, fluxos de automação, lead scoring, SEO)"
+      - "RD Station CRM (pipeline de vendas, deals, relatórios)"
+      - "RD Station Conversas (chat, WhatsApp Business, Instagram, Messenger)"
+      - "RD Mentor AI (assistente de IA para sugestões de campanhas)"
+    target_audience: "PMEs brasileiras, equipes de marketing e vendas, agências de marketing digital"
+    pricing: "Marketing: Light ~R$50/mês, Basic ~R$399/mês, Pro ~R$1.099/mês, Enterprise sob consulta. CRM: Free, Basic ~R$58/usr/mês, Pro ~R$85/usr/mês. Conversas: ~R$79/mês por canal."
+    strengths:
+      - "Marca consolidada no mercado brasileiro"
+      - "Solução plug-and-play com UX amigável"
+      - "Ecossistema educacional vasto (blog, eventos, certificações)"
+      - "Suporte em português"
+      - "Grupo TOTVS (solidez financeira)"
+    weaknesses:
+      - "Mensageria (WhatsApp) ainda é canal complementar, funcionalidades básicas"
+      - "IA superficial (assistente para sugestões, não agentes autônomos)"
+      - "SaaS fechado com integrações limitadas"
+      - "Custo elevado para PMEs em escala"
+      - "Customização restrita"
+    positioning: "Forte em inbound marketing clássico para PMEs brasileiras. Sobreposição crescente em CRM e atendimento, mas superficial em agentes de IA e WhatsApp — áreas core da Evolution."
+
+  - name: "HubSpot"
+    url: "https://br.hubspot.com/"
+    seo_stats:
+      top_artigos_mapeados: 122
+      palavras_chave_ranqueadas: 10047
+      cliques_por_mes: 173798
+      trafego_equivalente: "R$1.294.347/mês"
+    description: "Plataforma global líder em inbound marketing, vendas, atendimento e CRM. Suite completa com hubs modulares para marketing, vendas, serviço, CMS e operações."
+    main_products:
+      - "Marketing Hub (email, automação, landing pages, SEO, social media)"
+      - "Sales Hub (CRM, pipeline, sequências de email, agendamento)"
+      - "Service Hub (tickets, knowledge base, feedback, chat ao vivo)"
+      - "CMS Hub (criação de sites e blogs)"
+      - "Operations Hub (sincronização de dados, automação programável)"
+    target_audience: "Empresas de todos os portes (foco em mid-market), startups em crescimento, equipes de marketing, vendas e CS"
+    pricing: "Modelo freemium + tiers. Free tools disponíveis. Starter ~US$20/mês, Professional ~US$890/mês (Marketing Hub), Enterprise ~US$3.600/mês. Preço escala com contatos e funcionalidades."
+    strengths:
+      - "Ecossistema completo (marketing + vendas + atendimento + CMS + ops)"
+      - "CRM gratuito robusto como porta de entrada"
+      - "Marca global líder em inbound marketing"
+      - "Conteúdo educacional massivo (HubSpot Academy)"
+      - "Marketplace de integrações extenso"
+    weaknesses:
+      - "Muito caro nos tiers profissional e enterprise"
+      - "WhatsApp como canal secundário, sem profundidade"
+      - "IA focada em produtividade, não em agentes autônomos"
+      - "Complexo demais para operações simples"
+      - "Plataforma fechada, vendor lock-in significativo"
+    positioning: "Líder global em CRM e inbound, mas muito caro e genérico para o mercado brasileiro de mensageria e automação conversacional. Evolution compete no nicho WhatsApp + IA com custo muito menor."
+
+  - name: "ManyChat"
+    url: "https://manychat.com/"
+    seo_stats:
+      top_artigos_mapeados: 17
+      palavras_chave_ranqueadas: 54958
+      cliques_por_mes: 1625896
+      trafego_equivalente: "R$5.055.611/mês"
+    description: "Plataforma de automação de marketing conversacional focada em chat. Permite criar chatbots e fluxos automatizados para Instagram DM, Facebook Messenger, WhatsApp, SMS e email, sem código."
+    main_products:
+      - "Flow Builder (construtor visual drag-and-drop de fluxos de conversa)"
+      - "Automação de Instagram DM (respostas a comentários, Stories, menções)"
+      - "Automação de Facebook Messenger"
+      - "WhatsApp Business API (fluxos automatizados, broadcasts)"
+      - "SMS e Email marketing integrados"
+      - "AI Step / AI Assistant (IA generativa integrada nos fluxos)"
+      - "Keywords e Triggers (gatilhos por palavra-chave)"
+    target_audience: "Criadores de conteúdo, influenciadores, PMEs de marketing digital, agências de social media, e-commerces, infoprodutores"
+    pricing: "Free: até 1.000 contatos, funcionalidades básicas. Pro: a partir de ~US$15/mês (escala com contatos: 500=US$15, 1.000=US$25, 5.000=US$65). Elite: sob consulta."
+    strengths:
+      - "Líder em automação de Instagram DM"
+      - "UX muito polida e fácil para não-técnicos"
+      - "Ecossistema de templates e comunidade consolidada"
+      - "Onboarding rápido, sem setup técnico"
+      - "Forte em marketing conversacional para social media"
+    weaknesses:
+      - "SaaS fechado com vendor lock-in alto"
+      - "WhatsApp via API oficial (BSP) — mais restrito"
+      - "IA básica dentro de fluxos, sem agentes autônomos"
+      - "CRM básico (apenas tags e campos customizados)"
+      - "Custo escala significativamente com volume de contatos"
+      - "Sem controle sobre dados e infraestrutura"
+    positioning: "Líder em automação de Instagram DM e marketing conversacional para criadores. Concorre com Evolution em WhatsApp, mas sem a profundidade técnica, agentes de IA avançados e flexibilidade open-source."

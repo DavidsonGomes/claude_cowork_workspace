@@ -26,6 +26,12 @@ def create_scheduler() -> AsyncIOScheduler:
     )
 
 
+async def collect_routines():
+    from app.collectors.routine_collector import RoutineCollector
+    collector = RoutineCollector()
+    await collector.safe_collect()
+
+
 async def heartbeat():
     from sqlalchemy import insert
     from app.models.metric import Metric
@@ -53,8 +59,15 @@ def start_scheduler():
         id="heartbeat",
         replace_existing=True,
     )
+    _scheduler.add_job(
+        collect_routines,
+        "interval",
+        minutes=5,
+        id="collect-routines",
+        replace_existing=True,
+    )
     _scheduler.start()
-    logger.info("Scheduler started with heartbeat job (every 5 min)")
+    logger.info("Scheduler started with heartbeat + routine collector (every 5 min)")
 
 
 def stop_scheduler():

@@ -1,0 +1,23 @@
+# Audience: Empresas com operação comercial e suporte no WhatsApp
+name: "Empresas com operação comercial e suporte no WhatsApp"
+icon: "📱"
+
+problems:
+  - "Atendimento bagunçado"
+  - "Leads esfriam rápido"
+  - "Falta histórico centralizado"
+  - "Sem distribuição de conversas"
+  - "Sem métricas claras"
+
+solutions:
+  - "Plataforma omnichannel"
+  - "CRM"
+  - "Automação de follow-up"
+  - "IA para triagem e suporte"
+  - "Evolution integrada ao processo comercial"
+
+objections:
+  - "Minha equipe vai conseguir usar?"
+  - "Vai integrar com meu CRM?"
+  - "Consigo manter atendimento humano?"
+  - "Não quero parar a operação para migrar"

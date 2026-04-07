@@ -1,0 +1,19 @@
+# SEED DATA: criado com dados da tela de referência
+name: "Devs, freelancers e integradores"
+icon: "💻"
+problems:
+  - "Querem montar solução própria sem reinventar roda"
+  - "Falta base robusta para múltiplos canais"
+  - "Querem criar SaaS ou automações para clientes"
+  - "APIs de terceiros são caras ou limitadas"
+solutions:
+  - "APIs abertas"
+  - "Open source"
+  - "Infra própria"
+  - "White label"
+  - "Integração com agentes e automações"
+objections:
+  - "A documentação é boa?"
+  - "Consigo customizar?"
+  - "Tem lock-in?"
+  - "A stack aguenta produção?"

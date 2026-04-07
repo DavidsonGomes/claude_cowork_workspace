@@ -53,7 +53,7 @@ development_status:
 
   # Epic 2: Rotinas & Runner Intelligence
   epic-2: in-progress
-  2-1-runner-com-retry-e-timeout-configuravel: ready-for-dev
+  2-1-runner-com-retry-e-timeout-configuravel: in-progress
   2-2-routine-collector: ready-for-dev
   2-3-api-e-frontend-lista-de-rotinas: ready-for-dev
   2-4-api-e-frontend-historico-e-detalhe-de-rotina: ready-for-dev

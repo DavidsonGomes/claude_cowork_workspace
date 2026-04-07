@@ -1,0 +1,344 @@
+# keywords.yaml — Palavras-chave mapeadas para estratégia de conteúdo Evolution Foundation
+# Total: 60 palavras-chave
+keywords:
+
+  # === MARCA / PRODUTO ===
+  - term: "evolution"
+    description: "Evolução da Automação e IA em Pequenas Empresas: Guia Prático"
+    volume: 1000000
+    traffic_value: "R$904.570/mês"
+    position: "Sem posição"
+    status: "Artigo gerado"
+
+  - term: "evo ai"
+    description: "Como usar Evo AI para automação com agentes inteligentes"
+    volume: 8100
+    traffic_value: "R$54.659/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "evoai"
+    description: "EvoAI: Guia Prático para Automação em Pequenas Empresas"
+    volume: 3600
+    traffic_value: "R$53.893/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "evolution api"
+    description: "Evolution API: Integração e Automação para PMEs no Brasil"
+    volume: 33300
+    traffic_value: "R$19.904/mês"
+    position: "Sem posição"
+    status: "Artigo gerado"
+
+  # === WHATSAPP ===
+  - term: "whatsapp"
+    description: "WhatsApp para empresas: integração, automação e IA"
+    volume: 185000000
+    traffic_value: "R$111.111.100/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "automação whatsapp"
+    description: "Automação WhatsApp: integração, chatbots e atendimento agi"
+    volume: 2900
+    traffic_value: "R$53.932/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "whatsapp business"
+    description: "WhatsApp Business: Guia Prático para Automação e Integração"
+    volume: 14800
+    traffic_value: "R$179.493/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "integração whatsapp"
+    description: "Integração WhatsApp: automação prática para empresas e aplicações"
+    volume: 210
+    traffic_value: "R$164/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "api whatsapp"
+    description: "API WhatsApp: Como Integrar, Automatizar e Escalar o Atendimento"
+    volume: 27100
+    traffic_value: "R$16.580/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "crm whatsapp"
+    description: "CRM WhatsApp: Integração Para Vendas e Atendimento Escalável"
+    volume: 12100
+    traffic_value: "R$10.187/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === WHITE LABEL ===
+  - term: "white label"
+    description: "White Label: como escalar serviços digitais com sua marca"
+    volume: 110000
+    traffic_value: "R$48.787/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === TRANSFORMAÇÃO DIGITAL ===
+  - term: "transformação digital"
+    description: "Transformação Digital: Guia Prático para Empresas Brasileiras"
+    volume: 4400
+    traffic_value: "R$2.083/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "atendimento digital"
+    description: "Atendimento digital: integrar canais, IA e automação"
+    volume: 880
+    traffic_value: "R$225/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === CHATBOT ===
+  - term: "chatbot"
+    description: "Chatbot para Empresas: Guia Prático de Automação e IA"
+    volume: 755000000
+    traffic_value: "R$58.720.250/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "chatbot inteligente"
+    description: "Chatbot Inteligente: como aplicar IA no atendimento e vendas"
+    volume: 260
+    traffic_value: "R$159/mês"
+    position: "Sem posição"
+    status: "Artigo gerado"
+
+  # === ATENDIMENTO ===
+  - term: "atendimento multicanal"
+    description: "Atendimento multicanal: como integrar canais e IA no suporte"
+    volume: 170
+    traffic_value: "R$229/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "atendimento inteligente"
+    description: "Atendimento Inteligente: guia prático para automatizar seu suporte"
+    volume: 390
+    traffic_value: "R$177/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "atendimento"
+    description: "Como automatizar seu atendimento com integração e IA"
+    volume: 60500
+    traffic_value: "R$7.098/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "helpdesk"
+    description: "Help Desk: Como Automatizar Suporte e Integrar Canais na Sua Empresa"
+    volume: 201000
+    traffic_value: "R$3.032.419/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === AUTOMAÇÃO ===
+  - term: "automação comercial"
+    description: "Automação comercial: tecnologias e práticas para o varejo moderno"
+    volume: 3600
+    traffic_value: "R$2.595/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "automação empresarial"
+    description: "Automação empresarial: guia prático para integrar IA e sistemas"
+    volume: 170
+    traffic_value: "R$178/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "automação"
+    description: "Automação: Guia Prático para Integrar e Escalar Negócios"
+    volume: 33100
+    traffic_value: "R$11.540/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === IA / AGENTES ===
+  - term: "ia"
+    description: "Guia simples de IA: conceitos, casos e aplicações no Brasil"
+    volume: 6120000
+    traffic_value: "R$735.134/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "inteligência artificial"
+    description: "Inteligência Artificial: aplicações práticas para negócios reais"
+    volume: 1220000
+    traffic_value: "R$218.830/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "agentes"
+    description: "Agentes de IA: tipos, aplicações e desafios para empresas"
+    volume: 74000
+    traffic_value: "R$80/mês"
+    position: "Sem posição"
+    status: "Artigo gerado"
+
+  - term: "openai"
+    description: "OpenAI: Aplicações Práticas de IA para Pequenos Negócios"
+    volume: 9140000
+    traffic_value: "R$443.389/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "llm"
+    description: "Guia prático de LLMs: aplicações e desafios para empresas"
+    volume: 673000
+    traffic_value: "R$331.130/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "assistente virtual"
+    description: "Assistente Virtual: Guia Prático para Empresas e Profissionais"
+    volume: 14800
+    traffic_value: "R$1.444/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === API / INTEGRAÇÃO ===
+  - term: "api"
+    description: "API: Guia Prático para Integração e Automação em Negócios"
+    volume: 1000000
+    traffic_value: "R$288.750/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "integração"
+    description: "Integração de sistemas: como automatizar processos empresariais"
+    volume: 60500
+    traffic_value: "R$7.068/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === CRM ===
+  - term: "crm"
+    description: "CRM: Guia Prático Para Automatizar Relacionamento e Vendas"
+    volume: 1500000
+    traffic_value: "R$2.280.575/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === VENDAS / COMERCIAL ===
+  - term: "vendas"
+    description: "Vendas: Guia Prático de Automação e IA para Pequenos Negócios"
+    volume: 165000
+    traffic_value: "R$56.267/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "funil"
+    description: "Funil de Vendas Digital: Como Automatizar e Integrar Processos"
+    volume: 27100
+    traffic_value: "R$1.315/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "leads"
+    description: "Leads: como automatizar captação e qualificação de contatos"
+    volume: 673000
+    traffic_value: "R$265.842/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "conversão"
+    description: "Conversão Digital: Como Automatizar Leads e Vendas"
+    volume: 14800
+    traffic_value: "R$1.090/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "followup"
+    description: "Como estruturar um follow-up eficiente com automação e IA"
+    volume: 246000
+    traffic_value: "R$2.843/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === TECNOLOGIA / PLATAFORMAS ===
+  - term: "saas"
+    description: "SaaS: Como Aplicar Software em Nuvem e IA no Seu Negócio"
+    volume: 590000
+    traffic_value: "R$899.069/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "low code"
+    description: "Low Code: Guia Prático para Automatizar e Integrar Sistemas"
+    volume: 27100
+    traffic_value: "R$20.845/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "no code"
+    description: "No code: como automatizar processos e criar soluções sem programar"
+    volume: 27300
+    traffic_value: "R$15.904/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "omnichannel"
+    description: "Omnichannel: Guia Prático Para Integrar Canais e Dados na Empresa"
+    volume: 27100
+    traffic_value: "R$4.570/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === OPERAÇÕES / PROCESSOS ===
+  - term: "workflow"
+    description: "Workflow: Como Automatizar e Integrar Processos na Empresa"
+    volume: 165000
+    traffic_value: "R$101.005/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "orquestração"
+    description: "Orquestração de Sistemas: Centralizar e Automatizar Processos"
+    volume: 22200
+    traffic_value: "R$2.154/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "escalabilidade"
+    description: "Escalabilidade em Tecnologia: Como Crescer Sem Perder Controle"
+    volume: 4400
+    traffic_value: "R$1.372/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  - term: "produtividade"
+    description: "Automação e IA: Como Escalar a Produtividade no Trabalho"
+    volume: 12100
+    traffic_value: "R$1.314/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === SUPORTE ===
+  - term: "suporte"
+    description: "Como estruturar um suporte eficiente em automação e IA"
+    volume: 74000
+    traffic_value: "R$11.624/mês"
+    position: "Sem posição"
+    status: "Analisado"
+
+  # === PÁGINA 2 (duplicatas removidas, apenas novas) ===
+
+  # Nota: Muitas keywords da página 2 são variações/duplicatas das da página 1.
+  # Abaixo apenas as que não apareceram antes ou têm descrições distintas.
+
+  # (As seguintes já constam acima com mesmos dados: whatsapp, automação whatsapp,
+  #  whatsapp business, integração whatsapp, api whatsapp, crm whatsapp,
+  #  transformação digital, atendimento digital, chatbot, chatbot inteligente,
+  #  atendimento multicanal, atendimento inteligente, automação comercial,
+  #  automação empresarial, agentes, openai, ia, api, integração, crm,
+  #  automação, atendimento, llm, omnichannel)

@@ -1,0 +1,124 @@
+# Brand Visual Guide — Evolution Foundation
+# Atualizado com base no arquivo: Evolution_Brand_Book_baixa_2.pdf (2026-03-14)
+
+brand_core:
+  concept: "computadores conversando com pessoas"
+  positioning: "integração entre tecnologia e pessoas com soluções de IA, automação, API e SaaS"
+  value_prop: "baixo custo + open source + comunidade + resultado prático"
+  tagline: "Foundation, all in one"
+
+voice:
+  style: "profissional, inovador, acessível, claro e orientado a solução"
+  do:
+    - "usar linguagem prática e objetiva"
+    - "destacar integração, comunidade e eficiência operacional"
+    - "mostrar tecnologia aplicada a problemas reais"
+  dont:
+    - "promessas absolutas (100%, garantido, sem esforço)"
+    - "hype sem contexto técnico"
+    - "linguagem confusa ou excessivamente rebuscada"
+
+colors:
+  primary:
+    - name: "Evolution Green 500"
+      hex: "#00FFA7"
+      usage: "destaque principal, símbolo da marca, CTA"
+    - name: "Evolution Green 600"
+      hex: "#00C681"
+      usage: "variações de destaque e estados"
+    - name: "Evolution Green 700"
+      hex: "#00915D"
+      usage: "tons de profundidade"
+  secondary:
+    - name: "Evolution Purple 500"
+      hex: "#8133AA"
+      usage: "destaques secundários e apoio visual"
+    - name: "Evolution Purple 600"
+      hex: "#68288A"
+      usage: "hierarquia secundária"
+    - name: "Evolution Purple 700"
+      hex: "#521E6D"
+      usage: "contraste secundário"
+  neutrals:
+    - name: "White"
+      hex: "#FFFFFF"
+      usage: "texto/fundo claro"
+    - name: "Black"
+      hex: "#000000"
+      usage: "texto/fundo escuro"
+    - name: "Gray 50"
+      hex: "#F9FAFB"
+      usage: "fundo claro suave"
+    - name: "Gray 950"
+      hex: "#0C111D"
+      usage: "fundo escuro principal"
+  semantic_ui:
+    note: "cores de erro/alerta/info são de interface; não substituir identidade principal"
+
+typography:
+  primary_font: "Inter"
+  weights: [200, 300, 400, 500, 600, 700]
+  rules:
+    - "usar Inter em todas as peças quando possível"
+    - "priorizar legibilidade mobile"
+    - "títulos curtos com alto contraste"
+
+logo_usage:
+  approved_files:
+    main:
+      dark_bg: "assets/logos/Main logo/PNG/Main Light 500.png"
+      light_bg: "assets/logos/Main logo/PNG/Main Dark.png"
+      default: "assets/logos/Main logo/PNG/Main.png"
+    short:
+      dark_bg: "assets/logos/Short Logo/PNG/Reduzida Light 500.png"
+      light_bg: "assets/logos/Short Logo/PNG/Reduzida Dark.png"
+    square:
+      default: "assets/logos/Square logo/PNG/Square.png"
+  rules:
+    - "manter proporção original do logo"
+    - "usar apenas versões aprovadas"
+    - "garantir contraste com o fundo"
+  forbidden:
+    - "distorcer logo"
+    - "recolorir fora das versões aprovadas"
+    - "adicionar efeitos que prejudiquem legibilidade"
+
+visual_style:
+  allowed:
+    - "design minimalista e limpo"
+    - "estética tech moderna"
+    - "elementos de conexão/rede e geometria suave"
+    - "visualização de dados e UI realista"
+    - "composição com respiro e hierarquia"
+  forbidden:
+    - "layout poluído"
+    - "estilo datado ou genérico"
+    - "baixa qualidade ou baixa resolução"
+    - "texto ilegível/gibberish"
+
+creative_generation_guardrails:
+  mandatory:
+    - "sempre usar pelo menos 1 referência de brand em library/references/"
+    - "sempre usar logo oficial adequado ao fundo"
+    - "seguir paleta oficial com predominância do verde da marca"
+    - "manter tipografia Inter ou equivalente muito próxima"
+    - "validar legibilidade final antes de enviar"
+  output_checks:
+    - "sem watermark"
+    - "sem erros ortográficos"
+    - "sem texto truncado"
+
+channel_guidance:
+  linkedin:
+    objective: "autoridade técnica e posicionamento"
+    visual: "cover clean, headline forte, dados/fluxo/arquitetura"
+    format_priority: ["1:1", "16:9"]
+  instagram:
+    objective: "alcance + retenção + comunidade"
+    visual: "impacto rápido, hierarquia mobile-first"
+    format_priority: ["4:5", "1:1", "9:16"]
+
+asset_sources:
+  references: "brands/evolution-foundation/library/references/"
+  images: "brands/evolution-foundation/library/images/"
+  logos: "brands/evolution-foundation/assets/logos/"

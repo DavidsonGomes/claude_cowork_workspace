@@ -1,0 +1,23 @@
+# Audience: Donos de agências
+name: "Donos de agências"
+icon: "🏢"
+
+problems:
+  - "Dificuldade para escalar entrega para clientes"
+  - "Muito retrabalho entre projetos"
+  - "Precisa de solução white label"
+  - "Quer aumentar margem com produto próprio"
+  - "Depende demais de ferramentas terceiras"
+
+solutions:
+  - "White label"
+  - "Automações via N8N/Make"
+  - "APIs de mensageria"
+  - "CRM + IA integrados"
+  - "Evolution como base de operação"
+
+objections:
+  - "Vai me dar suporte suficiente?"
+  - "Consigo revender com minha marca?"
+  - "Consigo manter margem?"
+  - "A plataforma é estável para cliente final?"

@@ -1,0 +1,8 @@
+# Pixel Brand Registry
+# REGRA: toda operação que cria/remove brand DEVE atualizar este arquivo
+brands:
+  - slug: "evolution-foundation"
+    name: "Evolution Foundation"
+    status: "active"
+    created: "2026-03-14"
+  # Futuras empresas adicionadas aqui pelo workflow setup
