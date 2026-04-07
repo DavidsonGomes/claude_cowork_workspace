@@ -27,7 +27,7 @@ export interface RoutineRun {
   id: number;
   started_at: string;
   finished_at: string | null;
-  duration_secs: number;
+  duration_secs: number | null;
   status: string;
   return_code: number;
   retry_count: number;

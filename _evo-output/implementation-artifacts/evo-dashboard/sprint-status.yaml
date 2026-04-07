@@ -52,12 +52,12 @@ development_status:
   epic-1-retrospective: optional
 
   # Epic 2: Rotinas & Runner Intelligence
-  epic-2: in-progress
-  2-1-runner-com-retry-e-timeout-configuravel: in-progress
-  2-2-routine-collector: ready-for-dev
-  2-3-api-e-frontend-lista-de-rotinas: ready-for-dev
-  2-4-api-e-frontend-historico-e-detalhe-de-rotina: ready-for-dev
-  2-5-git-auto-commit-no-eod: ready-for-dev
+  epic-2: done
+  2-1-runner-com-retry-e-timeout-configuravel: done
+  2-2-routine-collector: done
+  2-3-api-e-frontend-lista-de-rotinas: done
+  2-4-api-e-frontend-historico-e-detalhe-de-rotina: done
+  2-5-git-auto-commit-no-eod: done
   epic-2-retrospective: optional
 
   # Epic 3: Monitoramento de Comunidade

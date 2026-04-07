@@ -2,8 +2,11 @@ import asyncio
 import logging
 from dataclasses import dataclass
 from datetime import datetime, timezone
+from pathlib import Path
 
 from app.core.routine_config import get_routine_config
+
+WORKSPACE_ROOT = Path(__file__).parent.parent.parent.parent.parent
 
 logger = logging.getLogger("evo-dashboard.runner")
 
@@ -31,12 +34,19 @@ async def _run_once(name: str, script: str, timeout: int) -> tuple[int, str, str
         stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=timeout)
         return proc.returncode or 0, stdout.decode(), stderr.decode()
     except asyncio.TimeoutError:
-        proc.kill()
+        try:
+            proc.kill()
+        except ProcessLookupError:
+            pass
         await proc.wait()
         return -1, "", f"Timeout after {timeout}s"
 
 
 async def run_adw(name: str, script: str) -> RoutineResult:
+    # Validate script path to prevent path traversal
+    resolved = (WORKSPACE_ROOT / script).resolve()
+    if not resolved.is_relative_to(WORKSPACE_ROOT.resolve()):
+        raise ValueError(f"Script path escapes workspace: {script}")
     config = get_routine_config(name)
     started_at = datetime.now(timezone.utc)
     retry_count = 0

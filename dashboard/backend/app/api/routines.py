@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_db
@@ -32,6 +32,6 @@ async def routine_detail(name: str, db: AsyncSession = Depends(get_db)):
 
 
 @router.get("/{name}/history")
-async def routine_history(name: str, days: int = 30, db: AsyncSession = Depends(get_db)):
+async def routine_history(name: str, days: int = Query(default=30, ge=1, le=365), db: AsyncSession = Depends(get_db)):
     data = await get_routine_history(db, name, days)
     return {"data": data, "meta": _meta()}

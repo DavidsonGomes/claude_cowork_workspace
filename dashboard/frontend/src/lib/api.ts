@@ -6,5 +6,5 @@ export async function fetchApi<T>(path: string): Promise<T> {
     throw new Error(`API error: ${res.status} ${res.statusText}`);
   }
   const json = await res.json();
-  return json.data;
+  return ('data' in json ? json.data : json) as T;
 }

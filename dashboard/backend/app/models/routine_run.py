@@ -1,10 +1,16 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, func
+from sqlalchemy import Column, Index, Integer, String, Float, DateTime, UniqueConstraint, func
 
 from app.core.database import Base
 
 
 class RoutineRun(Base):
     __tablename__ = "routine_runs"
+
+    __table_args__ = (
+        UniqueConstraint('name', 'started_at', name='uq_routine_run'),
+        Index('ix_routine_runs_name', 'name'),
+        Index('ix_routine_runs_started_at', 'started_at'),
+    )
 
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)

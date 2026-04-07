@@ -26,6 +26,11 @@ def create_scheduler() -> AsyncIOScheduler:
     )
 
 
+async def auto_commit_eod():
+    from app.services.git_service import auto_commit_daily_outputs
+    await auto_commit_daily_outputs()
+
+
 async def collect_routines():
     from app.collectors.routine_collector import RoutineCollector
     collector = RoutineCollector()
@@ -66,8 +71,17 @@ def start_scheduler():
         id="collect-routines",
         replace_existing=True,
     )
+    _scheduler.add_job(
+        auto_commit_eod,
+        "cron",
+        hour=21,
+        minute=30,
+        timezone="America/Sao_Paulo",
+        id="auto-commit-eod",
+        replace_existing=True,
+    )
     _scheduler.start()
-    logger.info("Scheduler started with heartbeat + routine collector (every 5 min)")
+    logger.info("Scheduler started: heartbeat, routine collector (5min), auto-commit (21:30 BRT)")
 
 
 def stop_scheduler():

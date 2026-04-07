@@ -6,15 +6,17 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.collectors.base import BaseCollector
+from app.config import settings
 from app.core.database import async_session
 from app.models.routine_run import RoutineRun
 
 logger = logging.getLogger("evo-dashboard.collector.routine")
 
-WORKSPACE_ROOT = Path(__file__).parent.parent.parent.parent.parent
+WORKSPACE_ROOT = Path(settings.WORKSPACE_ROOT)
 LOGS_DIR = WORKSPACE_ROOT / "ADWs" / "logs"
 
 
@@ -103,8 +105,12 @@ class RoutineCollector(BaseCollector):
                             error_summary=None,
                         )
                         session.add(run)
-                        total_imported += 1
-
-            await session.commit()
+                        try:
+                            await session.commit()
+                            total_imported += 1
+                        except IntegrityError:
+                            await session.rollback()
+                            total_skipped += 1
+                            continue
 
         logger.info(f"Routine collector: {total_imported} imported, {total_skipped} skipped (duplicates)")
