@@ -72,8 +72,17 @@ daily: sync review  ## Combo: sync meetings + review todoist
 scheduler:          ## ⏰ Inicia scheduler de rotinas (roda em background)
 	$(PYTHON) scheduler.py
 
-telegram:           ## 📨 Inicia bot Telegram (mostra mensagens no console)
-	@set -a && source .env && set +a && $(PYTHON) telegram_server.py
+telegram:           ## 📨 Inicia bot Telegram em background (screen)
+	@screen -dmS telegram claude --channels plugin:telegram@claude-plugins-official --dangerously-skip-permissions
+	@echo "✅ Telegram bot rodando em background (screen: telegram)"
+	@echo "📺 Ver: screen -r telegram"
+	@echo "🛑 Parar: make telegram-stop"
+
+telegram-stop:      ## 🛑 Para o bot Telegram
+	@screen -S telegram -X quit 2>/dev/null && echo "✅ Telegram bot parado" || echo "⚠ Não estava rodando"
+
+telegram-attach:    ## 📺 Conecta ao terminal do Telegram (Ctrl+A D pra desanexar)
+	@screen -r telegram
 
 # --- Utilitários ---
 
@@ -95,5 +104,5 @@ clean-logs:         ## 🗑️  Remove logs > 30 dias
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq strategy daily scheduler telegram logs logs-detail logs-tail metrics clean-logs help
+.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq strategy daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs help
 .DEFAULT_GOAL := help
