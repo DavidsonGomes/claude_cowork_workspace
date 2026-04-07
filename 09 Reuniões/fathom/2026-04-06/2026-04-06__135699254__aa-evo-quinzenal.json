@@ -1,0 +1,130 @@
+{
+  "title": "AA + EVO (quinzenal)",
+  "meeting_title": "AA + EVO (quinzenal)",
+  "url": "https://fathom.video/calls/622530585",
+  "created_at": "2026-04-06T21:50:29Z",
+  "scheduled_start_time": "2026-04-06T21:00:00Z",
+  "scheduled_end_time": "2026-04-06T22:00:00Z",
+  "recording_id": 135699254,
+  "recording_start_time": "2026-04-06T21:01:29Z",
+  "recording_end_time": "2026-04-06T21:48:25Z",
+  "calendar_invitees_domains_type": "one_or_more_external",
+  "transcript": null,
+  "transcript_language": "pt",
+  "default_summary": {
+    "template_name": "General",
+    "markdown_formatted": "## Meeting Purpose\n\n[Review and refine the Evo launch strategy.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=240.0)\n\n## Key Takeaways\n\n  - [**Strategic Pivot:** The launch strategy will pivot from a two-tier plan to a three-tier model (Free, Monthly, Annual) to better fit the community-focused brand and attract a wider audience.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=813.0)\n  - [**Positioning Refined:** The brand will be positioned as a \"Marketing Automation\" community, a broader scope than just messaging, to enable future expansion into tools like open-source email marketing.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=940.0)\n  - [**Community Hub:** The free community will remain on Discord to leverage its high daily engagement, while the new, paid community will be hosted on the Evo platform for better data control and SLA-backed support.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1873.0)\n  - [**Launch Plan Revised:** The launch timeline is now contingent on a revised financial plan, which Davidson will deliver by tomorrow.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1266.0)\n\n## Topics\n\n### Evo Platform & Launch Plan\n\n  - [**Platform Status:** The Evo Cominut open-source CRM is ready for launch.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=240.0)\n      - [Simplified to an MVP by removing SaaS-focused features (e.g., multi-account).](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=282.0)\n      - [Enhanced for self-service with guided installation, in-app tutorials, and video lessons.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=320.0)\n      - [Video content is dubbed into three languages using Panda Video.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=320.0)\n      - [User testing is underway to refine intuitiveness.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=377.0)\n  - [**Launch Strategy:** The plan, developed with Diego (DPR Estratégica) and Sanja, is to monetize the existing 16k+ lead base.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=426.0)\n      - [**Product Focus:** Evo Cominut (open-source CRM) and Evo Academy (paid support/courses).](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=480.0)\n      - [**Initial Offer:** A R$499/mo support plan bundled with 6 months of Academy access.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=559.0)\n      - [**Goal:** R$150k in revenue from \\~300 users to fund operations and future product development.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=645.0)\n      - [**Launch Event:** A 3-day live series (starting April 14) to introduce the brand, demo the platform, and sell the offer.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=900.0)\n\n### Strategic Feedback & Revisions\n\n  - [**Positioning:** The current messaging is unclear.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=718.0)\n      - [**Problem:** The brand identity is ambiguous (messaging, marketing, AI, dev?).](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=718.0)\n      - [**Solution:** Position as a \"Marketing Automation\" community.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=940.0)\n          - [**Rationale:** This broader scope allows for future expansion into related tools (e.g., open-source email marketing) under the Evo brand.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=987.0)\n  - [**Pricing & Community Model:** The two-tier plan is insufficient.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=813.0)\n      - [**Problem:** The R$499/mo price is a high barrier for the open-source audience (freelancers, devs).](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1728.0)\n      - [**Solution:** Adopt a three-tier model (Free, Monthly, Annual) to attract a wider audience.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=813.0)\n          - [**Rationale:** A free tier builds a large, engaged base for future monetization. The annual plan should be the primary focus, with pricing designed to cover costs (e.g., support staff, AI tokens) while offering a significant discount.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1735.0)\n  - [**Content Strategy:** The Academy needs a more structured production process.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2170.0)\n      - [**Problem:** Relying solely on live streams for course content lacks organization and a clear learning path.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2170.0)\n      - [**Solution:** Create a structured content pipeline.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2170.0)\n          - [Produce organized, curated courses on specific topics (e.g., \"Cloud Code from Beginner to Advanced\").](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2259.0)\n          - [Use multi-streaming (YouTube, Twitch, TikTok) for live \"build in public\" sessions, then edit the recordings into polished course modules.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2329.0)\n\n## Next Steps\n\n  - [**Davidson:**](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1266.0)\n      - [Finalize and deliver the revised financial and launch plan by tomorrow.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1266.0)\n      - [Revise the product and pricing strategy to a three-tier model (Free, Monthly, Annual).](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=813.0)\n      - [Validate the new strategy with Sanja, Felipe Reis, and Rabelo.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=1825.0)\n      - [Prepare a demo of the Panda Video player for Alberto.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2479.0)\n  - [**All:**](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2702.0)\n      - [Meet tomorrow at 4:30 PM to review the revised plan.](https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv?tab=summary&timestamp=2702.0)\n"
+  },
+  "action_items": [
+    {
+      "description": "Finalize launch plan (positioning, 3 tiers, pricing, bonuses, metrics, Diego goals); send to Xandão/Alberto/Anny",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:20:42",
+      "recording_playback_url": "https://fathom.video/calls/622530585?timestamp=1242.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Consult Sancha, Felipe Reis, Rabelo on pricing/plans/bonuses/Academy upsell",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:30:24",
+      "recording_playback_url": "https://fathom.video/calls/622530585?timestamp=1824.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Implement Discord login link; route free to Discord; restrict paid to Evolution community",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:31:30",
+      "recording_playback_url": "https://fathom.video/calls/622530585?timestamp=1890.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Evaluate multistream (YouTube/Twitch/TikTok) for live-coding/reviews; propose cadence",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:40:10",
+      "recording_playback_url": "https://fathom.video/calls/622530585?timestamp=2410.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Send platform access to Alberto; schedule video-player/dubbing walkthrough",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:41:08",
+      "recording_playback_url": "https://fathom.video/calls/622530585?timestamp=2468.9999",
+      "assignee": {
+        "name": "Davidson Gomes",
+        "email": "davidson.gomes@brius.com.br",
+        "team": null
+      }
+    },
+    {
+      "description": "Confirm community managers for Apr 7 4:30; invite Davidson; host 10-min daily",
+      "user_generated": false,
+      "completed": false,
+      "recording_timestamp": "00:46:15",
+      "recording_playback_url": "https://fathom.video/calls/622530585?timestamp=2775.9999",
+      "assignee": {
+        "name": "Alberto André",
+        "email": "aa@brius.com.br",
+        "team": null
+      }
+    }
+  ],
+  "calendar_invitees": [
+    {
+      "name": "Alberto Santos",
+      "email": "aa@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "anne.carvalho@etus.com.br",
+      "email": "anne.carvalho@etus.com.br",
+      "email_domain": "etus.com.br",
+      "is_external": true,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "alexandre.ribeiro@brius.com.br",
+      "email": "alexandre.ribeiro@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    },
+    {
+      "name": "Davidson Gomes",
+      "email": "davidson.gomes@brius.com.br",
+      "email_domain": "brius.com.br",
+      "is_external": false,
+      "matched_speaker_display_name": null
+    }
+  ],
+  "recorded_by": {
+    "name": "Davidson Gomes",
+    "email": "davidson.gomes@brius.com.br",
+    "email_domain": "brius.com.br",
+    "team": null
+  },
+  "share_url": "https://fathom.video/share/x6zUJet89GrSDhZsT2zPrwNmcDs9-WRv",
+  "crm_matches": null
+}

@@ -27,13 +27,8 @@ export function Sidebar() {
       style={{ backgroundColor: '#101828' }}
     >
       {/* Logo */}
-      <div className="flex items-center px-6 h-14 border-b" style={{ borderColor: 'hsl(215 20% 27%)' }}>
-        <span
-          className="text-2xl font-bold tracking-tight"
-          style={{ color: '#00FFA7' }}
-        >
-          evo
-        </span>
+      <div className="flex items-center px-5 h-14 border-b" style={{ borderColor: 'hsl(215 20% 27%)' }}>
+        <img src="/logo.png" alt="EVO Dashboard" className="h-8 w-auto" />
       </div>
 
       {/* Navigation */}

@@ -23,7 +23,8 @@ Reunião quinzenal com AA (Alberto André, Xandão, Anne) definiu pivot estraté
 R$150k com ~300 usuários pagantes para cobrir operações e desenvolvimento
 
 ### Próximo passo crítico
-Davidson entrega plano financeiro revisado **amanhã 07/04** antes da reunião de revisão com AA às **16h30**
+Davidson entrega plano financeiro revisado **07/04** antes da reunião de revisão com AA às **16h30**
+Pipeline de conteúdo: **multistream** (YouTube/Twitch/TikTok) para lives → editar gravações como módulos da Academy
 
 ### Meta de receita
 - **R$150k** com ~300 usuários pagantes para cobrir operações e desenvolvimento futuro
