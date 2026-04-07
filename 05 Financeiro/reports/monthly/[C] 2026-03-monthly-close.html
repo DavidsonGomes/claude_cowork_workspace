@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Close — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  th.right, td.right { text-align: right; }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  tr.total td { font-weight: 700; color: var(--text-primary); background: rgba(0,0,0,0.15); border-top: 2px solid var(--border); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .metric-row { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .mr-label { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+  .metric-row .mr-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 4px; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; }
+  .progress-bar-fill.evo { background: var(--evo-green); }
+
+  /* CHECKLIST */
+  .checklist-item { padding: 14px 20px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .checklist-item:last-child { border-bottom: none; }
+  .check-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+  .check-icon.done { background: rgba(18,183,106,0.2); color: var(--green); border: 1px solid rgba(18,183,106,0.4); }
+  .check-icon.pending { background: rgba(247,144,9,0.2); color: var(--yellow); border: 1px solid rgba(247,144,0.4); }
+  .check-icon.blocked { background: rgba(240,68,56,0.2); color: var(--red); border: 1px solid rgba(240,68,56,0.4); }
+  .check-icon.na { background: rgba(102,112,133,0.2); color: var(--text-muted); border: 1px solid rgba(102,112,133,0.4); }
+  .checklist-text { flex: 1; }
+  .checklist-text .cl-title { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+  .checklist-text .cl-detail { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .checklist-owner { font-size: 12px; color: var(--text-muted); }
+
+  .var-positive { color: var(--green); }
+  .var-negative { color: var(--red); }
+  .var-neutral { color: var(--text-muted); }
+
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>Monthly</span> Close</h1>
+    <div class="subtitle">Março / 2026 — Kickoff do fechamento mensal</div>
+  </div>
+  <div class="header-right">
+    <span class="badge yellow">Em Andamento</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- RESUMO DO MÊS                                  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Receita Total</div>
+      <div class="value">R$&nbsp;31,4k</div>
+      <div class="delta neutral">Omie: R$ 31.376,55</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Despesa Total</div>
+      <div class="value">R$&nbsp;23,4k</div>
+      <div class="delta neutral">77 lançamentos pagos</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Resultado</div>
+      <div class="value">R$&nbsp;7,9k</div>
+      <div class="delta up">Positivo</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Margem</div>
+      <div class="value">25,4%</div>
+      <div class="delta neutral">MRR: R$ 29.087</div>
+    </div>
+  </div>
+
+  <!-- MRR Stripe -->
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="label">Assinaturas Ativas (Stripe)</div>
+      <div class="value">208</div>
+      <div class="delta down">22 cancelamentos em março</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">MRR Stripe</div>
+      <div class="value">R$&nbsp;29,1k</div>
+      <div class="delta neutral">BRL + USD (x R$5,85)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Stripe — Charges Março</div>
+      <div class="value">219</div>
+      <div class="delta neutral">R$ 17.891 BRL + $378 USD | 3 reembolsos</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- CHECKLIST DE FECHAMENTO                        -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Checklist de Fechamento</h2>
+      <span class="count">2/9 concluídos</span>
+    </div>
+    <div class="section-body">
+      <div style="padding: 16px 20px;">
+        <div class="progress-bar">
+          <div class="progress-bar-fill evo" style="width: 22%"></div>
+        </div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon done">✓</div>
+        <div class="checklist-text">
+          <div class="cl-title">Levantar Receitas Stripe</div>
+          <div class="cl-detail">219 charges | R$ 17.891,67 BRL + $378,20 USD | 3 reembolsos (R$ 336,78)</div>
+        </div>
+        <div class="checklist-owner">Auto</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon done">✓</div>
+        <div class="checklist-text">
+          <div class="cl-title">Levantar Receitas Omie</div>
+          <div class="cl-detail">171 registros recebidos em março | R$ 31.376,55 total</div>
+        </div>
+        <div class="checklist-owner">Auto</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Conciliar Stripe x Omie</div>
+          <div class="cl-detail">Verificar se lançamentos Stripe estão refletidos nas NFs do Omie. Diferença a investigar: Stripe R$20.104 vs Omie R$31.376</div>
+        </div>
+        <div class="checklist-owner">Samara / Davidson</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Categorizar Despesas</div>
+          <div class="cl-detail">77 lançamentos pagos, R$ 23.395,08 — códigos Omie mapeados mas precisam validação com nomes reais</div>
+        </div>
+        <div class="checklist-owner">Samara</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Emitir NFs Pendentes</div>
+          <div class="cl-detail">Verificar se todos os 219 charges Stripe têm NF correspondente no Omie</div>
+        </div>
+        <div class="checklist-owner">Samara</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Cobrar Inadimplentes</div>
+          <div class="cl-detail">22 cancelamentos em março — verificar se houve churn por inadimplência vs voluntário</div>
+        </div>
+        <div class="checklist-owner">Davidson</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Calcular Impostos</div>
+          <div class="cl-detail">Impostos identificados: R$ 1.033,17 (cód. 2.19.95 + 2.19.93) — confirmar se há obrigações adicionais</div>
+        </div>
+        <div class="checklist-owner">Samara</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Conciliar Extratos Bancários</div>
+          <div class="cl-detail">Comparar entradas/saídas bancárias com os lançamentos Omie</div>
+        </div>
+        <div class="checklist-owner">Samara</div>
+      </div>
+
+      <div class="checklist-item">
+        <div class="check-icon pending">◯</div>
+        <div class="checklist-text">
+          <div class="cl-title">Aprovar Fechamento</div>
+          <div class="cl-detail">Davidson revisa DRE final e aprova após todos os itens concluídos</div>
+        </div>
+        <div class="checklist-owner">Davidson</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- DRE SIMPLIFICADA                               -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>DRE Simplificada — Março / 2026</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Conta</th>
+            <th class="right">Realizado</th>
+            <th class="right">Mês Anterior</th>
+            <th class="right">Variação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Receita Bruta — Assinaturas (Stripe BRL)</td>
+            <td class="right">R$ 17.891,67</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>Receita Bruta — Assinaturas (Stripe USD convertido)</td>
+            <td class="right">R$ 2.212,47</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>Receita Bruta — Serviços / NFs (Omie)</td>
+            <td class="right">R$ 31.376,55</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td style="color: var(--text-muted); font-style: italic; padding-left: 32px;">(-) Impostos e Taxas</td>
+            <td class="right" style="color: var(--red);">(R$ 1.033,17)</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr class="total">
+            <td>Receita Líquida (base Omie)</td>
+            <td class="right">R$ 30.343,38</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">Pendente comparativo</td>
+          </tr>
+
+          <tr><td colspan="4" style="padding: 8px 20px; font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.1);">Despesas Operacionais</td></tr>
+
+          <tr>
+            <td>(-) Pessoal / RH (cód. 2.04.99)</td>
+            <td class="right">R$ 9.526,98</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>(-) Infraestrutura / Cloud (cód. 2.05.xx)</td>
+            <td class="right">R$ 6.306,45</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>(-) Serviços de Terceiros (cód. 2.06.96)</td>
+            <td class="right">R$ 5.564,52</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>(-) Marketing / Plataformas (cód. 2.12.96)</td>
+            <td class="right">R$ 567,61</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr>
+            <td>(-) Outros (financeiras, bancárias, miscelânea)</td>
+            <td class="right">R$ 396,35</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+          <tr class="total">
+            <td>Total Despesas Operacionais</td>
+            <td class="right">R$ 22.361,91</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+
+          <tr class="total">
+            <td>Resultado Operacional</td>
+            <td class="right" style="color: var(--green);">R$ 7.981,47</td>
+            <td class="right">—</td>
+            <td class="right var-positive">Positivo</td>
+          </tr>
+          <tr class="total">
+            <td>Margem Operacional</td>
+            <td class="right" style="color: var(--green);">25,4%</td>
+            <td class="right">—</td>
+            <td class="right var-neutral">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- CONCILIAÇÕES PENDENTES                         -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Contas a Receber Pendentes -->
+    <div class="section">
+      <div class="section-header">
+        <h2>A Receber Pendentes</h2>
+        <span class="count">0 em aberto</span>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Situação</th>
+              <th class="right">Valor</th>
+              <th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge green">Sem Pendências</span></td>
+              <td class="right">—</td>
+              <td>Todos os lançamentos de março estão como RECEBIDO no Omie</td>
+            </tr>
+            <tr>
+              <td>22 cancelamentos Stripe</td>
+              <td class="right">—</td>
+              <td>Verificar se houve inadimplência associada</td>
+            </tr>
+            <tr>
+              <td>3 reembolsos Stripe</td>
+              <td class="right">R$ 336,78</td>
+              <td>Verificar lançamentos no Omie correspondentes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- NFs Pendentes -->
+    <div class="section">
+      <div class="section-header">
+        <h2>NFs Pendentes de Emissão</h2>
+        <span class="count">A verificar</span>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th class="right">Qtd / Valor</th>
+              <th>Responsável</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Charges Stripe sem NF correspondente</td>
+              <td class="right">A conciliar</td>
+              <td>Samara</td>
+            </tr>
+            <tr>
+              <td>Assinaturas USD — verificar tratamento fiscal</td>
+              <td class="right">$378,20 USD</td>
+              <td>Samara</td>
+            </tr>
+            <tr>
+              <td>Reembolsos — estorno de NF ou nota de crédito</td>
+              <td class="right">3 casos</td>
+              <td>Samara</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- CONTAS A PAGAR PRÓXIMO MÊS (ABRIL)             -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Contas a Pagar — Abril / 2026</h2>
+      <span class="count">32 itens | R$ 33.012,07</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Status</th>
+            <th class="right">Total Estimado</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Múltiplos fornecedores / vencimento 27/04</td>
+            <td><span class="badge yellow">A Vencer</span></td>
+            <td class="right">R$ 33.012,07</td>
+            <td>32 lançamentos — concentração em 27/04</td>
+          </tr>
+          <tr>
+            <td>Pessoal e RH</td>
+            <td><span class="badge yellow">A Vencer</span></td>
+            <td class="right">A detalhar</td>
+            <td>Folha e encargos de abril</td>
+          </tr>
+          <tr>
+            <td>Infraestrutura Cloud</td>
+            <td><span class="badge yellow">A Vencer</span></td>
+            <td class="right">A detalhar</td>
+            <td>AWS, GCP, servidores</td>
+          </tr>
+          <tr class="total">
+            <td>Total Compromissos Abril</td>
+            <td></td>
+            <td class="right">R$ 33.012,07</td>
+            <td>Concentrado no dia 27/04</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- AÇÕES & PENDENCIAS SAMARA                      -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="highlight-card">
+    <div class="title">Pendencias para Samara Cruz</div>
+    <div class="body">
+      <strong>1. Conciliar NFs x Stripe:</strong> Verificar se os 219 charges de março (R$ 17.891,67 BRL + $378,20 USD) possuem NFs emitidas no Omie. Identificar gaps.<br><br>
+      <strong>2. Reembolsos (3 casos | R$ 336,78):</strong> Gerar notas de crédito ou estorno de NF correspondentes para os 3 reembolsos processados no Stripe em março.<br><br>
+      <strong>3. Receitas USD:</strong> Confirmar tratamento fiscal para os $378,20 USD cobrados — qual alíquota e como foi lançado no Omie.<br><br>
+      <strong>4. Categorias de despesas:</strong> Validar nomes dos fornecedores para os lançamentos categorizados como 2.04.99 (Pessoal, R$ 9.526,98), 2.06.96 (Serviços, R$ 5.564,52) e 2.05.xx (Infra, R$ 6.306,45).<br><br>
+      <strong>5. Impostos março:</strong> Confirmar se os R$ 1.033,17 registrados cobrem todas as obrigações fiscais do mês ou há guias adicionais pendentes.<br><br>
+      <strong>6. Contas a pagar abril:</strong> Atenção para os R$ 33.012,07 com vencimento concentrado em 27/04 — confirmar disponibilidade de caixa.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">Observacoes do Fechamento</div>
+    <div class="body">
+      <strong>Stripe vs Omie — Divergencia a investigar:</strong> O Stripe registrou R$ 20.104 em charges no mes, enquanto o Omie registrou R$ 31.376 em receitas. A diferenca pode refletir: (a) NFs emitidas por servicos nao-Stripe, (b) receitas de meses anteriores registradas em marco, ou (c) dupla contagem. Conciliar antes do fechamento.<br><br>
+      <strong>22 cancelamentos em marco:</strong> Volume relevante de churn. Verificar se e sazonalidade ou sinal de retencao. Churn rate estimado: ~10,5% sobre base de 208 subs ativas.<br><br>
+      <strong>MRR atual (07/04):</strong> R$ 29.087 (208 assinaturas — mix BRL R$112 + USD $4.953 convertido). Crescimento vs marco depende de conciliacao.<br><br>
+      <strong>Maior despesa — Pessoal (R$ 9.526,98):</strong> Representa 40,7% do total de despesas. Padrao esperado ou houve pagamento atipico? Confirmar.<br><br>
+      <strong>Caixa abril:</strong> Com resultado positivo de R$ 7.981 em marco e compromissos de R$ 33.012 em abril, monitorar fluxo de caixa — entrada do MRR de abril precisa cobrir as saidas do dia 27.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Flux — 07/04/2026 | Referencia: Marco/2026
+</div>
+
+</body>
+</html>
