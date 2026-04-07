@@ -1,0 +1,2 @@
+- [Stripe Baseline — Abril 2026](project_stripe_baseline.md) — MRR ~R$28.950, 209 assinaturas ativas, churn 9,6% em 07/04/2026
+- [Omie API — Status de Integração](project_omie_status.md) — Omie retornando HTTP 404; verificar credenciais ou acionar Samara Cruz

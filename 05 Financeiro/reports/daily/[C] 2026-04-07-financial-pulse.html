@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Financial Pulse — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .metric-row { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .mr-label { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+  .metric-row .mr-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>Financial</span> Pulse</h1>
+    <div class="subtitle">07 de abril de 2026 — Snapshot diário</div>
+  </div>
+  <div class="header-right">
+    <span class="badge yellow">⚠ Atenção</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KPIs PRINCIPAIS                                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">MRR (estimado)</div>
+      <div class="value">R$ 28,9k</div>
+      <div class="delta neutral">BRL R$112 + USD $4.972 (~R$5,80)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Assinaturas Ativas</div>
+      <div class="value">209</div>
+      <div class="delta down">▼ 5 cancelando ao fim do período</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Receita Hoje</div>
+      <div class="value">R$ 112,26</div>
+      <div class="delta yellow">1 charge — 1 falha (TRY)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Churn (30d)</div>
+      <div class="value">9,6%</div>
+      <div class="delta down">▼ 20 canceladas em 30 dias</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- STRIPE + OMIE                                  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Stripe -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Stripe</h2>
+        <span class="count">2 charges hoje</span>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Cobrados (hoje)</div>
+          <div class="mr-value">R$ 112,26</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot red"></span>Falhas de pagamento</div>
+          <div class="mr-value">1 (TRY 679,55)</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Reembolsos (7d)</div>
+          <div class="mr-value">R$ 0,00</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Novas assinaturas (7d)</div>
+          <div class="mr-value">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Omie -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Omie (ERP)</h2>
+        <span class="count">Indisponível</span>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>A receber (vencidas)</div>
+          <div class="mr-value">— API 404</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>A pagar (próx. 7d)</div>
+          <div class="mr-value">— API 404</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>NFs pendentes emissão</div>
+          <div class="mr-value">— API 404</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>NFs emitidas (mês)</div>
+          <div class="mr-value">— API 404</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- MOVIMENTAÇÕES DO DIA                           -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Movimentações do Dia</h2>
+      <span class="count">2 registros</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Descrição</th>
+            <th>Valor</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge green">Receita</span></td>
+            <td>Subscription update — BRL</td>
+            <td class="right">R$ 112,26</td>
+            <td><span class="badge green">Confirmado</span></td>
+          </tr>
+          <tr>
+            <td><span class="badge red">Falha</span></td>
+            <td>Subscription update — TRY (Lira Turca)</td>
+            <td class="right">TRY 679,55</td>
+            <td><span class="badge red">Falhou</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ALERTAS                                        -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="highlight-card">
+    <div class="title">Alertas Financeiros</div>
+    <div class="body">
+      <strong>⚠ Churn elevado:</strong> 20 assinaturas canceladas nos últimos 30 dias (9,6% sobre base de 209). Acima do threshold de atenção (5–10%). Investigar motivos — feedback indica <em>low_quality</em> como razão recorrente.<br><br>
+      <strong>⚠ 5 assinaturas cancelando ao fim do período:</strong> Clientes com <code>cancel_at_period_end = true</code>. Oportunidade de retenção antes do encerramento.<br><br>
+      <strong>⚠ 1 falha de pagamento hoje:</strong> Charge em Lira Turca (TRY 679,55) falhou. Verificar se o cliente possui método de pagamento alternativo ou se o problema é cambial.<br><br>
+      <strong>⚠ Omie indisponível:</strong> Endpoints de contas a receber, contas a pagar e NFs retornaram HTTP 404. Verificar configuração da API com a Samara Cruz antes do fechamento do mês.<br><br>
+      <strong>ℹ Nenhuma nova assinatura nos últimos 7 dias.</strong> Monitorar captação.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Flux — 07/04/2026 às 07:00 BRT
+</div>
+
+</body>
+</html>
