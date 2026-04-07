@@ -16,6 +16,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | **20:15** | FAQ Sync | `make faq` | @pulse | Atualiza FAQ com perguntas do Discord + GitHub → `03 Comunidade/[C] FAQ.md` |
 | **21:00** | End of Day | `make eod` | @clawdia | Consolida memória dos agentes, logs ADW, tarefas, aprendizados → gera daily log |
 | **21:15** | Memory Sync | `make memory` | @clawdia | Extrai decisões/pessoas/feedbacks dos logs e reuniões → atualiza memória persistente |
+| **21:30** | Dashboard Consolidado | `make dashboard` | @clawdia | Lê outputs de todas as rotinas → gera HTML dashboard 360 com health badges |
 
 ## Rotinas Semanais
 
@@ -52,7 +53,7 @@ make clean-logs    # Remove logs > 30 dias
 
 | Agente | Rotinas |
 |--------|---------|
-| **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly, Trends |
+| **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Dashboard, Weekly, Trends |
 | **@sage** | Strategy Digest |
 | **@atlas** | Linear Review, GitHub Review |
 | **@pulse** | Community Pulse (diário), Community Weekly, FAQ Sync |
@@ -77,6 +78,7 @@ make clean-logs    # Remove logs > 30 dias
 | Community Weekly | HTML | `03 Comunidade/reports/weekly/[C] YYYY-WXX-community-report.html` |
 | FAQ Sync | MD | `03 Comunidade/[C] FAQ.md` (atualiza) |
 | Health Check-in | HTML + MD | `06 Pessoal/health-checkins/reports/[C] YYYY-MM-DD-health.html` |
+| Dashboard Consolidado | HTML | `01 Daily Logs/[C] YYYY-MM-DD-dashboard.html` |
 
 ### Templates HTML disponíveis
 
@@ -94,3 +96,4 @@ Todos em `.claude/templates/html/`, dark theme Evolution (verde `#00FFA7`, Inter
 | `community-daily-pulse.html` | Community Pulse |
 | `community-weekly-report.html` | Community Weekly |
 | `health-checkin.html` | Health Check-in |
+| `dashboard-consolidation.html` | Dashboard Consolidado |

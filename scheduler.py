@@ -76,6 +76,7 @@ def setup_schedule():
     schedule.every().day.at("20:15").do(run_adw, "FAQ Sync", "faq_sync.py")
     schedule.every().day.at("21:00").do(run_adw, "End of Day", "end_of_day.py")
     schedule.every().day.at("21:15").do(run_adw, "Memory Sync", "memory_sync.py")
+    schedule.every().day.at("21:30").do(run_adw, "Dashboard Consolidado", "dashboard.py")
 
     # --- Semanais ---
     schedule.every().friday.at("08:00").do(run_adw, "Weekly Review", "weekly_review.py")

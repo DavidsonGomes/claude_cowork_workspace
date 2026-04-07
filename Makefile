@@ -34,6 +34,9 @@ memory:             ## 🧠 Consolida memória (@clawdia)
 eod:                ## 🌙 Consolidação do dia — memória, logs, aprendizados (@clawdia)
 	$(PYTHON) $(ADW_DIR)/end_of_day.py
 
+dashboard:          ## 📊 Dashboard consolidado — visão 360 do negócio (@clawdia)
+	$(PYTHON) $(ADW_DIR)/dashboard.py
+
 # --- Rotinas semanais ---
 
 weekly:             ## 📊 Revisão semanal completa (@clawdia)
@@ -125,5 +128,5 @@ docker-build:       ## 🐳 Build da imagem
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq strategy daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
+.PHONY: morning sync triage review memory eod dashboard weekly health trends linear community community-week github faq strategy daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
 .DEFAULT_GOAL := help
