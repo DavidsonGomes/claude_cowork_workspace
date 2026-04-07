@@ -107,6 +107,7 @@ def setup_schedule():
     # --- Semanais ---
     schedule.every().friday.at("08:00").do(run_adw, "Weekly Review", "weekly_review.py")
     schedule.every().friday.at("08:30").do(run_adw, "Trends", "trends.py")
+    schedule.every().friday.at("09:00").do(run_adw, "Strategy Digest", "strategy_digest.py")
     schedule.every().monday.at("09:00").do(run_adw, "Linear Review", "linear_review.py")
     schedule.every().wednesday.at("09:00").do(run_adw, "Linear Review", "linear_review.py")
     schedule.every().friday.at("09:00").do(run_adw, "Linear Review", "linear_review.py")

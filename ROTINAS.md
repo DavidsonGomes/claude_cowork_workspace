@@ -26,6 +26,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | **Seg/Qua/Sex 09:00** | Linear Review | `make linear` | @atlas | Issues em review, blockers, stale, sprint progress → relatório |
 | **Seg/Qua/Sex 09:15** | GitHub Review | `make github` | @atlas | PRs abertos, issues comunidade, stars/forks, releases → relatório |
 | **Segunda 09:30** | Community Weekly | `make community-week` | @pulse | Análise semanal: WAM, sentimento, tópicos, insights produto, docs gaps → HTML |
+| **Sexta 09:00** | Strategy Digest | `make strategy` | @sage | Consolida financeiro + produto + comunidade + mercado → visão estratégica |
 | **Domingo 10:00** | Health Check-in | `make health` | @kai | Check-in de saúde: peso, alimentação, treino, sono, energia, Mounjaro |
 
 ---
@@ -52,6 +53,7 @@ make clean-logs    # Remove logs > 30 dias
 | Agente | Rotinas |
 |--------|---------|
 | **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Weekly, Trends |
+| **@sage** | Strategy Digest |
 | **@atlas** | Linear Review, GitHub Review |
 | **@pulse** | Community Pulse (diário), Community Weekly, FAQ Sync |
 | **@kai** | Health Check-in |
@@ -69,4 +71,5 @@ make clean-logs    # Remove logs > 30 dias
 | Community Pulse | `03 Comunidade/reports/daily/[C] YYYY-MM-DD-community-pulse.html` |
 | Community Weekly | `03 Comunidade/reports/weekly/[C] YYYY-WXX-community-report.html` |
 | GitHub Review | `02 Projects/github-reviews/[C] YYYY-MM-DD-github-review.html` |
+| Strategy Digest | `09 Estrategia/digests/[C] YYYY-WXX-strategy-digest.md` |
 | Memory Sync | `memory/` (arquivos individuais) |

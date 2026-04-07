@@ -54,6 +54,9 @@ community:          ## 📣 Pulso diário da comunidade Discord (@pulse)
 community-week:     ## 📊 Relatório semanal da comunidade Discord (@pulse)
 	$(PYTHON) $(ADW_DIR)/community_weekly.py
 
+strategy:           ## 🎯 Strategy Digest semanal — visão consolidada do negócio (@sage)
+	$(PYTHON) $(ADW_DIR)/strategy_digest.py
+
 github:             ## 🐙 Review dos repos GitHub — PRs, issues, stars (@atlas)
 	$(PYTHON) $(ADW_DIR)/github_review.py
 
@@ -92,5 +95,5 @@ clean-logs:         ## 🗑️  Remove logs > 30 dias
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq daily scheduler telegram logs logs-detail logs-tail metrics clean-logs help
+.PHONY: morning sync triage review memory eod weekly health trends linear community community-week github faq strategy daily scheduler telegram logs logs-detail logs-tail metrics clean-logs help
 .DEFAULT_GOAL := help

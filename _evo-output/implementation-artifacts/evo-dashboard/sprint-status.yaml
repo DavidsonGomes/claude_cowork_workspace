@@ -43,12 +43,12 @@ story_location: _evo-output/implementation-artifacts
 
 development_status:
   # Epic 1: Project Foundation & Infrastructure
-  epic-1: in-progress
-  1-1-inicializar-monorepo-backend: ready-for-dev
-  1-2-inicializar-frontend-react: ready-for-dev
-  1-3-makefile-development-workflow: ready-for-dev
-  1-4-sqlite-schema-base-alembic-migrations: ready-for-dev
-  1-5-apscheduler-integration: ready-for-dev
+  epic-1: done
+  1-1-inicializar-monorepo-backend: done
+  1-2-inicializar-frontend-react: done
+  1-3-makefile-development-workflow: done
+  1-4-sqlite-schema-base-alembic-migrations: done
+  1-5-apscheduler-integration: done
   epic-1-retrospective: optional
 
   # Epic 2: Rotinas & Runner Intelligence

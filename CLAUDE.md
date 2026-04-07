@@ -59,6 +59,10 @@ _evo/                 — Evo Method (framework de desenvolvimento)
 | **Atlas** 🗂️ | `/atlas` | Projetos — status, milestones, blockers, Linear, GitHub |
 | **Kai** 👤 | `/kai` | Pessoal — saúde, hábitos, rotina (domínio isolado) |
 | **Pulse** 📣 | `/pulse` | Comunidade — Discord, sentimento, FAQ, engajamento |
+| **Sage** 🎯 | `/sage` | Estratégia — OKRs, roadmap, priorização, cenários |
+| **Pixel** 📲 | `/pixel` | Social media — conteúdo, calendário, análise |
+| **Nex** 💼 | `/nex` | Comercial — pipeline, propostas, qualificação |
+| **Mentor** 🎓 | `/mentor` | Cursos — trilhas, módulos, Evo Academy |
 
 ---
 

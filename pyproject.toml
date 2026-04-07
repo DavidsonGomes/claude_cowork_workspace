@@ -11,3 +11,8 @@ dependencies = [
 
 [tool.uv]
 dev-dependencies = []
+
+[tool.uv.workspace]
+members = [
+    "dashboard/backend",
+]
