@@ -169,6 +169,15 @@ Ao terminar, apresentar um resumo curto:
 
 Sem listar tarefas uma por uma — apenas contagem. Se o Davidson quiser detalhes, ele pede.
 
+### Passo 9 — Notificar no Telegram
+
+Enviar o resumo do Passo 8 no Telegram para o Davidson usando a skill `/int-telegram`:
+- Chat ID: `946857210`
+- Usar `reply(chat_id="946857210", text="...")` via MCP
+- Formato curto: emoji + título + contagem de reuniões e tarefas
+
+Se não houver reuniões novas (parou no Passo 2), enviar: "🎙️ Sync Meetings — Nenhuma reunião nova."
+
 ## Notas
 
 - **Não reprocessar** meetings que já estão em `fathom-processed-recording-ids.txt`

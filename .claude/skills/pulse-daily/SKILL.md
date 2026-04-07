@@ -76,3 +76,11 @@ Relatório salvo em 03 Comunidade/reports/daily/
 - **Perguntas sem resposta = prioridade** — destacar sempre
 - **Comparar com média** — se tiver relatórios anteriores no diretório, comparar métricas
 - **Canais vazios = OK** — se um canal não teve atividade, não reportar como problema
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

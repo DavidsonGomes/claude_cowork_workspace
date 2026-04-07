@@ -11,8 +11,6 @@ import sys
 import signal
 import schedule
 import time
-import json
-import urllib.request
 from datetime import datetime
 from pathlib import Path
 
@@ -35,28 +33,6 @@ WORKSPACE = Path(__file__).parent
 PYTHON = "uv run python"
 ADW_DIR = WORKSPACE / "ADWs" / "rotinas"
 
-# Telegram
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "946857210")
-
-
-def notify(text: str):
-    """Envia notificação no Telegram."""
-    if not TELEGRAM_BOT_TOKEN:
-        return
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    data = json.dumps({
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": text,
-        "parse_mode": "Markdown",
-        "disable_web_page_preview": True,
-    }).encode("utf-8")
-    try:
-        req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
-        urllib.request.urlopen(req, timeout=5)
-    except Exception:
-        pass
-
 
 def run_adw(name: str, script: str):
     """Executa um ADW como subprocess."""
@@ -77,14 +53,11 @@ def run_adw(name: str, script: str):
             console.print(f"  [info]{now}[/info] [success]✓[/success] {name} concluído")
         else:
             console.print(f"  [info]{now}[/info] [error]✗[/error] {name} falhou (exit {result.returncode})")
-            notify(f"❌ *{name}* falhou (exit {result.returncode})")
 
     except subprocess.TimeoutExpired:
         console.print(f"  [info]{now}[/info] [error]✗[/error] {name} timeout (15min)")
-        notify(f"⏰ *{name}* timeout após 15 minutos")
     except Exception as e:
         console.print(f"  [info]{now}[/info] [error]✗[/error] {name} erro: {e}")
-        notify(f"❌ *{name}* erro: {e}")
 
 
 # ============================================================
@@ -128,7 +101,6 @@ def show_schedule():
     jobs = sorted(schedule.get_jobs(), key=lambda j: j.next_run)
     for job in jobs:
         next_run = job.next_run.strftime("%Y-%m-%d %H:%M") if job.next_run else "—"
-        # Extrai nome da rotina do job
         name = job.job_func.args[0] if job.job_func.args else "?"
         interval = str(job)
         table.add_row(next_run, name, interval)
@@ -140,7 +112,8 @@ def main():
     """Entry point do scheduler."""
     console.print(Panel(
         "[bold white]Evolution Workspace Scheduler[/bold white]\n"
-        "[dim]Executando rotinas automatizadas • Ctrl+C para parar[/dim]",
+        "[dim]Executando rotinas automatizadas • Ctrl+C para parar[/dim]\n"
+        "[dim]Notificações via MCP Telegram (dentro das skills)[/dim]",
         border_style="cyan",
         padding=(0, 2)
     ))
@@ -152,12 +125,9 @@ def main():
     console.print(f"\n  [success]✓[/success] {total} rotinas agendadas")
     console.print(f"  [dim]Timezone: BRT (UTC-3) • Logs: ADWs/logs/[/dim]\n")
 
-    notify(f"🟢 *Scheduler iniciado*\n{total} rotinas agendadas")
-
     # Graceful shutdown
     def shutdown(sig, frame):
         console.print(f"\n  [warning]⚠ Scheduler encerrado[/warning]")
-        notify("🔴 *Scheduler encerrado*")
         sys.exit(0)
 
     signal.signal(signal.SIGINT, shutdown)

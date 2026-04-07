@@ -354,3 +354,11 @@ See `skills/gog/_shared/references/testing.md` for complete test plan.
 - If email subject/sender contains obvious credentials or secrets, redact in output
 
 - For recurring newsletters, suggest creating a filter/rule rather than manual archiving
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

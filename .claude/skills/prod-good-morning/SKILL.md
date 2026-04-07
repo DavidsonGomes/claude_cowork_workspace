@@ -64,3 +64,10 @@ Create the `01 Daily Logs/` directory if it does not exist.
 ## Tone
 
 Keep the morning briefing conversational and brief. The user is starting their day — they don't need a wall of text. Punchy bullets, one clear recommendation, then move into action.
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

@@ -96,3 +96,11 @@ Apresentar versão curta e direta.
 - **Opinião sinalizada** — quando é opinião vs dado, deixar claro
 - **Uma recomendação** — não dar 10 sugestões, dar 1 clara
 - **Conectar os pontos** — o valor do digest é cruzar áreas, não repetir relatórios individuais
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

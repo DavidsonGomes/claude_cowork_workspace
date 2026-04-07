@@ -177,3 +177,11 @@ Novas:
 - **Não inventar respostas** — se não tem resposta clara, marcar como "pendente de documentação"
 - **Tags nos comentários** — manter as tags HTML comment pra facilitar busca
 - **Manter organizado** — categorias em ordem lógica (instalação → config → integrações → produto → billing → erros)
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

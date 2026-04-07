@@ -123,3 +123,11 @@ Se o Davidson quiser ver detalhes do que mudou, ele pede.
 - **Manter comentários existentes** — não alterar comentários, apenas o título
 - **Se não souber a categoria**, usar `[Operação]` como fallback
 - **Executar primeiro, reportar depois** — sem relatório intermediário
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

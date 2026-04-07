@@ -163,3 +163,11 @@ Criar `memory/trends/` se não existir.
 - **Se uma fonte não tem dados, pular** — não travar por falta de um relatório
 - **Foco em ação** — cada insight deve levar a uma recomendação concreta
 - **Não alarmar sem evidência** — 🔴 só quando métrica realmente indica risco
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

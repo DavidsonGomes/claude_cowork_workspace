@@ -7,8 +7,6 @@ import subprocess
 import os
 import sys
 import json
-import urllib.request
-import urllib.error
 from datetime import datetime
 from pathlib import Path
 
@@ -31,34 +29,8 @@ WORKSPACE = Path(__file__).parent.parent
 LOGS_DIR = Path(__file__).parent / "logs"
 LOGS_DIR.mkdir(exist_ok=True)
 
-# Telegram config (from .env)
-TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
-TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "946857210")  # Davidson's chat ID
-
-
 def _timestamp():
     return datetime.now().strftime("%Y%m%d-%H%M%S")
-
-
-def _send_telegram(text: str):
-    """Envia mensagem via Telegram Bot API. Falha silenciosamente."""
-    if not TELEGRAM_BOT_TOKEN:
-        return False
-
-    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
-    data = json.dumps({
-        "chat_id": TELEGRAM_CHAT_ID,
-        "text": text,
-        "parse_mode": "Markdown",
-        "disable_web_page_preview": True,
-    }).encode("utf-8")
-
-    try:
-        req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=5) as resp:
-            return resp.status == 200
-    except Exception:
-        return False
 
 
 def _save_metrics(log_name, duration, returncode, agent, stdout):
@@ -221,48 +193,15 @@ def banner(title: str, subtitle: str = "", color: str = "cyan"):
     console.print(Panel(content, border_style=color, padding=(0, 2)))
 
 
-def summary(results: list, title: str = "Concluído", notify: bool = True):
-    """
-    Mostra resumo final e envia notificação no Telegram.
-
-    Args:
-        results: Lista de resultados dos steps
-        title: Título do resumo
-        notify: Se True, envia resumo no Telegram
-    """
+def summary(results: list, title: str = "Concluído"):
+    """Mostra resumo final no terminal."""
     total_duration = sum(r.get("duration", 0) for r in results)
     success = sum(1 for r in results if r.get("success"))
     failed = len(results) - success
-
-    status_rich = "[success]✅ Tudo OK[/success]" if failed == 0 else f"[warning]⚠ {failed} falha(s)[/warning]"
+    status = "[success]✅ Tudo OK[/success]" if failed == 0 else f"[warning]⚠ {failed} falha(s)[/warning]"
     console.print(Panel(
-        f"{status_rich}\n[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s[/dim]",
+        f"{status}\n[dim]Steps: {success}/{len(results)} | Tempo: {total_duration:.0f}s[/dim]",
         title=f"[bold]{title}[/bold]",
         border_style="green" if failed == 0 else "yellow",
         padding=(0, 2)
     ))
-
-    # Telegram notification
-    if notify and TELEGRAM_BOT_TOKEN:
-        status_emoji = "✅" if failed == 0 else "⚠️"
-        # Extrai resumo do stdout (últimas linhas úteis)
-        output_summary = ""
-        for r in results:
-            stdout = r.get("stdout", "")
-            if stdout:
-                # Pega linhas que parecem resumo (não JSON, não vazias, não muito longas)
-                useful = [l.strip() for l in stdout.splitlines() if l.strip() and not l.strip().startswith("{") and len(l.strip()) < 200]
-                # Pega as últimas 15 linhas úteis
-                output_summary = "\n".join(useful[-15:])
-
-        msg = f"{status_emoji} *{title}*\n"
-        msg += f"Steps: {success}/{len(results)} | {total_duration:.0f}s\n"
-        if output_summary:
-            # Trunca pra caber no limite do Telegram (4096 chars)
-            if len(msg) + len(output_summary) > 3900:
-                output_summary = output_summary[:3900 - len(msg)] + "\n..."
-            msg += f"\n{output_summary}"
-
-        sent = _send_telegram(msg)
-        if sent:
-            console.print(f"  [dim]📨 Notificação enviada no Telegram[/dim]")

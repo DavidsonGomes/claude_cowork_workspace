@@ -93,3 +93,11 @@ Criar o diretório `02 Projects/linear-reviews/` se não existir.
 - **Priorizar clareza** — se não conseguir determinar o time ou ciclo, listar o que encontrar sem travar
 - **Destacar riscos** — issues em review há mais de 2 dias ou stale são sinais de atenção
 - **Ser direto** — números, não narrativa
+
+
+### Notificar no Telegram
+
+Ao finalizar, enviar resumo curto no Telegram para o Davidson:
+- Usar o MCP do Telegram: `reply(chat_id="946857210", text="...")`
+- Formato: emoji + nome da rotina + resultado principal (1-3 linhas)
+- Se a rotina não teve novidades, enviar mesmo assim com "sem novidades"

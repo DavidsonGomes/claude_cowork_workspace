@@ -73,10 +73,14 @@ scheduler:          ## ⏰ Inicia scheduler de rotinas (roda em background)
 	$(PYTHON) scheduler.py
 
 telegram:           ## 📨 Inicia bot Telegram em background (screen)
-	@screen -dmS telegram claude --channels plugin:telegram@claude-plugins-official --dangerously-skip-permissions
-	@echo "✅ Telegram bot rodando em background (screen: telegram)"
-	@echo "📺 Ver: screen -r telegram"
-	@echo "🛑 Parar: make telegram-stop"
+	@if screen -list | grep -q '\.telegram'; then \
+		echo "⚠ Telegram bot já está rodando. Use 'make telegram-stop' primeiro ou 'make telegram-attach' pra conectar."; \
+	else \
+		screen -dmS telegram claude --channels plugin:telegram@claude-plugins-official --dangerously-skip-permissions; \
+		echo "✅ Telegram bot rodando em background (screen: telegram)"; \
+		echo "📺 Ver: screen -r telegram"; \
+		echo "🛑 Parar: make telegram-stop"; \
+	fi
 
 telegram-stop:      ## 🛑 Para o bot Telegram
 	@screen -S telegram -X quit 2>/dev/null && echo "✅ Telegram bot parado" || echo "⚠ Não estava rodando"

@@ -66,11 +66,20 @@ type: project
 - **Sticker upload falha no S3** — issue #5 — webp: invalid format ao tentar decode
 - **Erro licença "invalid product slug"** — Discord — workaround: downgrade 0.6.0 → emite → upgrade 0.6.1
 
-## FAQ Status (06/abr/2026)
+## FAQ Status (07/abr/2026)
 
-- FAQ populado pela primeira vez com 14 entradas em: `03 Comunidade/[C] FAQ.md`
+- FAQ atualizado com 21 entradas em: `03 Comunidade/[C] FAQ.md`
+- Sync 07/abr adicionou 7 entradas novas: mídia não recebida, erro 400 integrações, canal fechado N8N, nome contato, sendWhatsAppAudio reply, histórico Evo Go, botões Evo Go, sticker S3, Azure/DeepSeek Evo AI, seeder bug Evo AI
 - Categorias cobertas: Instalação, Configuração, Integrações (Chatwoot, Typebot), Evolution API, Evo Go, Evo CRM
 - Próxima sync: adicionar entradas de Billing & Licenças quando houver dados
+
+## Novos Padrões Detectados (07/abr/2026)
+
+- **Erro "canal fechado" N8N** — recorrente no chat-pt, relacionado a instâncias com falso positivo de conexão
+- **Evo Go sem histórico de conversas** — confirmado por oismaelash, PR #3 em andamento
+- **Evo Go botões interativos quebrados** — discussão recorrente, sem solução oficial ainda
+- **Evo AI: Azure + DeepSeek** — demanda crescente por novos provedores de LLM (issues #37 e #30)
+- **Evo AI: bug seeder admin** — issue crítica #38 afeta deployments com troca de credenciais
 
 ## Tópicos de Alta Atividade (W14/abr/2026)
 
