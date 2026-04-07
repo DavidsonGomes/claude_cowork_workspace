@@ -53,6 +53,20 @@ This document provides the complete epic and story breakdown for EVO Dashboard, 
 - FR32: Davidson pode ver a data/hora da ultima atualizacao de cada metrica
 - FR33: O dashboard atualiza automaticamente os dados a cada 60 segundos
 - FR34: Davidson pode ver o estado geral do ecossistema (health score)
+- FR35: Davidson pode ver seus dados de saude atuais (peso, gordura%, musculo%, visceral, BMI)
+- FR36: Davidson pode ver trend de peso e composicao corporal ao longo do tempo
+- FR37: Davidson pode ver aderencia semanal (diet score, workouts, medicacao)
+- FR38: Davidson pode ver sintomas reportados
+- FR39: Davidson pode ver dados da Isabella no mesmo dashboard de saude
+- FR40: O sistema coleta automaticamente dados dos health check-ins JSON
+- FR41: As skills do Claude podem enviar dados estruturados via POST na API
+- FR42: Cada dominio tem um endpoint de ingestao POST /api/v1/ingest/{dominio}
+- FR43: O endpoint de ingestao valida o payload e grava no SQLite
+- FR44: Skills existentes sao atualizadas para chamar a API de ingestao
+- FR45: O sistema aceita dados tanto dos collectors quanto da ingestao direta (dual-write)
+- FR46: O runner grava POST /ingest/routine apos TODA execucao de ADW (14/14 rotinas)
+- FR47: Rotinas sem dados de dominio (morning, EOD, triage, etc.) sao rastreadas via FR46
+- FR48: Community weekly grava no endpoint /ingest/community com type:weekly
 
 ### NonFunctional Requirements
 
@@ -122,6 +136,20 @@ This document provides the complete epic and story breakdown for EVO Dashboard, 
 - FR32 → Epic 7 (Story 7.1)
 - FR33 → Epic 7 (Story 7.2)
 - FR34 → Epic 7 (Story 7.1)
+- FR35 → Epic 8 (Story 8.2)
+- FR36 → Epic 8 (Story 8.2)
+- FR37 → Epic 8 (Story 8.2)
+- FR38 → Epic 8 (Story 8.2)
+- FR39 → Epic 8 (Story 8.2)
+- FR40 → Epic 8 (Story 8.1)
+- FR41 → Epic 9 (Story 9.1)
+- FR42 → Epic 9 (Story 9.1)
+- FR43 → Epic 9 (Story 9.1)
+- FR44 → Epic 9 (Story 9.2)
+- FR45 → Epic 9 (Story 9.1)
+- FR46 → Epic 9 (Story 9.2) — runner grava /ingest/routine pra TODAS as 14 rotinas
+- FR47 → Epic 2 (Story 2.2) + Epic 9 (Story 9.2) — rotinas sem dominio rastreadas via routine ingest
+- FR48 → Epic 9 (Story 9.2) — community weekly usa mesmo endpoint com type:weekly
 
 ## Epic List
 
@@ -152,6 +180,14 @@ Davidson pode ver reunioes Fathom, action items e resumos filtrados por projeto 
 ### Epic 7: Cockpit Home & Integracao Final
 Davidson abre uma unica tela e ve o estado de todo o ecossistema com alertas, health score e navegacao.
 **FRs covered:** FR29, FR30, FR31, FR32, FR33, FR34
+
+### Epic 8: Acompanhamento Pessoal / Saude
+Davidson pode ver dados de saude (peso, composicao corporal, aderencia, sintomas) dele e da Isabella.
+**FRs covered:** FR35, FR36, FR37, FR38, FR39, FR40
+
+### Epic 9: Ingest API & Skills de Integracao
+Skills do Claude gravam dados estruturados direto na API do dashboard, eliminando dependencia de parsing de arquivos.
+**FRs covered:** FR41, FR42, FR43, FR44, FR45
 
 ---
 
@@ -528,3 +564,98 @@ So that it's a reliable daily tool.
 **And** a sidebar mostra indicadores de status por dominio (bolinha verde/vermelha)
 **And** o backend serve o frontend build via StaticFiles em producao
 **And** `make start` roda tudo num processo unico
+
+---
+
+## Epic 8: Acompanhamento Pessoal / Saude
+
+Davidson pode ver dados de saude (peso, composicao corporal, aderencia a dieta/treino, sintomas) dele e da Isabella, com trends historicos.
+
+### Story 8.1: Health Collector
+
+As the system,
+I want to collect health data from check-in JSON files into SQLite,
+So that the API can serve health metrics to the frontend.
+
+**Acceptance Criteria:**
+
+**Given** arquivos JSON existem em `06 Pessoal/health-checkins/` (formato: date, davidson{scale, trend, adherence, symptoms}, isabella{...})
+**When** o health collector executa (agendado apos health check-in semanal)
+**Then** cada JSON e parseado e rows sao inseridas na tabela `health_snapshots` para davidson e isabella
+**And** campos extraidos: weight_kg, fat_pct, skeletal_muscle_pct, visceral, bmi, water_pct, bmr_kcal, diet_score, workouts_count, medication_on_time, symptoms (JSON)
+**And** backfill dos 4+ JSONs historicos na primeira execucao
+**And** duplicatas detectadas por (date, person) e ignoradas
+**And** dados de `health-data.js` (31 medicoes Davidson, 17 Isabella) sao importados no backfill
+
+### Story 8.2: API e Frontend — Saude
+
+As Davidson,
+I want to see health metrics with trends for myself and Isabella,
+So that I can track our progress with Mounjaro and fitness goals.
+
+**Acceptance Criteria:**
+
+**Given** dados de saude existem no SQLite
+**When** Davidson acessa `/health` no dashboard
+**Then** a tela mostra tabs ou toggle: Davidson | Isabella
+**And** para cada pessoa mostra: peso atual, gordura %, musculo %, visceral, BMI, agua %, BMR
+**And** badges de trend: seta verde para melhoria, vermelha para piora
+**And** grafico de linha: peso ao longo do tempo (periodo selecionavel: 30d, 90d, 365d)
+**And** grafico de composicao: gordura vs musculo ao longo do tempo
+**And** secao de aderencia: diet score, workouts esta semana, medicacao em dia (check/x)
+**And** secao de sintomas: lista de sintomas reportados com intensidade
+**And** a API `GET /api/v1/health/latest?person=davidson` e `GET /api/v1/health/trend?person=davidson&days=90` retornam dados
+**And** dados atualizam a cada 60s
+
+---
+
+## Epic 9: Ingest API & Skills de Integracao
+
+A API do dashboard aceita dados estruturados via POST, e skills do Claude sao criadas/atualizadas para gravar dados direto na API alem dos outputs HTML/MD existentes.
+
+### Story 9.1: Ingest API Endpoints
+
+As a developer,
+I want POST endpoints for each domain that accept structured data,
+So that Claude skills can write directly to the dashboard database.
+
+**Acceptance Criteria:**
+
+**Given** o backend FastAPI esta rodando
+**When** uma skill faz `POST /api/v1/ingest/community` com payload JSON valido
+**Then** os dados sao validados (campos obrigatorios, tipos corretos)
+**And** uma row e inserida/atualizada na tabela correspondente
+**And** resposta 201 com `{data: {id: N}, meta: {timestamp}}` em caso de sucesso
+**And** resposta 422 com detalhes de validacao em caso de payload invalido
+**And** endpoints existem para todos os 7 dominios: community, github, finance, sprint, meeting, health, routine
+**And** duplicatas sao tratadas com upsert (update se ja existe row para mesma date/chave)
+**And** a API aceita tanto dados novos quanto atualizacoes de dados existentes
+
+### Story 9.2: Skills Claude de Integracao
+
+As Davidson,
+I want my existing Claude skills to automatically send data to the dashboard API,
+So that the dashboard stays updated without depending on file parsing.
+
+**Acceptance Criteria:**
+
+**Given** o backend esta rodando em localhost:8000
+**When** a rotina `community_daily.py` termina de executar via runner
+**Then** o runner (ou uma skill dedicada `int-dashboard-community`) extrai os dados estruturados do output
+**And** faz `POST /api/v1/ingest/community` com o payload JSON
+**And** o dashboard recebe os dados e grava no SQLite
+**And** isso funciona para todos os 7 dominios:
+  - `pulse-daily` → `POST /ingest/community`
+  - `int-github-review` → `POST /ingest/github`
+  - `int-stripe` + `int-omie` → `POST /ingest/finance`
+  - `int-linear-review` → `POST /ingest/sprint`
+  - `int-sync-meetings` → `POST /ingest/meeting`
+  - health check-in → `POST /ingest/health`
+  - `community_weekly.py` → `POST /ingest/community` (com `type: weekly`)
+  - runner pos-execucao → `POST /ingest/routine` (TODAS as 14 rotinas, automatico)
+**And** 7 skills de dominio sao criadas em `.claude/skills/`: `int-dashboard-community.md`, `int-dashboard-github.md`, etc.
+**And** o runner.py e modificado para fazer `POST /ingest/routine` automaticamente apos TODA execucao (14/14), sem precisar de skill separada
+**And** rotinas sem dominio especifico (morning, EOD, triage, todoist, FAQ sync, memory sync, weekly review, trends) sao rastreadas apenas via `/ingest/routine` — nao precisam de skill de dominio
+**And** cada skill contem instrucoes para extrair dados do output e formatar o payload JSON
+**And** se a API estiver offline, a skill loga o erro mas nao falha (graceful degradation)
+**And** os collectors de arquivo continuam funcionando como fallback (dual-write)

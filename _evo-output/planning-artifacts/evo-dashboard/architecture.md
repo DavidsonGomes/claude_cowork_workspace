@@ -103,7 +103,8 @@ npm install recharts @tanstack/react-query react-router-dom lucide-react
 - Frontend: React + Vite + TypeScript + Shadcn/ui
 
 **Important Decisions (Shape Architecture):**
-- Collector pattern: hooks pos-rotina
+- Dual-write: collectors (parse de arquivos) + ingest API (skills gravam direto)
+- Skills Claude `.claude/skills/int-dashboard-*` para cada dominio
 - API response format padronizado
 - Error handling centralizado
 - Logging estruturado
@@ -224,7 +225,28 @@ metrics (
     metadata    JSON
 );
 
+-- Snapshots de saude (fonte: health check-in JSON + API ingest)
+health_snapshots (
+    id                    INTEGER PRIMARY KEY AUTOINCREMENT,
+    date                  DATE NOT NULL,
+    person                TEXT NOT NULL CHECK(person IN ('davidson','isabella')),
+    weight_kg             REAL,
+    fat_pct               REAL,
+    skeletal_muscle_pct   REAL,
+    visceral              REAL,
+    bmi                   REAL,
+    water_pct             REAL,
+    bmr_kcal              REAL,
+    diet_score            INTEGER,
+    workouts_count        INTEGER,
+    medication_on_time    BOOLEAN,
+    symptoms              JSON,
+    created_at            DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(date, person)
+);
+
 -- Indices
+CREATE INDEX idx_health_date_person ON health_snapshots(date, person);
 CREATE INDEX idx_routine_runs_name_date ON routine_runs(name, started_at);
 CREATE INDEX idx_community_date ON community_snapshots(date);
 CREATE INDEX idx_github_date_repo ON github_snapshots(date, repo);
@@ -255,7 +277,9 @@ CREATE INDEX idx_metrics_category_date ON metrics(category, recorded_at);
 | Projects | `GET /projects/sprint` `GET /projects/github` `GET /projects/github/{repo}` |
 | Finance | `GET /finance/latest` `GET /finance/trend?days=30` |
 | Meetings | `GET /meetings` `GET /meetings/{id}` `GET /meetings?project=evo-ai&days=30` |
+| Health | `GET /health/latest?person=davidson` `GET /health/trend?person=davidson&days=90` |
 | Dashboard | `GET /dashboard/overview` `GET /dashboard/health` `GET /dashboard/alerts` |
+| Ingest | `POST /ingest/community` `POST /ingest/github` `POST /ingest/finance` `POST /ingest/sprint` `POST /ingest/meeting` `POST /ingest/health` `POST /ingest/routine` |
 
 **Response Format Padrao:**
 ```json
@@ -484,7 +508,8 @@ dashboard/
 │   │   │   ├── github_collector.py
 │   │   │   ├── finance_collector.py
 │   │   │   ├── meeting_collector.py
-│   │   │   └── sprint_collector.py
+│   │   │   ├── sprint_collector.py
+│   │   │   └── health_collector.py # Parse health check-in JSONs
 │   │   │
 │   │   ├── services/
 │   │   │   ├── __init__.py
@@ -493,6 +518,8 @@ dashboard/
 │   │   │   ├── project_service.py
 │   │   │   ├── finance_service.py
 │   │   │   ├── meeting_service.py
+│   │   │   ├── health_service.py
+│   │   │   ├── ingest_service.py   # Valida e grava dados da API de ingestao
 │   │   │   └── dashboard_service.py
 │   │   │
 │   │   └── api/
@@ -503,6 +530,8 @@ dashboard/
 │   │       ├── projects.py        # /api/v1/projects
 │   │       ├── finance.py         # /api/v1/finance
 │   │       ├── meetings.py        # /api/v1/meetings
+│   │       ├── health.py          # /api/v1/health
+│   │       ├── ingest.py          # POST /api/v1/ingest/{dominio}
 │   │       └── dashboard.py       # /api/v1/dashboard
 │   │
 │   ├── data/
@@ -534,7 +563,8 @@ dashboard/
 │   │   │   ├── FinancePage.tsx
 │   │   │   ├── RoutinesPage.tsx
 │   │   │   ├── RoutineDetailPage.tsx
-│   │   │   └── MeetingsPage.tsx
+│   │   │   ├── MeetingsPage.tsx
+│   │   │   └── HealthPage.tsx
 │   │   │
 │   │   ├── components/
 │   │   │   ├── ui/                # Shadcn components (auto-generated)
@@ -558,7 +588,8 @@ dashboard/
 │   │   │   ├── useCommunity.ts
 │   │   │   ├── useProjects.ts
 │   │   │   ├── useFinance.ts
-│   │   │   └── useMeetings.ts
+│   │   │   ├── useMeetings.ts
+│   │   │   └── useHealth.ts
 │   │   │
 │   │   ├── lib/
 │   │   │   ├── api.ts             # Fetch wrapper com base URL
@@ -596,20 +627,69 @@ dashboard/
 - Services nao chamam outros services (flat, nao nested)
 - API routers chamam services, nunca models diretamente
 
-**Data Flow:**
+**Data Flow (Dual-Write):**
 ```
-ADW Runner → JSONL/JSON/HTML (filesystem)
-                ↓
-         Collectors (parsers)
-                ↓
-            SQLite DB
-                ↓
-         Services (queries)
-                ↓
-          API Routers
-                ↓
-      Frontend (React)
+Path A: Collectors (backfill + fallback)
+  ADW Runner → JSONL/JSON/HTML (filesystem)
+                  ↓
+           Collectors (parsers)
+                  ↓
+              SQLite DB
+
+Path B: Ingest API (primary — skills gravam direto)
+  Claude CLI → Skill execution → POST /api/v1/ingest/{dominio}
+                                        ↓
+                                    SQLite DB
+
+Both paths write to the same tables.
+Path B is preferred (structured, no parsing needed).
+Path A exists for backfill and resilience.
+
+              SQLite DB
+                  ↓
+           Services (queries)
+                  ↓
+            API Routers (GET)
+                  ↓
+          Frontend (React)
 ```
+
+### Skills de Integracao (.claude/skills/)
+
+Skills novas que as rotinas ADW chamam para gravar dados direto na API:
+
+| Skill | Chamada | Endpoint |
+|-------|---------|----------|
+| `int-dashboard-community` | Chamada pelo `pulse-daily` apos gerar report | `POST /api/v1/ingest/community` |
+| `int-dashboard-github` | Chamada pelo `int-github-review` apos gerar report | `POST /api/v1/ingest/github` |
+| `int-dashboard-finance` | Chamada pelo `int-stripe` + `int-omie` | `POST /api/v1/ingest/finance` |
+| `int-dashboard-sprint` | Chamada pelo `int-linear-review` | `POST /api/v1/ingest/sprint` |
+| `int-dashboard-meeting` | Chamada pelo `int-sync-meetings` | `POST /api/v1/ingest/meeting` |
+| `int-dashboard-health` | Chamada pelo health check-in (Kai) | `POST /api/v1/ingest/health` |
+| `int-dashboard-routine` | Chamada pelo runner apos cada execucao | `POST /api/v1/ingest/routine` |
+
+**Payload de exemplo (community):**
+```json
+{
+  "date": "2026-04-06",
+  "messages_count": 117,
+  "active_members": 24,
+  "new_members": 16,
+  "sentiment_score": 0.78,
+  "sentiment_label": "positivo",
+  "top_topics": [{"topic": "Evolution Go", "count": 18}],
+  "unresolved_questions": 4,
+  "status": "atencao"
+}
+```
+
+**Como funciona:** A skill e um script shell ou prompt que:
+1. Recebe os dados da rotina que acabou de executar
+2. Formata como JSON
+3. Faz `curl -X POST http://localhost:8000/api/v1/ingest/{dominio} -H 'Content-Type: application/json' -d '{...}'`
+4. Retorna sucesso/falha
+
+Alternativamente, o runner.py pode chamar diretamente via `httpx` apos cada ADW sem precisar de skill separada.
 
 ### Requirements to Structure Mapping
 

@@ -1,0 +1,103 @@
+# generated: 2026-04-06
+# last_updated: 2026-04-06
+# project: EVO Dashboard
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _evo-output/implementation-artifacts
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-04-06
+last_updated: 2026-04-06
+project: EVO Dashboard
+project_key: NOKEY
+tracking_system: file-system
+story_location: _evo-output/implementation-artifacts
+
+development_status:
+  # Epic 1: Project Foundation & Infrastructure
+  epic-1: backlog
+  1-1-inicializar-monorepo-backend: backlog
+  1-2-inicializar-frontend-react: backlog
+  1-3-makefile-development-workflow: backlog
+  1-4-sqlite-schema-base-alembic-migrations: backlog
+  1-5-apscheduler-integration: backlog
+  epic-1-retrospective: optional
+
+  # Epic 2: Rotinas & Runner Intelligence
+  epic-2: backlog
+  2-1-runner-com-retry-e-timeout-configuravel: backlog
+  2-2-routine-collector: backlog
+  2-3-api-e-frontend-lista-de-rotinas: backlog
+  2-4-api-e-frontend-historico-e-detalhe-de-rotina: backlog
+  2-5-git-auto-commit-no-eod: backlog
+  epic-2-retrospective: optional
+
+  # Epic 3: Monitoramento de Comunidade
+  epic-3: backlog
+  3-1-community-collector: backlog
+  3-2-api-e-frontend-comunidade: backlog
+  epic-3-retrospective: optional
+
+  # Epic 4: Acompanhamento de Projetos
+  epic-4: backlog
+  4-1-github-sprint-collectors: backlog
+  4-2-api-e-frontend-projetos: backlog
+  epic-4-retrospective: optional
+
+  # Epic 5: Visibilidade Financeira
+  epic-5: backlog
+  5-1-finance-collector: backlog
+  5-2-api-e-frontend-financeiro: backlog
+  epic-5-retrospective: optional
+
+  # Epic 6: Gestao de Reunioes
+  epic-6: backlog
+  6-1-meeting-collector: backlog
+  6-2-api-e-frontend-reunioes: backlog
+  epic-6-retrospective: optional
+
+  # Epic 7: Cockpit Home & Integracao Final
+  epic-7: backlog
+  7-1-dashboard-overview-api-cockpit-home: backlog
+  7-2-auto-refresh-polish-final: backlog
+  epic-7-retrospective: optional
+
+  # Epic 8: Acompanhamento Pessoal / Saude
+  epic-8: backlog
+  8-1-health-collector: backlog
+  8-2-api-e-frontend-saude: backlog
+  epic-8-retrospective: optional
+
+  # Epic 9: Ingest API & Skills de Integracao
+  epic-9: backlog
+  9-1-ingest-api-endpoints: backlog
+  9-2-skills-claude-de-integracao: backlog
+  epic-9-retrospective: optional

@@ -90,12 +90,19 @@ Nao e um dashboard generico. E uma camada de visualizacao construida sobre um ec
 - Git auto-commit no EOD (logs, reports, FAQ, summaries gerados no dia) — ROADMAP F1
 
 **Telas MVP:**
-1. **Home / Cockpit** — Status dos agentes, rotinas do dia, alertas, metricas-chave
+1. **Home / Cockpit** — Status dos agentes, rotinas do dia, alertas, metricas-chave de todos os dominios
 2. **Comunidade** — Sentimento, perguntas, membros ativos, top topicos, trend
 3. **Projetos** — Sprint progress, GitHub PRs/issues, Linear status
 4. **Financeiro** — MRR, receita, churn (Stripe), NFs pendentes (Omie)
 5. **Rotinas** — Historico de execucoes, falhas, duracao, success rate, custo de tokens
 6. **Reunioes** — Lista de reunioes Fathom, action items, status de conclusao
+7. **Pessoal / Saude** — Peso, gordura, musculo, visceral, aderencia dieta/treino, Mounjaro (dados do Kai)
+
+**Skills de Integracao (Claude → API):**
+- Skills novas em `.claude/skills/` que fazem POST na API do dashboard
+- As rotinas existentes (community pulse, GitHub review, finance, etc.) passam a gravar dados estruturados via API alem dos outputs HTML/MD
+- Endpoints de escrita: `POST /api/v1/{dominio}/ingest` para cada dominio
+- Isso elimina a necessidade de collectors parsearem HTML/MD — a IA grava direto
 
 ### Growth Features (Post-MVP)
 
@@ -322,6 +329,26 @@ SPA (Single Page Application) local servida pelo mesmo processo FastAPI que forn
 - FR32: Davidson pode ver a data/hora da ultima atualizacao de cada metrica
 - FR33: O dashboard atualiza automaticamente os dados a cada 60 segundos
 - FR34: Davidson pode ver o estado geral do ecossistema num unico olhar (health score)
+
+### Acompanhamento Pessoal / Saude
+
+- FR35: Davidson pode ver seus dados de saude atuais (peso, gordura%, musculo%, visceral, BMI, agua%, BMR)
+- FR36: Davidson pode ver trend de peso e composicao corporal ao longo do tempo (grafico de linha)
+- FR37: Davidson pode ver aderencia semanal (diet score, workouts count, medicacao em dia)
+- FR38: Davidson pode ver sintomas reportados (nausea, refluxo, constipacao)
+- FR39: Davidson pode ver dados da Isabella no mesmo dashboard de saude
+- FR40: O sistema coleta automaticamente dados dos health check-ins JSON
+
+### Ingestao de Dados via API (Skills Claude → Dashboard)
+
+- FR41: As skills do Claude podem enviar dados estruturados via POST na API do dashboard
+- FR42: Cada dominio tem um endpoint de ingestao: `POST /api/v1/{dominio}/ingest`
+- FR43: O endpoint de ingestao valida o payload e grava no SQLite
+- FR44: Skills existentes (pulse-daily, int-github-review, int-stripe, etc.) sao atualizadas para tambem chamar a API de ingestao
+- FR45: O sistema aceita dados tanto dos collectors (parse de arquivos) quanto da ingestao direta (API) — dual-write
+- FR46: O runner grava automaticamente `POST /ingest/routine` apos TODA execucao de ADW (14/14 rotinas), independente de ter skill de dominio ou nao
+- FR47: Rotinas que nao produzem dados de dominio (morning, EOD, email triage, review todoist, FAQ sync, memory sync, weekly review, trends) ainda sao rastreadas na tela Rotinas via FR46
+- FR48: O community weekly (`community_weekly.py`) grava no mesmo endpoint `/ingest/community` com campo `type: weekly` para diferenciar de daily
 
 ## Non-Functional Requirements
 
