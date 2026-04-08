@@ -9,7 +9,7 @@ Integração com YouTube para monitorar canais da Evolution e outros. Suporta m�
 
 ## Setup
 
-Contas configuradas via `make social-auth` (OAuth login) ou manualmente no `.claude/.env`:
+Contas configuradas via `make social-auth` (OAuth login) ou manualmente no `.env`:
 ```env
 SOCIAL_YOUTUBE_1_LABEL=Evolution API
 SOCIAL_YOUTUBE_1_ACCESS_TOKEN=ya29...

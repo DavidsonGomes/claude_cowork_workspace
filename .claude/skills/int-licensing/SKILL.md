@@ -9,7 +9,7 @@ Integração com a API de licenciamento da Evolution para monitorar crescimento 
 
 ## Setup
 
-Requer variável de ambiente (em `.claude/.env`):
+Requer variável de ambiente (em `.env`):
 ```bash
 LICENSING_ADMIN_TOKEN=your_token_here
 ```

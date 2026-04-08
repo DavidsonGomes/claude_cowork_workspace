@@ -1,16 +1,16 @@
-"""Manage .claude/.env — multi-account support for social platforms."""
+"""Manage .env — multi-account support for social platforms."""
 
 import os
 import re
 from pathlib import Path
 from datetime import datetime, timezone
 
-ENV_PATH = Path(__file__).resolve().parent.parent / ".claude" / ".env"
+ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 
 # ── Low-level .env read/write ────────────────────────
 
 def read_env() -> dict:
-    """Read all vars from .claude/.env."""
+    """Read all vars from .env."""
     env = {}
     if not ENV_PATH.exists():
         return env
@@ -25,7 +25,7 @@ def read_env() -> dict:
 
 
 def set_env(key: str, value: str):
-    """Set or update a key in .claude/.env."""
+    """Set or update a key in .env."""
     lines = []
     found = False
     if ENV_PATH.exists():
@@ -46,7 +46,7 @@ def set_env(key: str, value: str):
 
 
 def delete_env(key: str):
-    """Remove a key from .claude/.env."""
+    """Remove a key from .env."""
     if not ENV_PATH.exists():
         return
     lines = []

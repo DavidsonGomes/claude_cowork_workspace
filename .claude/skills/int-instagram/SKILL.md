@@ -9,7 +9,7 @@ Integração com Instagram para monitorar perfis da Evolution e do Davidson. Sup
 
 ## Setup
 
-Contas configuradas via `make social-auth` (OAuth login com Facebook). Salva no `.claude/.env`:
+Contas configuradas via `make social-auth` (OAuth login com Facebook). Salva no `.env`:
 ```env
 SOCIAL_INSTAGRAM_1_LABEL=evolution.foundation
 SOCIAL_INSTAGRAM_1_ACCESS_TOKEN=EAA...

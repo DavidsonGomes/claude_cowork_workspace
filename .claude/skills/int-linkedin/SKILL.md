@@ -9,7 +9,7 @@ Integração com LinkedIn para monitorar perfil do Davidson e (futuramente) Comp
 
 ## Setup
 
-Contas configuradas via `make social-auth`. Salva no `.claude/.env`:
+Contas configuradas via `make social-auth`. Salva no `.env`:
 ```env
 SOCIAL_LINKEDIN_1_LABEL=Davidson Gomes
 SOCIAL_LINKEDIN_1_ACCESS_TOKEN=AQW...

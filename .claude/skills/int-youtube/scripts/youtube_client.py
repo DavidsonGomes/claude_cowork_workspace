@@ -12,21 +12,19 @@ from pathlib import Path
 
 
 def _load_dotenv():
-    """Load .env files."""
-    for rel in [".env", ".claude/.env"]:
-        env_path = Path(__file__).resolve().parents[4] / rel
-        if not env_path.exists():
-            continue
-        with open(env_path) as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith("#") or "=" not in line:
-                    continue
-                key, value = line.split("=", 1)
-                key, value = key.strip(), value.strip()
-                if key and key not in os.environ:
-                    os.environ[key] = value
-
+    """Load .env from project root."""
+    env_path = Path(__file__).resolve().parents[4] / ".env"
+    if not env_path.exists():
+        return
+    with open(env_path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, value = line.split("=", 1)
+            key, value = key.strip(), value.strip()
+            if key and key not in os.environ:
+                os.environ[key] = value
 
 _load_dotenv()
 
