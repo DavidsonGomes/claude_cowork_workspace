@@ -1,0 +1,1 @@
+- [Licensing Baseline Abril/2026](project_licensing_baseline.md) — 639 instâncias, 29 países, baseline estabelecido em 08/04/2026

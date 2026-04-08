@@ -304,5 +304,24 @@
     "last_input_tokens": 20,
     "last_output_tokens": 27435,
     "last_cost_usd": 0.75729
+  },
+  "licensing-monthly": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 650.6,
+    "avg_seconds": 650.6,
+    "last_run": "2026-04-08T13:01:22.865839",
+    "agent": "atlas-project",
+    "total_input_tokens": 3,
+    "total_output_tokens": 55,
+    "total_cache_creation_tokens": 370,
+    "total_cache_read_tokens": 60635,
+    "total_cost_usd": 1.10672,
+    "avg_cost_usd": 1.10672,
+    "success_rate": 100.0,
+    "last_input_tokens": 3,
+    "last_output_tokens": 55,
+    "last_cost_usd": 1.10672
   }
 }
