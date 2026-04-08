@@ -1,0 +1,39 @@
+TIMESTAMP: 2026-04-08T11:49:36.870060
+DURATION: 410.2s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-weekly
+
+============================================================
+STDOUT:
+============================================================
+Relatório semanal W15 concluído. Aqui está o resumo executivo:
+
+---
+
+## Relatório Semanal — Semana W15 (01–08/abr/2026)
+
+**Membros:** 16.373 (+89) | **WAM:** ~42 (0,26%) | **Online:** 2.290
+**WhatsApp:** 615 msgs · 77 participantes · 10 grupos
+**Sentimento:** 🟡 Neutro com tendência positiva
+
+**Top tópicos:** Evolution Summit 14–16/abr, Evo CRM aguardado, Evolution Go migração, bugs v2.3.7
+**Insights:** 3 features solicitadas, 4 bugs confirmados, 3 docs gaps críticos
+
+**Relatório salvo em:** `03 Comunidade/reports/weekly/[C] 2026-W15-community-report.html`
+
+---
+
+### 🔴 Alertas que precisam de atenção imediata:
+
+1. **Documentação inacessível** — usuários EN e ES reportaram que `docs.evolutionfoundation.com.br` não carrega
+2. **v2.3.7 instável** — ociosidade (0% CPU), media não recebida, instâncias fantasma
+3. **Evo Go licensing bug** — HTTP 400 no 0.6.1 com workaround documentado
+
+### 💡 Ações sugeridas para aprovação:
+
+- Verificar disponibilidade da documentação urgente
+- Post no #news sobre timeline do Evo CRM (antes do Summit)
+- Reconhecer **oismaelash** publicamente (MVP 2ª semana consecutiva)
+- Poll de engajamento sobre o Summit aproveitando os 89 novos membros
+

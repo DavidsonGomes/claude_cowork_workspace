@@ -1,0 +1,35 @@
+TIMESTAMP: 2026-04-08T11:33:13.020073
+DURATION: 235.8s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-daily
+
+============================================================
+STDOUT:
+============================================================
+Pronto! Aqui está o resumo do pulso diário de hoje:
+
+---
+
+## Pulso Diário — 08/04/2026
+
+**Saúde:** 🟡 Atenção
+
+**Discord:** 98 msgs | 28 ativos | 21 novos membros  
+**WhatsApp:** 78 msgs | 36 participantes | 10 grupos ativos  
+**Suporte:** 5 perguntas sem resposta (3 com +16h)  
+**Sentimento:** 🟡 Misto — curiosidade + frustração técnica
+
+**Top tópicos:**
+1. Versões estáveis da Evolution API (~18 menções)
+2. Evo AI CRM — status e acesso ao beta (~15 menções)
+3. Evolution Go — casos de uso (~14 menções)
+4. Instâncias desconectando / bug 2.3.7 (~12 menções)
+
+**Destaque:** Vídeo da YouTuber **Karol Attekita** (Attekita Dev) sobre Evolution Go em parceria com HostGator está gerando tração orgânica — novos membros chegando por esse canal.
+
+**Membros destaque:** `oismaelash`, `d_paes`, `dario.andrade`
+
+**Relatório HTML salvo em:** `03 Comunidade/reports/daily/[C] 2026-04-08-community-pulse.html`  
+**Notificação enviada no Telegram** ✅
+

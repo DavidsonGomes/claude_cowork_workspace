@@ -1,11 +1,11 @@
 ---
 name: pulse-daily
-description: "Daily community pulse report — reads Discord messages from the last 24h, analyzes activity, sentiment, support questions, and top topics. Generates an HTML report using the Evolution brand. Use when user says 'pulso da comunidade', 'community pulse', 'como tá o discord', 'relatório diário comunidade', or any reference to daily community health check."
+description: "Daily community pulse report — reads Discord AND WhatsApp messages from the last 24h, analyzes activity, sentiment, support questions, and top topics. Generates an HTML report using the Evolution brand. Use when user says 'pulso da comunidade', 'community pulse', 'como tá o discord', 'como tá o whatsapp', 'relatório diário comunidade', or any reference to daily community health check."
 ---
 
 # Pulso Diário da Comunidade
 
-Rotina diária que lê as mensagens do Discord das últimas 24h e gera um relatório HTML de saúde da comunidade.
+Rotina diária que lê as mensagens do Discord e WhatsApp das últimas 24h e gera um relatório HTML de saúde da comunidade.
 
 **Sempre responder em pt-BR.**
 
@@ -27,16 +27,32 @@ Canais a monitorar (Guild ID: `1127247206752206969`):
 
 Para cada canal, buscar as últimas 100 mensagens e filtrar as das últimas 24h.
 
+### Passo 1b — Coletar dados do WhatsApp
+
+Usar a skill `/int-whatsapp` para buscar mensagens das últimas 24h:
+
+```bash
+python3 {project-root}/.claude/skills/int-whatsapp/scripts/whatsapp_client.py messages_24h
+```
+
+E também as estatísticas:
+```bash
+python3 {project-root}/.claude/skills/int-whatsapp/scripts/whatsapp_client.py stats --start $(date -u -v-1d '+%Y-%m-%d') --end $(date -u '+%Y-%m-%d')
+```
+
+Extrair: total de mensagens, grupos ativos, participantes únicos, tópicos discutidos, perguntas de suporte.
+
 ### Passo 2 — Analisar
 
 A partir das mensagens coletadas, calcular:
 
-1. **Atividade**: total de mensagens, membros únicos ativos, canal mais ativo
+1. **Atividade**: total de mensagens (Discord + WhatsApp separados), membros únicos ativos, canal/grupo mais ativo
 2. **Novos membros**: checar `🆕・new-members` para entradas do dia
-3. **Suporte**: perguntas sem resposta em `🆘・help`, tempo sem resposta
-4. **Sentimento**: analisar o tom geral (positivo/neutro/negativo) com base no conteúdo
-5. **Top tópicos**: agrupar por tema as discussões mais frequentes (máximo 6)
-6. **Saúde geral**: Normal (>80% positivo, <3 perguntas abertas), Atenção (sentimento misto ou 3-5 perguntas abertas), Crítico (sentimento negativo ou >5 perguntas sem resposta)
+3. **Suporte**: perguntas sem resposta em `🆘・help` (Discord) + perguntas nos grupos WhatsApp, tempo sem resposta
+4. **Sentimento**: analisar o tom geral (positivo/neutro/negativo) com base no conteúdo de ambas as plataformas
+5. **Top tópicos**: agrupar por tema as discussões mais frequentes de Discord + WhatsApp (máximo 6)
+6. **WhatsApp**: grupos ativos, total mensagens, participantes únicos, tópicos — seção separada no relatório
+7. **Saúde geral**: Normal (>80% positivo, <3 perguntas abertas), Atenção (sentimento misto ou 3-5 perguntas abertas), Crítico (sentimento negativo ou >5 perguntas sem resposta)
 
 ### Passo 3 — Gerar relatório HTML
 

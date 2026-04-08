@@ -1,11 +1,11 @@
 ---
 name: pulse-weekly
-description: "Weekly community analysis report — aggregates Discord activity, engagement metrics, sentiment trends, top contributors, product insights, and docs gaps. Generates an HTML report using the Evolution brand. Use when user says 'relatório semanal comunidade', 'weekly community', 'análise da comunidade', 'como foi a semana no discord', or any reference to weekly community analysis."
+description: "Weekly community analysis report — aggregates Discord AND WhatsApp activity, engagement metrics, sentiment trends, top contributors, product insights, and docs gaps. Generates an HTML report using the Evolution brand. Use when user says 'relatório semanal comunidade', 'weekly community', 'análise da comunidade', 'como foi a semana no discord', 'como foi o whatsapp', or any reference to weekly community analysis."
 ---
 
 # Relatório Semanal da Comunidade
 
-Rotina semanal que analisa a atividade do Discord dos últimos 7 dias e gera um relatório HTML completo.
+Rotina semanal que analisa a atividade do Discord e WhatsApp dos últimos 7 dias e gera um relatório HTML completo.
 
 **Sempre responder em pt-BR.**
 
@@ -22,6 +22,18 @@ Canais a monitorar:
 - Canal de novos membros (`🆕・new-members`)
 
 Para cada canal, buscar mensagens paginadas (100 por request) até cobrir 7 dias.
+
+### Passo 1b — Coletar dados do WhatsApp (7 dias)
+
+Usar a skill `/int-whatsapp` para buscar mensagens e stats dos últimos 7 dias:
+
+```bash
+python3 {project-root}/.claude/skills/int-whatsapp/scripts/whatsapp_client.py messages_7d
+python3 {project-root}/.claude/skills/int-whatsapp/scripts/whatsapp_client.py stats --start $(date -u -v-7d '+%Y-%m-%d') --end $(date -u '+%Y-%m-%d')
+python3 {project-root}/.claude/skills/int-whatsapp/scripts/whatsapp_client.py groups --start $(date -u -v-7d '+%Y-%m-%d') --end $(date -u '+%Y-%m-%d')
+```
+
+Incluir no relatório como seção separada "WhatsApp" com: grupos ativos, total mensagens, participantes únicos, tópicos, perguntas de suporte.
 
 ### Passo 2 — Calcular métricas
 

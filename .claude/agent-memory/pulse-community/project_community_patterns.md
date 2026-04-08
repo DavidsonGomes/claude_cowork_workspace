@@ -84,6 +84,18 @@ type: project
 - **FAQ candidatas:** "Como começar com Evolution API" (iniciantes); "Envio de botões e listas — versão suportada"
 - **Relatório salvo:** `03 Comunidade/reports/daily/[C] 2026-04-07-community-pulse.html`
 
+## Pulso Diário 08/abr/2026
+
+- **Mensagens 24h:** 98 Discord + 78 WhatsApp = **176 total** | **Ativos Discord:** 28 | **Ativos WA:** 36 | **Novos membros:** 21
+- **Canal mais ativo:** chat-pt (60 msgs Discord); OrionDesign (45 msgs WA)
+- **Sentimento:** Misto — curiosidade alta (Evolution Go viral via Attekita Dev), frustração técnica (instâncias desconectando, erro 463, botões quebrados)
+- **Evento notável:** Vídeo da YouTuber Karol Attekita (Attekita Dev) sobre Evolution Go em parceria com HostGator gerando novos membros e buzz positivo
+- **Alerta:** 5 dúvidas de suporte sem resposta (3 com >16h); erro 463 v2.3.1 recorrente; instâncias desconectando relatadas em Discord e WA
+- **CRM FAQ pendente:** Comunidade muito confusa sobre status do Evo AI CRM — pede data de lançamento e acesso ao beta
+- **Membros destaque do dia:** oismaelash, d_paes, dario.andrade (respostas técnicas nos 3 canais de idioma)
+- **WhatsApp:** Grupo OrionDesign mais ativo; tópicos: Evolution Go viabilidade, versão mais estável, acesso ao CRM, instâncias desconectando
+- **Relatório salvo:** `03 Comunidade/reports/daily/[C] 2026-04-08-community-pulse.html`
+
 ## Novos Padrões Detectados (07/abr/2026)
 
 - **Erro "canal fechado" N8N** — recorrente no chat-pt, relacionado a instâncias com falso positivo de conexão
@@ -108,4 +120,40 @@ type: project
 - Pico de engajamento coincide com anúncios/eventos (Summit: +55% msgs no dia do anúncio)
 
 **Why:** Relatório semanal W14 — primeira coleta completa com dados reais do Discord.
-**How to apply:** Usar como baseline para comparações nas semanas seguintes. Próximo relatório: W15 (07–13/abr/2026).
+**How to apply:** Usar como baseline para comparações nas semanas seguintes.
+
+## Baseline Semanal W15 (01–08/abr/2026)
+
+- **Total membros Discord:** 16.373 | **Online:** 2.290
+- **Novos membros (7 dias):** 89
+- **WAM:** ~42 membros únicos ativos (Discord canais de chat)
+- **WhatsApp:** 615 msgs · 77 participantes únicos · 10 grupos ativos
+- **Sentimento:** Neutro com tendência positiva (35% pos / 45% neu / 20% neg)
+- **Principal driver de crescimento:** Evolution Summit (14–16/abr) + buzz Attekita Dev (YouTube)
+
+## Alertas W15
+
+- **docs.evolutionfoundation.com.br** inacessível reportado por usuários EN e ES — verificar urgente
+- **v2.3.7** com instabilidade: 0% CPU ocioso, media não recebida, instâncias fantasma
+- **Evo Go 0.6.1** licensing bug (HTTP 400) — workaround: downgrade 0.6.0 → upgrade 0.6.1
+- **Evo CRM**: comunidade pergunta repetidamente sobre timeline de lançamento
+
+## FAQ Candidatas W15 (novas)
+
+1. QR Code não gerado — checklist troubleshooting (DNS, Docker, versão) — 5+ ocorrências
+2. Baileys vs WhatsApp Cloud API — tabela comparativa — 3+ ocorrências
+3. Migração Evolution API → Evo Go — guia dedicado — 3+ ocorrências
+4. Quando o Evo CRM vai ser lançado? — comunicado oficial pendente
+5. Evolution Go tem node para n8n? — Resposta: `n8n-nodes-evolution-go` ou `n8n-nodes-evo-go`
+
+## Membros Destaque W15
+
+- **oismaelash** — MVP contínuo (2ª semana): suporte em 3 idiomas, script de monitoramento publicado
+- **d_paes** — Suporte avançado e moderação informal
+- **aledepaulaaa** — Novo membro via Attekita Dev, alto potencial de evangelismo
+- **yuricaetano** — Bridge Evo Go + Chatwoot em uso real com clientes
+
+## Relatório Salvo
+
+- `03 Comunidade/reports/weekly/[C] 2026-W15-community-report.html`
+- Próximo relatório: W16 (08–15/abr/2026) — semana do Evolution Summit

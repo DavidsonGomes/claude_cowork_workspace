@@ -1,11 +1,11 @@
 ---
 name: pulse-faq-sync
-description: "Sync and update the community FAQ from Discord conversations and GitHub issues. Identifies recurring questions, adds new entries, and keeps the FAQ as a living knowledge base. Use when user says 'atualiza faq', 'sync faq', 'faq da comunidade', 'perguntas frequentes', or when running community routines that detect unanswered/recurring questions."
+description: "Sync and update the community FAQ from Discord conversations, WhatsApp groups, and GitHub issues. Identifies recurring questions, adds new entries, and keeps the FAQ as a living knowledge base. Use when user says 'atualiza faq', 'sync faq', 'faq da comunidade', 'perguntas frequentes', or when running community routines that detect unanswered/recurring questions."
 ---
 
 # FAQ Sync — Base de Conhecimento Viva
 
-Rotina que mantém o FAQ da comunidade sempre atualizado, alimentado por perguntas do Discord e issues do GitHub.
+Rotina que mantém o FAQ da comunidade sempre atualizado, alimentado por perguntas do Discord, WhatsApp e issues do GitHub.
 
 **Sempre responder em pt-BR.**
 
@@ -108,6 +108,15 @@ gh issue list --repo EvolutionAPI/EVO-METHOD --state open --json title,body,labe
 ```
 
 Filtrar issues que são perguntas ou bugs recorrentes.
+
+**Do WhatsApp (últimas 24h):**
+Usar `/int-whatsapp` para buscar mensagens dos grupos:
+
+```bash
+python3 {project-root}/.claude/skills/int-whatsapp/scripts/whatsapp_client.py messages_24h
+```
+
+Filtrar mensagens que são perguntas (terminam em ?, pedem ajuda, reportam erro, pedem orientação sobre configuração). Marcar fonte como "WhatsApp {nome do grupo}".
 
 **Do Linear — Projeto "Evolution Suporte":**
 Usar MCP do Linear para buscar issues resolvidas recentemente no projeto de suporte pago:

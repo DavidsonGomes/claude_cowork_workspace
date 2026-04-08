@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Semanal da Comunidade — Evolution Foundation — W15 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 40%, rgba(0,255,167,0.03) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px;
+  }
+
+  .header-top { display: flex; align-items: center; gap: 16px; margin-bottom: 8px; }
+  .header-logo { width: 40px; height: 40px; }
+
+  .header h1 { font-size: 28px; font-weight: 700; }
+  .header h1 span { color: var(--evo-green); }
+
+  .header .period { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  .header .exec-summary {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .exec-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .exec-item .exec-icon { margin-right: 6px; }
+  .exec-item strong { color: var(--text-primary); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  .metrics-row { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .m-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    text-align: center;
+    transition: border-color 0.2s;
+  }
+
+  .m-card:hover { border-color: var(--evo-green); }
+
+  .m-card .m-label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .m-card .m-value { font-size: 28px; font-weight: 700; margin: 6px 0 4px; }
+  .m-card .m-sub { font-size: 12px; color: var(--text-muted); }
+  .m-card .m-delta { font-size: 12px; font-weight: 600; }
+  .m-card .m-delta.up { color: var(--green); }
+  .m-card .m-delta.down { color: var(--red); }
+  .m-card .m-delta.neutral { color: var(--text-muted); }
+
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .badge {
+    background: var(--bg-primary);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.2);
+  }
+  td {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .trend-up { color: var(--green); font-weight: 600; }
+  .trend-down { color: var(--red); font-weight: 600; }
+  .trend-neutral { color: var(--text-muted); }
+
+  .sentiment-bar {
+    display: flex;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 4px;
+  }
+  .sentiment-bar .pos { background: var(--green); }
+  .sentiment-bar .neu { background: var(--yellow); }
+  .sentiment-bar .neg { background: var(--red); }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .tag-green { background: rgba(18,183,106,0.15); color: var(--green); border: 1px solid rgba(18,183,106,0.3); }
+  .tag-red { background: rgba(240,68,56,0.15); color: var(--red); border: 1px solid rgba(240,68,56,0.3); }
+  .tag-yellow { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,9,0.3); }
+  .tag-blue { background: rgba(46,144,250,0.15); color: var(--blue); border: 1px solid rgba(46,144,250,0.3); }
+  .tag-purple { background: rgba(129,51,170,0.15); color: #c084fc; border: 1px solid rgba(129,51,170,0.3); }
+
+  .urgency-alta { color: var(--red); font-weight: 700; }
+  .urgency-media { color: var(--yellow); font-weight: 600; }
+  .urgency-baixa { color: var(--green); font-weight: 500; }
+
+  .p-content { padding: 20px; }
+  .p-content p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 8px; }
+  .p-content p:last-child { margin-bottom: 0; }
+
+  .sentiment-overview {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .sentiment-main { font-size: 48px; }
+  .sentiment-label { font-size: 20px; font-weight: 700; }
+  .sentiment-sub { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  .sentiment-bars { flex: 1; }
+  .sent-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 13px; }
+  .sent-name { width: 70px; color: var(--text-muted); }
+  .sent-bar-wrap { flex: 1; background: rgba(255,255,255,0.05); border-radius: 3px; height: 8px; }
+  .sent-bar-fill { height: 100%; border-radius: 3px; }
+  .sent-pct { width: 40px; text-align: right; font-weight: 600; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+
+  .insight-item {
+    padding: 12px 20px;
+    border-top: 1px solid rgba(52,64,84,0.5);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .insight-item:first-child { border-top: none; }
+  .insight-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+  .insight-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .insight-text strong { color: var(--text-primary); }
+
+  .footer {
+    text-align: center;
+    padding: 32px 40px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .footer a { color: var(--evo-green); text-decoration: none; }
+
+  .highlight-box {
+    background: rgba(0,255,167,0.05);
+    border: 1px solid rgba(0,255,167,0.2);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 20px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .highlight-box strong { color: var(--evo-green); }
+
+  .wa-section {
+    background: rgba(18,183,106,0.04);
+    border-color: rgba(18,183,106,0.2);
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>Relatório Semanal — <span>Evolution Community</span></h1>
+      <div class="period">Semana W15 · 01 de abril a 08 de abril de 2026 · Gerado em 08/04/2026</div>
+    </div>
+  </div>
+
+  <div class="exec-summary">
+    <div class="exec-item">
+      <span class="exec-icon">📣</span>
+      <strong>Destaque da semana:</strong> Anúncio do <strong>Evolution Summit (14–16/abr)</strong> aqueceu a comunidade e trouxe 89 novos membros em 7 dias. Buzz sobre Evo CRM e Evolution Go dominou as discussões.
+    </div>
+    <div class="exec-item">
+      <span class="exec-icon">⚙️</span>
+      <strong>Suporte:</strong> Alta demanda técnica — QR Code não gerado, instabilidade na v2.3.7, media não recebida e erro de licensing no Evo Go foram os bugs mais reportados. Oismaelash foi o principal respondedor.
+    </div>
+    <div class="exec-item">
+      <span class="exec-icon">💡</span>
+      <strong>Produto:</strong> Comunidade aguarda ansiosamente o Evo CRM e pergunta sobre migração para Evo Go. Perguntas sobre Baileys vs Cloud API e suporte a comunidades WhatsApp indicam gaps na documentação.
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- MÉTRICAS PRINCIPAIS -->
+  <div class="metrics-row">
+    <div class="m-card">
+      <div class="m-label">Total Membros</div>
+      <div class="m-value" style="color: var(--evo-green);">16.373</div>
+      <div class="m-sub">Discord</div>
+      <div class="m-delta up">↑ +89 novos / semana</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Online Agora</div>
+      <div class="m-value" style="color: var(--blue);">2.290</div>
+      <div class="m-sub">presença simultânea</div>
+      <div class="m-delta neutral">≈ 14% taxa presença</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">WAM Discord</div>
+      <div class="m-value" style="color: var(--yellow);">~42</div>
+      <div class="m-sub">membros ativos únicos</div>
+      <div class="m-delta neutral">~0,26% communicators</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Novos Membros</div>
+      <div class="m-value" style="color: var(--green);">89</div>
+      <div class="m-sub">entraram esta semana</div>
+      <div class="m-delta up">↑ vs W14 (crescimento)</div>
+    </div>
+    <div class="m-card">
+      <div class="m-label">Msgs WhatsApp</div>
+      <div class="m-value" style="color: var(--evo-green);">615</div>
+      <div class="m-sub">77 participantes únicos</div>
+      <div class="m-delta neutral">10 grupos ativos</div>
+    </div>
+  </div>
+
+  <!-- SENTIMENTO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🧠 Sentimento Geral da Semana</h2>
+      <span class="badge">🟡 Neutro com tendência positiva</span>
+    </div>
+    <div class="sentiment-overview">
+      <div>
+        <div class="sentiment-main">🟡</div>
+        <div class="sentiment-label">Neutro</div>
+        <div class="sentiment-sub">com picos positivos</div>
+      </div>
+      <div class="sentiment-bars" style="max-width: 400px;">
+        <div class="sent-row">
+          <div class="sent-name">Positivo</div>
+          <div class="sent-bar-wrap">
+            <div class="sent-bar-fill" style="width: 35%; background: var(--green);"></div>
+          </div>
+          <div class="sent-pct" style="color: var(--green);">35%</div>
+        </div>
+        <div class="sent-row">
+          <div class="sent-name">Neutro</div>
+          <div class="sent-bar-wrap">
+            <div class="sent-bar-fill" style="width: 45%; background: var(--yellow);"></div>
+          </div>
+          <div class="sent-pct" style="color: var(--yellow);">45%</div>
+        </div>
+        <div class="sent-row">
+          <div class="sent-name">Negativo</div>
+          <div class="sent-bar-wrap">
+            <div class="sent-bar-fill" style="width: 20%; background: var(--red);"></div>
+          </div>
+          <div class="sent-pct" style="color: var(--red);">20%</div>
+        </div>
+      </div>
+    </div>
+    <div class="p-content" style="border-top: 1px solid var(--border);">
+      <p>O anúncio do <strong>Evolution Summit (14–16 de abril)</strong> gerou entusiasmo visível na comunidade, com membros compartilhando expectativas sobre o Evo CRM e o lançamento do ecossistema. O sentimento negativo está concentrado em problemas técnicos com a v2.3.7 e relatos de instabilidade de instâncias — nada que aponte para crise, mas exige atenção.</p>
+      <p>Destaque positivo: membro <strong>aledepaulaaa</strong> chegou via vídeo da Attekita Dev e demonstrou entusiasmo genuíno ao descobrir o projeto. O buzz externo da Evolution Go está trazendo novos perfis de usuários.</p>
+    </div>
+  </div>
+
+  <!-- TÓPICOS QUENTES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔥 Tópicos Quentes</h2>
+      <span class="badge">5 tópicos</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tópico</th>
+          <th>Canais</th>
+          <th>Volume</th>
+          <th>Sentimento</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color: var(--evo-green); font-weight: 700;">1</td>
+          <td>
+            <strong style="color: var(--text-primary);">Evolution Summit & Evo CRM</strong><br>
+            <small>Anúncio do evento 14–16/abr, perguntas sobre lançamento do CRM, acesso ao beta</small>
+          </td>
+          <td><span class="tag tag-green">chat-pt</span></td>
+          <td>~35 msgs</td>
+          <td>
+            <div class="sentiment-bar" style="width: 120px;">
+              <div class="pos" style="width: 70%;"></div>
+              <div class="neu" style="width: 25%;"></div>
+              <div class="neg" style="width: 5%;"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="color: var(--evo-green); font-weight: 700;">2</td>
+          <td>
+            <strong style="color: var(--text-primary);">Evolution Go — adoção e migração</strong><br>
+            <small>Dúvidas sobre migrar da API para Go, estabilidade, node n8n, integração Chatwoot</small>
+          </td>
+          <td><span class="tag tag-green">chat-pt</span><span class="tag tag-yellow">chat-es</span></td>
+          <td>~28 msgs</td>
+          <td>
+            <div class="sentiment-bar" style="width: 120px;">
+              <div class="pos" style="width: 40%;"></div>
+              <div class="neu" style="width: 45%;"></div>
+              <div class="neg" style="width: 15%;"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="color: var(--evo-green); font-weight: 700;">3</td>
+          <td>
+            <strong style="color: var(--text-primary);">Bugs técnicos — v2.3.7</strong><br>
+            <small>QR Code não gerado, instabilidade (0% CPU), media não recebida, envio de botões com erro</small>
+          </td>
+          <td><span class="tag tag-green">chat-pt</span><span class="tag tag-yellow">chat-es</span><span class="tag tag-blue">chat-en</span></td>
+          <td>~22 msgs</td>
+          <td>
+            <div class="sentiment-bar" style="width: 120px;">
+              <div class="pos" style="width: 5%;"></div>
+              <div class="neu" style="width: 25%;"></div>
+              <div class="neg" style="width: 70%;"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="color: var(--evo-green); font-weight: 700;">4</td>
+          <td>
+            <strong style="color: var(--text-primary);">N8N + Evolution API — automações</strong><br>
+            <small>Canal fechado no envio, integração webhook, histórico de conversas via Evo Go</small>
+          </td>
+          <td><span class="tag tag-green">chat-pt</span></td>
+          <td>~15 msgs</td>
+          <td>
+            <div class="sentiment-bar" style="width: 120px;">
+              <div class="pos" style="width: 30%;"></div>
+              <div class="neu" style="width: 50%;"></div>
+              <div class="neg" style="width: 20%;"></div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td style="color: var(--evo-green); font-weight: 700;">5</td>
+          <td>
+            <strong style="color: var(--text-primary);">Baileys vs WhatsApp Cloud API</strong><br>
+            <small>Diferenças entre os tipos de instância, impacto no projeto real</small>
+          </td>
+          <td><span class="tag tag-blue">chat-en</span><span class="tag tag-green">chat-pt</span></td>
+          <td>~8 msgs</td>
+          <td>
+            <div class="sentiment-bar" style="width: 120px;">
+              <div class="pos" style="width: 10%;"></div>
+              <div class="neu" style="width: 80%;"></div>
+              <div class="neg" style="width: 10%;"></div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DÚVIDAS RECORRENTES / FAQ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>❓ Dúvidas Recorrentes — Candidatas a FAQ</h2>
+      <span class="badge">7 identificadas</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Dúvida</th>
+          <th>Freq.</th>
+          <th>Canais</th>
+          <th>Ação Sugerida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">QR Code não é gerado ao criar instância</strong><br>
+            <small>Problema com DNS da VPS, versão da API, Docker config</small>
+          </td>
+          <td><span class="tag tag-red">Alta (5+)</span></td>
+          <td><span class="tag tag-blue">EN</span><span class="tag tag-green">PT</span><span class="tag tag-yellow">ES</span></td>
+          <td>Criar/atualizar FAQ com checklist de troubleshooting</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Qual a versão estável atual da Evolution API?</strong><br>
+            <small>Confusão entre v2.3.7 e versões anteriores</small>
+          </td>
+          <td><span class="tag tag-red">Alta (4+)</span></td>
+          <td><span class="tag tag-green">PT</span><span class="tag tag-blue">EN</span></td>
+          <td>Pinned message + FAQ: "v2.3.7 é a mais recente"</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Como migrar de Evolution API para Evolution Go?</strong><br>
+            <small>Dúvidas sobre compatibilidade, dados, instâncias</small>
+          </td>
+          <td><span class="tag tag-yellow">Média (3+)</span></td>
+          <td><span class="tag tag-green">PT</span><span class="tag tag-yellow">ES</span></td>
+          <td>Guia de migração na documentação oficial</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Qual a diferença entre Baileys e WhatsApp Cloud API?</strong><br>
+            <small>Perguntado em PT e EN na mesma semana</small>
+          </td>
+          <td><span class="tag tag-yellow">Média (3+)</span></td>
+          <td><span class="tag tag-green">PT</span><span class="tag tag-blue">EN</span></td>
+          <td>FAQ clara com tabela comparativa</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Quando o Evo CRM vai ser lançado para todos?</strong><br>
+            <small>Membros aguardam acesso além dos apoiadores beta</small>
+          </td>
+          <td><span class="tag tag-yellow">Média (3+)</span></td>
+          <td><span class="tag tag-green">PT</span></td>
+          <td>Post fixado com roadmap de acesso ao CRM</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Evolution Go tem node para n8n?</strong><br>
+            <small>Perguntado no Discord e no WhatsApp da comunidade</small>
+          </td>
+          <td><span class="tag tag-yellow">Média (2+)</span></td>
+          <td><span class="tag tag-green">PT</span><span class="tag tag-purple">WA</span></td>
+          <td>Confirmar e documentar: <code>n8n-nodes-evolution-go</code></td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">A documentação oficial não carrega</strong><br>
+            <small>Reportado em EN e ES — possível problema de CDN ou rota</small>
+          </td>
+          <td><span class="tag tag-red">Urgente (2+)</span></td>
+          <td><span class="tag tag-blue">EN</span><span class="tag tag-yellow">ES</span></td>
+          <td>Verificar docs.evolutionfoundation.com.br — possível outage</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PROBLEMAS DETECTADOS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>⚠️ Problemas Detectados</h2>
+      <span class="badge">4 itens</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Problema</th>
+          <th>Urgência</th>
+          <th>Ação Sugerida</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Documentação oficial inacessível</strong><br>
+            <small>Pelo menos 2 usuários (EN + ES) reportaram que docs.evolutionfoundation.com.br não carrega. Cria barreira de entrada para novos membros.</small>
+          </td>
+          <td><span class="urgency-alta">🔴 ALTA</span></td>
+          <td>Verificar disponibilidade da documentação imediatamente. Fixar mensagem temporária com alternativa.</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Instabilidade da v2.3.7 com carga real</strong><br>
+            <small>Múltiplos relatos de ociosidade (0% CPU), travamento ao receber mensagens da API oficial WhatsApp, instâncias "fantasma" que não deletam.</small>
+          </td>
+          <td><span class="urgency-alta">🔴 ALTA</span></td>
+          <td>Sinalizar para time técnico. Checar issues abertas no GitHub. Considerar nota de estabilidade conhecida no canal #news.</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Erro de licensing no Evo Go (invalid product slug)</strong><br>
+            <small>Membro ambonatti reportou HTTP 400 no licensing server do Evo Go. Workaround: downgrade para 0.6.0 → upgrade para 0.6.1, mas bug no manager deslogando na aba instâncias persiste.</small>
+          </td>
+          <td><span class="urgency-media">🟡 MÉDIA</span></td>
+          <td>Confirmar se issue foi aberta no GitHub. Checar com time se é bug conhecido no 0.6.1.</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Falta de clareza sobre roadmap do Evo CRM</strong><br>
+            <small>Comunidade pergunta repetidamente quando o CRM será aberto. Cria frustração mesmo com sentimento positivo sobre o produto.</small>
+          </td>
+          <td><span class="urgency-baixa">🟢 BAIXA</span></td>
+          <td>Comunicado simples no #news ou #chat-pt com próximos passos do CRM. Pode ser vinculado ao Summit.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GRID 2 colunas -->
+  <div class="grid-2">
+
+    <!-- MEMBROS DESTAQUE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>⭐ Membros Destaque</h2>
+        <span class="badge">Discord</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Membro</th>
+            <th>Contribuição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong style="color: var(--evo-green);">oismaelash</strong></td>
+            <td>Principal respondedor de suporte — compartilhou documentação, explicou configurações e orientou múltiplos usuários em EN, PT e ES. Também publicou script de monitoramento de conexão.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--evo-green);">d_paes</strong></td>
+            <td>Muito ativo em chat-pt — ajudou a esclarecer diferenças entre projetos, orientou sobre issues no GitHub do Evo Go e incentivou contribuições.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--blue);">aledepaulaaa</strong></td>
+            <td>Novo membro que chegou via Attekita Dev (YouTube) — grande potencial de evangelismo. Demonstrou entusiasmo genuíno e fez boas perguntas iniciais.</td>
+          </tr>
+          <tr>
+            <td><strong style="color: var(--blue);">yuricaetano</strong></td>
+            <td>Compartilhou experiência com Evo Go em projetos reais e mencionou bridge Evo Go + Chatwoot que está desenvolvendo — potencial showcase.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- NOVOS MEMBROS -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🆕 Crescimento da Semana</h2>
+        <span class="badge">89 novos</span>
+      </div>
+      <div class="p-content">
+        <p><strong>89 novos membros</strong> entraram no Discord nesta semana — crescimento impulsionado principalmente pelo anúncio do <strong>Evolution Summit (14–16/abr)</strong> e pelo buzz em torno do EvoGo e Evo CRM.</p>
+        <p>Novos perfis observados: desenvolvedores chegando via YouTube (Attekita Dev mencionada explicitamente), usuários hispanohablantes em busca de suporte, e builders buscando alternativas ao Chatwoot.</p>
+        <p style="margin-top: 8px;"><strong style="color: var(--yellow);">⚠️ Oportunidade:</strong> A maioria dos novos membros fica silenciosa. O canal <strong>#introduce</strong> pode ser ativado com uma call-to-action no #welcome para aumentar apresentações.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- WHATSAPP -->
+  <div class="section wa-section">
+    <div class="section-header">
+      <h2>💬 WhatsApp — Grupos da Comunidade</h2>
+      <span class="badge">615 msgs · 7 dias</span>
+    </div>
+    <div class="metrics-row" style="padding: 20px; margin-bottom: 0;">
+      <div class="m-card">
+        <div class="m-label">Total Msgs</div>
+        <div class="m-value" style="color: var(--green);">615</div>
+        <div class="m-sub">7 dias</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Grupos Ativos</div>
+        <div class="m-value" style="color: var(--blue);">10</div>
+        <div class="m-sub">grupos</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Participantes</div>
+        <div class="m-value" style="color: var(--yellow);">77</div>
+        <div class="m-sub">únicos no grupo principal</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Grupo Principal</div>
+        <div class="m-value" style="font-size: 18px; color: var(--evo-green);">548</div>
+        <div class="m-sub">msgs no grupo 1</div>
+      </div>
+      <div class="m-card">
+        <div class="m-label">Tipo Mais Comum</div>
+        <div class="m-value" style="font-size: 18px; color: var(--text-secondary);">Text</div>
+        <div class="m-sub">509 conversas</div>
+      </div>
+    </div>
+    <div class="p-content" style="border-top: 1px solid var(--border);">
+      <p>O grupo principal do WhatsApp registrou <strong>548 mensagens</strong> esta semana, com 77 participantes únicos — mantendo ritmo forte. O tópico do node n8n para Evolution Go foi discutido tanto no Discord quanto no WhatsApp, confirmando ser uma FAQ real da comunidade. O suporte mútuo entre membros no WA é forte, mas o volume torna difícil monitorar sistematicamente.</p>
+    </div>
+  </div>
+
+  <!-- INSIGHTS DE PRODUTO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>💡 Insights para o Produto</h2>
+      <span class="badge">Semana W15</span>
+    </div>
+
+    <div style="padding: 12px 0;">
+      <div style="padding: 8px 20px; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">🚀 Features Solicitadas</div>
+      <div class="insight-item">
+        <div class="insight-icon">🏘️</div>
+        <div class="insight-text"><strong>Suporte a Comunidades WhatsApp</strong> — Usuário no chat-en perguntou sobre suporte a managing communities (novo recurso do Baileys). Potencial feature estratégica.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">📜</div>
+        <div class="insight-text"><strong>API de histórico de conversas no Evo Go</strong> — Usuário n00b3t1c0 perguntou sobre endpoint para buscar histórico. Confirmado por oismaelash que existe, mas é chat por chat — pode ser melhorado.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🔔</div>
+        <div class="insight-text"><strong>Monitoramento nativo de status de instância</strong> — Membro promac2025 (histórico) criou automação no N8N para monitorar status. Isso indica que deveria ser uma feature built-in da API.</div>
+      </div>
+
+      <div style="padding: 8px 20px; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px;">🐛 Bugs Reportados</div>
+      <div class="insight-item">
+        <div class="insight-icon">🔴</div>
+        <div class="insight-text"><strong>v2.3.7 — Instância ociosa (0% CPU) travando ao receber msgs</strong> — @filipe_albuquerque reportou. Pode ser conexão pendente com API oficial WhatsApp.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🔴</div>
+        <div class="insight-text"><strong>v2.3.7 — Media recebida não chega (apenas texto)</strong> — @tonygomes9356 reportou. Possível bug de processamento de webhook para attachments.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🟡</div>
+        <div class="insight-text"><strong>Evo Go 0.6.1 — Manager deslogando na aba instâncias</strong> — @ambonatti confirmou. Bug UI no manager que não impede operação mas prejudica UX.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">🟡</div>
+        <div class="insight-text"><strong>Webhook message_upsert — mensagem de áudio não dispara em alguns casos</strong> — @nana_bruni reportou que ao receber mensagem de áudio, o webhook não dispara corretamente.</div>
+      </div>
+
+      <div style="padding: 8px 20px; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 8px;">📚 Gaps na Documentação (Docs Gap)</div>
+      <div class="insight-item">
+        <div class="insight-icon">📖</div>
+        <div class="insight-text"><strong>Troubleshooting QR Code</strong> — Perguntado 5+ vezes esta semana. Checklist de DNS, versão Docker, portas — não existe na doc atual de forma acessível.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">📖</div>
+        <div class="insight-text"><strong>Baileys vs Cloud API — comparativo claro</strong> — Pergunta recorrente em PT e EN. Uma tabela simples na doc resolveria.</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon">📖</div>
+        <div class="insight-text"><strong>Guia de migração Evolution API → Evolution Go</strong> — Comunidade não sabe se pode migrar, como fazer, e o que muda. Página dedicada na doc é necessária.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO W14 vs W15 -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Comparativo — W14 vs W15</h2>
+      <span class="badge">Tendências</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Métrica</th>
+          <th>W14 (ant.)</th>
+          <th>W15 (atual)</th>
+          <th>Tendência</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Total membros Discord</td>
+          <td>~16.284</td>
+          <td>16.373</td>
+          <td><span class="trend-up">↑ +89</span></td>
+        </tr>
+        <tr>
+          <td>Novos membros (7 dias)</td>
+          <td>~60–70 (est.)</td>
+          <td>89</td>
+          <td><span class="trend-up">↑ Crescimento acelerado</span></td>
+        </tr>
+        <tr>
+          <td>Sentimento geral</td>
+          <td>Neutro</td>
+          <td>Neutro/Positivo</td>
+          <td><span class="trend-up">↑ Melhora leve</span></td>
+        </tr>
+        <tr>
+          <td>Principal tópico</td>
+          <td>Evolution Go lançamento</td>
+          <td>Summit + Evo CRM</td>
+          <td><span class="trend-neutral">→ Foco em produto</span></td>
+        </tr>
+        <tr>
+          <td>Bugs reportados</td>
+          <td>Moderado</td>
+          <td>Moderado/Alto</td>
+          <td><span class="trend-down">↓ v2.3.7 com instabilidade</span></td>
+        </tr>
+        <tr>
+          <td>WhatsApp msgs (7 dias)</td>
+          <td>n/a</td>
+          <td>615</td>
+          <td><span class="trend-neutral">→ Baseline estabelecida</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SUGESTÕES DE AÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🎯 Sugestões de Ação — Semana W15</h2>
+      <span class="badge">Para aprovação de Davidson</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Ação</th>
+          <th>Prioridade</th>
+          <th>Justificativa</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Verificar docs.evolutionfoundation.com.br</strong><br>
+            <small>Checar se documentação está acessível internacionalmente</small>
+          </td>
+          <td><span class="tag tag-red">Urgente</span></td>
+          <td>2+ usuários reportaram inacessibilidade esta semana — impacta onboarding</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Comunicado sobre Evo CRM no #news</strong><br>
+            <small>Atualizar comunidade sobre timeline de acesso — mesmo que seja "em breve"</small>
+          </td>
+          <td><span class="tag tag-yellow">Alta</span></td>
+          <td>Comunidade está ansiosa e fazendo a mesma pergunta múltiplas vezes</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Criar FAQ: Troubleshooting QR Code</strong><br>
+            <small>Checklist com DNS, versão Docker, portas abertas</small>
+          </td>
+          <td><span class="tag tag-yellow">Alta</span></td>
+          <td>Pergunta mais frequente desta semana (5+ ocorrências, 3 idiomas)</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Reconhecer oismaelash publicamente</strong><br>
+            <small>Post ou reação destacando contribuição como suporte voluntário</small>
+          </td>
+          <td><span class="tag tag-green">Média</span></td>
+          <td>Membro mais ativo em suporte — reconhecimento incentiva continuidade</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Usar Summit como gancho de engajamento</strong><br>
+            <small>Poll no Discord: "O que você mais quer ver no Summit?"</small>
+          </td>
+          <td><span class="tag tag-green">Média</span></td>
+          <td>89 novos membros + Summit em 6 dias = momento ideal para engajamento</td>
+        </tr>
+        <tr>
+          <td>
+            <strong style="color: var(--text-primary);">Criar guia de migração API → Evo Go</strong><br>
+            <small>Página na documentação com passo a passo de migração</small>
+          </td>
+          <td><span class="tag tag-blue">Backlog</span></td>
+          <td>Tópico recorrente que vai crescer conforme adoção do Evo Go aumenta</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>Relatório gerado automaticamente pelo <strong>Pulse</strong> — Agente de Comunidade da Evo Foundation · Semana W15 · 08/04/2026</p>
+  <p style="margin-top: 4px;">Dados coletados via Discord API v10 e WhatsApp Integration · <a href="#">Evolution Community</a></p>
+</div>
+
+</body>
+</html>
