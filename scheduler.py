@@ -94,7 +94,7 @@ def setup_schedule():
     schedule.every().sunday.at("10:00").do(run_adw, "Health Check-in", "health_checkin.py")
 
     # --- Mensais (dia 1) ---
-    # Monthly close roda via check no loop principal (ver abaixo)
+    # Monthly close e community monthly rodam via check no loop principal (ver abaixo)
 
 
 def show_schedule():
@@ -146,10 +146,11 @@ def main():
     while True:
         schedule.run_pending()
 
-        # Monthly Close — roda no dia 1 às 08:00
+        # Rotinas mensais — rodam no dia 1
         now = datetime.now()
         if now.day == 1 and now.hour == 8 and not monthly_close_ran:
             run_adw("Monthly Close Kickoff", "monthly_close.py")
+            run_adw("Community Monthly", "community_monthly.py")
             monthly_close_ran = True
         elif now.day != 1:
             monthly_close_ran = False

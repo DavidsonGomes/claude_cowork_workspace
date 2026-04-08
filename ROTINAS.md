@@ -37,6 +37,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | Dia/Horário | Rotina | Comando | Agente | O que faz |
 |:---:|--------|---------|--------|-----------|
 | **Dia 1 08:00** | Monthly Close Kickoff | `make fin-close` | @flux | DRE, checklist fechamento, NFs pendentes, pendências Samara → HTML |
+| **Dia 1 08:00** | Community Monthly | `make community-month` | @pulse | Discord + WhatsApp 30d: MAM, sentimento, tópicos, produto, docs gaps → HTML |
 
 ---
 
@@ -64,7 +65,7 @@ make clean-logs    # Remove logs > 30 dias
 | **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Dashboard, Weekly, Trends |
 | **@sage** | Strategy Digest |
 | **@atlas** | Linear Review, GitHub Review |
-| **@pulse** | Community Pulse (diário), Community Weekly, FAQ Sync |
+| **@pulse** | Community Pulse (diário), Community Weekly, Community Monthly, FAQ Sync |
 | **@flux** | Financial Pulse (diário), Financial Weekly, Monthly Close |
 | **@kai** | Health Check-in |
 
@@ -91,6 +92,7 @@ make clean-logs    # Remove logs > 30 dias
 | Financial Pulse | HTML | `05 Financeiro/reports/daily/[C] YYYY-MM-DD-financial-pulse.html` |
 | Financial Weekly | HTML | `05 Financeiro/reports/weekly/[C] YYYY-WXX-financial-weekly.html` |
 | Monthly Close | HTML | `05 Financeiro/reports/monthly/[C] YYYY-MM-monthly-close.html` |
+| Community Monthly | HTML | `03 Comunidade/reports/monthly/[C] YYYY-MM-community-monthly.html` |
 
 ### Templates HTML disponíveis
 
@@ -112,3 +114,4 @@ Todos em `.claude/templates/html/`, dark theme Evolution (verde `#00FFA7`, Inter
 | `financial-pulse.html` | Financial Pulse |
 | `financial-weekly.html` | Financial Weekly |
 | `monthly-close.html` | Monthly Close Kickoff |
+| `community-monthly-report.html` | Community Monthly |

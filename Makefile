@@ -50,6 +50,9 @@ fin-weekly:         ## 📊 Financial Weekly — relatório financeiro semanal (
 fin-close:          ## 📋 Monthly Close — kickoff do fechamento mensal (@flux)
 	$(PYTHON) $(ADW_DIR)/monthly_close.py
 
+community-month:    ## 📊 Community Monthly — relatório mensal da comunidade (@pulse)
+	$(PYTHON) $(ADW_DIR)/community_monthly.py
+
 # --- Rotinas semanais ---
 
 weekly:             ## 📊 Revisão semanal completa (@clawdia)
@@ -141,5 +144,5 @@ docker-build:       ## 🐳 Build da imagem
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod dashboard fin-pulse weekly health trends linear community community-week github faq strategy fin-weekly fin-close daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
+.PHONY: morning sync triage review memory eod dashboard fin-pulse weekly health trends linear community community-week community-month github faq strategy fin-weekly fin-close daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
 .DEFAULT_GOAL := help
