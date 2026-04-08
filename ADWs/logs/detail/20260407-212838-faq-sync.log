@@ -1,0 +1,35 @@
+TIMESTAMP: 2026-04-07T21:28:38.559297
+DURATION: 110.5s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-faq-sync
+
+============================================================
+STDOUT:
+============================================================
+## FAQ Sync — 07/04/2026
+
+**Perguntas no FAQ:** 26 (+5 novas)
+**Atualizadas:** 0
+**Fontes:** Discord #chat-pt (43 msgs, 23 perguntas detectadas) + GitHub Issues (evolution-api, evolution-go) + Linear (sem issues de suporte resolvidas nas últimas 24h)
+
+---
+
+### Novas entradas adicionadas:
+
+| # | Pergunta | Categoria | Fonte |
+|---|----------|-----------|-------|
+| 1 | Instância v2.3.7 ficando lenta/ociosa | Instalação & Setup | Discord #chat-pt |
+| 2 | Qual versão mais estável da Evolution API? | Instalação & Setup | Discord #chat-pt (recorrente) |
+| 3 | Evo AI CRM já foi lançado? Quando disponível? | Evo CRM | Discord #chat-pt |
+| 4 | Evolution Go está pronto para produção? | Evo Go | Discord #chat-pt |
+| 5 | `/message/edit` falha silenciosamente no Evo Go | Evo Go | GitHub evolution-go #16 |
+
+---
+
+### Observações para atenção:
+
+- 🔥 **Evo AI CRM** gerou bastante curiosidade hoje — múltiplos membros perguntando sobre status e data de lançamento. Oportunidade para um comunicado oficial no `#news`.
+- ⚠️ **Instabilidade v2.3.7** sendo reportada por mais membros — pode indicar problema sistêmico que merece investigação técnica.
+- ❓ **"Qual versão mais estável?"** é pergunta recorrente — o FAQ agora responde, mas um comunicado fixado no canal ajudaria a reduzir o volume.
+

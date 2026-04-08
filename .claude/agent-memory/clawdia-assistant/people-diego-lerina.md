@@ -14,6 +14,8 @@ type: user
 - Responsável por construir a página de captura do Summit no **Rappet**
 - Cria o calendário de publicações no **Notion** para o Summit
 - Desenha automações de marketing para clientes (ex: fluxo de comprador + carrinho abandonado)
+- **Responsável pelas projeções financeiras** do modelo de 3 tiers (recebe os preços de Davidson e monta as projeções)
+- Participou da reunião "Alinhamento Evolution Estratégia" em 07/04 junto com Davidson e Filipe Reis
 
 ### Ferramentas que usa
 - **Rappet:** plataforma de páginas de captura/landing pages

@@ -73,6 +73,17 @@ type: project
 - Categorias cobertas: Instalação, Configuração, Integrações (Chatwoot, Typebot), Evolution API, Evo Go, Evo CRM
 - Próxima sync: adicionar entradas de Billing & Licenças quando houver dados
 
+## Pulso Diário 07/abr/2026
+
+- **Mensagens 24h:** 112 | **Ativos:** 38 | **Novos membros:** 19
+- **Canal mais ativo:** chat-pt (81 msgs)
+- **Sentimento:** Misto/Neutro — ajuda mútua saudável, mas bugs v2.3.7 gerando frustração
+- **Alerta:** TypeError no ChannelStartupService v2.3.7 com Chatwoot — múltiplos relatos simultâneos
+- **Alerta:** Link de documentação EN com 404 — impacta usuários internacionais
+- **Membros destaque do dia:** oismaelash (3 canais), d_paes, oriondesign
+- **FAQ candidatas:** "Como começar com Evolution API" (iniciantes); "Envio de botões e listas — versão suportada"
+- **Relatório salvo:** `03 Comunidade/reports/daily/[C] 2026-04-07-community-pulse.html`
+
 ## Novos Padrões Detectados (07/abr/2026)
 
 - **Erro "canal fechado" N8N** — recorrente no chat-pt, relacionado a instâncias com falso positivo de conexão

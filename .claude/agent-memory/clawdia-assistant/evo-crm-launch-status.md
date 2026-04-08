@@ -4,7 +4,7 @@ description: Evo CRM lança na semana de 06/04; campanha de marketing ativa; foc
 type: project
 ---
 
-## Situação atual (referência: 2026-04-06)
+## Situação atual (referência: 2026-04-07)
 
 O Evo CRM está em fase final antes do lançamento. Campanha de marketing (email + Instagram) começou em 06/04 e vai até 23/04.
 
@@ -30,6 +30,12 @@ O Evo CRM está em fase final antes do lançamento. Campanha de marketing (email
 - Evo CRM provavelmente não é afetado (já usa IDs para leads), mas Davidson deve garantir que o CRM armazene WID em vez de número de telefone
 - Meta está fazendo A/B test — a equipe está monitorando
 
+### Portal de testes
+- URL: portal.evi.com.br — usado pelo time para acesso ao ambiente de testes
+
+### Fase 2 (meados semana de 07/04)
+- Davidson triaga bugs reportados na Fase 1, remove duplicatas e distribui tarefas para correção
+
 **Why:** O lançamento acontece agora — qualquer lacuna de contexto pode fazer a Clawdia sugerir ações já tomadas ou conflitar com a estratégia atual.
 
-**How to apply:** Ao receber perguntas sobre Evo CRM, assumir que o produto está em fase de testes pré-lançamento. Não sugerir novas features. Priorizar estabilização.
+**How to apply:** Ao receber perguntas sobre Evo CRM, assumir que o produto entrou em Fase 2 (triagem de bugs). Não sugerir novas features. Priorizar estabilização e fix dos bugs reportados.

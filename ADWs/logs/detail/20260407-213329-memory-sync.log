@@ -1,0 +1,56 @@
+TIMESTAMP: 2026-04-07T21:33:29.082408
+DURATION: 170.3s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a rotina de consolidação de memória:
+
+1. Leia os últimos 3 daily logs em '01 Daily Logs/' (mais recentes primeiro)
+2. Leia os summaries de reuniões dos últimos 3 dias em '09 Reuniões/summaries/'
+3. Analise o git log recente: `git log --oneline --since="3 days ago"` e `git diff --stat HEAD~10` para entender o que mudou no workspace
+4. Para cada fonte, extraia:
+   - Decisões tomadas → salvar em memory/ como tipo 'project'
+   - Pessoas novas ou contexto novo sobre pessoas → salvar como tipo 'user' ou atualizar existente
+   - Feedbacks ou correções de abordagem → salvar como tipo 'feedback'
+   - Termos ou referências externas novas → salvar como tipo 'reference'
+   - Skills ou rotinas criadas/alteradas → atualizar referências se relevante
+5. Antes de salvar, verificar se já existe memória similar — atualizar em vez de duplicar
+6. Atualizar MEMORY.md com ponteiros para novos arquivos
+
+Reportar no final: quantas memórias criadas/atualizadas por tipo.
+Ser conciso — não criar memórias para coisas óbvias ou já documentadas no código.
+
+============================================================
+STDOUT:
+============================================================
+Pronto. Consolidação concluída.
+
+---
+
+## Relatório de consolidação de memória
+
+**Fontes lidas:**
+- Daily logs: `2026-04-07.md`, `2026-04-06.md`, `2026-04-07-morning.md`
+- Reuniões: Planning Evolution (06/04), AA+Evo Quinzenal (06/04), Summit 01 Kickoff (06/04), Alinhamento Evolution Estratégia (07/04)
+- Git log: 29 commits nos últimos 3 dias — foco em skills financeiras, dashboard, sync-meetings, community reports
+
+---
+
+### Memórias criadas (2)
+| Tipo | Arquivo | O quê |
+|------|---------|-------|
+| `user` | `people-filipe-reis.md` | Filipe Reis (Supersonic) — consultor de precificação, participou da reunião de 07/04 |
+| `reference` | `reference-panda-video.md` | Panda Video — plataforma de vídeo/dublagem da Evo Academy (3 idiomas) |
+| `project` | `project-pending-actions-aa-evo.md` | Actions críticos em aberto; reunião AA+Evo reagendada para 09/04 às 18h |
+
+### Memórias atualizadas (3)
+| Arquivo | O que mudou |
+|---------|-------------|
+| `people-diego-lerina.md` | Adicionado: responsável pelas projeções financeiras dos tiers; participou do alinhamento de 07/04 com Filipe Reis |
+| `evo-crm-launch-status.md` | Atualizado para Fase 2 (triagem de bugs); URL portal.evi.com.br adicionada |
+| `MEMORY.md` | Novos ponteiros para Filipe Reis, Panda Video, pendências AA+Evo; removido cabeçalho duplicado |
+
+### Não criado (motivo)
+- **RunPod saldo baixo** → ephemeral, não vale memória persistente
+- **Skills financeiras novas** → estrutura de código, documentada no SKILL.md próprio
+- **Portal portal.evi.com.br** → adicionado inline no evo-crm, não merece arquivo próprio
+

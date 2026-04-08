@@ -1,0 +1,26 @@
+TIMESTAMP: 2026-04-08T09:33:41.532561
+DURATION: 43160.8s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /prod-dashboard
+
+============================================================
+STDOUT:
+============================================================
+## Dashboard gerado
+
+**Arquivo:** `01 Daily Logs/[C] 2026-04-07-dashboard.html`
+**Health:** Produto 🟡 Misto | Comunidade 🟡 Misto | Financeiro 🔴 Risco | Rotinas 🟢 Saudável
+**Alertas:** 5 pontos de atenção
+
+---
+
+**Resumo dos alertas:**
+1. 🔴 Churn 9,6% — 20 cancelamentos em 30d, 5 encerrando, zero novas assinaturas em 7 dias
+2. 🔴 Omie API 404 — ERP indisponível, acionar Samara antes do fechamento
+3. 🔴 RunPod saldo baixo — adicionar crédito
+4. 🟡 Conflito às 10h — Alinhamento Estratégia vs IAB (IAB aguarda resposta)
+5. 🟡 Instabilidade v2.3.7 na comunidade — 12 relatos de TypeError
+
+**Rotinas:** todas 13 com 100% de sucesso. Linear/GitHub não rodam às terças — próxima execução: quarta.
+

@@ -1,0 +1,44 @@
+TIMESTAMP: 2026-04-07T21:24:01.068746
+DURATION: 191.0s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-daily
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Pulso Diário — 07/04/2026
+
+**Saúde: 🟡 Atenção**
+Mensagens: **112** | Ativos: **38** | Novos: **19**
+Suporte: **6 perguntas identificadas** no chat-pt/en/es
+Sentimento: 🟡 Misto — ajuda mútua saudável, mas bugs preocupam
+
+**Top tópicos:** Instabilidade v2.3.7, Evo CRM (expectativa), Evolution Go, N8N, Docs 404
+
+---
+
+### ⚠️ Alertas Prioritários
+
+1. **TypeError no ChannelStartupService — v2.3.7 + Chatwoot** `URGENTE`
+   - Múltiplos usuários relatando travamento ao passar mensagens para o Chatwoot
+   - Erro: `Cannot read properties of undefined (reading 'name')`
+
+2. **Documentação EN com 404** `URGENTE`
+   - Usuários de chat-en e chat-es não conseguem acessar a documentação em inglês
+   - Pelo menos 3 pessoas impactadas no dia
+
+### ⭐ Membro Destaque
+
+**oismaelash** — presente nos 3 canais (PT, EN, ES), respondeu +15 dúvidas técnicas no dia. Candidato a reconhecimento público.
+
+### 💡 Sugestões de Ação
+
+1. Criar FAQ "Como começar com a Evolution API" — pedido recorrente de iniciantes
+2. Publicar comunicado sobre o status do Evo CRM — especulação alta na comunidade
+3. Reconhecer oismaelash no canal — contribuidor MVP do dia
+
+Relatório salvo em `03 Comunidade/reports/daily/[C] 2026-04-07-community-pulse.html`
+

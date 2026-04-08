@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pulso Diário — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .header-left h1 span { color: var(--evo-green); }
+
+  .header-left .subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+
+  .health-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .health-badge.normal { background: rgba(18,183,106,0.15); color: var(--green); border: 1px solid rgba(18,183,106,0.3); }
+  .health-badge.atencao { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,9,0.3); }
+  .health-badge.critico { background: rgba(240,68,56,0.15); color: var(--red); border: 1px solid rgba(240,68,56,0.3); }
+
+  .health-badge .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  .health-badge.normal .dot { background: var(--green); }
+  .health-badge.atencao .dot { background: var(--yellow); }
+  .health-badge.critico .dot { background: var(--red); }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .metric-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+
+  .metric-card:hover { border-color: var(--evo-green); }
+
+  .metric-card .label {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .metric-card .value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 8px 0 4px;
+  }
+
+  .metric-card .delta {
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 {
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .section-header .count {
+    background: var(--bg-primary);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .section-body { padding: 0; }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.2);
+  }
+
+  td {
+    padding: 12px 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .topics-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+
+  .topic-item {
+    padding: 16px 20px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topic-item:nth-child(3n) { border-right: none; }
+  .topic-item:nth-last-child(-n+3) { border-bottom: none; }
+
+  .topic-item .topic-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .topic-item .topic-count {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .topic-item .topic-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .topic-item .topic-bar-fill {
+    height: 100%;
+    background: var(--evo-green);
+    border-radius: 2px;
+  }
+
+  .action-item {
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+  }
+
+  .action-item:last-child { border-bottom: none; }
+
+  .action-item .checkbox {
+    width: 18px; height: 18px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .action-item .action-text {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .action-item .action-tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  .action-item .action-tag.urgente { background: rgba(240,68,56,0.15); color: var(--red); }
+  .action-item .action-tag.importante { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .action-item .action-tag.normal { background: rgba(18,183,106,0.15); color: var(--green); }
+
+  .footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--text-muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .footer span { color: var(--evo-green); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .support-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .support-item:last-child { border-bottom: none; }
+
+  .support-item .question {
+    font-size: 14px;
+    color: var(--text-secondary);
+    max-width: 70%;
+  }
+
+  .support-item .time {
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .support-item .time.alert { color: var(--red); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div style="display:flex;align-items:center;gap:16px">
+      <h1>Pulso <span>Diário</span></h1>
+    </div>
+    <div class="subtitle">07 de Abril de 2026 — Comunidade Discord — Últimas 24h</div>
+  </div>
+  <div class="health-badge atencao">
+    <div class="dot"></div>
+    Atenção
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- MÉTRICAS -->
+  <div class="grid">
+    <div class="metric-card">
+      <div class="label">Mensagens (24h)</div>
+      <div class="value">112</div>
+      <div class="delta neutral">— sem baseline anterior</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Membros ativos</div>
+      <div class="value">38</div>
+      <div class="delta neutral">— sem baseline anterior</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Novos membros</div>
+      <div class="value">19</div>
+      <div class="delta neutral">0 saída(s)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Canal mais ativo</div>
+      <div class="value" style="font-size:18px;">💬 chat-pt</div>
+      <div class="delta neutral">81 msgs</div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- SUPORTE -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Suporte <span class="count">6 perguntas identificadas</span></h2>
+      </div>
+      <div class="section-body">
+        <div class="support-item">
+          <div class="question">Instabilidade na v2.3.7 — erro TypeError no ChannelStartupService</div>
+          <div class="time alert">Hoje, 22:47</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Problema ao receber mídia (áudio/vídeo) na v2.3.7</div>
+          <div class="time alert">Hoje, 13:13</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Instância aparece conectada mas algumas mensagens não são enviadas via N8N</div>
+          <div class="time alert">Hoje, 14:01</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Documentação do site não carrega (seção em inglês com 404)</div>
+          <div class="time">Hoje, 02:46</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Erro ao deletar mensagens no chat-es: Cannot read properties of null</div>
+          <div class="time">Hoje, 15:39</div>
+        </div>
+        <div class="support-item">
+          <div class="question">Como começar a usar a Evolution API — iniciante sem onboarding</div>
+          <div class="time">Hoje, 15:58</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SENTIMENTO -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Sentimento</h2>
+      </div>
+      <div class="section-body" style="padding:20px;">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px;">
+          <div style="font-size:48px;">🟡</div>
+          <div>
+            <div style="font-size:20px;font-weight:700;">Misto / Neutro</div>
+            <div style="font-size:13px;color:var(--text-muted);">Baseado em 92 mensagens analisadas</div>
+          </div>
+        </div>
+        <div style="font-size:13px;color:var(--text-secondary);line-height:1.6;">
+          <strong>Positivo:</strong> Membros ajudando ativamente uns aos outros (oismaelash em destaque). Entusiasmo com o Evo CRM e Evolution Go. Novos membros entrando em ritmo saudável (19 no dia).<br><br>
+          <strong>Negativo:</strong> Relatos de instabilidade na v2.3.7 preocupam — erro de TypeError repetido. Frustração com envio de botões e listas. Problema de documentação 404 em inglês.<br><br>
+          <strong>Neutro:</strong> Discussões técnicas sobre N8N, Chatwoot e uso comercial foram construtivas e sem atrito.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP TÓPICOS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Top Tópicos do Dia</h2>
+    </div>
+    <div class="section-body">
+      <div class="topics-grid">
+        <div class="topic-item">
+          <div class="topic-name">Instabilidade v2.3.7</div>
+          <div class="topic-count">~12 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Evo CRM — expectativas e dúvidas</div>
+          <div class="topic-count">~10 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:83%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Evolution Go — estabilidade e recursos</div>
+          <div class="topic-count">~8 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:66%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Integração N8N + Evolution</div>
+          <div class="topic-count">~7 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:58%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Documentação — links quebrados</div>
+          <div class="topic-count">~4 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:33%"></div></div>
+        </div>
+        <div class="topic-item">
+          <div class="topic-name">Monetização e uso comercial</div>
+          <div class="topic-count">~4 menções</div>
+          <div class="topic-bar"><div class="topic-bar-fill" style="width:33%"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBROS DESTAQUE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Membros Destaque</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Membro</th>
+            <th>Contribuição</th>
+            <th>Canal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>oismaelash</strong></td>
+            <td>Respondeu múltiplas dúvidas técnicas — conectou instâncias, sugeriu endpoint de PR, indicou docs</td>
+            <td>chat-pt, chat-en, chat-es</td>
+          </tr>
+          <tr>
+            <td><strong>d_paes</strong></td>
+            <td>Auxiliou com debug de mensagens N8N e respondeu sobre monetização com a plataforma</td>
+            <td>chat-pt</td>
+          </tr>
+          <tr>
+            <td><strong>n00b3t1c0</strong></td>
+            <td>Trouxe dúvida técnica relevante sobre histórico de conversa no Evo Go e agradeceu a ajuda</td>
+            <td>chat-pt</td>
+          </tr>
+          <tr>
+            <td><strong>oriondesign</strong></td>
+            <td>Publicou conteúdo no canal #news sobre mercado de IA</td>
+            <td>news</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- AÇÕES NECESSÁRIAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Ações Necessárias</h2>
+    </div>
+    <div class="section-body">
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Investigar TypeError no ChannelStartupService da v2.3.7 — múltiplos usuários reportaram instabilidade com Chatwoot</div>
+        <div class="action-tag urgente">URGENTE</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Corrigir link de documentação em inglês com 404 — impactando usuários internacionais (EN e ES)</div>
+        <div class="action-tag urgente">URGENTE</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Criar FAQ: "Como começar a usar a Evolution API" — pedido recorrente de iniciantes</div>
+        <div class="action-tag importante">IMPORTANTE</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Publicar comunicado sobre o status do Evo CRM — há muita especulação sobre data de lançamento</div>
+        <div class="action-tag importante">IMPORTANTE</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Reconhecer oismaelash publicamente — maior contribuidor do dia, presente em 3 canais ajudando a comunidade</div>
+        <div class="action-tag normal">NORMAL</div>
+      </div>
+      <div class="action-item">
+        <div class="checkbox"></div>
+        <div class="action-text">Criar FAQ sobre envio de botões e listas — versão suportada e workarounds conhecidos</div>
+        <div class="action-tag normal">NORMAL</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pulse — 07/04/2026 às 23:00 BRT
+</div>
+
+</body>
+</html>

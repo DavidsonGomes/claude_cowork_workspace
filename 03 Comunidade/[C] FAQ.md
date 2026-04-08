@@ -1,8 +1,8 @@
 # FAQ — Evolution Foundation
 
-> Atualizado automaticamente. Última sync: 2026-04-07 16:00
+> Atualizado automaticamente. Última sync: 2026-04-07 20:15
 > Fontes: Discord (#chat-pt) + GitHub Issues (evolution-api, evo-ai, evolution-go)
-> Total: 21 perguntas
+> Total: 26 perguntas
 
 ---
 
@@ -43,6 +43,33 @@ Geralmente causado por variáveis de ambiente malconfiguradas. Verifique:
 
 Acompanhe o GitHub issue #2499 para o fix oficial.
 **Fonte:** GitHub evolution-api #2499 (2026-04-07)
+**Adicionado:** 2026-04-07
+
+### Evolution API v2.3.7 ficando lenta/ociosa — instância trava ao receber mensagens
+
+**Resposta:** Problema de instabilidade reportado na v2.3.7, especialmente em servidores com uso intenso. Os sintomas mais comuns são: CPU em 0.00% (aparência ociosa), mas respostas lentas ou ausentes; mensagens chegam com atraso ou travam.
+
+**O que verificar:**
+1. Logs da instância para erros de conexão com Redis/Postgres
+2. Se o Redis está consumindo muita memória — use `redis-cli info memory`
+3. Variável `CONFIG_SESSION_PHONE_VERSION` atualizada (`2.3000.1036217085` ou superior)
+4. Reinicie a instância (não o container inteiro) via `DELETE /instance/logout/{name}` seguido de nova conexão
+
+Se o problema persistir, considere manter-se na versão anterior até um patch ser lançado.
+**Fonte:** Discord #chat-pt (2026-04-07) — filipe_albuquerque e outros
+**Adicionado:** 2026-04-07
+
+### Qual a versão mais estável da Evolution API atualmente?
+
+**Resposta:** A versão mais recente é a **v2.3.7**, mas ela apresenta alguns bugs conhecidos (QR instável, erros com Chatwoot, problema na página de integrações). 
+
+**Recomendação atual da comunidade:**
+- Para **produção estável sem botões**: v2.3.7 com as correções documentadas neste FAQ
+- Para **botões e listas**: ainda há instabilidade. Aguarde a próxima versão ou use a v2.2.x se botões forem críticos
+- Acompanhe as releases em: https://github.com/EvolutionAPI/evolution-api/releases
+
+Sempre verifique o changelog antes de atualizar — bugs são documentados rapidamente pela comunidade.
+**Fonte:** Discord #chat-pt (2026-04-07) — gusta1139 e outros
 **Adicionado:** 2026-04-07
 
 ### Como instalar a Evolution API via Docker?
@@ -259,6 +286,36 @@ O problema é que a lógica de decode de imagem é aplicada mesmo quando a inten
 **Fonte:** GitHub evolution-go #5
 **Adicionado:** 2026-04-07
 
+### O Evolution Go está pronto para projetos em produção?
+
+**Resposta:** O Evolution Go está em **beta ativo** — funciona para casos de uso simples, mas ainda apresenta bugs conhecidos que podem impactar produção:
+
+**O que funciona bem:**
+- Envio e recebimento de mensagens de texto
+- Conexão via QR code (sem proxy)
+- Webhooks básicos
+
+**Bugs ativos (abril/2026):**
+- Interface pisca a cada 5s (issue #11)
+- QR trava quando proxy está ativo (issue #12)
+- Stickers não fazem upload para S3/MinIO (issue #5)
+- `/message/edit` falha silenciosamente (issue #16)
+- Botões e menus interativos instáveis
+
+**Recomendação:** Para projetos críticos, use a Evolution API (v2) como base. O Evo Go é uma opção complementar para casos específicos enquanto amadurece.
+**Fonte:** Discord #chat-pt (2026-04-07) — rodrigo000358, confirmado por comunidade
+**Adicionado:** 2026-04-07
+
+### Endpoint `/message/edit` não funciona no Evolution Go (falha silenciosa)
+
+**Resposta:** Bug confirmado na versão atual do Evo Go. O endpoint `POST /message/edit` retorna `"message": "success"`, mas a mensagem **nunca é editada** no WhatsApp.
+
+**Causa raiz:** O método `EditMessage` usa `Conversation` no payload, mas mensagens editáveis no WhatsApp requerem `ExtendedTextMessage`. O Baileys silenciosamente descarta o comando.
+
+**Workaround:** Não há workaround disponível — evite depender de edição de mensagens no Evo Go por enquanto. Acompanhe o GitHub issue #16 para o fix oficial.
+**Fonte:** GitHub evolution-go #16 (2026-04-07)
+**Adicionado:** 2026-04-07
+
 ### Interface do Evo Go Manager fica piscando a cada 5 segundos
 **Resposta:** Bug de UI confirmado na versão 0.6.1-beta. O polling do endpoint `GET /instance/all` a cada 5 segundos está causando re-render completo do componente ao invés de atualização parcial de estado. Nenhum erro no console — o problema é de implementação do frontend.
 
@@ -270,6 +327,19 @@ Acompanhe o GitHub issue #11 do evolution-go.
 
 ## Evo CRM
 <!-- tag: crm, agentes, pipeline, leads, evo-ai -->
+
+### O Evo AI (CRM) já foi lançado? Quando vai estar disponível para todos?
+
+**Resposta:** O Evo AI está em **beta fechado** no momento (abril/2026). O acesso inicial foi liberado para contribuidores (Tier 1). O lançamento público ainda não tem data confirmada.
+
+O que sabemos:
+- O código está no GitHub em https://github.com/EvolutionAPI/evo-ai
+- A comunidade pode acompanhar o progresso e reportar issues
+- Novidades serão anunciadas nos canais oficiais (#news e YouTube)
+
+Não existe previsão oficial de data — fique de olho nos anúncios em `#📢・news`.
+**Fonte:** Discord #chat-pt (2026-04-07) — vhoerlle, caobrilhantee
+**Adicionado:** 2026-04-07
 
 ### O Evo AI suporta Azure OpenAI como provedor de LLM?
 

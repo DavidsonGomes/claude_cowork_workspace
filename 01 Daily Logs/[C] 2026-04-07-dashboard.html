@@ -26,18 +26,16 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
 
-  /* HEADER */
   .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
   .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
   .header-left h1 span { color: var(--evo-green); }
   .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
   .header-right { display: flex; align-items: center; gap: 16px; }
 
-  /* HEALTH BADGES (header) */
   .health-badges { display: flex; gap: 12px; flex-wrap: wrap; }
   .health-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 100px; font-weight: 600; font-size: 13px; }
   .health-badge.saudavel { background: rgba(18,183,106,0.15); color: var(--green); border: 1px solid rgba(18,183,106,0.3); }
-  .health-badge.misto { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,9,0.3); }
+  .health-badge.misto { background: rgba(247,144,9,0.15); color: var(--yellow); border: 1px solid rgba(247,144,0.3); }
   .health-badge.risco { background: rgba(240,68,56,0.15); color: var(--red); border: 1px solid rgba(240,68,56,0.3); }
   .health-badge .dot { width: 8px; height: 8px; border-radius: 50%; animation: pulse 2s infinite; }
   .health-badge.saudavel .dot { background: var(--green); }
@@ -45,16 +43,10 @@
   .health-badge.risco .dot { background: var(--red); }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-  /* CONTAINER */
   .container { max-width: 1400px; margin: 0 auto; padding: 32px 40px; }
-
-  /* GRID LAYOUTS */
   .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
   .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
-  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 24px; }
 
-  /* METRIC CARDS (top row) */
   .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
   .metric-card:hover { border-color: var(--evo-green); }
   .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
@@ -64,20 +56,17 @@
   .metric-card .delta.down { color: var(--red); }
   .metric-card .delta.neutral { color: var(--text-muted); }
 
-  /* SECTIONS */
   .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
   .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
   .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
   .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
   .section-body { padding: 0; }
 
-  /* TABLES */
   table { width: 100%; border-collapse: collapse; }
   th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
   td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
   tr:hover td { background: var(--bg-card-hover); }
 
-  /* BADGES */
   .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
   .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
   .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
@@ -86,7 +75,6 @@
   .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
   .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
 
-  /* METRIC ROWS (inside sections) */
   .metric-row { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(52,64,84,0.5); }
   .metric-row:last-child { border-bottom: none; }
   .metric-row .mr-label { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
@@ -96,42 +84,31 @@
   .status-dot.yellow { background: var(--yellow); }
   .status-dot.red { background: var(--red); }
 
-  /* LIST ITEMS */
   .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
   .list-item:last-child { border-bottom: none; }
   .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
 
-  /* HIGHLIGHT CARD */
   .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
   .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
 
-  /* PROGRESS BAR */
   .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
   .progress-bar-fill { height: 100%; border-radius: 4px; }
-  .progress-bar-fill.green { background: var(--green); }
-  .progress-bar-fill.yellow { background: var(--yellow); }
-  .progress-bar-fill.red { background: var(--red); }
   .progress-bar-fill.evo { background: var(--evo-green); }
 
-  /* ROTINAS STATUS TABLE */
   .rotina-status { display: flex; align-items: center; gap: 6px; }
   .rotina-dot { width: 8px; height: 8px; border-radius: 50%; }
   .rotina-dot.ok { background: var(--green); }
   .rotina-dot.falha { background: var(--red); }
-  .rotina-dot.pendente { background: var(--text-muted); }
   .rotina-rate { font-size: 12px; font-weight: 600; }
   .rotina-rate.high { color: var(--green); }
   .rotina-rate.medium { color: var(--yellow); }
-  .rotina-rate.low { color: var(--red); }
 
-  /* FOOTER */
   .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
   .footer span { color: var(--evo-green); }
 
-  /* RESPONSIVE */
-  @media (max-width: 1200px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .three-col { grid-template-columns: 1fr; } }
-  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .grid-4, .grid-3 { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+  @media (max-width: 1200px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .grid-4 { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
 
 </style>
 </head>
@@ -141,13 +118,13 @@
 <div class="header">
   <div class="header-left">
     <h1><span>Evolution</span> Dashboard</h1>
-    <div class="subtitle">07 de Abril de 2026, Terça-feira — Consolidação diária</div>
+    <div class="subtitle">07 de Abril de 2026 — Terça-feira — Consolidação diária</div>
   </div>
   <div class="header-right">
     <div class="health-badges">
       <div class="health-badge misto"><div class="dot"></div>Produto</div>
       <div class="health-badge misto"><div class="dot"></div>Comunidade</div>
-      <div class="health-badge misto"><div class="dot"></div>Financeiro</div>
+      <div class="health-badge risco"><div class="dot"></div>Financeiro</div>
       <div class="health-badge saudavel"><div class="dot"></div>Rotinas</div>
     </div>
   </div>
@@ -155,9 +132,7 @@
 
 <div class="container">
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 1: KPI CARDS                               -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 1: KPI CARDS -->
   <div class="grid-4">
     <div class="metric-card">
       <div class="label">Tarefas Pendentes</div>
@@ -167,113 +142,99 @@
     <div class="metric-card">
       <div class="label">PRs Abertos</div>
       <div class="value">—</div>
-      <div class="delta neutral">GitHub review pendente</div>
+      <div class="delta neutral">GitHub review: Qua/Sex</div>
     </div>
     <div class="metric-card">
-      <div class="label">Msgs Comunidade (semana)</div>
-      <div class="value">497</div>
-      <div class="delta neutral">WAM: 81 membros ativos</div>
+      <div class="label">Msgs Comunidade (24h)</div>
+      <div class="value">112</div>
+      <div class="delta neutral">38 membros ativos · 19 novos</div>
     </div>
     <div class="metric-card">
       <div class="label">MRR</div>
-      <div class="value">—</div>
-      <div class="delta neutral">Validação pendente</div>
+      <div class="value">R$ 28,9k</div>
+      <div class="delta down">Churn 9,6% — atenção</div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 2: AGENDA + TAREFAS PRIORITÁRIAS           -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 2: AGENDA + TAREFAS PRIORITÁRIAS -->
   <div class="two-col">
-    <!-- Agenda do Dia -->
     <div class="section">
       <div class="section-header">
         <h2>Agenda Hoje</h2>
-        <span class="count">5</span>
+        <span class="count">5 eventos</span>
       </div>
       <div class="section-body">
-        <div class="metric-row">
-          <div class="mr-label">10:00</div>
-          <div class="mr-value">Alinhamento Evolution Estratégia (3 pessoas)</div>
-        </div>
-        <div class="metric-row">
-          <div class="mr-label">10:00</div>
-          <div class="mr-value">[IAB] Comitê Retail Media — Online (sem resposta)</div>
+        <div class="metric-row" style="border-left: 3px solid var(--red);">
+          <div class="mr-label" style="color:var(--red);font-weight:600;">10:00</div>
+          <div class="mr-value" style="font-size:13px;text-align:right;">⚠ Conflito — Alinhamento Estratégia (Diego, Filipe) × IAB Retail Media</div>
         </div>
         <div class="metric-row">
           <div class="mr-label">11:00</div>
-          <div class="mr-value">Planejamentos (bloqueio)</div>
+          <div class="mr-value" style="font-size:13px;">Planejamentos (bloqueado)</div>
         </div>
         <div class="metric-row">
           <div class="mr-label">13:00</div>
-          <div class="mr-value">Ocupado (bloqueio)</div>
+          <div class="mr-value" style="font-size:13px;">Ocupado (bloqueado)</div>
         </div>
         <div class="metric-row">
           <div class="mr-label">16:00</div>
-          <div class="mr-value">ETUS + Praça — Presencial, Sede ETUS (10 pessoas)</div>
+          <div class="mr-value" style="font-size:13px;">ETUS + Praça — Anne, Alberto, Alexandre — Presencial</div>
         </div>
       </div>
     </div>
 
-    <!-- Tarefas Prioritárias -->
     <div class="section">
       <div class="section-header">
         <h2>Tarefas Prioritárias</h2>
-        <span class="count">8</span>
+        <span class="count">8 tarefas</span>
       </div>
       <div class="section-body">
-        <div class="list-item">Finalizar plano de lançamento (3 tiers, preços, bônus, metas) → Xandão/Alberto/Anny</div>
-        <div class="list-item">Coordenar testes do Evo CRM — coletar bugs até 07/04 12h</div>
-        <div class="list-item">Revisar PR do Evo CRM do Danilo</div>
+        <div class="list-item">Finalizar plano de lançamento (3 tiers, preços, bônus) → enviar para Xandão/Alberto/Anne</div>
+        <div class="list-item">Coordenar testes do Evo CRM — coletar bugs</div>
+        <div class="list-item">Revisar PR do Evo CRM (Danilo)</div>
         <div class="list-item">Testar fluxo single-account e Telegram no Evo CRM</div>
-        <div class="list-item">Enviar link do Evolution Summit 01 para Willian</div>
-        <div class="list-item">Subir painel web do calendário de lançamento → acesso ao Willian</div>
+        <div class="list-item">Enviar link de inscrição do Evolution Summit 01 para Willian</div>
+        <div class="list-item">Subir painel web do calendário de lançamento → acesso Willian</div>
         <div class="list-item">Agendar emails da semana do Evolution Summit 01</div>
-        <div class="list-item">[Financeiro] Validar painel financeiro (MRR, CAC, taxa de conversão)</div>
+        <div class="list-item">[Financeiro] Validar painel financeiro (MRR, CAC, conversão)</div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 3: SPRINT/LINEAR + GITHUB                  -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 3: SPRINT/LINEAR + GITHUB -->
   <div class="two-col">
-    <!-- Sprint / Linear -->
     <div class="section">
       <div class="section-header">
         <h2>Sprint / Linear</h2>
-        <span class="badge yellow">Lançamento semana</span>
+        <span class="badge muted">Sem dados — review Seg/Qua/Sex</span>
       </div>
       <div class="section-body">
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot yellow"></span>Progresso</div>
-          <div class="mr-value">Fase de testes — sem novas features</div>
+          <div class="mr-value">— sem dados hoje</div>
         </div>
         <div style="padding: 0 20px 14px;">
-          <div class="progress-bar">
-            <div class="progress-bar-fill evo" style="width: 75%"></div>
-          </div>
+          <div class="progress-bar"><div class="progress-bar-fill evo" style="width: 0%"></div></div>
         </div>
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot yellow"></span>Blockers</div>
-          <div class="mr-value">EvoGo: 400 license server error</div>
+          <div class="mr-value">—</div>
         </div>
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot yellow"></span>Em Review</div>
-          <div class="mr-value">PR do Danilo (Evo CRM)</div>
+          <div class="mr-value">—</div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot green"></span>Status Geral</div>
-          <div class="mr-value">Evo CRM pronto para lançamento</div>
+          <div class="mr-label"><span class="status-dot green"></span>Concluídas</div>
+          <div class="mr-value">—</div>
         </div>
       </div>
     </div>
 
-    <!-- GitHub -->
     <div class="section">
       <div class="section-header">
         <h2>GitHub</h2>
-        <span class="badge muted">Sem dados</span>
+        <span class="badge muted">Sem dados — review Seg/Qua/Sex</span>
       </div>
       <div class="section-body">
         <div class="metric-row">
@@ -282,90 +243,84 @@
         </div>
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot yellow"></span>Issues Comunidade</div>
-          <div class="mr-value">EvoGo bugs (webhook duplicado)</div>
+          <div class="mr-value">—</div>
         </div>
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot green"></span>Stars (semana)</div>
           <div class="mr-value">—</div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot green"></span>Monitoramento</div>
-          <div class="mr-value">Matheus monitora EvoGo open-source</div>
+          <div class="mr-label"><span class="status-dot green"></span>Último Release</div>
+          <div class="mr-value">—</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 4: COMUNIDADE + FINANCEIRO                 -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 4: COMUNIDADE + FINANCEIRO -->
   <div class="two-col">
-    <!-- Comunidade -->
     <div class="section">
       <div class="section-header">
         <h2>Comunidade</h2>
-        <span class="badge yellow">Misto</span>
+        <span class="badge yellow">Atenção</span>
       </div>
       <div class="section-body">
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot green"></span>WAM</div>
-          <div class="mr-value">81 membros ativos</div>
+          <div class="mr-label"><span class="status-dot green"></span>Mensagens 24h</div>
+          <div class="mr-value">112</div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot green"></span>Sentimento</div>
-          <div class="mr-value">Positivo</div>
+          <div class="mr-label"><span class="status-dot yellow"></span>Sentimento</div>
+          <div class="mr-value">Misto / Neutro</div>
         </div>
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot yellow"></span>Tickets Suporte</div>
-          <div class="mr-value">29 abertos na semana</div>
+          <div class="mr-value">6 questões abertas</div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot yellow"></span>Docs Gaps</div>
-          <div class="mr-value">6 gaps identificados</div>
+          <div class="mr-label"><span class="status-dot red"></span>Docs Gaps</div>
+          <div class="mr-value">2 (404 en, onboarding)</div>
         </div>
       </div>
     </div>
 
-    <!-- Financeiro -->
     <div class="section">
       <div class="section-header">
         <h2>Financeiro</h2>
-        <span class="badge yellow">Validação pendente</span>
+        <span class="badge red">Risco</span>
       </div>
       <div class="section-body">
         <div class="metric-row">
           <div class="mr-label"><span class="status-dot yellow"></span>MRR</div>
           <div>
-            <div class="mr-value">—</div>
-            <div style="font-size:12px;color:var(--text-muted);text-align:right;">Painel em validação</div>
+            <div class="mr-value">R$ 28.900</div>
+            <div style="font-size:12px;color:var(--text-muted);text-align:right;">BRL R$112 + USD $4.972/mês</div>
           </div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot yellow"></span>Assinaturas</div>
+          <div class="mr-label"><span class="status-dot red"></span>Assinaturas</div>
           <div>
-            <div class="mr-value">—</div>
-            <div style="font-size:12px;color:var(--text-muted);text-align:right;">Aguardando dados Stripe</div>
+            <div class="mr-value">209</div>
+            <div style="font-size:12px;color:var(--red);text-align:right;">5 cancelando ao fim do período</div>
           </div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot yellow"></span>Runway</div>
-          <div class="mr-value">— meses</div>
+          <div class="mr-label"><span class="status-dot red"></span>Churn (30d)</div>
+          <div class="mr-value" style="color:var(--red);">9,6% (20 cancelamentos)</div>
         </div>
         <div class="metric-row">
-          <div class="mr-label"><span class="status-dot yellow"></span>Pipeline</div>
-          <div class="mr-value">Meta: R$150k (300 usuários)</div>
+          <div class="mr-label"><span class="status-dot red"></span>Omie (ERP)</div>
+          <div class="mr-value" style="color:var(--red);">Indisponível — API 404</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 5: REUNIÕES RECENTES                       -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 5: REUNIÕES RECENTES -->
   <div class="section">
     <div class="section-header">
       <h2>Reuniões Recentes</h2>
-      <span class="count">5</span>
+      <span class="count">3 reuniões (06/04) + 1 hoje</span>
     </div>
     <div class="section-body">
       <table>
@@ -379,47 +334,39 @@
         </thead>
         <tbody>
           <tr>
-            <td>06/04</td>
-            <td>Planning Evolution</td>
-            <td>Davidson, Danilo, Guilherme, Nickolas, Marcelo, Daniel, Raphael</td>
-            <td>12 action items — foco em testes Evo CRM antes lançamento</td>
+            <td>07/04</td>
+            <td style="color:var(--text-primary);font-weight:500;">Alinhamento Evolution Estratégia</td>
+            <td>Diego Lerina, Filipe Reis (Supersonic)</td>
+            <td><span class="badge blue">Hoje 10h</span></td>
           </tr>
           <tr>
             <td>06/04</td>
-            <td>AA + EVO (quinzenal)</td>
-            <td>Davidson, Alberto, Anne, Alexandre</td>
-            <td>5 action items — plano 3 tiers, posicionamento Marketing Automation</td>
+            <td style="color:var(--text-primary);font-weight:500;">AA + EVO (quinzenal)</td>
+            <td>Davidson, Anne, Alberto, Alexandre (Xandão)</td>
+            <td><span class="badge red">5+ pendentes</span></td>
           </tr>
           <tr>
             <td>06/04</td>
-            <td>Impromptu Meet</td>
-            <td>—</td>
-            <td>—</td>
+            <td style="color:var(--text-primary);font-weight:500;">Planning Evolution</td>
+            <td>Davidson + time técnico</td>
+            <td><span class="badge yellow">12 itens</span></td>
           </tr>
           <tr>
-            <td>01/04</td>
-            <td>Impromptu Meet</td>
-            <td>—</td>
-            <td>—</td>
-          </tr>
-          <tr>
-            <td>30/03</td>
-            <td>Evolução de Produto VPS (HostGator)</td>
-            <td>—</td>
-            <td>—</td>
+            <td>06/04</td>
+            <td>Impromptu Google Meet</td>
+            <td>Davidson</td>
+            <td><span class="badge muted">—</span></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 6: ROTINAS ADW — STATUS & MÉTRICAS         -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 6: ROTINAS ADW -->
   <div class="section">
     <div class="section-header">
       <h2>Rotinas Automatizadas</h2>
-      <span class="badge green">Todas operacionais</span>
+      <span class="badge green">Saudável — 100% sucesso em todas</span>
     </div>
     <div class="section-body">
       <table>
@@ -436,7 +383,7 @@
         <tbody>
           <tr>
             <td>Good Morning</td>
-            <td>@clawdia-assistant</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
             <td>07/04 10:34</td>
             <td>121s</td>
             <td><span class="rotina-rate high">100%</span></td>
@@ -444,7 +391,7 @@
           </tr>
           <tr>
             <td>Email Triage</td>
-            <td>@clawdia-assistant</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
             <td>07/04 10:38</td>
             <td>99s</td>
             <td><span class="rotina-rate high">100%</span></td>
@@ -452,31 +399,79 @@
           </tr>
           <tr>
             <td>Review Todoist</td>
-            <td>@clawdia-assistant</td>
-            <td>07/04 08:45</td>
-            <td>36s</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
+            <td>07/04 14:19</td>
+            <td>41s</td>
             <td><span class="rotina-rate high">100%</span></td>
             <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
           </tr>
           <tr>
             <td>Sync Meetings</td>
-            <td>@clawdia-assistant</td>
-            <td>07/04 12:49</td>
-            <td>136s</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
+            <td>07/04 15:18</td>
+            <td>119s</td>
+            <td><span class="rotina-rate high">100%</span></td>
+            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
+          </tr>
+          <tr>
+            <td>Financial Pulse</td>
+            <td style="color:var(--text-muted);">@flux-financeiro</td>
+            <td>07/04 13:33</td>
+            <td>224s</td>
+            <td><span class="rotina-rate high">100%</span></td>
+            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
+          </tr>
+          <tr>
+            <td>Financial Weekly</td>
+            <td style="color:var(--text-muted);">@flux-financeiro</td>
+            <td>07/04 13:59</td>
+            <td>498s</td>
+            <td><span class="rotina-rate high">100%</span></td>
+            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
+          </tr>
+          <tr>
+            <td>Monthly Close</td>
+            <td style="color:var(--text-muted);">@flux-financeiro</td>
+            <td>07/04 14:11</td>
+            <td>540s</td>
+            <td><span class="rotina-rate high">100%</span></td>
+            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
+          </tr>
+          <tr>
+            <td>Community Daily</td>
+            <td style="color:var(--text-muted);">@pulse-community</td>
+            <td>07/04 21:24</td>
+            <td>191s</td>
             <td><span class="rotina-rate high">100%</span></td>
             <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
           </tr>
           <tr>
             <td>FAQ Sync</td>
-            <td>@pulse-community</td>
-            <td>07/04 11:49</td>
-            <td>153s</td>
+            <td style="color:var(--text-muted);">@pulse-community</td>
+            <td>07/04 21:28</td>
+            <td>139s</td>
+            <td><span class="rotina-rate high">100%</span></td>
+            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
+          </tr>
+          <tr>
+            <td>End of Day</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
+            <td>07/04 21:30</td>
+            <td>112s</td>
+            <td><span class="rotina-rate high">100%</span></td>
+            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
+          </tr>
+          <tr>
+            <td>Memory Sync</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
+            <td>07/04 21:33</td>
+            <td>145s</td>
             <td><span class="rotina-rate high">100%</span></td>
             <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
           </tr>
           <tr>
             <td>Community Weekly</td>
-            <td>@pulse-community</td>
+            <td style="color:var(--text-muted);">@pulse-community</td>
             <td>06/04 19:48</td>
             <td>399s</td>
             <td><span class="rotina-rate high">100%</span></td>
@@ -484,25 +479,9 @@
           </tr>
           <tr>
             <td>Trends</td>
-            <td>@clawdia-assistant</td>
+            <td style="color:var(--text-muted);">@clawdia-assistant</td>
             <td>06/04 20:56</td>
             <td>151s</td>
-            <td><span class="rotina-rate high">100%</span></td>
-            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
-          </tr>
-          <tr>
-            <td>End of Day</td>
-            <td>@clawdia-assistant</td>
-            <td>06/04 20:58</td>
-            <td>129s</td>
-            <td><span class="rotina-rate high">100%</span></td>
-            <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
-          </tr>
-          <tr>
-            <td>Memory Sync</td>
-            <td>@clawdia-assistant</td>
-            <td>06/04 21:01</td>
-            <td>120s</td>
             <td><span class="rotina-rate high">100%</span></td>
             <td><div class="rotina-status"><div class="rotina-dot ok"></div></div></td>
           </tr>
@@ -511,18 +490,18 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════ -->
-  <!-- ROW 7: ALERTAS & ATENÇÃO                       -->
-  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 7: ALERTAS & ATENÇÃO -->
   <div class="highlight-card">
-    <div class="title">Pontos de Atenção</div>
+    <div class="title">Pontos de Atenção — 07/04/2026</div>
     <div class="body">
-      ⚠️ <strong>Conflito de agenda às 10h</strong> — "Alinhamento Evolution Estratégia" vs IAB Retail Media. IAB ainda aguarda resposta.<br><br>
-      🔴 <strong>Plano de 3 tiers em aberto</strong> — Davidson precisa entregar plano financeiro/lançamento para Alberto, Xandão e Anne. Reunião AA+EVO reagendada para qui 09/04 18h.<br><br>
-      🟡 <strong>EvoGo: bug crítico na comunidade</strong> — 15 instâncias bloqueadas, duplicação de eventos webhook com 5 tickets abertos. Matheus monitorando GitHub.<br><br>
-      🟡 <strong>6 docs gaps identificados</strong> na semana + 29 tickets de suporte sem cobertura de documentação.<br><br>
-      🟡 <strong>Painel financeiro não validado</strong> — MRR, CAC e taxa de conversão precisam de checagem (tarefa #8 do dia).<br><br>
-      ✅ <strong>Evo CRM em fase final de testes</strong> — lançamento previsto para esta semana. Campanha de email/Instagram já rodando.
+      <strong style="color:var(--red);">🔴 Financeiro — Churn 9,6%:</strong> 20 cancelamentos em 30 dias + 5 assinaturas ativas com <em>cancel_at_period_end</em>. Nenhuma nova assinatura nos últimos 7 dias. Janela de retenção aberta antes dos 5 cancelamentos efetivarem.<br><br>
+      <strong style="color:var(--red);">🔴 Omie indisponível:</strong> API retornando HTTP 404 para contas a receber, contas a pagar e NFs. Acionar Samara Cruz antes do fechamento do mês.<br><br>
+      <strong style="color:var(--red);">🔴 RunPod — Saldo Baixo:</strong> Email de alerta recebido. Adicionar crédito para evitar interrupção de serviço/perda de dados.<br><br>
+      <strong style="color:var(--yellow);">🟡 Conflito de agenda às 10h:</strong> "Alinhamento Evolution Estratégia" (Diego, Filipe) e "[IAB] Comitê de Retail Media" se sobrepõem. IAB ainda aguarda resposta — resolver antes da reunião.<br><br>
+      <strong style="color:var(--yellow);">🟡 Comunidade — Instabilidade v2.3.7:</strong> ~12 relatos de TypeError no ChannelStartupService + problema de mídia (áudio/vídeo). Requer triagem técnica.<br><br>
+      <strong style="color:var(--yellow);">🟡 Docs com 404:</strong> Seção em inglês com links quebrados. Iniciante sem onboarding claro — 2 gaps documentados hoje.<br><br>
+      <strong style="color:var(--yellow);">🟡 Reunião AA+EVO em 09/04 às 18h:</strong> Plano de 3 tiers (preços, bônus, metas) precisa estar pronto antes. Confirmar presença no convite da Anne Carvalho.<br><br>
+      <strong style="color:var(--blue);">ℹ Linear e GitHub:</strong> Rotinas de review não executam às terças. Próxima execução: quarta-feira 09h.
     </div>
   </div>
 
@@ -530,7 +509,7 @@
 
 <!-- FOOTER -->
 <div class="footer">
-  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Clawdia — 07/04/2026 às 13:00 BRT
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Clawdia — 07/04/2026 às 21:40 BRT
 </div>
 
 </body>
