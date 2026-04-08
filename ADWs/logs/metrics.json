@@ -238,5 +238,24 @@
     "last_input_tokens": 900,
     "last_output_tokens": 22652,
     "last_cost_usd": 0.92582
+  },
+  "github-review": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 276.0,
+    "avg_seconds": 276.0,
+    "last_run": "2026-04-08T10:11:41.923976",
+    "agent": "atlas-project",
+    "total_input_tokens": 24,
+    "total_output_tokens": 22850,
+    "total_cache_creation_tokens": 67256,
+    "total_cache_read_tokens": 1013946,
+    "total_cost_usd": 0.89922,
+    "avg_cost_usd": 0.89922,
+    "success_rate": 100.0,
+    "last_input_tokens": 24,
+    "last_output_tokens": 22850,
+    "last_cost_usd": 0.89922
   }
 }

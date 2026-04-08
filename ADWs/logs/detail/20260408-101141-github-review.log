@@ -1,0 +1,51 @@
+TIMESTAMP: 2026-04-08T10:11:41.923351
+DURATION: 276.0s
+RETURNCODE: 0
+PROMPT:
+[agent:atlas-project] Execute a skill /int-github-review
+
+============================================================
+STDOUT:
+============================================================
+## GitHub Review — 08/04/2026
+
+Coleta completa. Aqui está o resumo executivo:
+
+---
+
+### 📊 Visão Geral
+
+| Repo | PRs | Issues | Stars | Commits (7d) | Status |
+|------|-----|--------|-------|--------------|--------|
+| evolution-api | 20 | 430 | 7.807 | 0 | 🔴 Inativo |
+| evo-ai | 4 | 21 | 570 | 0 | 🔴 Inativo |
+| evolution-go | 8 | 15 | 181 | 0 (main) | 🟡 PRs frescos |
+| evo-crm-community | 0 | 0 | 0 | **17** | 🟢 Ativo |
+| EVO-METHOD | 0 | 0 | 25 | 0 | 🔴 Inativo |
+
+---
+
+### 🚨 Alertas prioritários
+
+1. **evolution-api tem 20 PRs sem review** — vários com mais de 30, 60 e até 64 dias abertos. A comunidade abriu issue (#2492) reclamando que o projeto está "sem atualizações há meses".
+
+2. **evolution-go precisa de triagem** — repo novo com 8 PRs criados nos últimos 4 dias (moothz contribuiu 3 de uma vez). Nenhum tem review atribuído.
+
+3. **evo-ai PR #43 tem 265 dias aberto** — um badge do MseeP.ai. Fechar ou mergear rapidamente.
+
+4. **Persistência de sessão (#28 evo-ai)** — issue mais engajada, pede que EVO-API + Evo AI mantenham contexto entre mensagens. Recurso pedido pela comunidade.
+
+5. **Suporte a LLMs locais (#23 e #41 evo-ai)** — Ollama e LLMs locais são os features mais pedidos da comunidade.
+
+---
+
+### ✅ Positivo
+
+- **evo-crm-community** está com 17 commits na semana — único repo ativo.
+- **evolution-go** está recebendo contribuições externas ativamente (bom sinal de adoção).
+
+---
+
+Relatório HTML completo salvo em:
+`02 Projects/github-reviews/[C] 2026-04-08-github-review.html`
+

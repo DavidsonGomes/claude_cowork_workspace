@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GitHub Review — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+    --orange: #FB6514;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+  }
+
+  .header {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .header-left h1 { font-size: 24px; font-weight: 700; }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+
+  .header-right { display: flex; gap: 12px; }
+
+  .stat-pill {
+    display: flex; align-items: center; gap: 6px;
+    padding: 6px 14px; border-radius: 100px;
+    font-size: 13px; font-weight: 600;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+  }
+
+  .stat-pill .icon { font-size: 16px; }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+
+  /* Repo cards */
+  .repos-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; margin-bottom: 32px; }
+
+  .repo-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    transition: border-color 0.2s;
+    cursor: default;
+  }
+
+  .repo-card:hover { border-color: var(--evo-green); }
+
+  .repo-card .repo-name {
+    font-size: 14px; font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+
+  .repo-card .repo-stats { display: flex; flex-direction: column; gap: 6px; }
+
+  .repo-stat {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px;
+  }
+
+  .repo-stat .label { color: var(--text-muted); }
+  .repo-stat .value { font-weight: 600; color: var(--text-secondary); }
+  .repo-stat .value.alert { color: var(--red); }
+  .repo-stat .value.warn { color: var(--yellow); }
+  .repo-stat .value.ok { color: var(--green); }
+
+  .activity-bar {
+    height: 4px; background: var(--border); border-radius: 2px;
+    margin-top: 8px; overflow: hidden;
+  }
+
+  .activity-bar-fill { height: 100%; border-radius: 2px; }
+  .activity-bar-fill.high { background: var(--evo-green); }
+  .activity-bar-fill.medium { background: var(--yellow); }
+  .activity-bar-fill.low { background: var(--red); }
+
+  /* Sections */
+  .section {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .section-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+
+  .badge {
+    font-size: 12px; font-weight: 600; padding: 2px 8px;
+    border-radius: 100px;
+  }
+
+  .badge.count { background: var(--bg-primary); color: var(--text-muted); }
+  .badge.alert { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.warn { background: rgba(247,144,9,0.15); color: var(--yellow); }
+
+  table { width: 100%; border-collapse: collapse; }
+
+  th {
+    text-align: left; padding: 10px 20px;
+    font-size: 11px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase;
+    letter-spacing: 0.5px; background: rgba(0,0,0,0.2);
+  }
+
+  td {
+    padding: 12px 20px; font-size: 14px;
+    color: var(--text-secondary);
+    border-top: 1px solid rgba(52,64,84,0.5);
+  }
+
+  tr:hover td { background: var(--bg-card-hover); }
+
+  .pr-title { font-weight: 500; }
+
+  .pr-repo {
+    font-size: 11px; font-weight: 600;
+    padding: 2px 6px; border-radius: 4px;
+    background: rgba(0,255,167,0.1); color: var(--evo-green);
+  }
+
+  .pr-author {
+    font-size: 12px; color: var(--text-muted);
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .days-badge {
+    font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px;
+  }
+
+  .days-badge.fresh { background: rgba(18,183,106,0.15); color: var(--green); }
+  .days-badge.aging { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .days-badge.stale { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  .review-status { font-size: 12px; font-weight: 600; }
+  .review-status.pending { color: var(--yellow); }
+  .review-status.approved { color: var(--green); }
+  .review-status.changes { color: var(--red); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  /* Releases */
+  .release-item {
+    padding: 14px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .release-item:last-child { border-bottom: none; }
+
+  .release-info { display: flex; align-items: center; gap: 12px; }
+
+  .release-tag {
+    font-size: 13px; font-weight: 700;
+    padding: 4px 10px; border-radius: 6px;
+    background: rgba(0,255,167,0.1); color: var(--evo-green);
+    font-family: monospace;
+  }
+
+  .release-repo { font-size: 14px; font-weight: 500; }
+  .release-name { font-size: 12px; color: var(--text-muted); }
+  .release-date { font-size: 12px; color: var(--text-muted); white-space: nowrap; }
+
+  /* Activity summary */
+  .activity-item {
+    padding: 12px 20px;
+    border-bottom: 1px solid rgba(52,64,84,0.5);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+
+  .activity-item:last-child { border-bottom: none; }
+
+  .activity-label { font-size: 14px; font-weight: 500; }
+
+  .activity-status {
+    font-size: 12px; font-weight: 600;
+    padding: 4px 10px; border-radius: 100px;
+  }
+
+  .activity-status.active { background: rgba(18,183,106,0.15); color: var(--green); }
+  .activity-status.moderate { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .activity-status.inactive { background: rgba(240,68,56,0.15); color: var(--red); }
+
+  .activity-commits { font-size: 12px; color: var(--text-muted); }
+
+  .footer {
+    text-align: center; padding: 24px;
+    color: var(--text-muted); font-size: 12px;
+    border-top: 1px solid var(--border);
+  }
+  .footer span { color: var(--evo-green); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div style="display:flex;align-items:center;gap:16px"><h1>GitHub <span>Review</span></h1></div>
+    <div class="subtitle">08/04/2026 — 5 repositórios monitorados</div>
+  </div>
+  <div class="header-right">
+    <div class="stat-pill"><span class="icon">⑂</span> 32 PRs abertos</div>
+    <div class="stat-pill"><span class="icon">⚑</span> 57 Issues abertas</div>
+    <div class="stat-pill"><span class="icon">★</span> 8.583 Stars</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- REPO CARDS -->
+  <div class="repos-grid">
+
+    <!-- evolution-api -->
+    <div class="repo-card">
+      <div class="repo-name">evolution-api</div>
+      <div class="repo-stats">
+        <div class="repo-stat">
+          <span class="label">PRs</span>
+          <span class="value alert">20</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Issues</span>
+          <span class="value">430</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Stars</span>
+          <span class="value">7.807</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Forks</span>
+          <span class="value">5.940</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Commits (7d)</span>
+          <span class="value warn">0</span>
+        </div>
+      </div>
+      <div class="activity-bar">
+        <div class="activity-bar-fill low" style="width:5%"></div>
+      </div>
+    </div>
+
+    <!-- evo-ai -->
+    <div class="repo-card">
+      <div class="repo-name">evo-ai</div>
+      <div class="repo-stats">
+        <div class="repo-stat">
+          <span class="label">PRs</span>
+          <span class="value warn">4</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Issues</span>
+          <span class="value">21</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Stars</span>
+          <span class="value">570</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Forks</span>
+          <span class="value">188</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Commits (7d)</span>
+          <span class="value warn">0</span>
+        </div>
+      </div>
+      <div class="activity-bar">
+        <div class="activity-bar-fill low" style="width:5%"></div>
+      </div>
+    </div>
+
+    <!-- evolution-go -->
+    <div class="repo-card">
+      <div class="repo-name">evolution-go</div>
+      <div class="repo-stats">
+        <div class="repo-stat">
+          <span class="label">PRs</span>
+          <span class="value alert">8</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Issues</span>
+          <span class="value">15</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Stars</span>
+          <span class="value">181</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Forks</span>
+          <span class="value">80</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Commits (7d)</span>
+          <span class="value warn">0</span>
+        </div>
+      </div>
+      <div class="activity-bar">
+        <div class="activity-bar-fill low" style="width:5%"></div>
+      </div>
+    </div>
+
+    <!-- evo-crm-community -->
+    <div class="repo-card">
+      <div class="repo-name">evo-crm-community</div>
+      <div class="repo-stats">
+        <div class="repo-stat">
+          <span class="label">PRs</span>
+          <span class="value ok">0</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Issues</span>
+          <span class="value">0</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Stars</span>
+          <span class="value">0</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Forks</span>
+          <span class="value">0</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Commits (7d)</span>
+          <span class="value ok">17</span>
+        </div>
+      </div>
+      <div class="activity-bar">
+        <div class="activity-bar-fill high" style="width:85%"></div>
+      </div>
+    </div>
+
+    <!-- EVO-METHOD -->
+    <div class="repo-card">
+      <div class="repo-name">EVO-METHOD</div>
+      <div class="repo-stats">
+        <div class="repo-stat">
+          <span class="label">PRs</span>
+          <span class="value ok">0</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Issues</span>
+          <span class="value">0</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Stars</span>
+          <span class="value">25</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Forks</span>
+          <span class="value">16</span>
+        </div>
+        <div class="repo-stat">
+          <span class="label">Commits (7d)</span>
+          <span class="value warn">0</span>
+        </div>
+      </div>
+      <div class="activity-bar">
+        <div class="activity-bar-fill low" style="width:5%"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRs QUE PRECISAM DE ATENÇÃO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>⑂ PRs que precisam de atenção</h2>
+      <span class="badge alert">32 pendentes de review</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>PR</th>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Dias</th>
+            <th>Review</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- evolution-api PRs -->
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2493</td>
+            <td class="pr-title">fix(meta): resolve race condition in Business API sender identification</td>
+            <td class="pr-author">LeonardPeixoto</td>
+            <td><span class="days-badge stale">6d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2487</td>
+            <td class="pr-title">issue fixed</td>
+            <td class="pr-author">shajandevz</td>
+            <td><span class="days-badge stale">11d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2484</td>
+            <td class="pr-title">pull</td>
+            <td class="pr-author">lourencogrill</td>
+            <td><span class="days-badge stale">15d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2483</td>
+            <td class="pr-title">feat(chat): add fetchLid endpoint for PN to LID resolution</td>
+            <td class="pr-author">MrShennawy</td>
+            <td><span class="days-badge stale">16d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2480</td>
+            <td class="pr-title">feat: add MiniMax as chatbot provider integration</td>
+            <td class="pr-author">octo-patch</td>
+            <td><span class="days-badge stale">19d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2461</td>
+            <td class="pr-title">fix(whatsapp): resolve this.isZero error in list messages</td>
+            <td class="pr-author">MohaDevPro</td>
+            <td><span class="days-badge stale">34d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2421</td>
+            <td class="pr-title">feat(label): add GET /label/syncLabels endpoint</td>
+            <td class="pr-author">josuecocoman</td>
+            <td><span class="days-badge stale">59d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2402</td>
+            <td class="pr-title">fix: Ajustando whatsapp.bailey.service.ts para mostrar corretamente...</td>
+            <td class="pr-author">jpavrdev</td>
+            <td><span class="days-badge stale">64d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <!-- evo-ai PRs -->
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#46</td>
+            <td class="pr-title">Add AG2 (formerly AutoGen) as a third AI engine (AI_ENGINE=ag2)</td>
+            <td class="pr-author">VasiliyRad</td>
+            <td><span class="days-badge stale">27d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#43</td>
+            <td class="pr-title">Add MseeP.ai badge</td>
+            <td class="pr-author">lwsinclair</td>
+            <td><span class="days-badge stale">265d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#36</td>
+            <td class="pr-title">fix(agent_builder): correct sub-agent tuple return format</td>
+            <td class="pr-author">andersonlemesc</td>
+            <td><span class="days-badge stale">309d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <!-- evolution-go PRs -->
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#15</td>
+            <td class="pr-title">feat: adiciona endpoints de status do WhatsApp para texto, imagem e vídeo</td>
+            <td class="pr-author">Eduardo-gato</td>
+            <td><span class="days-badge fresh">3d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#14</td>
+            <td class="pr-title">fix: avoid manager flicker during instance polling</td>
+            <td class="pr-author">TBDevMaster</td>
+            <td><span class="days-badge fresh">3d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#13</td>
+            <td class="pr-title">fix: support explicit http proxy protocol</td>
+            <td class="pr-author">TBDevMaster</td>
+            <td><span class="days-badge fresh">3d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#9</td>
+            <td class="pr-title">Feature: Enhanced Media Sending</td>
+            <td class="pr-author">moothz</td>
+            <td><span class="days-badge aging">4d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#8</td>
+            <td class="pr-title">Feature: Get Group Info from Invite Link</td>
+            <td class="pr-author">moothz</td>
+            <td><span class="days-badge aging">4d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#7</td>
+            <td class="pr-title">Fix: Admin Revoke (Delete messages from others)</td>
+            <td class="pr-author">moothz</td>
+            <td><span class="days-badge aging">4d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#4</td>
+            <td class="pr-title">docs: improve setup instructions and add docker compose</td>
+            <td class="pr-author">oismaelash</td>
+            <td><span class="days-badge stale">8d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-go</span></td>
+            <td>#3</td>
+            <td class="pr-title">docs(swagger): add swagger models and update API annotations</td>
+            <td class="pr-author">oismaelash</td>
+            <td><span class="days-badge stale">8d</span></td>
+            <td><span class="review-status pending">⏳ Pendente</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <!-- ISSUES SEM RESPOSTA -->
+    <div class="section">
+      <div class="section-header">
+        <h2>⚑ Issues sem resposta</h2>
+        <span class="badge alert">13 sem resposta</span>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Repo</th>
+              <th>Issue</th>
+              <th>Dias</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">[Bug]: Chatwoot integration fails - "no body message found" (#2500)</td>
+              <td><span class="days-badge fresh">0d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">Integrations page not working: 400 error (#2499)</td>
+              <td><span class="days-badge fresh">1d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">Bug fix for WAMonitoringService — stream:error 515 (#2498)</td>
+              <td><span class="days-badge aging">3d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">Bug: archiveChat fails with PrismaClientValidationError (#2495)</td>
+              <td><span class="days-badge aging">4d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">Webhook sempre vai para número padrão (#2496)</td>
+              <td><span class="days-badge aging">4d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">Desabilitar confirmações de leitura no Chatwoot (#2494)</td>
+              <td><span class="days-badge stale">5d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">TypeError: Cannot read properties of undefined (#2491)</td>
+              <td><span class="days-badge stale">9d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">evento TYPEBOT_START não está sendo enviado (#2490)</td>
+              <td><span class="days-badge stale">10d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-api</span></td>
+              <td class="pr-title">sendWhatsAppAudio does not send a reply (#2485)</td>
+              <td><span class="days-badge stale">15d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evo-ai</span></td>
+              <td class="pr-title">my account can not sign in (#45)</td>
+              <td><span class="days-badge stale">40d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-go</span></td>
+              <td class="pr-title">[BUG] Interface reload e desconexão ao clicar em instâncias (#17)</td>
+              <td><span class="days-badge fresh">0d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-go</span></td>
+              <td class="pr-title">/message/edit endpoint silently fails (#16)</td>
+              <td><span class="days-badge fresh">1d</span></td>
+            </tr>
+            <tr>
+              <td><span class="pr-repo">evolution-go</span></td>
+              <td class="pr-title">[BUG] Interface piscando a cada 5 segundos (#11)</td>
+              <td><span class="days-badge aging">4d</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- RELEASES RECENTES -->
+    <div class="section">
+      <div class="section-header">
+        <h2>🚀 Releases recentes</h2>
+      </div>
+      <div class="section-body">
+        <div class="release-item">
+          <div class="release-info">
+            <span class="release-tag">v2.3.7</span>
+            <div>
+              <div class="release-repo">evolution-api</div>
+              <div class="release-name">v2.3.7</div>
+            </div>
+          </div>
+          <div class="release-date">05/12/2025</div>
+        </div>
+        <div class="release-item">
+          <div class="release-info">
+            <span class="release-tag">v0.6.1</span>
+            <div>
+              <div class="release-repo">evolution-go</div>
+              <div class="release-name">v0.6.1</div>
+            </div>
+          </div>
+          <div class="release-date">Pré-release</div>
+        </div>
+        <div class="release-item">
+          <div class="release-info">
+            <span class="release-tag">v0.1.0</span>
+            <div>
+              <div class="release-repo">evo-ai</div>
+              <div class="release-name">v0.1.0</div>
+            </div>
+          </div>
+          <div class="release-date">24/05/2025</div>
+        </div>
+        <div class="release-item">
+          <div class="release-info">
+            <span class="release-tag">—</span>
+            <div>
+              <div class="release-repo">evo-crm-community</div>
+              <div class="release-name">Sem release publicado</div>
+            </div>
+          </div>
+          <div class="release-date">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATIVIDADE POR REPO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Atividade (últimos 7 dias)</h2>
+    </div>
+    <div class="section-body">
+      <div class="activity-item">
+        <div class="activity-label">evo-crm-community</div>
+        <div class="activity-commits">17 commits</div>
+        <div class="activity-status active">● Ativo</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-label">evolution-api</div>
+        <div class="activity-commits">0 commits</div>
+        <div class="activity-status inactive">● Inativo</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-label">evo-ai</div>
+        <div class="activity-commits">0 commits</div>
+        <div class="activity-status inactive">● Inativo</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-label">evolution-go</div>
+        <div class="activity-commits">0 commits (branch principal)</div>
+        <div class="activity-status inactive">● Inativo na main</div>
+      </div>
+      <div class="activity-item">
+        <div class="activity-label">EVO-METHOD</div>
+        <div class="activity-commits">0 commits</div>
+        <div class="activity-status inactive">● Inativo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ISSUES MAIS COMENTADAS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔥 Issues mais comentadas / votadas</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Repo</th>
+            <th>Issue</th>
+            <th>Título</th>
+            <th>Comentários</th>
+            <th>Labels</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#28</td>
+            <td class="pr-title">EVO-API + EVOAI = Não persiste (contexto de sessão)</td>
+            <td>5</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#37</td>
+            <td class="pr-title">Provedor Azure OpenAI</td>
+            <td>1 (com tutorial detalhado)</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#41</td>
+            <td class="pr-title">Ollama API (suporte a LLMs locais)</td>
+            <td>2</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evo-ai</span></td>
+            <td>#25</td>
+            <td class="pr-title">Problemas na execução de agentes (local e web)</td>
+            <td>3</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">—</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2488</td>
+            <td class="pr-title">QRCode não gera mesmo com CONFIG_SESSION_PHONE_VERSION</td>
+            <td>3</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">bug</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2497</td>
+            <td class="pr-title">[BUG] Todo número que conecto é banido</td>
+            <td>1</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">bug</span></td>
+          </tr>
+          <tr>
+            <td><span class="pr-repo">evolution-api</span></td>
+            <td>#2492</td>
+            <td class="pr-title">O projeto não recebe atualizações há meses (enhancement)</td>
+            <td>1</td>
+            <td><span style="font-size:12px;color:var(--text-muted);">enhancement</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Atlas — 08/04/2026 às 12:45 BRT
+</div>
+
+</body>
+</html>
