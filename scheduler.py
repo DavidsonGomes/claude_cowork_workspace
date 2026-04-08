@@ -76,6 +76,7 @@ def setup_schedule():
     schedule.every().day.at("20:15").do(run_adw, "FAQ Sync", "faq_sync.py")
     schedule.every().day.at("21:00").do(run_adw, "End of Day", "end_of_day.py")
     schedule.every().day.at("21:15").do(run_adw, "Memory Sync", "memory_sync.py")
+    schedule.every().day.at("18:00").do(run_adw, "Social Analytics Daily", "social_analytics.py")
     schedule.every().day.at("18:30").do(run_adw, "Licensing Daily", "licensing_daily.py")
     schedule.every().day.at("19:00").do(run_adw, "Financial Pulse", "financial_pulse.py")
     schedule.every().day.at("21:30").do(run_adw, "Dashboard Consolidado", "dashboard.py")
@@ -93,6 +94,7 @@ def setup_schedule():
     schedule.every().monday.at("09:30").do(run_adw, "Community Weekly", "community_weekly.py")
     schedule.every().friday.at("07:30").do(run_adw, "Financial Weekly", "financial_weekly.py")
     schedule.every().friday.at("07:45").do(run_adw, "Licensing Weekly", "licensing_weekly.py")
+    schedule.every().friday.at("08:15").do(run_adw, "Social Analytics Weekly", "social_analytics.py")
     schedule.every().sunday.at("10:00").do(run_adw, "Health Check-in", "health_checkin.py")
 
     # --- Mensais (dia 1) ---
@@ -154,6 +156,7 @@ def main():
             run_adw("Monthly Close Kickoff", "monthly_close.py")
             run_adw("Community Monthly", "community_monthly.py")
             run_adw("Licensing Monthly", "licensing_monthly.py")
+            run_adw("Social Analytics Monthly", "social_analytics.py")
             monthly_close_ran = True
         elif now.day != 1:
             monthly_close_ran = False

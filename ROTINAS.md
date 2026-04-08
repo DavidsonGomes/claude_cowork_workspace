@@ -12,6 +12,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | **07:00** | Good Morning | `make morning` | @clawdia | Briefing: agenda do dia + emails importantes + tarefas prioritárias |
 | **07:15** | Email Triage | `make triage` | @clawdia | Classifica emails não lidos por urgência, propõe ações |
 | **a cada 30min** | Sync Meetings | `make sync` | @clawdia | Puxa reuniões do Fathom, salva summaries, cria tarefas no Todoist |
+| **18:00** | Social Analytics | `make social` | @pixel | YouTube + Instagram + LinkedIn consolidado → HTML cross-platform |
 | **18:30** | Licensing Daily | `make licensing` | @atlas | Instâncias, geo, versões, funil de ativação, alertas → HTML open source growth |
 | **19:00** | Financial Pulse | `make fin-pulse` | @flux | Puxa Stripe (MRR, charges, churn) + Omie (contas, NFs) → snapshot financeiro HTML |
 | **20:00** | Community Pulse | `make community` | @pulse | Lê Discord 24h → atividade, sentimento, suporte, tópicos → relatório HTML |
@@ -32,6 +33,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | **Sexta 09:00** | Strategy Digest | `make strategy` | @sage | Consolida financeiro + produto + comunidade + mercado → visão estratégica |
 | **Sexta 07:30** | Financial Weekly | `make fin-weekly` | @flux | Consolida semana: receitas, despesas, fluxo de caixa, inadimplência → HTML |
 | **Sexta 07:45** | Licensing Weekly | `make licensing-weekly` | @atlas | Crescimento semanal: instâncias, geo expansion, version adoption → HTML |
+| **Sexta 08:15** | Social Analytics Weekly | `make social` | @pixel | Relatório semanal cross-platform: YouTube + Instagram + LinkedIn |
 | **Domingo 10:00** | Health Check-in | `make health` | @kai | Check-in de saúde: peso, alimentação, treino, sono, energia, Mounjaro |
 
 ## Rotinas Mensais
@@ -41,6 +43,7 @@ Guia de todas as rotinas do workspace, seus horários e agentes responsáveis.
 | **Dia 1 08:00** | Monthly Close Kickoff | `make fin-close` | @flux | DRE, checklist fechamento, NFs pendentes, pendências Samara → HTML |
 | **Dia 1 08:00** | Community Monthly | `make community-month` | @pulse | Discord + WhatsApp 30d: MAM, sentimento, tópicos, produto, docs gaps → HTML |
 | **Dia 1 08:00** | Licensing Monthly | `make licensing-month` | @atlas | Crescimento mensal: trajetória, mercados, versões, projeções → HTML |
+| **Dia 1 08:00** | Social Analytics Monthly | `make social` | @pixel | Relatório mensal cross-platform: YouTube + Instagram + LinkedIn |
 
 ---
 
@@ -68,6 +71,7 @@ make clean-logs    # Remove logs > 30 dias
 | **@clawdia** | Morning, Sync, Triage, Review, Memory, EOD, Dashboard, Weekly, Trends |
 | **@sage** | Strategy Digest |
 | **@atlas** | Linear Review, GitHub Review |
+| **@pixel** | Social Analytics (diário, semanal, mensal) |
 | **@atlas** | Linear Review, GitHub Review, Licensing (diário, semanal, mensal) |
 | **@pulse** | Community Pulse (diário), Community Weekly, Community Monthly, FAQ Sync |
 | **@flux** | Financial Pulse (diário), Financial Weekly, Monthly Close |
@@ -97,6 +101,7 @@ make clean-logs    # Remove logs > 30 dias
 | Financial Weekly | HTML | `05 Financeiro/reports/weekly/[C] YYYY-WXX-financial-weekly.html` |
 | Monthly Close | HTML | `05 Financeiro/reports/monthly/[C] YYYY-MM-monthly-close.html` |
 | Community Monthly | HTML | `03 Comunidade/reports/monthly/[C] YYYY-MM-community-monthly.html` |
+| Social Analytics | HTML | `04 Redes Sociais/reports/consolidated/[C] YYYY-MM-DD-social-analytics.html` |
 | Licensing Daily | HTML | `02 Projects/licensing-reports/daily/[C] YYYY-MM-DD-licensing-daily.html` |
 | Licensing Weekly | HTML | `02 Projects/licensing-reports/weekly/[C] YYYY-WXX-licensing-weekly.html` |
 | Licensing Monthly | HTML | `02 Projects/licensing-reports/monthly/[C] YYYY-MM-licensing-monthly.html` |
@@ -122,4 +127,5 @@ Todos em `.claude/templates/html/`, dark theme Evolution (verde `#00FFA7`, Inter
 | `financial-weekly.html` | Financial Weekly |
 | `monthly-close.html` | Monthly Close Kickoff |
 | `community-monthly-report.html` | Community Monthly |
+| `social-analytics-report.html` | Social Analytics (cross-platform) |
 | `licensing-report.html` | Licensing Daily / Weekly / Monthly |
