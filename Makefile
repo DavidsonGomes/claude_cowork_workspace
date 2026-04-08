@@ -128,7 +128,17 @@ logs-tail:          ## 📝 Mostra último log completo
 	@cat ADWs/logs/detail/$$(ls -t ADWs/logs/detail/ 2>/dev/null | head -1) 2>/dev/null || echo "Nenhum log ainda."
 
 metrics:            ## 📈 Mostra métricas acumuladas por rotina (tokens + custo)
-	@python3 -c "import json; d=json.load(open('ADWs/logs/metrics.json')); [print(f'  {k:22s} runs:{v[\"runs\"]:3d}  ok:{v[\"success_rate\"]:5.1f}%  avg:{v[\"avg_seconds\"]:5.0f}s  cost:\$${v.get(\"total_cost_usd\",0):7.2f}  avg:\$${v.get(\"avg_cost_usd\",0):.2f}  tok:{v.get(\"total_input_tokens\",0)+v.get(\"total_output_tokens\",0):>9,}  last:{v[\"last_run\"][:16]}') for k,v in sorted(d.items())]" 2>/dev/null || echo "Nenhuma métrica ainda."
+	@python3 -c "\
+	import json; d=json.load(open('ADWs/logs/metrics.json'));\
+	total_runs=0; total_cost=0; total_tok=0;\
+	[(\
+	  print(f'  {k:22s} runs:{v[\"runs\"]:3d}  ok:{v[\"success_rate\"]:5.1f}%  avg:{v[\"avg_seconds\"]:5.0f}s  cost:\$${v.get(\"total_cost_usd\",0):7.2f}  avg:\$${v.get(\"avg_cost_usd\",0):.2f}  tok:{v.get(\"total_input_tokens\",0)+v.get(\"total_output_tokens\",0):>9,}  last:{v[\"last_run\"][:16]}'),\
+	  total_runs:=total_runs+v['runs'],\
+	  total_cost:=total_cost+v.get('total_cost_usd',0),\
+	  total_tok:=total_tok+v.get('total_input_tokens',0)+v.get('total_output_tokens',0)\
+	) for k,v in sorted(d.items())];\
+	print(f'\n  {\"TOTAL\":22s} runs:{total_runs:3d}  {\" \":18s}  cost:\$${total_cost:7.2f}  {\" \":10s}  tok:{total_tok:>9,}')\
+	" 2>/dev/null || echo "Nenhuma métrica ainda."
 
 clean-logs:         ## 🗑️  Remove logs > 30 dias
 	@find ADWs/logs/ -name "*.log" -mtime +30 -delete 2>/dev/null; find ADWs/logs/ -name "*.jsonl" -mtime +30 -delete 2>/dev/null; echo "Logs antigos removidos."
