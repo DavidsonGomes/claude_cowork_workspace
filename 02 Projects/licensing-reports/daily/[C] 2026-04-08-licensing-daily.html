@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Licensing Report — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 32px 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+
+  /* METRIC CARDS */
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .value small { font-size: 16px; font-weight: 400; color: var(--text-muted); }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+
+  /* SECTIONS */
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+
+  /* TABLES */
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  th.right, td.right { text-align: right; }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+
+  /* BADGES */
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+
+  /* METRIC ROWS */
+  .metric-row { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .mr-label { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+  .metric-row .mr-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+
+  /* PROGRESS BAR */
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 6px; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; }
+  .progress-bar-fill.evo { background: var(--evo-green); }
+  .progress-bar-fill.blue { background: var(--blue); }
+  .progress-bar-fill.purple { background: var(--evo-purple); }
+
+  /* HIGHLIGHT */
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* LIST ITEMS */
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+
+  /* FUNNEL BAR */
+  .funnel-step { padding: 14px 20px; display: flex; align-items: center; gap: 16px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .funnel-step:last-child { border-bottom: none; }
+  .funnel-step .funnel-num { font-size: 24px; font-weight: 700; color: var(--text-primary); min-width: 80px; text-align: right; }
+  .funnel-step .funnel-bar { flex: 1; }
+  .funnel-step .funnel-label { font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+  .funnel-step .funnel-pct { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+
+  @media (max-width: 1200px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .three-col { grid-template-columns: 1fr; } }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } .grid-4 { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>Licensing</span> Daily</h1>
+    <div class="subtitle">08/04/2026 — Open Source Growth Report</div>
+  </div>
+  <div class="header-right">
+    <span class="badge green">🟢 Crescendo</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 1: KPIs PRINCIPAIS                         -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Instâncias Ativas</div>
+      <div class="value">639<small>/3.995</small></div>
+      <div class="delta neutral">primeiro relatório — sem delta</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Clientes Cadastrados</div>
+      <div class="value">1.005</div>
+      <div class="delta neutral">primeiro relatório — sem delta</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">API Keys Geradas</div>
+      <div class="value">1.396</div>
+      <div class="delta neutral">primeiro relatório — sem delta</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Alertas Pendentes</div>
+      <div class="value">52</div>
+      <div class="delta down">⚠ todos rate limit — mesma instância</div>
+    </div>
+  </div>
+
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Cobertura Heartbeat</div>
+      <div class="value" style="color: var(--evo-green);">100%</div>
+      <div class="delta up">↑ Excelente cobertura</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Inst. c/ Heartbeat</div>
+      <div class="value">639</div>
+      <div class="delta neutral">últimas 24h</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Produtos Ativos</div>
+      <div class="value">2</div>
+      <div class="delta neutral">evolution-go · evo-ai-crm-community</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Países Alcançados</div>
+      <div class="value">14</div>
+      <div class="delta neutral">primeiro relatório — sem delta</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 2: FUNIL DE ATIVAÇÃO                       -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Funil de Ativação</h2>
+      <span class="badge blue">45,8% taxa de ativação (keys)</span>
+    </div>
+    <div class="section-body">
+      <div class="funnel-step">
+        <div class="funnel-num">1.005</div>
+        <div class="funnel-bar">
+          <div class="funnel-label">Clientes cadastrados</div>
+          <div class="progress-bar"><div class="progress-bar-fill evo" style="width: 100%"></div></div>
+          <div class="funnel-pct">100%</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">1.396</div>
+        <div class="funnel-bar">
+          <div class="funnel-label">API Keys geradas</div>
+          <div class="progress-bar"><div class="progress-bar-fill blue" style="width: 100%"></div></div>
+          <div class="funnel-pct">138,9% dos clientes (múltiplas keys por cliente)</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">3.995</div>
+        <div class="funnel-bar">
+          <div class="funnel-label">Instâncias criadas (total histórico)</div>
+          <div class="progress-bar"><div class="progress-bar-fill blue" style="width: 100%"></div></div>
+          <div class="funnel-pct">286,2% das keys — média de 2,86 instâncias/key</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">639</div>
+        <div class="funnel-bar">
+          <div class="funnel-label">Instâncias ativas agora (heartbeat 24h)</div>
+          <div class="progress-bar"><div class="progress-bar-fill evo" style="width: 45.8%"></div></div>
+          <div class="funnel-pct">45,8% das keys ativas — 16,0% das instâncias criadas retidas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 3: PRODUTOS + VERSÕES                      -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Distribuição por Produto -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Distribuição por Produto</h2>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span> evolution-go</div>
+          <div class="mr-value">162 instâncias <span style="color:var(--text-muted); font-weight:400; font-size:12px;">(97,0%)</span></div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot blue"></span> evo-ai-crm-community</div>
+          <div class="mr-value">5 instâncias <span style="color:var(--text-muted); font-weight:400; font-size:12px;">(3,0%)</span></div>
+        </div>
+        <div class="metric-row" style="padding: 12px 20px;">
+          <div class="mr-label" style="font-size:12px; color:var(--text-muted);">* Dados de distribuição do período 24h</div>
+          <div class="mr-value" style="font-size:12px; color:var(--text-muted);">Total: 167</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Versões Instaladas -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Versões Instaladas</h2>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Versão</th>
+              <th class="right">Instâncias</th>
+              <th class="right">%</th>
+              <th>Barra</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge green">0.6.1-beta</span></td>
+              <td class="right">136</td>
+              <td class="right">81,4%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill evo" style="width:81.4%"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge muted">dev</span></td>
+              <td class="right">9</td>
+              <td class="right">5,4%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill blue" style="width:5.4%"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge blue">0.6.1</span></td>
+              <td class="right">9</td>
+              <td class="right">5,4%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill blue" style="width:5.4%"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge muted">v0.6.1</span></td>
+              <td class="right">5</td>
+              <td class="right">3,0%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill blue" style="width:3%"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge yellow">2.0.0</span></td>
+              <td class="right">5</td>
+              <td class="right">3,0%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill blue" style="width:3%"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge muted">0.0.0</span></td>
+              <td class="right">2</td>
+              <td class="right">1,2%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill blue" style="width:1.2%"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="badge muted">0.6.1-fix</span></td>
+              <td class="right">1</td>
+              <td class="right">0,6%</td>
+              <td><div class="progress-bar" style="width:120px"><div class="progress-bar-fill blue" style="width:0.6%"></div></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 4: GEO (PAÍS + CIDADE)                    -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Distribuição por País -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Distribuição por País</h2>
+        <span class="count">14 países</span>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>País</th>
+              <th class="right">Instâncias</th>
+              <th class="right">%</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>🇧🇷 Brasil</td><td class="right">152</td><td class="right">91,0%</td></tr>
+            <tr><td>🇪🇬 Egito</td><td class="right">2</td><td class="right">1,2%</td></tr>
+            <tr><td>🇵🇹 Portugal</td><td class="right">2</td><td class="right">1,2%</td></tr>
+            <tr><td>🇦🇷 Argentina</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇺🇾 Uruguai</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇪🇨 Equador</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇵🇾 Paraguai</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇨🇴 Colômbia</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇫🇷 França</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇮🇳 Índia</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇲🇦 Marrocos</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇲🇿 Moçambique</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇺🇸 EUA</td><td class="right">1</td><td class="right">0,6%</td></tr>
+            <tr><td>🇨🇲 Camarões</td><td class="right">1</td><td class="right">0,6%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Top Cidades -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Top Cidades</h2>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Cidade</th>
+              <th>País</th>
+              <th class="right">Instâncias</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>São Paulo</td><td>🇧🇷 BR</td><td class="right">9</td></tr>
+            <tr><td>Goiânia</td><td>🇧🇷 BR</td><td class="right">5</td></tr>
+            <tr><td>Belo Horizonte</td><td>🇧🇷 BR</td><td class="right">5</td></tr>
+            <tr><td>Brasília</td><td>🇧🇷 BR</td><td class="right">4</td></tr>
+            <tr><td>Salvador</td><td>🇧🇷 BR</td><td class="right">4</td></tr>
+            <tr><td>São Luís</td><td>🇧🇷 BR</td><td class="right">4</td></tr>
+            <tr><td>Fortaleza</td><td>🇧🇷 BR</td><td class="right">4</td></tr>
+            <tr><td>Rio de Janeiro</td><td>🇧🇷 BR</td><td class="right">3</td></tr>
+            <tr><td>Uberlândia</td><td>🇧🇷 BR</td><td class="right">3</td></tr>
+            <tr><td>Teresina</td><td>🇧🇷 BR</td><td class="right">3</td></tr>
+            <tr><td>Suzano</td><td>🇧🇷 BR</td><td class="right">3</td></tr>
+            <tr><td>Curitiba</td><td>🇧🇷 BR</td><td class="right">3</td></tr>
+            <tr><td>São Bernardo do Campo</td><td>🇧🇷 BR</td><td class="right">3</td></tr>
+            <tr><td>Campo do Meio</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+            <tr><td>Campinas</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+            <tr><td>Porto Alegre</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+            <tr><td>Ribeirão Preto</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+            <tr><td>Boa Vista</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+            <tr><td>Imperatriz</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+            <tr><td>Niterói</td><td>🇧🇷 BR</td><td class="right">2</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 5: FEATURES + MESSAGE TREND                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Feature Usage -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Features Mais Usadas</h2>
+      </div>
+      <div class="section-body">
+        <div class="list-item">Dados de feature_usage não disponíveis neste período. A telemetria de features ainda não está sendo coletada pelo agente de licenciamento.</div>
+      </div>
+    </div>
+
+    <!-- Message Trend Diário -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Trend de Mensagens (diário)</h2>
+      </div>
+      <div class="section-body">
+        <table>
+          <thead>
+            <tr>
+              <th>Métrica</th>
+              <th class="right">Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Total enviadas (24h)</td>
+              <td class="right">14</td>
+            </tr>
+            <tr>
+              <td>Média por instância ativa</td>
+              <td class="right">~0,02</td>
+            </tr>
+            <tr>
+              <td>Trend histórico diário</td>
+              <td class="right"><span class="badge muted">indisponível</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="list-item" style="font-size:12px; color:var(--text-muted);">daily_message_trend não disponível — volume muito baixo sugere produto ainda em early adoption.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 6: ALERTAS COMERCIAIS                      -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Alertas Comerciais</h2>
+      <span class="count">52 pendentes</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Instância</th>
+            <th>API Key</th>
+            <th>Alerta</th>
+            <th class="right">Ocorrências</th>
+            <th>Primeira Ocorrência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-size:12px; color:var(--text-muted);">50025b56-0309-4655-9b5e-0e08450f323a</td>
+            <td><span class="badge yellow">Key #771</span></td>
+            <td><span class="badge red">Rate Limit Exceeded</span></td>
+            <td class="right">52</td>
+            <td style="font-size:12px;">02/04/2026 18:58</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="list-item" style="font-size:13px; color:var(--yellow);">⚠ Todos os 52 alertas são da mesma instância + key (Rate Limit). Provável cliente com automação agressiva ou bug de loop. Recomenda-se contato proativo.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ROW 7: INSIGHTS ESTRATÉGICOS                   -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="highlight-card">
+    <div class="title">Análise de Crescimento</div>
+    <div class="body">
+      A base de licenciamento mostra <strong>saúde operacional excepcional</strong>: 639 instâncias ativas com 100% de cobertura de heartbeat nas últimas 24h. Com 1.005 clientes e 1.396 keys geradas, há uma taxa saudável de adoção de múltiplas keys por cliente (1,39x). O funil histórico revela 3.995 instâncias criadas no total, com 16% de retenção ativa — indicando espaço para reativação de instâncias inativas. Brasil domina com 91% das instâncias, mas 14 países já estão presentes, sinalizando expansão internacional incipiente.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">Sinais de Produto</div>
+    <div class="body">
+      <strong>Evolution-Go é o produto dominante</strong> (97% das instâncias no período 24h). O evo-ai-crm-community tem presença ainda pequena (3%), o que é esperado para um produto mais recente. <strong>81,4% das instâncias rodam 0.6.1-beta</strong>, mostrando adoção rápida da versão mais recente — sinal de que a comunidade está atualizada e confiante no produto. A versão "2.0.0" com 5 instâncias merece investigação: pode ser um fork ou tag customizada. Volume de mensagens (14 em 24h) indica plataforma em uso controlado — produto ainda sendo adotado, não em escala de produção massiva.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">Gaps de Coleta — O que Falta Medir</div>
+    <div class="body">
+      <strong>1. Feature usage:</strong> Nenhum dado disponível — sem instrumentação de quais features são mais utilizadas por instância.<br>
+      <strong>2. Daily message trend:</strong> Histórico de mensagens não coletado — impossível calcular crescimento de volume de mensagens ao longo do tempo.<br>
+      <strong>3. Retenção histórica:</strong> Sem timestamps de criação por cohort — não é possível calcular retenção por mês de cadastro.<br>
+      <strong>4. Alertas resolvidos:</strong> 52 alertas da Key #771 sem resolução desde 02/04 — pipeline de resolução de alertas precisa de ação manual ou automática.<br>
+      <strong>5. Churn de instâncias:</strong> Sem dado de instâncias desativadas por período — não é possível calcular churn líquido.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Atlas — 08/04/2026 às 15:50 BRT
+</div>
+
+</body>
+</html>

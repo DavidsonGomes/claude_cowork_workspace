@@ -1,0 +1,36 @@
+TIMESTAMP: 2026-04-08T12:49:05.290372
+DURATION: 321.5s
+RETURNCODE: 0
+PROMPT:
+[agent:atlas-project] Execute a skill /prod-licensing-daily
+
+============================================================
+STDOUT:
+============================================================
+Rotina concluída! Aqui está o resumo do dia:
+
+---
+
+## 📊 Licensing Daily — 08/04/2026
+
+**Status:** 🟢 Crescendo
+
+| KPI | Valor |
+|-----|-------|
+| Instâncias ativas | **639** / 3.995 histórico |
+| Cobertura heartbeat | **100%** |
+| Clientes | **1.005** |
+| API Keys | **1.396** |
+| Países | **14** (91% BR) |
+| Mensagens 24h | **14** |
+| Alertas pendentes | **52** |
+
+**Destaques:**
+- Versão dominante: `0.6.1-beta` (81,4% das instâncias)
+- Produto dominante: `evolution-go` (97%)
+- 52 alertas são todos da **mesma instância** (API Key #771) — rate limit desde 02/04. Vale contato proativo com esse cliente.
+
+**Gaps identificados:** feature_usage e daily_message_trend ainda sem dados — telemetria precisa de instrumentação adicional.
+
+Relatório HTML salvo em `02 Projects/licensing-reports/daily/[C] 2026-04-08-licensing-daily.html` e notificação enviada no Telegram.
+
