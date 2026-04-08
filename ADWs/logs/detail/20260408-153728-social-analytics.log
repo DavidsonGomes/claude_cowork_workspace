@@ -1,0 +1,44 @@
+TIMESTAMP: 2026-04-08T15:37:28.495828
+DURATION: 159.9s
+RETURNCODE: 0
+PROMPT:
+[agent:pixel-social-media] Execute a skill /social-analytics-report
+
+============================================================
+STDOUT:
+============================================================
+Relatório gerado e entregue! Aqui o resumo:
+
+---
+
+## 📊 Social Analytics — Snapshot Baseline · 08/04/2026
+
+### KPIs Cross-Platform
+| Métrica | Valor |
+|---------|-------|
+| Total seguidores | **10.159** |
+| Publicações recentes | **47** |
+| ER médio ponderado | **5,91%** |
+
+### Por Plataforma
+| Conta | Seguidores | ER |
+|-------|-----------|-----|
+| YouTube — Evolution API | 7.450 | 7,63% |
+| Instagram — davidson.o.gomes | 1.750 | 3,40% |
+| Instagram — evolution.foundation | 686 | 3,92% |
+| Instagram — agenciadgcode | 273 | — |
+| LinkedIn — Davidson Gomes | — | — |
+
+### 🏆 Top conteúdo
+**"A Evolution v3 está chegando"** — YouTube · 15.749 views · **10,1% ER**
+
+### Principais insights
+1. **YouTube domina** — 73% dos seguidores totais e maior ER
+2. **Instagram fragmentado** — 3 perfis diluindo esforço; o pessoal do Davidson tem mais seguidores que o institucional
+3. **Reels 2x superiores** a fotos em ER
+4. **LinkedIn completamente cego** — sem acesso a posts/métricas
+5. **Summit em 6 dias** — janela crítica ativa
+
+### Arquivo salvo
+`04 Redes Sociais/reports/consolidated/[C] 2026-04-08-social-analytics.html`
+

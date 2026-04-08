@@ -380,5 +380,24 @@
     "last_input_tokens": 13,
     "last_output_tokens": 7423,
     "last_cost_usd": 0.31015
+  },
+  "social-analytics": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 159.9,
+    "avg_seconds": 159.9,
+    "last_run": "2026-04-08T15:37:28.496490",
+    "agent": "pixel-social-media",
+    "total_input_tokens": 18,
+    "total_output_tokens": 10464,
+    "total_cache_creation_tokens": 31729,
+    "total_cache_read_tokens": 420702,
+    "total_cost_usd": 0.40221,
+    "avg_cost_usd": 0.40221,
+    "success_rate": 100.0,
+    "last_input_tokens": 18,
+    "last_output_tokens": 10464,
+    "last_cost_usd": 0.40221
   }
 }
