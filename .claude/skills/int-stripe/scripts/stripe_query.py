@@ -14,7 +14,7 @@ from pathlib import Path
 
 def _load_dotenv():
     """Load .env from .claude/ directory."""
-    env_path = Path(__file__).resolve().parents[3] / ".env"
+    env_path = Path(__file__).resolve().parents[4] / ".env"
     if not env_path.exists():
         return
     with open(env_path) as f:
