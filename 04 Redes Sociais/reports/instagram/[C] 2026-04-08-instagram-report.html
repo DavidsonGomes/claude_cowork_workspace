@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Analytics — Instagram</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+    --instagram: #E1306C;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  th.right, td.right { text-align: right; }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .badge.instagram { background: rgba(225,48,108,0.15); color: var(--instagram); }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; }
+  .progress-bar-fill.evo { background: var(--evo-green); }
+  .progress-bar-fill.davidson { background: var(--blue); }
+  .progress-bar-fill.dg { background: var(--evo-purple); }
+  .account-block { padding: 20px; border-bottom: 1px solid var(--border); }
+  .account-block:last-child { border-bottom: none; }
+  .account-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
+  .account-meta { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; }
+  .follower-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; font-size: 13px; }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>Instagram</span> Analytics Report</h1>
+    <div class="subtitle">08 de abril de 2026 — 3 contas monitoradas</div>
+  </div>
+  <div class="header-right">
+    <span class="badge instagram">Instagram</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- KPIs GERAIS -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Total Seguidores</div>
+      <div class="value">2.709</div>
+      <div class="delta neutral">3 contas ativas</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Total Publicações</div>
+      <div class="value">144</div>
+      <div class="delta neutral">evolution + davidson + dgcode</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Engagement Rate Médio</div>
+      <div class="value">4,53%</div>
+      <div class="delta up">▲ Reels lideram performance</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Alcance Total (4 sem.)</div>
+      <div class="value">1.871</div>
+      <div class="delta neutral">evolution + davidson</div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO POR CONTA -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Comparativo por Conta</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Conta</th>
+            <th class="right">Seguidores</th>
+            <th class="right">Posts</th>
+            <th class="right">ER Médio</th>
+            <th class="right">Alcance 4sem</th>
+            <th class="right">Interações</th>
+            <th>Melhor Post</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>@evolution.foundation</strong><br>
+              <span style="font-size:12px;color:var(--text-muted)">Evolution Foundation</span>
+            </td>
+            <td class="right"><strong>686</strong></td>
+            <td class="right">18</td>
+            <td class="right"><span class="badge green">4,69%</span></td>
+            <td class="right">476</td>
+            <td class="right">55</td>
+            <td>
+              <a href="https://www.instagram.com/reel/DRh7RbZAcQY/" target="_blank">Evo V3 chegando — Reels</a><br>
+              <span style="font-size:12px;color:var(--text-muted)">64 likes · 4 comments · ER 9,91%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>@davidson.o.gomes</strong><br>
+              <span style="font-size:12px;color:var(--text-muted)">Davidson Gomes (pessoal)</span>
+            </td>
+            <td class="right"><strong>1.750</strong></td>
+            <td class="right">50</td>
+            <td class="right"><span class="badge green">4,37%</span></td>
+            <td class="right">1.395</td>
+            <td class="right">56</td>
+            <td>
+              <a href="https://www.instagram.com/reel/DCDLaKZsCKV/" target="_blank">Sonhos e conquistas — Reels</a><br>
+              <span style="font-size:12px;color:var(--text-muted)">142 likes · 25 comments · ER 9,54%</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <strong>@agenciadgcode</strong><br>
+              <span style="font-size:12px;color:var(--text-muted)">Dgcode | Agência Digital</span>
+            </td>
+            <td class="right"><strong>273</strong></td>
+            <td class="right">76</td>
+            <td class="right"><span class="badge muted">N/A</span></td>
+            <td class="right">—</td>
+            <td class="right">—</td>
+            <td>
+              <span style="color:var(--text-muted);font-size:13px">Sem posts recentes disponíveis</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CRESCIMENTO DE SEGUIDORES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📈 Crescimento de Seguidores</h2>
+    </div>
+    <div class="section-body">
+      <div class="account-block">
+        <div class="follower-row">
+          <span class="account-name">@evolution.foundation</span>
+          <strong>686 seguidores</strong>
+        </div>
+        <div class="account-meta">34 seguindo · 18 posts · Infraestrutura open source para IA e automação</div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width: 25%"></div></div>
+      </div>
+      <div class="account-block">
+        <div class="follower-row">
+          <span class="account-name">@davidson.o.gomes</span>
+          <strong>1.750 seguidores</strong>
+        </div>
+        <div class="account-meta">1.227 seguindo · 50 posts · Fundador da @evo.foundation · Construindo infra open source para IA</div>
+        <div class="progress-bar"><div class="progress-bar-fill davidson" style="width: 65%"></div></div>
+      </div>
+      <div class="account-block">
+        <div class="follower-row">
+          <span class="account-name">@agenciadgcode</span>
+          <strong>273 seguidores</strong>
+        </div>
+        <div class="account-meta">339 seguindo · 76 posts · Agência Digital</div>
+        <div class="progress-bar"><div class="progress-bar-fill dg" style="width: 10%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP POSTS — EVOLUTION.FOUNDATION -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🏆 Top Posts — @evolution.foundation</h2>
+      <span class="count">últimos 15 posts</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Legenda</th>
+            <th class="right">Likes</th>
+            <th class="right">Comments</th>
+            <th class="right">ER</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DRh7RbZAcQY/" target="_blank">A Evo V3 está chegando com um pacote de novas funcionalidades...</a></td>
+            <td class="right">64</td>
+            <td class="right">4</td>
+            <td class="right"><span class="badge green">9,91%</span></td>
+            <td>26/11/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DRj8h_DEcTi/" target="_blank">A nova Era da Evolution está chegando. Davidson abre o jogo...</a></td>
+            <td class="right">53</td>
+            <td class="right">1</td>
+            <td class="right"><span class="badge green">7,87%</span></td>
+            <td>27/11/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DRm7D2vFBvR/" target="_blank">(sem legenda)</a></td>
+            <td class="right">48</td>
+            <td class="right">3</td>
+            <td class="right"><span class="badge green">7,43%</span></td>
+            <td>28/11/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DVLuSDwjtPz/" target="_blank">Evoluir não é tendência. É estratégia. Evo AI.</a></td>
+            <td class="right">37</td>
+            <td class="right">3</td>
+            <td class="right"><span class="badge yellow">5,83%</span></td>
+            <td>25/02/2026</td>
+          </tr>
+          <tr>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td><a href="https://www.instagram.com/p/DUbnZXGkpmN/" target="_blank">Fala pessoal! PRÓXIMA SEGUNDA vai rolar uma super live...</a></td>
+            <td class="right">32</td>
+            <td class="right">4</td>
+            <td class="right"><span class="badge yellow">5,25%</span></td>
+            <td>06/02/2026</td>
+          </tr>
+          <tr>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td><a href="https://www.instagram.com/p/DRDAMPFEhx1/" target="_blank">Você ainda acha que a Evolution é "só API de WhatsApp"?</a></td>
+            <td class="right">35</td>
+            <td class="right">1</td>
+            <td class="right"><span class="badge yellow">5,25%</span></td>
+            <td>14/11/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DWyux-DDtPM/" target="_blank">A Evolution vai ao vivo. Dias 14, 15 e 16 de abril...</a></td>
+            <td class="right">24</td>
+            <td class="right">3</td>
+            <td class="right"><span class="badge yellow">3,94%</span></td>
+            <td>06/04/2026</td>
+          </tr>
+          <tr>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td><a href="https://www.instagram.com/p/DSGIl63Eu7Q/" target="_blank">A Evo AI está literalmente sendo construída pela comunidade...</a></td>
+            <td class="right">29</td>
+            <td class="right">3</td>
+            <td class="right"><span class="badge yellow">4,66%</span></td>
+            <td>10/12/2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- TOP POSTS — DAVIDSON -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🏆 Top Posts — @davidson.o.gomes</h2>
+      <span class="count">últimos 20 posts</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Legenda</th>
+            <th class="right">Likes</th>
+            <th class="right">Comments</th>
+            <th class="right">ER</th>
+            <th>Data</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DCDLaKZsCKV/" target="_blank">Trabalhe pelos seus sonhos até que sua realidade brilhe...</a></td>
+            <td class="right">142</td>
+            <td class="right">25</td>
+            <td class="right"><span class="badge green">9,54%</span></td>
+            <td>07/11/2024</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DEPxdbYu-l1/" target="_blank">Desejo um excelente 2025 para todos!</a></td>
+            <td class="right">146</td>
+            <td class="right">20</td>
+            <td class="right"><span class="badge green">9,49%</span></td>
+            <td>31/12/2024</td>
+          </tr>
+          <tr>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td><a href="https://www.instagram.com/p/C-gHFLgyoQ8/" target="_blank">Lançamento da Evolution API v2 🚀🚀🚀</a></td>
+            <td class="right">110</td>
+            <td class="right">19</td>
+            <td class="right"><span class="badge yellow">7,37%</span></td>
+            <td>10/08/2024</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DLN4ZxHu302/" target="_blank">Highlights da #CPBR17! Hackathon + demos no Palco SERPRO...</a></td>
+            <td class="right">111</td>
+            <td class="right">9</td>
+            <td class="right"><span class="badge yellow">6,86%</span></td>
+            <td>22/06/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DQHldRAjnKJ/" target="_blank">Mostrando um pouco da nossa live de ontem, cola no YouTube!</a></td>
+            <td class="right">82</td>
+            <td class="right">6</td>
+            <td class="right"><span class="badge yellow">5,03%</span></td>
+            <td>22/10/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DKMcVo5u0CY/" target="_blank">🔥 O FUTURO COMEÇA AGORA. Conecte inteligência + automação...</a></td>
+            <td class="right">90</td>
+            <td class="right">12</td>
+            <td class="right"><span class="badge yellow">5,83%</span></td>
+            <td>28/05/2025</td>
+          </tr>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td><a href="https://www.instagram.com/reel/DW4F45sDg0b/" target="_blank">A Evolution não começou como empresa. Começou como um problema...</a></td>
+            <td class="right">24</td>
+            <td class="right">5</td>
+            <td class="right"><span class="badge muted">1,66%</span></td>
+            <td>08/04/2026</td>
+          </tr>
+          <tr>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td><a href="https://www.instagram.com/p/DW3zf9GDtEA/" target="_blank">A tecnologia de IA mais poderosa do mundo não vale nada se...</a></td>
+            <td class="right">4</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge muted">0,23%</span></td>
+            <td>08/04/2026</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ANÁLISE DE FORMATO DE CONTEÚDO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🎬 Performance por Tipo de Conteúdo</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Conta</th>
+            <th>Tipo</th>
+            <th class="right">Quantidade</th>
+            <th class="right">ER Médio</th>
+            <th class="right">Likes Médio</th>
+            <th>Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>@evolution.foundation</td>
+            <td><span class="badge purple">REEL</span></td>
+            <td class="right">5</td>
+            <td class="right"><span class="badge green">7,00%</span></td>
+            <td class="right">45</td>
+            <td>Formato dominante em alcance</td>
+          </tr>
+          <tr>
+            <td>@evolution.foundation</td>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td class="right">10</td>
+            <td class="right"><span class="badge yellow">3,52%</span></td>
+            <td class="right">23</td>
+            <td>Consistente mas menor alcance</td>
+          </tr>
+          <tr>
+            <td>@davidson.o.gomes</td>
+            <td><span class="badge purple">REEL</span></td>
+            <td class="right">8</td>
+            <td class="right"><span class="badge green">5,97%</span></td>
+            <td class="right">97</td>
+            <td>Alta performance histórica</td>
+          </tr>
+          <tr>
+            <td>@davidson.o.gomes</td>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td class="right">10</td>
+            <td class="right"><span class="badge yellow">3,69%</span></td>
+            <td class="right">59</td>
+            <td>Posts motivacionais performam bem</td>
+          </tr>
+          <tr>
+            <td>@davidson.o.gomes</td>
+            <td><span class="badge muted">CAROUSEL</span></td>
+            <td class="right">1</td>
+            <td class="right"><span class="badge yellow">3,03%</span></td>
+            <td class="right">51</td>
+            <td>Pouca amostragem</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ACCOUNT INSIGHTS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📡 Account Insights (período recente)</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Conta</th>
+            <th class="right">Alcance (4 sem.)</th>
+            <th class="right">Profile Views</th>
+            <th class="right">Contas Engajadas</th>
+            <th class="right">Total Interações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>@evolution.foundation</strong></td>
+            <td class="right">476</td>
+            <td class="right">22</td>
+            <td class="right">38</td>
+            <td class="right">55</td>
+          </tr>
+          <tr>
+            <td><strong>@davidson.o.gomes</strong></td>
+            <td class="right">1.395</td>
+            <td class="right">18</td>
+            <td class="right">42</td>
+            <td class="right">56</td>
+          </tr>
+          <tr>
+            <td><strong>@agenciadgcode</strong></td>
+            <td class="right" colspan="4"><span style="color:var(--text-muted)">Sem permissão de insights nessa conta</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- POSTS RECENTES (HOJE) -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔴 Publicados Hoje — 08/04/2026</h2>
+      <span class="count">@davidson.o.gomes</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Legenda</th>
+            <th class="right">Likes</th>
+            <th class="right">Comments</th>
+            <th class="right">ER</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge purple">REEL</span></td>
+            <td>A Evolution não começou como empresa. Começou como um problema a resolver...</td>
+            <td class="right">24</td>
+            <td class="right">5</td>
+            <td class="right"><span class="badge muted">1,66%</span></td>
+            <td><a href="https://www.instagram.com/reel/DW4F45sDg0b/" target="_blank">Ver post</a></td>
+          </tr>
+          <tr>
+            <td><span class="badge blue">IMAGE</span></td>
+            <td>A tecnologia de IA mais poderosa do mundo não vale nada se não chega onde precisa...</td>
+            <td class="right">4</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge red">0,23%</span></td>
+            <td><a href="https://www.instagram.com/p/DW3zf9GDtEA/" target="_blank">Ver post</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="padding: 12px 20px; font-size: 13px; color: var(--text-muted)">
+        ⏱ Posts publicados há menos de 8 horas — ER ainda em crescimento, comparar em 24-48h.
+      </div>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="highlight-card">
+    <div class="title">Insights</div>
+    <div class="body">
+      <strong>Reels dominam o alcance orgânico</strong> em ambas as contas. @evolution.foundation tem ER médio de 7,00% em Reels vs 3,52% em imagens — uma diferença de 2x. @davidson.o.gomes mantém histórico consistente com Reels acima de 5% ER.<br><br>
+      <strong>Crescimento de audiência ainda lento</strong>: @evolution.foundation tem 686 seguidores com 18 posts (conta recente). @davidson.o.gomes tem 1.750 seguidores, com alta taxa de engajamento em posts motivacionais e de bastidores pessoais.<br><br>
+      <strong>Posts do Summit (14-16 abril)</strong> já estão publicados no @evolution.foundation e @davidson.o.gomes. O Reel "A Evolution vai ao vivo" publicado em 06/04 está com ER 3,94% — abaixo do histórico de Reels da conta. Intensificar distribuição.<br><br>
+      <strong>@agenciadgcode</strong> sem posts recentes disponíveis via API — a conta tem 273 seguidores e 76 posts acumulados. Conta inativa no período analisado.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">Recomendações</div>
+    <div class="body">
+      1. <strong>Summit (14-16 abril):</strong> Publicar stories diários de contagem regressiva no @evolution.foundation e @davidson.o.gomes. Reforçar CTA "inscreva-se no YouTube" nos posts.<br><br>
+      2. <strong>Dobrar frequência de Reels</strong> no @evolution.foundation — é o único formato que consistentemente ultrapassa 7% ER. Meta: 2 Reels/semana durante o Summit.<br><br>
+      3. <strong>Posts de bastidores pessoais</strong> no @davidson.o.gomes performam excepcionalmente bem (ER histórico >9% nos melhores). Criar 1 Reel de bastidores do evento.<br><br>
+      4. <strong>Cross-posting</strong>: Os posts do @evolution.foundation publicados hoje no @davidson.o.gomes (IA + tecnologia) estão com ER baixo — aguardar 24h para avaliar se é problema de horário ou de formato.<br><br>
+      5. <strong>@agenciadgcode:</strong> Avaliar se continua ativa ou se recursos devem ser concentrados nos perfis principais.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pixel — 08/04/2026 · BRT
+</div>
+
+</body>
+</html>

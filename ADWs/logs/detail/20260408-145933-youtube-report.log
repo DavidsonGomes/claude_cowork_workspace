@@ -1,0 +1,38 @@
+TIMESTAMP: 2026-04-08T14:59:33.813466
+DURATION: 364.0s
+RETURNCODE: 0
+PROMPT:
+[agent:pixel-social-media] Execute a skill /social-youtube-report
+
+============================================================
+STDOUT:
+============================================================
+Relatório gerado com sucesso! Aqui está o resumo:
+
+---
+
+**YouTube Daily Report — 08/04/2026**
+
+**Canal:** @evolution-api
+
+| Métrica | Valor |
+|--------|-------|
+| Inscritos | **7.450** |
+| Views totais | **132.462** |
+| Vídeos publicados | **27** |
+| Engagement rate médio | **7,63%** ↑ acima da média da indústria |
+
+**Vídeos recentes (últimos 30 dias):**
+- 🟢 Lançamento EvoGo — 7.180 views · 9,25% ER ✅ destaque
+- Do Zero ao Deploy — 1.683 views · 6,12% ER
+- Live #03 BMAD — 1.643 views · 6,45% ER
+
+**Destaques estratégicos:**
+- Anúncios e lançamentos geram 2-3x mais views que tutoriais
+- Canal não usa **YouTube Shorts** — oportunidade não explorada
+- Série BMAD com boa tração — conteúdo técnico tem demanda crescente
+- Meta viável: **10k inscritos até junho** com o Evolution Summit
+
+**Arquivo salvo em:** `04 Redes Sociais/reports/youtube/[C] 2026-04-08-youtube-daily.html`
+**Telegram:** notificado ✅
+

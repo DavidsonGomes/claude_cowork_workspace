@@ -1,0 +1,41 @@
+TIMESTAMP: 2026-04-08T15:29:17.807548
+DURATION: 119.1s
+RETURNCODE: 0
+PROMPT:
+[agent:pixel-social-media] Execute a skill /social-linkedin-report
+
+============================================================
+STDOUT:
+============================================================
+Preciso do chat_id do Telegram para enviar a notificação. Como não há uma mensagem Telegram inbound nesta conversa, vou apresentar o resultado diretamente aqui.
+
+---
+
+## 📊 Relatório LinkedIn — 08/04/2026
+
+**Status da integração:** Parcial ⚠️
+
+**Dados obtidos com sucesso:**
+- ✅ Conta autenticada: **Davidson Gomes**
+- ✅ Email: contato@agenciadgcode.com
+- ✅ Localidade: 🇧🇷 Brasil (pt-BR)
+
+**Bloqueio identificado:**
+- ❌ `HTTP 403 — ACCESS_DENIED` ao buscar posts e métricas
+- Endpoint `partnerApiPostsExternal` requer aprovação do **LinkedIn Marketing Developer Platform**
+
+**Métricas pendentes:** Seguidores, posts, impressões, engajamento, top posts — todas aguardam aprovação de parceiro LinkedIn.
+
+**Ação necessária:**
+1. Acessar [developer.linkedin.com](https://developer.linkedin.com/)
+2. Solicitar acesso ao produto **Marketing Developer Platform**
+3. Prazo típico: 5-10 dias úteis
+4. Alternativa imediata: exportar manualmente pelo LinkedIn Creator Analytics
+
+**Relatório salvo em:**
+`04 Redes Sociais/reports/linkedin/[C] 2026-04-08-linkedin-report.html`
+
+---
+
+O relatório inclui as recomendações estratégicas para o LinkedIn mesmo sem as métricas — destaque para o **Evolution Summit (14-16 abr)** como oportunidade de conteúdo. Assim que a aprovação da API for concedida, os próximos relatórios trarão dados completos de performance.
+

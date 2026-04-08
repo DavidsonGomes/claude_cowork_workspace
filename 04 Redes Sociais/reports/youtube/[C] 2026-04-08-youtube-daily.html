@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Analytics — Evolution API — 2026-04-08</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+    --yt-red: #FF0000;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 28px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  th.right, td.right { text-align: right; }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-top: 8px; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; }
+  .progress-bar-fill.evo { background: var(--evo-green); }
+  .progress-bar-fill.red { background: var(--yt-red); }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  .video-rank { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: rgba(0,255,167,0.1); border-radius: 6px; font-size: 12px; font-weight: 700; color: var(--evo-green); margin-right: 8px; }
+  .video-title { font-weight: 500; color: var(--text-primary); }
+  .video-date { font-size: 12px; color: var(--text-muted); }
+  .yt-icon { color: var(--yt-red); font-size: 18px; }
+  a { color: var(--evo-green); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .growth-item { padding: 16px 20px; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .growth-item:last-child { border-bottom: none; }
+  .growth-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .growth-label { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+  .growth-value { font-size: 13px; color: var(--text-muted); }
+  @media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>▶ YouTube <span>Analytics</span> — Daily</h1>
+    <div class="subtitle">08 de Abril de 2026 — Canal @evolution-api</div>
+  </div>
+  <div class="header-right">
+    <span class="badge green">📈 Crescendo</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- KPIs CANAL -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">Inscritos</div>
+      <div class="value">7.450</div>
+      <div class="delta neutral">— Primeiro relatório (sem delta)</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Views Totais</div>
+      <div class="value">132.462</div>
+      <div class="delta neutral">— Acumulado do canal</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Total de Vídeos</div>
+      <div class="value">27</div>
+      <div class="delta neutral">— Vídeos publicados</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Engagement Rate Médio</div>
+      <div class="value">7,63%</div>
+      <div class="delta up">▲ Acima da média da indústria (5%)</div>
+    </div>
+  </div>
+
+  <!-- TOP 10 VÍDEOS POR ENGAJAMENTO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>▶ Top Vídeos por Engagement Rate</h2>
+      <span class="count">Top 10</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Título</th>
+            <th>Publicado</th>
+            <th class="right">Views</th>
+            <th class="right">Likes</th>
+            <th class="right">Comments</th>
+            <th class="right">Engagement</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="video-rank">1</span></td>
+            <td><span class="video-title">🔴 Conteúdo Privado (Depoimentos)</span><br><span class="video-date">21 Jan 2025</span></td>
+            <td>21/01/2025</td>
+            <td class="right">3</td>
+            <td class="right">1</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge yellow">33,33%</span></td>
+            <td><a href="https://youtube.com/watch?v=hkMajW7VZSM" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">2</span></td>
+            <td><span class="video-title">💥 Lançamento EvoAI OpenSource</span><br><span class="video-date">16 Mai 2025</span></td>
+            <td>16/05/2025</td>
+            <td class="right">565</td>
+            <td class="right">61</td>
+            <td class="right">2</td>
+            <td class="right"><span class="badge green">11,15%</span></td>
+            <td><a href="https://youtube.com/watch?v=OidNMJylR1w" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">3</span></td>
+            <td><span class="video-title">LIVE COM SANDECO</span><br><span class="video-date">19 Jul 2025</span></td>
+            <td>19/07/2025</td>
+            <td class="right">316</td>
+            <td class="right">31</td>
+            <td class="right">2</td>
+            <td class="right"><span class="badge green">10,44%</span></td>
+            <td><a href="https://youtube.com/watch?v=v3tN29_4DJQ" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">4</span></td>
+            <td><span class="video-title">🚀 Evolution v3 está chegando</span><br><span class="video-date">21 Out 2025</span></td>
+            <td>21/10/2025</td>
+            <td class="right">15.749</td>
+            <td class="right">1.538</td>
+            <td class="right">53</td>
+            <td class="right"><span class="badge green">10,10%</span></td>
+            <td><a href="https://youtube.com/watch?v=MX33BSkE-g4" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">5</span></td>
+            <td><span class="video-title">🟢 Lançamento oficial da EvoGo</span><br><span class="video-date">24 Mar 2026</span></td>
+            <td>24/03/2026</td>
+            <td class="right">7.180</td>
+            <td class="right">612</td>
+            <td class="right">52</td>
+            <td class="right"><span class="badge green">9,25%</span></td>
+            <td><a href="https://youtube.com/watch?v=OC5TTN-r7Qw" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">6</span></td>
+            <td><span class="video-title">Da teoria à prática: Construindo agentes com BMAD</span><br><span class="video-date">03 Mar 2026</span></td>
+            <td>03/03/2026</td>
+            <td class="right">2.238</td>
+            <td class="right">202</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge green">9,03%</span></td>
+            <td><a href="https://youtube.com/watch?v=I0WicV-GdOw" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">7</span></td>
+            <td><span class="video-title">A Evolution API Morreu? 😳 (teaser/short)</span><br><span class="video-date">02 Set 2025</span></td>
+            <td>02/09/2025</td>
+            <td class="right">2.442</td>
+            <td class="right">171</td>
+            <td class="right">27</td>
+            <td class="right"><span class="badge green">8,11%</span></td>
+            <td><a href="https://youtube.com/watch?v=9q9G98BTHqE" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">8</span></td>
+            <td><span class="video-title">A Nova Era do Software: IA que Escreve Software</span><br><span class="video-date">27 Fev 2026</span></td>
+            <td>27/02/2026</td>
+            <td class="right">5.448</td>
+            <td class="right">461</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge green">8,46%</span></td>
+            <td><a href="https://youtube.com/watch?v=JBmrJc9fgaQ" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">9</span></td>
+            <td><span class="video-title">A Evolution API Morreu? 😳 (vídeo completo)</span><br><span class="video-date">02 Set 2025</span></td>
+            <td>02/09/2025</td>
+            <td class="right">22.731</td>
+            <td class="right">1.587</td>
+            <td class="right">111</td>
+            <td class="right"><span class="badge green">7,47%</span></td>
+            <td><a href="https://youtube.com/watch?v=FxCbUUQgMus" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-rank">10</span></td>
+            <td><span class="video-title">Apresentação EVO AI — Plataforma de Agentes</span><br><span class="video-date">11 Jun 2025</span></td>
+            <td>11/06/2025</td>
+            <td class="right">5.285</td>
+            <td class="right">318</td>
+            <td class="right">40</td>
+            <td class="right"><span class="badge green">6,77%</span></td>
+            <td><a href="https://youtube.com/watch?v=w64dB5WFiSA" target="_blank">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- VÍDEOS RECENTES (ÚLTIMOS 30 DIAS) -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🕐 Vídeos Recentes (últimos 30 dias)</h2>
+      <span class="count">3 vídeos</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Publicado</th>
+            <th class="right">Views</th>
+            <th class="right">Likes</th>
+            <th class="right">Comments</th>
+            <th class="right">Eng. Rate</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span class="video-title">🟢 Lançamento oficial da EvoGo</span>
+              <span class="badge green" style="margin-left:8px;">Destaque</span>
+            </td>
+            <td>24/03/2026</td>
+            <td class="right">7.180</td>
+            <td class="right">612</td>
+            <td class="right">52</td>
+            <td class="right"><span class="badge green">9,25%</span></td>
+            <td><a href="https://youtube.com/watch?v=OC5TTN-r7Qw" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Do Zero ao Deploy: Publicando sua primeira aplicação</span></td>
+            <td>20/03/2026</td>
+            <td class="right">1.683</td>
+            <td class="right">103</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge blue">6,12%</span></td>
+            <td><a href="https://youtube.com/watch?v=trbHW2EFPo0" target="_blank">Abrir</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Live #03 — Customizando o BMAD e adaptando ao contexto</span></td>
+            <td>14/03/2026</td>
+            <td class="right">1.643</td>
+            <td class="right">106</td>
+            <td class="right">0</td>
+            <td class="right"><span class="badge blue">6,45%</span></td>
+            <td><a href="https://youtube.com/watch?v=pZFnxvez01Q" target="_blank">Abrir</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- CRESCIMENTO DE VIEWS POR VÍDEO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📊 Distribuição de Views — Top Vídeos</h2>
+    </div>
+    <div class="section-body">
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">A Evolution API Morreu? (vídeo completo)</span>
+          <span class="growth-value">22.731 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill red" style="width:100%"></div></div>
+      </div>
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">🚀 Evolution v3 está chegando</span>
+          <span class="growth-value">15.749 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width:69%"></div></div>
+      </div>
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">🚀 Liberando Primeiros Acessos à Evolution v3</span>
+          <span class="growth-value">8.205 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width:36%"></div></div>
+      </div>
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">Conheça o Novo CRM da Evolution V3</span>
+          <span class="growth-value">7.473 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width:33%"></div></div>
+      </div>
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">🟢 Lançamento oficial da EvoGo (Mar 2026)</span>
+          <span class="growth-value">7.180 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width:32%"></div></div>
+      </div>
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">A Nova Era do Software: IA que Escreve Software</span>
+          <span class="growth-value">5.448 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width:24%"></div></div>
+      </div>
+      <div class="growth-item">
+        <div class="growth-header">
+          <span class="growth-label">Apresentação EVO AI — Plataforma de Agentes</span>
+          <span class="growth-value">5.285 views</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill evo" style="width:23%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TODOS OS VÍDEOS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📋 Todos os Vídeos — Performance Completa</h2>
+      <span class="count">27 vídeos</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Publicado</th>
+            <th class="right">Views</th>
+            <th class="right">Likes</th>
+            <th class="right">Eng. Rate</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="video-title">🟢 Lançamento oficial da EvoGo</span></td>
+            <td>24/03/2026</td>
+            <td class="right">7.180</td>
+            <td class="right">612</td>
+            <td class="right"><span class="badge green">9,25%</span></td>
+            <td><a href="https://youtube.com/watch?v=OC5TTN-r7Qw" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Do Zero ao Deploy: Publicando sua primeira aplicação</span></td>
+            <td>20/03/2026</td>
+            <td class="right">1.683</td>
+            <td class="right">103</td>
+            <td class="right"><span class="badge blue">6,12%</span></td>
+            <td><a href="https://youtube.com/watch?v=trbHW2EFPo0" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Live #03 — Customizando o BMAD</span></td>
+            <td>14/03/2026</td>
+            <td class="right">1.643</td>
+            <td class="right">106</td>
+            <td class="right"><span class="badge blue">6,45%</span></td>
+            <td><a href="https://youtube.com/watch?v=pZFnxvez01Q" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Da teoria à prática: Construindo agentes com BMAD</span></td>
+            <td>03/03/2026</td>
+            <td class="right">2.238</td>
+            <td class="right">202</td>
+            <td class="right"><span class="badge green">9,03%</span></td>
+            <td><a href="https://youtube.com/watch?v=I0WicV-GdOw" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">A Nova Era do Software: IA que Escreve Software</span></td>
+            <td>27/02/2026</td>
+            <td class="right">5.448</td>
+            <td class="right">461</td>
+            <td class="right"><span class="badge green">8,46%</span></td>
+            <td><a href="https://youtube.com/watch?v=JBmrJc9fgaQ" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Conheça o Novo CRM da Evolution V3 + Beta</span></td>
+            <td>10/02/2026</td>
+            <td class="right">7.473</td>
+            <td class="right">453</td>
+            <td class="right"><span class="badge blue">6,46%</span></td>
+            <td><a href="https://youtube.com/watch?v=73NDK3gjIH8" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Como ir do zero aos R$70k MRR em 12 semanas</span></td>
+            <td>16/11/2025</td>
+            <td class="right">1.090</td>
+            <td class="right">52</td>
+            <td class="right"><span class="badge muted">5,05%</span></td>
+            <td><a href="https://youtube.com/watch?v=oKcopqHQOvc" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">🚀 Liberando Primeiros Acessos à Evolution v3</span></td>
+            <td>13/11/2025</td>
+            <td class="right">8.205</td>
+            <td class="right">477</td>
+            <td class="right"><span class="badge blue">6,18%</span></td>
+            <td><a href="https://youtube.com/watch?v=g0ps82G-R4A" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">A nova Era da Evolution: O que esperar da V3? (teaser)</span></td>
+            <td>22/10/2025</td>
+            <td class="right">2.086</td>
+            <td class="right">68</td>
+            <td class="right"><span class="badge muted">3,45%</span></td>
+            <td><a href="https://youtube.com/watch?v=pEhpQmD0CX0" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">🚀 Evolution v3 está chegando — e promete mudar tudo</span></td>
+            <td>21/10/2025</td>
+            <td class="right">15.749</td>
+            <td class="right">1.538</td>
+            <td class="right"><span class="badge green">10,10%</span></td>
+            <td><a href="https://youtube.com/watch?v=MX33BSkE-g4" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">A Evolution API Morreu? 😳 (vídeo completo)</span></td>
+            <td>02/09/2025</td>
+            <td class="right">22.731</td>
+            <td class="right">1.587</td>
+            <td class="right"><span class="badge green">7,47%</span></td>
+            <td><a href="https://youtube.com/watch?v=FxCbUUQgMus" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">A Evolution API Morreu? 😳 (short/teaser)</span></td>
+            <td>02/09/2025</td>
+            <td class="right">2.442</td>
+            <td class="right">171</td>
+            <td class="right"><span class="badge green">8,11%</span></td>
+            <td><a href="https://youtube.com/watch?v=9q9G98BTHqE" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">LIVE COM SANDECO</span></td>
+            <td>19/07/2025</td>
+            <td class="right">316</td>
+            <td class="right">31</td>
+            <td class="right"><span class="badge green">10,44%</span></td>
+            <td><a href="https://youtube.com/watch?v=v3tN29_4DJQ" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Apresentação Oficial Evo AI na Campus Party #CPBR17</span></td>
+            <td>22/06/2025</td>
+            <td class="right">3.567</td>
+            <td class="right">185</td>
+            <td class="right"><span class="badge blue">5,55%</span></td>
+            <td><a href="https://youtube.com/watch?v=3sGzRR8VcVY" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">O Futuro é A-gente — Evolution na Campus Party</span></td>
+            <td>20/06/2025</td>
+            <td class="right">1.639</td>
+            <td class="right">100</td>
+            <td class="right"><span class="badge blue">6,59%</span></td>
+            <td><a href="https://youtube.com/watch?v=cujvi8KBWDE" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Apresentação EVO AI — Plataforma de Agentes</span></td>
+            <td>11/06/2025</td>
+            <td class="right">5.285</td>
+            <td class="right">318</td>
+            <td class="right"><span class="badge blue">6,77%</span></td>
+            <td><a href="https://youtube.com/watch?v=w64dB5WFiSA" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">💥 Lançamento — Construa Seu Agente IA com EvoAI</span></td>
+            <td>16/05/2025</td>
+            <td class="right">565</td>
+            <td class="right">61</td>
+            <td class="right"><span class="badge green">11,15%</span></td>
+            <td><a href="https://youtube.com/watch?v=OidNMJylR1w" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Guia Apresentação Evo AI — Criadores</span></td>
+            <td>13/05/2025</td>
+            <td class="right">1.294</td>
+            <td class="right">56</td>
+            <td class="right"><span class="badge muted">4,48%</span></td>
+            <td><a href="https://youtube.com/watch?v=kkT1iFJcFtc" target="_blank">↗</a></td>
+          </tr>
+          <tr>
+            <td><span class="video-title">Descubra a EVOLUTION CLOUD 🚀</span></td>
+            <td>28/01/2025</td>
+            <td class="right">4.676</td>
+            <td class="right">267</td>
+            <td class="right"><span class="badge blue">6,31%</span></td>
+            <td><a href="https://youtube.com/watch?v=0B46rmMnzWk" target="_blank">↗</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- INSIGHTS -->
+  <div class="highlight-card">
+    <div class="title">📊 Insights do Canal</div>
+    <div class="body">
+      <strong>Canal em crescimento sólido:</strong> 7.450 inscritos com 132.462 views totais em apenas 27 vídeos. Engagement rate médio de <strong>7,63%</strong> — muito acima da média da indústria (2-5%), o que indica audiência altamente engajada e nichada.<br><br>
+
+      <strong>Padrão claro de conteúdo viral:</strong> Vídeos sobre <em>anúncios e lançamentos</em> dominam em views. Os 3 maiores vídeos do canal são: "A Evolution API Morreu?" (22.7k), "Evolution v3 está chegando" (15.7k) e "Liberando acessos à v3" (8.2k). Todos são sobre novidades e anúncios — não tutoriais.<br><br>
+
+      <strong>Lançamento EvoGo (Mar 2026) foi um sucesso:</strong> 7.180 views e 9,25% de engagement em um único vídeo de lançamento — performance excepcional para o canal, especialmente combinando views altas com engagement alto.<br><br>
+
+      <strong>Oportunidade: Série BMAD com boa tração:</strong> Os vídeos sobre BMAD/agentes (Mar 2026) mostram engagement acima de 6%, sinalizando que conteúdo técnico-prático tem demanda crescente da audiência.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">🎯 Recomendações Estratégicas</div>
+    <div class="body">
+      <strong>1. Aproveitar o momentum do Evolution Summit (14-16 Abr):</strong> Publicar vídeo de anúncio/teaser do Summit imediatamente — padrão de anúncios gera 2-3x mais views no canal.<br><br>
+
+      <strong>2. Aumentar cadência:</strong> Canal está publicando ~1 vídeo/semana nos últimos 30 dias (3 vídeos em março). Manter ou aumentar para 2x/semana com formatos curtos + longs.<br><br>
+
+      <strong>3. Replicar fórmula de "Lançamento EvoGo":</strong> Título com emoji + produto + ação clara = engagement acima de 9%. Aplicar esse padrão para o lançamento de novos módulos Evo AI e Evo Academy.<br><br>
+
+      <strong>4. Meta: 10.000 inscritos até Jun 2026:</strong> Crescer ~2.550 inscritos em ~2 meses é viável com o Summit + lançamentos. Uma campanha de conteúdo focada pode acelerar esse milestone.<br><br>
+
+      <strong>5. Integrar com outras plataformas:</strong> Cortar trechos dos vídeos longos para Shorts e LinkedIn — o canal não tem Shorts, que têm alcance orgânico muito maior no YouTube hoje.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pixel 🎨 — 08 de Abril de 2026, 00:00 BRT
+</div>
+
+</body>
+</html>

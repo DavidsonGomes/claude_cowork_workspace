@@ -1,0 +1,27 @@
+TIMESTAMP: 2026-04-08T15:19:56.753712
+DURATION: 315.5s
+RETURNCODE: 0
+PROMPT:
+[agent:pixel-social-media] Execute a skill /social-instagram-report
+
+============================================================
+STDOUT:
+============================================================
+Relatório Instagram concluído! ✅
+
+**Resumo do que foi feito:**
+
+**3 contas analisadas:**
+- **@evolution.foundation** — 686 seguidores · ER 4,69% · Melhor post: Reel "Evo V3" (9,91%)
+- **@davidson.o.gomes** — 1.750 seguidores · ER 4,37% · Melhor histórico: Reel motivacional (9,54%)
+- **@agenciadgcode** — 273 seguidores · sem posts recentes via API
+
+**Principais achados:**
+- Reels têm 2x mais engajamento que imagens em ambas as contas
+- 2 posts publicados hoje no @davidson ainda acumulando engajamento (muito recentes)
+- Post do Summit ("A Evolution vai ao vivo") com ER abaixo do esperado — recomendado intensificar distribuição antes do evento (14-16/04)
+
+**Outputs gerados:**
+- 📄 HTML salvo em `04 Redes Sociais/reports/instagram/[C] 2026-04-08-instagram-report.html`
+- 📱 Notificação enviada via Telegram
+

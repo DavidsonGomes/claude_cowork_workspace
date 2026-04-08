@@ -40,6 +40,15 @@ dashboard:          ## 📊 Dashboard consolidado — visão 360 do negócio (@c
 fin-pulse:          ## 💰 Financial Pulse — snapshot financeiro diário (@flux)
 	$(PYTHON) $(ADW_DIR)/financial_pulse.py
 
+youtube:            ## 📺 YouTube Report — analytics do canal (@pixel)
+	$(PYTHON) $(ADW_DIR)/youtube_report.py
+
+instagram:          ## 📸 Instagram Report — analytics dos perfis (@pixel)
+	$(PYTHON) $(ADW_DIR)/instagram_report.py
+
+linkedin:           ## 💼 LinkedIn Report — analytics do perfil (@pixel)
+	$(PYTHON) $(ADW_DIR)/linkedin_report.py
+
 licensing:          ## 📊 Licensing Daily — crescimento open source diário (@atlas)
 	$(PYTHON) $(ADW_DIR)/licensing_daily.py
 
@@ -99,6 +108,9 @@ daily: sync review  ## Combo: sync meetings + review todoist
 
 scheduler:          ## ⏰ Inicia scheduler de rotinas (roda em background)
 	$(PYTHON) scheduler.py
+
+social-auth:        ## 🔑 Abre tela de login das redes sociais (localhost:8765)
+	cd social-auth && $(PYTHON) app.py
 
 telegram:           ## 📨 Inicia bot Telegram em background (screen)
 	@if screen -list | grep -q '\.telegram'; then \
@@ -163,5 +175,5 @@ docker-build:       ## 🐳 Build da imagem
 help:               ## 📖 Mostra este help
 	@grep -E '^[a-zA-Z_-]+:.*##' Makefile | sort | awk 'BEGIN {FS = ":.*## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
-.PHONY: morning sync triage review memory eod dashboard fin-pulse licensing weekly health trends linear community community-week community-month github faq strategy fin-weekly licensing-weekly fin-close licensing-month daily scheduler telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
+.PHONY: morning sync triage review memory eod dashboard youtube instagram linkedin fin-pulse licensing weekly health trends linear community community-week community-month github faq strategy fin-weekly licensing-weekly fin-close licensing-month daily scheduler social-auth telegram telegram-stop telegram-attach logs logs-detail logs-tail metrics clean-logs docker-up docker-down docker-logs docker-run docker-build help
 .DEFAULT_GOAL := help
