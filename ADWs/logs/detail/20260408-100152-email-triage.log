@@ -1,0 +1,21 @@
+TIMESTAMP: 2026-04-08T10:01:52.629397
+DURATION: 140.9s
+RETURNCODE: 0
+PROMPT:
+[agent:clawdia-assistant] Execute a skill /gog-email-triage
+
+============================================================
+STDOUT:
+============================================================
+Triage concluído. Resumo do que importa hoje:
+
+**🔴 Ação imediata:** RunPod com saldo crítico — dois alertas. Se zerar, os pods param.
+
+**Amanhã (9 abr):** Reunião AA + EVO às 18h — convite ainda sem resposta.
+
+**Sexta (10 abr):** Duas reuniões — Evolution <> Financeiro (16h) + Comitê IAB Brasil (10h). Vale verificar conflito de agenda.
+
+**Outros:** Todoist com 10+ tarefas vencidas, Fathom recap com possíveis action items da reunião Etus.
+
+Arquivo salvo em `01 Daily Logs/[C] 2026-04-08-email-triage.html`. Por onde quer começar?
+

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Review — Evolution</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .pills-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+  .stat-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px; padding: 8px 16px; font-size: 14px; font-weight: 500; }
+  .stat-pill .pill-value { font-weight: 700; color: var(--text-primary); }
+  .stat-pill .pill-label { color: var(--text-muted); font-size: 12px; }
+  .stat-pill.alert { border-color: var(--red); }
+  .stat-pill.alert .pill-value { color: var(--red); }
+  .stat-pill.warning { border-color: var(--yellow); }
+  .stat-pill.warning .pill-value { color: var(--yellow); }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: var(--evo-green); border-radius: 4px; }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <div style="display:flex;align-items:center;gap:16px">
+      <div>
+        <h1>Linear <span>Review</span></h1>
+        <div class="subtitle">08 de abril de 2026 — Time Evolution</div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:right;">
+    <div style="font-size:13px;color:var(--text-muted);">Gerado por Atlas</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-top:2px;">2026-04-08</div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <!-- PILLS -->
+  <div class="pills-row">
+    <div class="stat-pill">
+      <span class="pill-label">Em Review</span>
+      <span class="pill-value">22</span>
+    </div>
+    <div class="stat-pill warning">
+      <span class="pill-label">Blockers</span>
+      <span class="pill-value">2</span>
+    </div>
+    <div class="stat-pill alert">
+      <span class="pill-label">Stale &gt;3d</span>
+      <span class="pill-value">5</span>
+    </div>
+    <div class="stat-pill">
+      <span class="pill-label">Minhas Issues</span>
+      <span class="pill-value">12</span>
+    </div>
+  </div>
+
+  <!-- EM REVIEW -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔍 Em Review</h2>
+      <span class="count">22 issues</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Título</th>
+            <th>Responsável</th>
+            <th>Dias em Review</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-921</span></td>
+            <td style="color:var(--text-primary);">Runtime Config for evo-crm-community</td>
+            <td>Guilherme</td>
+            <td><span class="badge green">1d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-589</span></td>
+            <td style="color:var(--text-primary);">Bug: Áudios não reproduzem e áudios enviados pelo celular</td>
+            <td>Davidson</td>
+            <td><span class="badge yellow">16d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-582</span></td>
+            <td style="color:var(--text-primary);">Bug: Canal EvoGo exibe status "desconectado" incorretamente</td>
+            <td>Davidson</td>
+            <td><span class="badge yellow">16d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-683</span></td>
+            <td style="color:var(--text-primary);">Bug: i18n namespace misplacement and orphaned translation keys</td>
+            <td>Davidson</td>
+            <td><span class="badge red">19d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-599</span></td>
+            <td style="color:var(--text-primary);">evo-auth-service: Read email and storage config from DB</td>
+            <td>Davidson</td>
+            <td><span class="badge red">20d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-598</span></td>
+            <td style="color:var(--text-primary);">evo-ai-crm: Super Admin config screens + DB config store</td>
+            <td>Davidson</td>
+            <td><span class="badge red">20d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-597</span></td>
+            <td style="color:var(--text-primary);">First user onboarding flow</td>
+            <td>Davidson</td>
+            <td><span class="badge red">20d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-585</span></td>
+            <td style="color:var(--text-primary);">Bug: Contatos do celular importados automaticamente sem consentimento</td>
+            <td>Davidson</td>
+            <td><span class="badge red">21d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-595</span></td>
+            <td style="color:var(--text-primary);">Bug (Reg): Informações de pipeline ausentes na sidebar</td>
+            <td>Marcelo</td>
+            <td><span class="badge red">22d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-591</span></td>
+            <td style="color:var(--text-primary);">Bug: Não é possível trocar canal de resposta na conversa</td>
+            <td>Davidson</td>
+            <td><span class="badge red">22d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-586</span></td>
+            <td style="color:var(--text-primary);">Bug: Agentes de IA configurados não aparecem na seleção do canal</td>
+            <td>Davidson</td>
+            <td><span class="badge red">23d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-596</span></td>
+            <td style="color:var(--text-primary);">Bug (Reg): Canal Evolution API não envia nem recebe mensagens</td>
+            <td>Davidson</td>
+            <td><span class="badge red">23d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-575</span></td>
+            <td style="color:var(--text-primary);">Bug: Agente responde "No content to process" após transcrição</td>
+            <td>Davidson</td>
+            <td><span class="badge red">26d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-574</span></td>
+            <td style="color:var(--text-primary);">Bug: Erro na criação de canal Telegram — URL undefined</td>
+            <td>Davidson</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-602</span></td>
+            <td style="color:var(--text-primary);">[EVO-548] Integrar evo-ai-crm com Bot Runtime Service</td>
+            <td>Davidson</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-559</span></td>
+            <td style="color:var(--text-primary);">Bug: Erro ao conectar Google Calendar na integração de agentes</td>
+            <td>Davidson</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-558</span></td>
+            <td style="color:var(--text-primary);">[EVO-548] Integrar Evolution Hub com Bot Runtime Service</td>
+            <td>Davidson</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-580</span></td>
+            <td style="color:var(--text-primary);">Bug: Informações da Conversa incompletas — IDs exibidos</td>
+            <td>Davidson</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-573</span></td>
+            <td style="color:var(--text-primary);">Bug: Múltiplos filtros de conversas retornam erro 500</td>
+            <td>Davidson</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-548</span></td>
+            <td style="color:var(--text-primary);">Adequação do Evolution Hub para cobrir funcionalidades da API V2</td>
+            <td>Guilherme</td>
+            <td><span class="badge red">27d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-583</span></td>
+            <td style="color:var(--text-primary);">Bug: Avatar do canal Telegram não persiste após salvamento</td>
+            <td>Davidson</td>
+            <td><span class="badge red">29d</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-557</span></td>
+            <td style="color:var(--text-primary);">[EVO-548] Implementar Event Emitter com paridade da Evolution API V2</td>
+            <td>Davidson</td>
+            <td><span class="badge red">41d</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BLOCKERS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🚨 Blockers</h2>
+      <span class="count">2 issues</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Título</th>
+            <th>Prioridade</th>
+            <th>Responsável</th>
+            <th>Dias parado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-659</span></td>
+            <td style="color:var(--text-primary);">Community — EVO-AI Open Source</td>
+            <td><span class="badge red">Urgent</span></td>
+            <td>Danilo</td>
+            <td style="color:var(--red);font-size:13px;">16 dias sem update</td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-904</span></td>
+            <td style="color:var(--text-primary);">Integração de Licensing — Ecossistema CRM</td>
+            <td><span class="badge yellow">High</span></td>
+            <td>Danilo</td>
+            <td style="color:var(--yellow);font-size:13px;">11 dias sem update</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- STALE -->
+  <div class="section">
+    <div class="section-header">
+      <h2>⏸️ Stale — Paradas &gt;3 dias</h2>
+      <span class="count">5 issues</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Título</th>
+            <th>Responsável</th>
+            <th>Última Atualização</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-904</span></td>
+            <td style="color:var(--text-primary);">Integração de Licensing — Ecossistema CRM</td>
+            <td>Danilo</td>
+            <td style="color:var(--yellow);font-size:13px;">2026-03-28 (11d)</td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-659</span></td>
+            <td style="color:var(--text-primary);">Community — EVO-AI Open Source</td>
+            <td>Danilo</td>
+            <td style="color:var(--red);font-size:13px;">2026-03-23 (16d)</td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-368</span></td>
+            <td style="color:var(--text-primary);">Validação — Teste de carga e stress</td>
+            <td>Guilherme</td>
+            <td style="color:var(--red);font-size:13px;">2026-02-14 (53d)</td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-325</span></td>
+            <td style="color:var(--text-primary);">[2] Fase 2: Rotatividade de Inboxes</td>
+            <td>Guilherme</td>
+            <td style="color:var(--red);font-size:13px;">2026-02-09 (58d)</td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-78</span></td>
+            <td style="color:var(--text-primary);">Definir processos de Backup e Disaster Recovery</td>
+            <td>Guilherme</td>
+            <td style="color:var(--red);font-size:13px;">2025-11-17 (142d)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MINHAS ISSUES -->
+  <div class="section">
+    <div class="section-header">
+      <h2>👤 Minhas Issues (Davidson)</h2>
+      <span class="count">12 issues</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Issue</th>
+            <th>Título</th>
+            <th>Status</th>
+            <th>Prioridade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-821</span></td>
+            <td style="color:var(--text-primary);">[Produtos Digitais] Epic 1 — Criação e Gestão de Produtos</td>
+            <td><span class="badge blue">In Progress</span></td>
+            <td><span class="badge muted">—</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-589</span></td>
+            <td style="color:var(--text-primary);">Bug: Áudios não reproduzem / não aparecem</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-582</span></td>
+            <td style="color:var(--text-primary);">Bug: Canal EvoGo exibe status "desconectado" incorretamente</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-691</span></td>
+            <td style="color:var(--text-primary);">Bug: Mensagens outgoing processadas como incoming</td>
+            <td><span class="badge muted">Backlog</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-683</span></td>
+            <td style="color:var(--text-primary);">Bug: i18n namespace misplacement</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-599</span></td>
+            <td style="color:var(--text-primary);">evo-auth-service: Read email/storage config from DB</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-598</span></td>
+            <td style="color:var(--text-primary);">evo-ai-crm: Super Admin config screens + DB config store</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-597</span></td>
+            <td style="color:var(--text-primary);">First user onboarding flow</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-585</span></td>
+            <td style="color:var(--text-primary);">Bug: Contatos importados sem consentimento</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-591</span></td>
+            <td style="color:var(--text-primary);">Bug: Não é possível trocar canal de resposta</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-573</span></td>
+            <td style="color:var(--text-primary);">Bug: Múltiplos filtros retornam erro 500</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+          <tr>
+            <td><span style="color:var(--evo-green);font-family:monospace;font-size:13px;">EVO-557</span></td>
+            <td style="color:var(--text-primary);">[EVO-548] Implementar Event Emitter com paridade Evolution API V2</td>
+            <td><span class="badge purple">In Review</span></td>
+            <td><span class="badge yellow">High</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SPRINT / CICLO -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔄 Sprint / Ciclo Atual</h2>
+      <span class="badge red">Sem ciclo ativo</span>
+    </div>
+    <div class="section-body" style="padding:20px;">
+      <div style="font-size:14px;color:var(--text-secondary);margin-bottom:12px;">
+        Nenhum ciclo/sprint ativo encontrado no Linear para o time Evolution.<br>
+        <span style="color:var(--text-muted);font-size:13px;">Recomendação: criar ciclo no Linear para organizar o backlog atual.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Atlas — 2026-04-08 às 21:00 BRT
+</div>
+
+</body>
+</html>

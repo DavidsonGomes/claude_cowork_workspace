@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Briefing Matinal — 08 de Abril de 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+    --purple: #8133AA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .header-right { font-size: 28px; font-weight: 700; color: var(--evo-green); }
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 40px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 28px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; }
+  .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .alert-card { background: rgba(240,68,56,0.08); border: 1px solid rgba(240,68,56,0.3); border-radius: 12px; padding: 16px 20px; margin-bottom: 24px; }
+  .alert-card .title { font-size: 12px; font-weight: 600; color: var(--red); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .alert-card .body { font-size: 14px; color: var(--text-secondary); }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <h1>☀️ Bom dia, <span>Davidson</span></h1>
+    <div class="subtitle">Quarta-feira, 08 de Abril de 2026 — Brasília (BRT)</div>
+  </div>
+  <div class="header-right">07:00</div>
+</div>
+
+<div class="container">
+
+  <!-- Métricas rápidas -->
+  <div class="grid-3">
+    <div class="metric-card">
+      <div class="label">📅 Agenda hoje</div>
+      <div class="value" style="color:var(--yellow)">2</div>
+      <div class="delta">Bloqueios: Planejamentos + Ocupado</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">📬 Emails</div>
+      <div class="value" style="color:var(--red)">3</div>
+      <div class="delta">que pedem atenção</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">✅ Tarefas críticas</div>
+      <div class="value" style="color:var(--red)">2</div>
+      <div class="delta">bloqueantes hoje</div>
+    </div>
+  </div>
+
+  <!-- Alerta crítico -->
+  <div class="alert-card">
+    <div class="title">⚠️ Atenção — RunPod com saldo baixo + pods stale</div>
+    <div class="body">RunPod enviou alerta de baixo saldo <strong>e</strong> aviso de pods parados sendo cobrados. Risco de perda de dados. Acesse e resolva hoje.</div>
+  </div>
+
+  <!-- Agenda -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📅 Agenda de hoje</h2>
+      <span class="count">2 blocos</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Horário</th>
+          <th>Evento</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="color:var(--evo-green);font-weight:600">11:00–13:00</td>
+          <td style="color:var(--text-primary);font-weight:500">Planejamentos</td>
+          <td><span class="badge muted">Bloqueado</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--evo-green);font-weight:600">13:00–14:00</td>
+          <td style="color:var(--text-primary);font-weight:500">Ocupado</td>
+          <td><span class="badge muted">Bloqueado</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--green);font-weight:600">09:00–11:00</td>
+          <td style="color:var(--text-secondary)">🟢 Bloco livre — foco</td>
+          <td><span class="badge green">Disponível</span></td>
+        </tr>
+        <tr>
+          <td style="color:var(--green);font-weight:600">14:00–18:00</td>
+          <td style="color:var(--text-secondary)">🟢 Bloco livre — foco</td>
+          <td><span class="badge green">Disponível</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="list-item" style="color:var(--yellow)">
+      ⚠️ ETUS + Praça (que estava na agenda de ontem às 16h) foi <strong>cancelado</strong> pela Anne — aguarda remarcação.
+    </div>
+    <div class="list-item" style="color:var(--blue)">
+      📌 Lembrete: <strong>AA + Evo — quinta 09/04 às 18h</strong> com Alberto/Anne/Xandão. Confirmação pendente.
+    </div>
+    <div class="list-item" style="color:var(--blue)">
+      📌 <strong>Evolution &lt;&gt; Financeiro - Monthly</strong> — sexta 10/04 às 16h (convidado por Wanderson Santos/Brius).
+    </div>
+  </div>
+
+  <!-- Emails -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📬 E-mails que pedem atenção</h2>
+      <span class="count">3 relevantes</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Prioridade</th>
+          <th>De</th>
+          <th>Assunto</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="badge red">🔴 Alta</span></td>
+          <td>RunPod</td>
+          <td style="color:var(--text-primary)">Low Balance Warning + Stale Pods</td>
+          <td style="color:var(--text-muted);font-size:13px">Verificar saldo e encerrar pods parados</td>
+        </tr>
+        <tr>
+          <td><span class="badge yellow">🟡 Média</span></td>
+          <td>Samara Cruz (Etus)</td>
+          <td style="color:var(--text-primary)">Holerite - Março/2026</td>
+          <td style="color:var(--text-muted);font-size:13px">Verificar/arquivar</td>
+        </tr>
+        <tr>
+          <td><span class="badge yellow">🟡 Média</span></td>
+          <td>Wanderson Santos (Brius)</td>
+          <td style="color:var(--text-primary)">Evolution &lt;&gt; Financeiro - Monthly — sex. 10/04 às 16h</td>
+          <td style="color:var(--text-muted);font-size:13px">Confirmar presença</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="list-item" style="color:var(--text-muted)">
+      Ignorados: Claude Incident Sonnet 4.6 (resolvido), notificação Todoist, Google Cloud BigQuery, DigitalOcean newsletter.
+    </div>
+  </div>
+
+  <!-- Tarefas críticas hoje -->
+  <div class="section">
+    <div class="section-header">
+      <h2>✅ Tarefas críticas (bloqueantes)</h2>
+      <span class="count">2 para hoje</span>
+    </div>
+    <div class="list-item">
+      <div>
+        <span style="color:var(--red);font-weight:600">[CRÍTICO — Estratégia]</span> Finalizar plano de lançamento (posicionamento, 3 tiers, preços, bônus, métricas, metas Diego) e enviar para Xandão/Alberto/Anne
+        <span class="badge red" style="margin-left:8px">due: hoje</span>
+      </div>
+    </div>
+    <div class="list-item">
+      <div>
+        <span style="color:var(--yellow);font-weight:600">[Financeiro]</span> Validar painel financeiro (MRR, CAC e taxa de conversão) e registrar variações da semana
+        <span class="badge yellow" style="margin-left:8px">due: hoje</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pendências de ontem -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔁 Pendências em aberto (de ontem)</h2>
+      <span class="count">7 itens</span>
+    </div>
+    <div class="list-item">Definir preços exatos do Contributor e Member → passar ao Diego para projeções <span class="badge red" style="margin-left:8px">bloqueante AA+Evo</span></div>
+    <div class="list-item">Confirmar presença na call AA + Evo — quinta 09/04 às 18h</div>
+    <div class="list-item">Enviar transcript da reunião (06/04) ao Diego e Filipe Reis</div>
+    <div class="list-item">Fase 2 Evo CRM: triagem dos bugs reportados e distribuição para o time</div>
+    <div class="list-item">Garantir que Evo CRM armazene WID em vez de número de telefone</div>
+    <div class="list-item">Validar onboarding Beacop com Marcelo</div>
+    <div class="list-item">RunPod: resolver saldo baixo + encerrar pods stale <span class="badge red" style="margin-left:8px">urgente</span></div>
+  </div>
+
+  <!-- O que foi feito ontem -->
+  <div class="section">
+    <div class="section-header">
+      <h2>📋 Resumo de ontem (07/04)</h2>
+    </div>
+    <div class="list-item">Evolution Summit — campanha Warm-up iniciada; Willian cuida de WhatsApp/Discord, Davidson de Email/LinkedIn</div>
+    <div class="list-item">Estratégia AA + Evo — modelo 3 tiers finalizado (Contributor / Member / Pro-Support); preços ainda pendentes</div>
+    <div class="list-item">Evo CRM — Fase 1 de testes em andamento (só reportar bugs, não corrigir); campanha de marketing ativa</div>
+    <div class="list-item">ETUS + Praça (presencial às 16h) foi <strong>cancelado</strong> por imprevistos — Anne vai remarcar</div>
+    <div class="list-item">25 rotinas ADW executadas com 100% de sucesso; FAQ da comunidade expandido</div>
+  </div>
+
+  <!-- Recomendação -->
+  <div class="highlight-card">
+    <div class="title">🎯 Recomendação do dia</div>
+    <div class="body">
+      Você tem dois blocos limpos hoje (09h–11h e 14h–18h) — use o da manhã para <strong>definir os preços dos tiers Contributor/Member e montar o plano de lançamento</strong>. Esse item está vencido, é o principal bloqueador da call de quinta com AA+Evo, e qualquer outro avanço depende dele. Depois resolva o RunPod (5 min) e confirme a reunião de quinta. O resto pode esperar.
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Clawdia — 08/04/2026 às 07:00 BRT
+</div>
+
+</body>
+</html>

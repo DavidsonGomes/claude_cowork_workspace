@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Triage — 08/04/2026</title>
+<style>
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 1100px; margin: 40px auto; padding: 0 20px; color: #1a1a1a; background: #f9f9f9; }
+  h1 { font-size: 1.6rem; border-bottom: 2px solid #e0e0e0; padding-bottom: 10px; }
+  h2 { font-size: 1.1rem; color: #444; margin-top: 30px; }
+  .stats { display: flex; gap: 16px; margin: 20px 0; flex-wrap: wrap; }
+  .stat-card { background: white; border-radius: 10px; padding: 14px 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); min-width: 110px; text-align: center; }
+  .stat-card .num { font-size: 2rem; font-weight: 700; }
+  .stat-card .lbl { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 0.05em; }
+  .urgent { color: #d32f2f; }
+  .high { color: #e65100; }
+  .medium { color: #f9a825; }
+  .low { color: #388e3c; }
+  .top3 { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-bottom: 20px; }
+  .top3 ol { padding-left: 18px; }
+  .top3 li { margin-bottom: 14px; }
+  .top3 li strong { font-size: 1rem; }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.72rem; font-weight: 600; margin-left: 6px; }
+  .badge-urgent { background: #ffebee; color: #d32f2f; }
+  .badge-high { background: #fff3e0; color: #e65100; }
+  .badge-medium { background: #fffde7; color: #f9a825; }
+  .badge-low { background: #e8f5e9; color: #388e3c; }
+  table { width: 100%; border-collapse: collapse; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+  th { background: #f0f0f0; text-align: left; padding: 10px 12px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.04em; color: #555; }
+  td { padding: 9px 12px; font-size: 0.85rem; border-bottom: 1px solid #f0f0f0; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #fafafa; }
+  .actions { background: white; border-radius: 10px; padding: 20px; box-shadow: 0 1px 4px rgba(0,0,0,0.08); margin-top: 20px; }
+  .actions ul { list-style: none; padding: 0; }
+  .actions li { padding: 6px 0; border-bottom: 1px solid #f5f5f5; font-size: 0.9rem; }
+  .actions li:before { content: "☐ "; color: #888; }
+  .actions li:last-child { border-bottom: none; }
+  footer { text-align: center; font-size: 0.75rem; color: #aaa; margin-top: 40px; }
+</style>
+</head>
+<body>
+
+<h1>📧 Email Triage — 08 de abril de 2026</h1>
+<p style="color:#888; font-size:0.85rem;">Gerado por Clawdia · 08/04/2026 · davidson.gomes@etus.com.br</p>
+
+<div class="stats">
+  <div class="stat-card"><div class="num">25</div><div class="lbl">Total</div></div>
+  <div class="stat-card"><div class="num urgent">1</div><div class="lbl">⚠️ Urgente</div></div>
+  <div class="stat-card"><div class="num high">4</div><div class="lbl">🔴 Alta</div></div>
+  <div class="stat-card"><div class="num medium">7</div><div class="lbl">🟡 Média</div></div>
+  <div class="stat-card"><div class="num low">13</div><div class="lbl">🟢 Baixa</div></div>
+</div>
+
+<h2>🏆 Top 3 Prioridades</h2>
+<div class="top3">
+  <ol>
+    <li>
+      <strong>Low Balance Warning</strong> — RunPod <span class="badge badge-urgent">urgente</span><br>
+      <small>Dois alertas de saldo baixo. Se zerar, pods param. Recarregar agora.</small><br>
+      <small><b>Ação:</b> Acessar dashboard RunPod e recarregar saldo</small>
+    </li>
+    <li>
+      <strong>Convite: AA + EVO — qui. 9 abr. 18h</strong> — Anne Carvalho <span class="badge badge-high">alta</span><br>
+      <small>Reunião amanhã às 18h. Convite sem resposta ainda.</small><br>
+      <small><b>Ação:</b> Confirmar presença</small>
+    </li>
+    <li>
+      <strong>Fathom Recap — reunião com etus.com.br</strong> — Fathom <span class="badge badge-high">alta</span><br>
+      <small>Resumo de reunião com action items potenciais. Ler para capturar pendências.</small><br>
+      <small><b>Ação:</b> Ler recap e extrair action items</small>
+    </li>
+  </ol>
+</div>
+
+<h2>📋 Todos os Emails</h2>
+<table>
+  <thead>
+    <tr>
+      <th>De</th>
+      <th>Assunto</th>
+      <th>Urgência</th>
+      <th>Categoria</th>
+      <th>Ação</th>
+      <th>Racional</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>RunPod (2x)</td><td>Low Balance Warning</td><td><span class="urgent">⚠️ urgente</span></td><td>action-required</td><td>recarregar saldo</td><td>2 alertas — pods podem parar</td></tr>
+    <tr><td>Samara Cruz</td><td>Holerite - Março/2026</td><td><span class="high">🔴 alta</span></td><td>action-required</td><td>ler/arquivar</td><td>Documento pessoal da Financeiro Etus</td></tr>
+    <tr><td>Todoist</td><td>10+ tarefas atrasadas — abr. 8</td><td><span class="high">🔴 alta</span></td><td>action-required</td><td>revisar tarefas</td><td>10+ tarefas vencidas no Todoist</td></tr>
+    <tr><td>Anne Carvalho</td><td>Convite: AA + EVO — 9 abr 18h</td><td><span class="high">🔴 alta</span></td><td>meeting</td><td>confirmar presença</td><td>Reunião amanhã sem resposta</td></tr>
+    <tr><td>Fathom</td><td>Recap of meeting with etus.com.br</td><td><span class="high">🔴 alta</span></td><td>fyi</td><td>ler</td><td>Resumo de reunião — action items potenciais</td></tr>
+    <tr><td>Wanderson Santos</td><td>Convite: Evolution &lt;&gt; Financeiro — 10 abr 16h</td><td><span class="medium">🟡 média</span></td><td>meeting</td><td>confirmar presença</td><td>Reunião sexta sem resposta</td></tr>
+    <tr><td>IAB Brasil</td><td>Convite: Comitê Mensuração — 10 abr 10h</td><td><span class="medium">🟡 média</span></td><td>meeting</td><td>verificar agenda</td><td>Conflito potencial com reunião de sexta</td></tr>
+    <tr><td>IAB Brasil</td><td>Pauta do Comitê de Mensuração — 10 abr</td><td><span class="medium">🟡 média</span></td><td>fyi</td><td>ler</td><td>Contexto para reunião de sexta</td></tr>
+    <tr><td>statuspage.io</td><td>Claude Incident - Sonnet 4.6 — 8 abr</td><td><span class="medium">🟡 média</span></td><td>fyi</td><td>monitorar</td><td>Incidente em andamento (5 msgs)</td></tr>
+    <tr><td>Google Cloud</td><td>SQL legado BigQuery até 1º jun/2026</td><td><span class="medium">🟡 média</span></td><td>fyi</td><td>criar tarefa</td><td>Deprecação técnica com prazo definido</td></tr>
+    <tr><td>RunPod</td><td>Stale Pods</td><td><span class="medium">🟡 média</span></td><td>action-required</td><td>verificar pods</td><td>Pods ociosos — possível custo desnecessário</td></tr>
+    <tr><td>Gemini</td><td>Anotações: AA + EVO (quinzenal) — 6 abr</td><td><span class="medium">🟡 média</span></td><td>fyi</td><td>ler</td><td>Notas automáticas da reunião de ontem</td></tr>
+    <tr><td>Matheus Pastorini</td><td>Aceito: Planning Evolution — segundas 15h</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Confirmação de aceite de convite</td></tr>
+    <tr><td>Diego Lerina</td><td>Aceito: Alinhamento Evolution Estratégia — 7 abr</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Aceite de reunião já passada</td></tr>
+    <tr><td>Anne Carvalho</td><td>Evento cancelado: AA+EVO — 16 abr</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Evento cancelado</td></tr>
+    <tr><td>Anne Carvalho</td><td>Evento cancelado: ETUS + Praça — 7 abr</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Evento cancelado, dia anterior</td></tr>
+    <tr><td>Anne Carvalho</td><td>Convite: ETUS + Praça — 7 abr (cancelado)</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Evento já cancelado</td></tr>
+    <tr><td>statuspage.io</td><td>Claude Incident — 7 abr (2x)</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Incidentes anteriores resolvidos</td></tr>
+    <tr><td>IAB Brasil</td><td>[AGORA ONLINE] Comitê Retail Media — 7 abr</td><td><span class="low">🟢 baixa</span></td><td>fyi</td><td>arquivar</td><td>Evento de ontem, já passou</td></tr>
+    <tr><td>DigitalOcean</td><td>AI coding agents shift...</td><td><span class="low">🟢 baixa</span></td><td>newsletter</td><td>arquivar</td><td>Conteúdo editorial</td></tr>
+    <tr><td>Evolution Foundation</td><td>O timing importa tanto quanto a competência</td><td><span class="low">🟢 baixa</span></td><td>newsletter</td><td>arquivar</td><td>Próprio email marketing</td></tr>
+    <tr><td>Agentforce/Salesforce</td><td>50+ tendências de vendas</td><td><span class="low">🟢 baixa</span></td><td>newsletter</td><td>arquivar</td><td>Prospecção não solicitada</td></tr>
+    <tr><td>Zindra/mLabs</td><td>Descubra o que seus concorrentes fazem</td><td><span class="low">🟢 baixa</span></td><td>newsletter</td><td>arquivar</td><td>Prospecção comercial não solicitada</td></tr>
+  </tbody>
+</table>
+
+<h2>✅ Ações Sugeridas</h2>
+<div class="actions">
+  <ul>
+    <li><strong>🔴 URGENTE</strong> — Recarregar saldo no RunPod (2 alertas recebidos)</li>
+    <li>Confirmar presença: AA + EVO — amanhã qui. 9 abr. 18h</li>
+    <li>Confirmar presença: Evolution &lt;&gt; Financeiro — sex. 10 abr. 16h</li>
+    <li>Ler Fathom Recap — extrair action items da reunião com Etus</li>
+    <li>Revisar 10+ tarefas atrasadas no Todoist</li>
+    <li>Verificar pods ociosos no RunPod (custo desnecessário)</li>
+    <li>Criar tarefa: deprecação SQL legado BigQuery — prazo 01/06/2026</li>
+    <li>Ler holerite Março/2026 da Samara</li>
+    <li>Verificar conflito de agenda: Comitê IAB (10h) vs. reuniões de sexta</li>
+    <li>Arquivar ~12 newsletters, notificações e eventos passados</li>
+  </ul>
+</div>
+
+<footer>Gerado por Clawdia · Claude Code · 08/04/2026</footer>
+
+</body>
+</html>

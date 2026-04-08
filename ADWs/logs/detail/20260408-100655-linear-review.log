@@ -1,0 +1,97 @@
+TIMESTAMP: 2026-04-08T10:06:55.929918
+DURATION: 296.4s
+RETURNCODE: 0
+PROMPT:
+[agent:atlas-project] Execute a skill /int-linear-review
+
+============================================================
+STDOUT:
+============================================================
+---
+
+## Linear Review — 08/04/2026
+
+### 🔍 Em Review (22)
+
+| Issue | Título | Responsável | Dias em review |
+|-------|--------|-------------|----------------|
+| EVO-921 | Runtime Config for evo-crm-community | Guilherme | 1d ✅ |
+| EVO-589 | Bug: Áudios não reproduzem | Davidson | 16d ⚠️ |
+| EVO-582 | Bug: Canal EvoGo status "desconectado" | Davidson | 16d ⚠️ |
+| EVO-683 | Bug: i18n namespace misplacement | Davidson | 19d 🔴 |
+| EVO-599 | evo-auth-service: config from DB | Davidson | 20d 🔴 |
+| EVO-598 | evo-ai-crm: Super Admin config screens | Davidson | 20d 🔴 |
+| EVO-597 | First user onboarding flow | Davidson | 20d 🔴 |
+| EVO-585 | Bug: Contatos importados sem consentimento | Davidson | 21d 🔴 |
+| EVO-595 | Bug (Reg): Pipeline ausente na sidebar | Marcelo | 22d 🔴 |
+| EVO-591 | Bug: Troca de canal de resposta | Davidson | 22d 🔴 |
+| EVO-586 | Bug: Agentes IA não aparecem no canal | Davidson | 23d 🔴 |
+| EVO-596 | Bug (Reg): Canal API não envia mensagens | Davidson | 23d 🔴 |
+| EVO-575 | Bug: "No content to process" após áudio | Davidson | 26d 🔴 |
+| EVO-574 | Bug: Canal Telegram — URL undefined | Davidson | 27d 🔴 |
+| EVO-602 | Integrar evo-ai-crm com Bot Runtime | Davidson | 27d 🔴 |
+| EVO-559 | Bug: Google Calendar na integração | Davidson | 27d 🔴 |
+| EVO-558 | Integrar Evolution Hub com Bot Runtime | Davidson | 27d 🔴 |
+| EVO-580 | Bug: Informações da Conversa incompletas | Davidson | 27d 🔴 |
+| EVO-573 | Bug: Filtros retornam erro 500 | Davidson | 27d 🔴 |
+| EVO-548 | Evolution Hub paridade API V2 | Guilherme | 27d 🔴 |
+| EVO-583 | Bug: Avatar Telegram não persiste | Davidson | 29d 🔴 |
+| EVO-557 | Event Emitter paridade Evolution API | Davidson | 41d 🔴 |
+
+---
+
+### 🚨 Blockers (2)
+
+| Issue | Título | Prioridade | Responsável | Situação |
+|-------|--------|------------|-------------|----------|
+| EVO-659 | Community — EVO-AI Open Source | 🔴 Urgent | Danilo | 16d sem update |
+| EVO-904 | Integração de Licensing — CRM | 🟡 High | Danilo | 11d sem update |
+
+---
+
+### ⏸️ Stale — Paradas >3 dias (5)
+
+| Issue | Título | Responsável | Última atualização |
+|-------|--------|-------------|-------------------|
+| EVO-904 | Integração de Licensing CRM | Danilo | 2026-03-28 (11d) |
+| EVO-659 | Community — EVO-AI Open Source | Danilo | 2026-03-23 (16d) |
+| EVO-368 | Validação — Teste de carga | Guilherme | 2026-02-14 (53d) |
+| EVO-325 | Fase 2: Rotatividade de Inboxes | Guilherme | 2026-02-09 (58d) |
+| EVO-78 | Backup e Disaster Recovery | Guilherme | 2025-11-17 (142d) 🔴 |
+
+---
+
+### 👤 Minhas Issues (12)
+
+| Issue | Título | Status | Prioridade |
+|-------|--------|--------|------------|
+| EVO-821 | Produtos Digitais — Epic 1 | In Progress | — |
+| EVO-589 | Bug: Áudios não reproduzem | In Review | High |
+| EVO-582 | Bug: EvoGo desconectado | In Review | High |
+| EVO-691 | Bug: Mensagens outgoing como incoming | Backlog | High |
+| EVO-683 | Bug: i18n namespace | In Review | High |
+| EVO-599 | evo-auth-service: config DB | In Review | High |
+| EVO-598 | Super Admin config screens | In Review | High |
+| EVO-597 | First user onboarding flow | In Review | High |
+| EVO-585 | Contatos importados sem consentimento | In Review | High |
+| EVO-591 | Troca de canal de resposta | In Review | High |
+| EVO-573 | Filtros retornam erro 500 | In Review | High |
+| EVO-557 | Event Emitter Evolution API | In Review | High |
+
+---
+
+### 🔄 Sprint / Ciclo Atual
+
+**Nenhum ciclo ativo** encontrado para o time Evolution.
+
+---
+
+### ⚡ Pontos de Atenção
+
+1. **Volume crítico em review**: 21 das 22 issues em review têm mais de 3 dias sem movimentação — sinal de gargalo no processo de revisão/merge
+2. **EVO-659 Community Open Source (Urgent)** com Danilo está parado há 16 dias — precisa de atenção imediata
+3. **EVO-78 (142 dias parado)** e **EVO-368 / EVO-325** da Guilherme estão muito antigas — candidatas a repriorização ou cancelamento
+4. **Sem sprint ativo** — recomendado criar ciclo no Linear para organizar e dar visibilidade ao backlog
+
+Artefato HTML salvo em `02 Projects/linear-reviews/[C] 2026-04-08-linear-review.html`.
+
