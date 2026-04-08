@@ -16,6 +16,7 @@ O papel do Claude é manter o Davidson em movimento nesse loop. Se não há meta
 
 **Nome:** Davidson Gomes
 **O que faço:** CEO e desenvolvedor open source, baseado no Brasil
+**Empresa:** Evolution API LTDA (CNPJ: 58.157.295/0001-94)
 **Com o que quero ajuda:** Organizar meu trabalho e projetos — tarefas, agenda, comunidade, redes sociais e financeiro
 **Vibe:** Profissional e organizado
 **Timezone:** Brasília (BRT, UTC-3)
@@ -25,16 +26,21 @@ O papel do Claude é manter o Davidson em movimento nesse loop. Se não há meta
 ## Folder Structure
 
 ```
-01 Daily Logs/        — logs de sessão, briefings, reviews semanais
-02 Projects/          — uma pasta por projeto + reviews (github, linear)
-03 Comunidade/        — gestão da comunidade, FAQ, relatórios Discord
-04 Redes Sociais/     — conteúdo e estratégia de redes sociais
+01 Daily Logs/        — logs de sessão, briefings, reviews semanais, dashboards
+02 Projects/          — projetos + reviews (github, linear, licensing, social analytics)
+03 Comunidade/        — gestão da comunidade, FAQ, relatórios Discord/WhatsApp
+04 Redes Sociais/     — conteúdo, estratégia e reports de redes sociais
 05 Financeiro/        — controle financeiro (Stripe, Omie, relatórios)
 06 Pessoal/           — saúde, fitness, hábitos e bem-estar
-07 Reuniões/          — transcrições e summaries do Fathom
+07 Reuniões/          — transcrições e summaries do Fathom (legacy)
+08 Cursos/            — Evo Academy, agentic-engineer, claude-code, openclaw
+09 Estrategia/        — análises, cenários, decisões, digests, OKRs, roadmap
+09 Reuniões/          — reuniões Fathom (summaries atuais)
 ADWs/                 — AI Developer Workflows (rotinas automatizadas)
-memory/               — memória persistente (pessoas, projetos, glossário)
+memory/               — memória persistente (pessoas, projetos, glossário, trends)
+social-auth/          — OAuth app para login nas redes sociais
 _evo/                 — Evo Method (framework de desenvolvimento)
+_evo-output/          — artifacts gerados pelo Evo Method (planning + implementation)
 ```
 
 ---
@@ -44,25 +50,27 @@ _evo/                 — Evo Method (framework de desenvolvimento)
 | Nome | O que é | Status |
 |------|---------|--------|
 | **Evo AI** | CRM + agentes IA (produto principal) | In Progress |
-| **Evolution Summit** | Evento de lançamento (14-16 abril) | Em execução |
+| **Evolution Summit** | Evento de lançamento (14-16 abril 2026) | Em execução |
 | **Evo Academy** | Plataforma de cursos | Backlog |
 | **HostGator** | Parceria — reuniões recorrentes | Em andamento |
 
 ---
 
-## Agentes
+## Agentes (9)
+
+Definidos em `.claude/agents/`. Cada agente tem domínio isolado e pode ser invocado via comando.
 
 | Agente | Command | Domínio |
 |--------|---------|---------|
-| **Clawdia** 🦞 | `/clawdia` | Hub operacional — agenda, emails, tarefas, decisões |
-| **Flux** 🧮 | `/flux` | Financeiro — fluxo de caixa, métricas, Stripe, Omie |
-| **Atlas** 🗂️ | `/atlas` | Projetos — status, milestones, blockers, Linear, GitHub |
-| **Kai** 👤 | `/kai` | Pessoal — saúde, hábitos, rotina (domínio isolado) |
-| **Pulse** 📣 | `/pulse` | Comunidade — Discord, sentimento, FAQ, engajamento |
-| **Sage** 🎯 | `/sage` | Estratégia — OKRs, roadmap, priorização, cenários |
-| **Pixel** 📲 | `/pixel` | Social media — conteúdo, calendário, análise |
-| **Nex** 💼 | `/nex` | Comercial — pipeline, propostas, qualificação |
-| **Mentor** 🎓 | `/mentor` | Cursos — trilhas, módulos, Evo Academy |
+| **Clawdia** | `/clawdia` | Hub operacional — agenda, emails, tarefas, decisões |
+| **Flux** | `/flux` | Financeiro — fluxo de caixa, métricas, Stripe, Omie |
+| **Atlas** | `/atlas` | Projetos — status, milestones, blockers, Linear, GitHub, Licensing |
+| **Kai** | `/kai` | Pessoal — saúde, hábitos, rotina (domínio isolado) |
+| **Pulse** | `/pulse` | Comunidade — Discord, WhatsApp, sentimento, FAQ |
+| **Sage** | `/sage` | Estratégia — OKRs, roadmap, priorização, cenários |
+| **Pixel** | `/pixel` | Social media — conteúdo, calendário, análise, reports |
+| **Nex** | `/nex` | Comercial — pipeline, propostas, qualificação |
+| **Mentor** | `/mentor` | Cursos — trilhas, módulos, Evo Academy |
 
 ---
 
@@ -71,43 +79,62 @@ _evo/                 — Evo Method (framework de desenvolvimento)
 Gerenciadas pelo scheduler (`make scheduler`) — ver `ROTINAS.md` para detalhes completos.
 
 ### Diárias
-| Horário | Rotina | Make |
-|---------|--------|------|
-| 06:50 | Review Todoist | `make review` |
-| 07:00 | Good Morning (briefing) | `make morning` |
-| 07:15 | Email Triage | `make triage` |
-| a cada 30min | Sync Meetings (Fathom) | `make sync` |
-| 20:00 | Community Pulse (Discord) | `make community` |
-| 20:15 | FAQ Sync | `make faq` |
-| 21:00 | End of Day | `make eod` |
-| 21:15 | Memory Sync | `make memory` |
+| Horário | Rotina | Make | Agente |
+|---------|--------|------|--------|
+| 06:50 | Review Todoist | `make review` | @clawdia |
+| 07:00 | Good Morning (briefing) | `make morning` | @clawdia |
+| 07:15 | Email Triage | `make triage` | @clawdia |
+| a cada 30min | Sync Meetings (Fathom) | `make sync` | @clawdia |
+| 18:00 | Social Analytics | `make social` | @pixel |
+| 18:30 | Licensing Daily | `make licensing` | @atlas |
+| 19:00 | Financial Pulse | `make fin-pulse` | @flux |
+| 20:00 | Community Pulse (Discord) | `make community` | @pulse |
+| 20:15 | FAQ Sync | `make faq` | @pulse |
+| 21:00 | End of Day | `make eod` | @clawdia |
+| 21:15 | Memory Sync | `make memory` | @clawdia |
+| 21:30 | Dashboard Consolidado | `make dashboard` | @clawdia |
 
 ### Semanais
-| Dia | Rotina | Make |
-|-----|--------|------|
-| Sexta 08:00 | Weekly Review | `make weekly` |
-| Seg/Qua/Sex 09:00 | Linear Review | `make linear` |
-| Seg/Qua/Sex 09:15 | GitHub Review | `make github` |
-| Segunda 09:30 | Community Weekly | `make community-week` |
-| Domingo 10:00 | Health Check-in | `make health` |
+| Dia | Rotina | Make | Agente |
+|-----|--------|------|--------|
+| Sexta 07:30 | Financial Weekly | `make fin-weekly` | @flux |
+| Sexta 07:45 | Licensing Weekly | `make licensing-weekly` | @atlas |
+| Sexta 08:00 | Weekly Review | `make weekly` | @clawdia |
+| Sexta 08:15 | Social Analytics Weekly | `make social` | @pixel |
+| Sexta 08:30 | Trends | `make trends` | @clawdia |
+| Sexta 09:00 | Strategy Digest | `make strategy` | @sage |
+| Seg/Qua/Sex 09:00 | Linear Review | `make linear` | @atlas |
+| Seg/Qua/Sex 09:15 | GitHub Review | `make github` | @atlas |
+| Segunda 09:30 | Community Weekly | `make community-week` | @pulse |
+| Domingo 10:00 | Health Check-in | `make health` | @kai |
+
+### Mensais (Dia 1)
+| Rotina | Make | Agente |
+|--------|------|--------|
+| Monthly Close Kickoff | `make fin-close` | @flux |
+| Community Monthly | `make community-month` | @pulse |
+| Licensing Monthly | `make licensing-month` | @atlas |
+| Social Analytics Monthly | `make social` | @pixel |
 
 ---
 
-## Skills (92 skills)
+## Skills (126 skills)
 
 Organizadas por prefixo — ver `.claude/skills/CLAUDE.md` para índice completo.
 
 | Prefixo | Categoria | Qtd |
 |---------|-----------|-----|
-| `prod-` | Produtividade (morning, eod, review, memory) | 6 |
-| `gog-` | Gmail, Calendar, Tasks | 6 |
-| `int-` | Integrações (Fathom, Todoist, Stripe, Omie, Discord, Telegram, Linear, GitHub) | 9 |
-| `fin-` | Financeiro (statements, journal, reconciliation, SOX) | 8 |
-| `mkt-` | Marketing (content, campaigns, SEO, email sequences) | 8 |
-| `obs-` | Obsidian (CLI, markdown, bases, canvas) | 5 |
-| `discord-` | Discord (messages, channels, manage) | 5 |
-| `pulse-` | Comunidade (daily, weekly, FAQ sync) | 3 |
-| `evo-` | Evo Method (dev, architect, QA, PM, sprints) | 45 |
+| `evo-` | Evo Method (dev, architect, QA, PM, sprints, reviews) | 45 |
+| `social-` | Social media (posts, threads, carousels, analytics, strategy) | 17 |
+| `int-` | Integrações (Fathom, Todoist, Stripe, Omie, Discord, Telegram, Linear, GitHub, YouTube, Instagram, LinkedIn, WhatsApp, Licensing) | 13 |
+| `fin-` | Financeiro (statements, journal, reconciliation, SOX, pulse, close) | 11 |
+| `prod-` | Produtividade (morning, eod, review, memory, dashboard, trends, licensing) | 9 |
+| `mkt-` | Marketing (content, campaigns, SEO, email sequences, competitive) | 8 |
+| `gog-` | Google (Gmail, Calendar, Tasks, followups) | 6 |
+| `obs-` | Obsidian (CLI, markdown, bases, canvas, defuddle) | 5 |
+| `discord-` | Discord (messages, channels, manage, create) | 5 |
+| `pulse-` | Comunidade (daily, weekly, monthly, FAQ sync) | 4 |
+| `sage-` | Estratégia (OKR review, strategy digest, competitive analysis) | 3 |
 
 ---
 
@@ -116,16 +143,23 @@ Organizadas por prefixo — ver `.claude/skills/CLAUDE.md` para índice completo
 | Integração | Tipo | Para que serve |
 |---|---|---|
 | **Google Calendar** | MCP | Criar/ler/atualizar compromissos |
-| **Gmail** | MCP | Ler e rascunhar e-mails |
+| **Gmail** | MCP | Ler, rascunhar e enviar e-mails |
 | **Linear** | MCP | Issues e projetos de desenvolvimento |
+| **GitHub** | MCP + CLI (gh) | PRs, issues, releases (repos Evolution) |
 | **Canva** | MCP | Criar e editar artes e apresentações |
+| **Notion** | MCP | Base de conhecimento |
 | **Telegram** | MCP + Bot | Mensagens, notificações, comandos |
+| **Computer Use** | MCP | Controle de desktop (screenshots, clicks, typing) |
 | **Discord** | API | Comunidade — canais, mensagens, moderação |
+| **WhatsApp** | API (Evolution) | Grupos, mensagens, stats |
 | **Fathom** | API | Reuniões, transcrições, action items |
 | **Todoist** | CLI | Gestão de tarefas (projeto Evolution) |
 | **Stripe** | API | Cobranças, assinaturas, MRR |
 | **Omie** | API | ERP — clientes, NF-e, financeiro |
-| **GitHub** | CLI (gh) | PRs, issues, releases (5 repos Evolution) |
+| **YouTube** | API (OAuth) | Analytics do canal |
+| **Instagram** | API (OAuth) | Analytics dos perfis |
+| **LinkedIn** | API (OAuth) | Analytics do perfil/org |
+| **Licensing** | API | Telemetria open source (instâncias, geo, versões) |
 
 ---
 
@@ -162,9 +196,10 @@ Emails: davidson.gomes@etus.com.br (profissional) | agenciadgcode@gmail.com (pes
 | **Nickolas / Nick** | Nickolas Oliveira — Dev (Brius) |
 | **Marcelo** | Marcelo Soares — Etus |
 | **Matheus** | Matheus Pastorini — Etus |
-| **Samara** | Samara Cruz — Financeiro Etus (notas fiscais, pagamentos) |
+| **Samara** | Samara Ângela — Financeiro Etus (notas fiscais, pagamentos) |
 | **Thaís** | Thaís Menezes — Jurídico Brius/Etus (contratos) |
 | **Vitor** | Vitor Lacerda — Jurídico Etus |
+| **Wanderson** | Wanderson Santos — Brius |
 | **William / Willian** | Willian Capovilla — Freelancer (OrionDesign) |
 → Perfis completos: memory/people/
 
@@ -176,8 +211,10 @@ Emails: davidson.gomes@etus.com.br (profissional) | agenciadgcode@gmail.com (pes
 | Bot Runtime | Serviço Go de orquestração de chatbot |
 | Beta Evo | Programa de beta testers |
 | Super Admin | Painel de admin do evo-ai-crm |
+| Custom Tools | Ferramentas customizadas nos agentes |
 | Grooming | Refinamento de backlog — seg. 14h30 BRT |
 | Planning | Planejamento sprint — seg. 15h BRT |
+| E'TALKS | Evento interno Etus — seg. 17h |
 | Omie | ERP / integração financeira |
 → Glossário completo: memory/glossary.md
 
@@ -200,12 +237,33 @@ Emails: davidson.gomes@etus.com.br (profissional) | agenciadgcode@gmail.com (pes
 
 ---
 
-## Servidores
+## Servidores e Infra
 
 | Comando | O que faz |
 |---------|-----------|
 | `make scheduler` | Inicia scheduler de rotinas (todas as rotinas automáticas) |
-| `make telegram` | Inicia bot Telegram (escuta mensagens) |
+| `make telegram` | Inicia bot Telegram em background (screen) |
+| `make social-auth` | Abre OAuth login das redes sociais (localhost:8765) |
+| `make dashboard` | Gera dashboard consolidado 360 |
+| `make daily` | Combo: sync meetings + review todoist |
+| `make metrics` | Mostra métricas acumuladas por rotina (tokens + custo) |
+| `make logs` | Mostra últimos logs das rotinas |
+| `make help` | Lista todos os comandos disponíveis |
+
+### Docker (VPS)
+| Comando | O que faz |
+|---------|-----------|
+| `make docker-up` | Sobe scheduler + telegram em Docker |
+| `make docker-down` | Para todos os containers |
+| `make docker-logs` | Logs dos containers |
+| `make docker-run ADW=<script>` | Roda rotina manualmente no container |
+
+---
+
+## HTML Templates
+
+Todos em `.claude/templates/html/`, dark theme Evolution (verde `#00FFA7`, fonte Inter).
+17 templates disponíveis — ver `ROTINAS.md` para mapeamento completo de template → rotina.
 
 ---
 
