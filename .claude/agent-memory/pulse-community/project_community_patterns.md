@@ -157,3 +157,23 @@ type: project
 
 - `03 Comunidade/reports/weekly/[C] 2026-W15-community-report.html`
 - Próximo relatório: W16 (08–15/abr/2026) — semana do Evolution Summit
+
+---
+
+## Relatório Mensal — Março 2026
+
+- **MAM Discord:** 633 membros únicos ativos
+- **Total mensagens:** 6.133 (Discord 1.754 + WhatsApp 4.379)
+- **Novos membros Discord:** 426 (média 14/dia)
+- **WhatsApp:** 4 grupos ativos, ~470 participantes únicos estimados
+- **Sentimento:** Neutro-Misto (71% neutro, 18% negativo, 9% positivo no Discord)
+- **Pico mensal:** W4 (22–28/mar) — 492 msgs Discord, 112 novos membros
+- **Top contribuidores:** oismaelash (383 msgs), d_paes (161 msgs) — juntos = 31% do volume
+- **Tópico #1:** Erros/Bugs (277 menções), seguido por API/Integrações (247) e Versões (194)
+- **Docs gap crítico:** Nginx+SSL, reconexão 24/7, migração v2→v3
+- **Features mais pedidas:** Auto-reconexão, interface visual de instâncias, webhook com retry
+- **Bugs mais reportados:** Desconexão espontânea, QR expirando, webhook pós-restart Docker
+- **Relatório mensal salvo:** `03 Comunidade/reports/monthly/[C] 2026-03-community-monthly.html`
+
+**Why:** Primeiro relatório mensal completo — estabelece baseline para comparação em abril/2026.
+**How to apply:** Usar MAM=633, msgs=6.133 e novos=426 como referência para medir crescimento em abril.

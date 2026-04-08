@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório Mensal da Comunidade — Evolution Foundation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --evo-green: #00FFA7;
+    --evo-green-dark: #00C681;
+    --evo-purple: #8133AA;
+    --bg-primary: #0C111D;
+    --bg-card: #182230;
+    --bg-card-hover: #1e2a3a;
+    --border: #344054;
+    --text-primary: #F9FAFB;
+    --text-secondary: #D0D5DD;
+    --text-muted: #667085;
+    --red: #F04438;
+    --yellow: #F79009;
+    --green: #12B76A;
+    --blue: #2E90FA;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 0; }
+  .header { background: linear-gradient(135deg, var(--bg-primary) 0%, #0a1628 50%, var(--bg-primary) 100%); border-bottom: 1px solid var(--border); padding: 32px 40px; display: flex; justify-content: space-between; align-items: center; }
+  .header-left h1 { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+  .header-left h1 span { color: var(--evo-green); }
+  .header-left .subtitle { font-size: 14px; color: var(--text-muted); margin-top: 4px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 32px 40px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .metric-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: border-color 0.2s; }
+  .metric-card:hover { border-color: var(--evo-green); }
+  .metric-card .label { font-size: 12px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .metric-card .value { font-size: 32px; font-weight: 700; color: var(--text-primary); margin: 8px 0 4px; }
+  .metric-card .delta { font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+  .metric-card .delta.up { color: var(--green); }
+  .metric-card .delta.down { color: var(--red); }
+  .metric-card .delta.neutral { color: var(--text-muted); }
+  .section { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 24px; overflow: hidden; }
+  .section-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .section-header h2 { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+  .section-header .count { background: var(--bg-primary); color: var(--text-muted); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+  .section-body { padding: 0; }
+  table { width: 100%; border-collapse: collapse; }
+  th { text-align: left; padding: 10px 20px; font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; background: rgba(0,0,0,0.2); }
+  th.right, td.right { text-align: right; }
+  td { padding: 12px 20px; font-size: 14px; color: var(--text-secondary); border-top: 1px solid rgba(52,64,84,0.5); }
+  tr:hover td { background: var(--bg-card-hover); }
+  .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 100px; font-size: 12px; font-weight: 600; }
+  .badge.red { background: rgba(240,68,56,0.15); color: var(--red); }
+  .badge.yellow { background: rgba(247,144,9,0.15); color: var(--yellow); }
+  .badge.green { background: rgba(18,183,106,0.15); color: var(--green); }
+  .badge.blue { background: rgba(46,144,250,0.15); color: var(--blue); }
+  .badge.purple { background: rgba(129,51,170,0.15); color: var(--evo-purple); }
+  .badge.muted { background: rgba(102,112,133,0.15); color: var(--text-muted); }
+  .metric-row { padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(52,64,84,0.5); }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-row .mr-label { font-size: 14px; color: var(--text-secondary); display: flex; align-items: center; gap: 8px; }
+  .metric-row .mr-value { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .status-dot.green { background: var(--green); }
+  .status-dot.yellow { background: var(--yellow); }
+  .status-dot.red { background: var(--red); }
+  .highlight-card { background: linear-gradient(135deg, rgba(0,255,167,0.05) 0%, rgba(129,51,170,0.05) 100%); border: 1px solid rgba(0,255,167,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 24px; }
+  .highlight-card .title { font-size: 12px; font-weight: 600; color: var(--evo-green); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .highlight-card .body { font-size: 15px; color: var(--text-secondary); line-height: 1.6; }
+  .list-item { padding: 12px 20px; display: flex; align-items: flex-start; gap: 12px; border-bottom: 1px solid rgba(52,64,84,0.5); font-size: 14px; color: var(--text-secondary); }
+  .list-item:last-child { border-bottom: none; }
+  .list-item::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--evo-green); margin-top: 5px; flex-shrink: 0; }
+  .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; border-radius: 4px; }
+  .progress-bar-fill.evo { background: var(--evo-green); }
+  .progress-bar-fill.green { background: var(--green); }
+  .progress-bar-fill.yellow { background: var(--yellow); }
+  .progress-bar-fill.red { background: var(--red); }
+  .footer { text-align: center; padding: 24px; color: var(--text-muted); font-size: 12px; border-top: 1px solid var(--border); }
+  .footer span { color: var(--evo-green); }
+  @media (max-width: 900px) { .grid-4 { grid-template-columns: repeat(2, 1fr); } .two-col { grid-template-columns: 1fr; } .container { padding: 20px; } .header { padding: 20px; flex-direction: column; gap: 16px; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1><span>Community</span> Monthly Report</h1>
+    <div class="subtitle">Março 2026 — Discord + WhatsApp — Relatório mensal</div>
+  </div>
+  <div class="header-right">
+    <span class="badge yellow">🟡 Neutro-Positivo</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- KPIs DO MÊS                                    -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="grid-4">
+    <div class="metric-card">
+      <div class="label">MAM (Monthly Active Members)</div>
+      <div class="value">633</div>
+      <div class="delta up">↑ Discord ativos únicos</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Total Mensagens</div>
+      <div class="value">6.133</div>
+      <div class="delta neutral">Discord 1.754 + WhatsApp 4.379</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Novos Membros</div>
+      <div class="value">426</div>
+      <div class="delta up">↑ Primeiro relatório mensal</div>
+    </div>
+    <div class="metric-card">
+      <div class="label">Taxa de Resolução</div>
+      <div class="value">~72%</div>
+      <div class="delta yellow">↔ Estimativa (sem fórum direto)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- EVOLUÇÃO SEMANAL                               -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Evolução Semanal</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Semana</th>
+            <th class="right">Mensagens (Discord Chat)</th>
+            <th class="right">Ativos</th>
+            <th class="right">Novos</th>
+            <th class="right">Sentimento</th>
+            <th class="right">Suporte Aberto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Semana 1 (01–07/Mar)</td>
+            <td class="right">275</td>
+            <td class="right">96</td>
+            <td class="right">104</td>
+            <td class="right"><span class="badge yellow">Neutro</span></td>
+            <td class="right">~18</td>
+          </tr>
+          <tr>
+            <td>Semana 2 (08–14/Mar)</td>
+            <td class="right">289</td>
+            <td class="right">76</td>
+            <td class="right">86</td>
+            <td class="right"><span class="badge yellow">Neutro</span></td>
+            <td class="right">~19</td>
+          </tr>
+          <tr>
+            <td>Semana 3 (15–21/Mar)</td>
+            <td class="right">293</td>
+            <td class="right">66</td>
+            <td class="right">79</td>
+            <td class="right"><span class="badge yellow">Neutro</span></td>
+            <td class="right">~20</td>
+          </tr>
+          <tr>
+            <td>Semana 4 (22–28/Mar)</td>
+            <td class="right">492</td>
+            <td class="right">93</td>
+            <td class="right">112</td>
+            <td class="right"><span class="badge green">Positivo</span></td>
+            <td class="right">~33</td>
+          </tr>
+          <tr>
+            <td>Semana 5 (29–31/Mar)</td>
+            <td class="right">279</td>
+            <td class="right">38</td>
+            <td class="right">45</td>
+            <td class="right"><span class="badge yellow">Neutro</span></td>
+            <td class="right">~19</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- DISCORD + WHATSAPP SIDE BY SIDE                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <!-- Discord -->
+    <div class="section">
+      <div class="section-header">
+        <h2>Discord</h2>
+        <span class="badge green">Ativo</span>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Mensagens (chats)</div>
+          <div class="mr-value">1.754</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Membros Ativos Únicos</div>
+          <div class="mr-value">633</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>Tickets Suporte (estimativa)</div>
+          <div class="mr-value">~109</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>Sentimento Geral</div>
+          <div class="mr-value">Neutro (71% neutro, 18% neg, 9% pos)</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Canal mais ativo</div>
+          <div class="mr-value">💬 chat-pt (1.628 msgs)</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot blue"></span>Novos membros entrados</div>
+          <div class="mr-value">426</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WhatsApp -->
+    <div class="section">
+      <div class="section-header">
+        <h2>WhatsApp</h2>
+        <span class="badge green">Muito Ativo</span>
+      </div>
+      <div class="section-body">
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Mensagens</div>
+          <div class="mr-value">4.379</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Grupos Ativos</div>
+          <div class="mr-value">4</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Participantes Únicos</div>
+          <div class="mr-value">~470 (est. com overlap)</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot yellow"></span>Sentimento</div>
+          <div class="mr-value">Misto / Técnico</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot green"></span>Grupo mais ativo</div>
+          <div class="mr-value">Grupo 1 — 2.103 msgs, 227 part.</div>
+        </div>
+        <div class="metric-row">
+          <div class="mr-label"><span class="status-dot blue"></span>Tipos de conteúdo</div>
+          <div class="mr-value">88% texto, 6% imagens, 2% áudio</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TOP CONTRIBUIDORES                             -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Top Contribuidores do Mês</h2>
+      <span class="count">10</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Membro</th>
+            <th>Plataforma</th>
+            <th class="right">Mensagens</th>
+            <th class="right">Engajamento</th>
+            <th>Destaque</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>oismaelash</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">383</td>
+            <td class="right">Alto</td>
+            <td><span class="badge green">MVP do Mês</span></td>
+          </tr>
+          <tr>
+            <td>d_paes</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">161</td>
+            <td class="right">Alto</td>
+            <td><span class="badge green">Helper</span></td>
+          </tr>
+          <tr>
+            <td>angustiaturias</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">29</td>
+            <td class="right">Médio</td>
+            <td><span class="badge yellow">Contribuidor</span></td>
+          </tr>
+          <tr>
+            <td>gaaabss__</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">28</td>
+            <td class="right">Médio</td>
+            <td><span class="badge yellow">Contribuidor</span></td>
+          </tr>
+          <tr>
+            <td>edson4831</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">22</td>
+            <td class="right">Médio</td>
+            <td><span class="badge muted">Ativo</span></td>
+          </tr>
+          <tr>
+            <td>whafe1</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">22</td>
+            <td class="right">Médio</td>
+            <td><span class="badge muted">Ativo</span></td>
+          </tr>
+          <tr>
+            <td>daicon</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">21</td>
+            <td class="right">Médio</td>
+            <td><span class="badge muted">Ativo</span></td>
+          </tr>
+          <tr>
+            <td>nandocosta</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">18</td>
+            <td class="right">Médio</td>
+            <td><span class="badge muted">Ativo</span></td>
+          </tr>
+          <tr>
+            <td>kdumr</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">18</td>
+            <td class="right">Médio</td>
+            <td><span class="badge muted">Ativo</span></td>
+          </tr>
+          <tr>
+            <td>digitaldreamteam_10324</td>
+            <td><span class="badge blue">Discord</span></td>
+            <td class="right">18</td>
+            <td class="right">Médio</td>
+            <td><span class="badge muted">Ativo</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- TÓPICOS DO MÊS                                -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Tópicos Mais Discutidos</h2>
+    </div>
+    <div class="section-body">
+      <div class="list-item">Erros e Bugs — 277 menções — sentimento negativo/misto (maior volume de dúvidas técnicas do mês)</div>
+      <div class="list-item">API e Integrações — 247 menções — sentimento neutro (integrações com n8n, Typebot, Chatwoot, APIs externas)</div>
+      <div class="list-item">Versões e Atualizações da Evolution API — 194 menções — sentimento misto (migração v2→v3, compatibilidade)</div>
+      <div class="list-item">Certificados SSL / Nginx / HTTPS — 135 menções — sentimento negativo (dificuldades de configuração de proxy reverso)</div>
+      <div class="list-item">Conexão WhatsApp (QR, reconexão, logout) — 129 menções — sentimento misto (instabilidade de sessões recorrente)</div>
+      <div class="list-item">Gerenciamento de Instâncias — 118 menções — sentimento neutro (criação, remoção, configuração de instâncias)</div>
+      <div class="list-item">Instalação e Deploy (Docker, VPS) — 106 menções — sentimento misto (dificuldades no setup inicial)</div>
+      <div class="list-item">Webhooks — 62 menções — sentimento neutro (configuração e troubleshooting)</div>
+      <div class="list-item">Chatwoot — 50 menções — sentimento misto (integração com Evolution API)</div>
+      <div class="list-item">n8n — 43 menções — sentimento positivo (automações e fluxos)</div>
+      <div class="list-item">Banco de Dados (Redis, Postgres) — 33 menções — sentimento negativo (problemas de persistência)</div>
+      <div class="list-item">Evo AI / CRM — 32 menções — sentimento positivo (interesse crescente no produto)</div>
+      <div class="list-item">Evolution Summit 2026 — 31 menções — sentimento positivo (expectativa para o evento de abril)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- INSIGHTS PRODUTO                               -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="two-col">
+    <div class="section">
+      <div class="section-header">
+        <h2>Features Solicitadas</h2>
+        <span class="count">7</span>
+      </div>
+      <div class="section-body">
+        <div class="list-item">Auto-reconexão de instâncias WhatsApp sem intervenção manual — múltiplas menções (Discord + WhatsApp)</div>
+        <div class="list-item">Interface visual para gerenciar instâncias sem precisar de API — mencionado recorrentemente</div>
+        <div class="list-item">Suporte nativo a grupos do WhatsApp com mais controles (admin, mensagem em massa) — frequente</div>
+        <div class="list-item">Webhook com retry automático em caso de falha — solicitado em chat-pt e grupos WA</div>
+        <div class="list-item">Dashboard de status de instâncias em tempo real — pedido repetido no Discord</div>
+        <div class="list-item">Integração direta com mais plataformas de CRM além do Evo AI — mencionado em chat-en</div>
+        <div class="list-item">Suporte a múltiplos números por instância (multi-device avançado) — pedido no WhatsApp</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-header">
+        <h2>Bugs Reportados</h2>
+        <span class="count">6</span>
+      </div>
+      <div class="section-body">
+        <div class="list-item">Instâncias desconectando sozinhas após algumas horas sem atividade — alta frequência (Discord + WA)</div>
+        <div class="list-item">QR Code expirando antes de ser escaneado / não atualizando — frequente no chat-pt</div>
+        <div class="list-item">Webhooks não disparando após reinício do container Docker — recorrente</div>
+        <div class="list-item">Erro de certificado SSL ao usar proxy reverso Nginx em algumas configs — múltiplos relatos</div>
+        <div class="list-item">Mensagens de grupo não chegando ao webhook em algumas versões — relatado em v2 e v3</div>
+        <div class="list-item">Banco de dados Redis perdendo sessões após restart — relatado com configs não persistentes</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- DOCS GAPS                                      -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Docs Gaps — Perguntas Recorrentes sem Documentação</h2>
+      <span class="count">7</span>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Pergunta</th>
+            <th>Fonte</th>
+            <th class="right">Frequência</th>
+            <th>Categoria</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Como configurar Nginx como proxy reverso para a Evolution API com SSL válido?</td>
+            <td>Discord #chat-pt / WhatsApp</td>
+            <td class="right">135+ vezes</td>
+            <td><span class="badge yellow">Deploy</span></td>
+          </tr>
+          <tr>
+            <td>Por que minha instância desconecta sozinha? Como manter conectada 24/7?</td>
+            <td>Discord chat-pt / WhatsApp grupos</td>
+            <td class="right">~80 vezes</td>
+            <td><span class="badge red">Estabilidade</span></td>
+          </tr>
+          <tr>
+            <td>Qual a diferença entre Evolution API v2 e v3? Como migrar?</td>
+            <td>Discord chat-pt / chat-en / WA</td>
+            <td class="right">~60 vezes</td>
+            <td><span class="badge blue">Versões</span></td>
+          </tr>
+          <tr>
+            <td>Como integrar Evolution API com n8n? Tem template oficial?</td>
+            <td>Discord chat-pt / WhatsApp</td>
+            <td class="right">~43 vezes</td>
+            <td><span class="badge blue">Integração</span></td>
+          </tr>
+          <tr>
+            <td>Como integrar com Chatwoot? Quais endpoints usar?</td>
+            <td>Discord chat-pt / WhatsApp</td>
+            <td class="right">~50 vezes</td>
+            <td><span class="badge blue">Integração</span></td>
+          </tr>
+          <tr>
+            <td>Como configurar Redis persistente com Docker Compose?</td>
+            <td>Discord chat-pt</td>
+            <td class="right">~25 vezes</td>
+            <td><span class="badge yellow">Deploy</span></td>
+          </tr>
+          <tr>
+            <td>Como usar webhooks com retry automático ou garantia de entrega?</td>
+            <td>Discord chat-pt / WA</td>
+            <td class="right">~20 vezes</td>
+            <td><span class="badge purple">API</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- SENTIMENTO — TENDÊNCIA MENSAL                  -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-header">
+      <h2>Tendência de Sentimento (Discord — Canais de Chat)</h2>
+    </div>
+    <div class="section-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Semana</th>
+            <th class="right">Positivo</th>
+            <th class="right">Neutro</th>
+            <th class="right">Negativo</th>
+            <th>Tendência</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Semana 1 (01–07/Mar)</td>
+            <td class="right">8%</td>
+            <td class="right">73%</td>
+            <td class="right">19%</td>
+            <td><span class="badge yellow">Estável</span></td>
+          </tr>
+          <tr>
+            <td>Semana 2 (08–14/Mar)</td>
+            <td class="right">8%</td>
+            <td class="right">72%</td>
+            <td class="right">20%</td>
+            <td><span class="badge yellow">Estável</span></td>
+          </tr>
+          <tr>
+            <td>Semana 3 (15–21/Mar)</td>
+            <td class="right">9%</td>
+            <td class="right">73%</td>
+            <td class="right">18%</td>
+            <td><span class="badge green">Leve Melhora</span></td>
+          </tr>
+          <tr>
+            <td>Semana 4 (22–28/Mar)</td>
+            <td class="right">12%</td>
+            <td class="right">70%</td>
+            <td class="right">18%</td>
+            <td><span class="badge green">Melhorando</span></td>
+          </tr>
+          <tr>
+            <td>Semana 5 (29–31/Mar)</td>
+            <td class="right">9%</td>
+            <td class="right">72%</td>
+            <td class="right">19%</td>
+            <td><span class="badge yellow">Retorno à Média</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════ -->
+  <!-- ANÁLISE & RECOMENDAÇÕES                        -->
+  <!-- ═══════════════════════════════════════════════ -->
+  <div class="highlight-card">
+    <div class="title">Análise do Mês — Março 2026</div>
+    <div class="body">
+      <strong>1. Comunidade grande e ativa:</strong> 633 membros únicos ativos no Discord + ~470 no WhatsApp demonstram uma base sólida. O chat-pt domina (93% das msgs Discord), refletindo o público majoritariamente brasileiro.<br><br>
+      <strong>2. WhatsApp supera Discord em volume:</strong> Com 4.379 mensagens vs. 1.754 no Discord, o WhatsApp é o canal mais ativo — indica que a comunidade prefere conversas mais informais e em tempo real por lá. Os 4 grupos somam formatos distintos de suporte.<br><br>
+      <strong>3. Sentimento geral neutro com tensão técnica:</strong> 71% das mensagens são neutras, mas 18% carregam sinal negativo — concentrado em erros, desconexões de instâncias e dificuldades de SSL/deploy. A W4 registrou o pico positivo, possivelmente influenciado pelas discussões sobre o Evolution Summit.<br><br>
+      <strong>4. Dois usuários concentram volume desproporcional:</strong> oismaelash (383 msgs) e d_paes (161 msgs) respondem por ~31% de todas as mensagens do Discord. São os pilares informais da comunidade — merecem reconhecimento oficial e possivelmente papéis de moderação/helper.<br><br>
+      <strong>5. Crescimento consistente de novos membros:</strong> 426 novas entradas em março (média de ~14/dia), com pico na W4 (112). Sugere que o buzz do Evolution Summit e releases recentes estão trazendo novos usuários de forma orgânica.<br><br>
+      <strong>6. Docs são o maior gap:</strong> Os 7 tópicos de docs gaps somam centenas de perguntas repetidas. SSL/Nginx, reconexão de instâncias e migração v2→v3 são as lacunas mais críticas a resolver na documentação.
+    </div>
+  </div>
+
+  <div class="highlight-card">
+    <div class="title">Recomendações para Abril 2026</div>
+    <div class="body">
+      <strong>1. Reconhecer oismaelash e d_paes publicamente:</strong> Um "Membro do Mês" no Discord com cargo especial (Helper/Community Star) retém esses contribuidores e incentiva outros. Ação: criar role no Discord e anúncio no canal news.<br><br>
+      <strong>2. Priorizar 3 docs urgentes:</strong> Criar guias passo a passo para (a) Nginx + SSL + Evolution API, (b) Como manter instâncias conectadas 24/7, (c) Guia de migração v2→v3. Esses 3 sozinhos eliminam ~40% das perguntas repetidas.<br><br>
+      <strong>3. Criar FAQ oficial para Chatwoot e n8n:</strong> As integrações mais pedidas. Um canal dedicado #integrações com threads fixadas resolveria muito ruído no chat-pt.<br><br>
+      <strong>4. Monitorar instabilidade de instâncias como prioridade de produto:</strong> A desconexão espontânea e o QR expirando são os bugs com maior frequência de relato — impactam diretamente a confiança no produto. Sugerir abertura de issues específicas no GitHub para tracking.<br><br>
+      <strong>5. Aproveitar o momentum do Evolution Summit (14-16 abril):</strong> A comunidade já está animada (31 menções orgânicas em março). Criar canal dedicado #summit no Discord com atualizações ao vivo vai intensificar o engajamento e atrair novos membros durante o evento.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  Gerado automaticamente por <span>Evolution Foundation</span> — Agente Pulse — 08/04/2026 às 16:00 BRT
+</div>
+
+</body>
+</html>

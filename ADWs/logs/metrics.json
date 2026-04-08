@@ -266,5 +266,24 @@
     "last_input_tokens": 24,
     "last_output_tokens": 22850,
     "last_cost_usd": 0.89922
+  },
+  "community-monthly": {
+    "runs": 1,
+    "successes": 1,
+    "failures": 0,
+    "total_seconds": 589.2,
+    "avg_seconds": 589.2,
+    "last_run": "2026-04-08T12:13:07.491146",
+    "agent": "pulse-community",
+    "total_input_tokens": 31,
+    "total_output_tokens": 27067,
+    "total_cache_creation_tokens": 58403,
+    "total_cache_read_tokens": 996784,
+    "total_cost_usd": 0.92414,
+    "avg_cost_usd": 0.92414,
+    "success_rate": 100.0,
+    "last_input_tokens": 31,
+    "last_output_tokens": 27067,
+    "last_cost_usd": 0.92414
   }
 }

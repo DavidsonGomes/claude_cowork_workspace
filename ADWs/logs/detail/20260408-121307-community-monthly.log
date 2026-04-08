@@ -1,0 +1,37 @@
+TIMESTAMP: 2026-04-08T12:13:07.490394
+DURATION: 589.2s
+RETURNCODE: 0
+PROMPT:
+[agent:pulse-community] Execute a skill /pulse-monthly
+
+============================================================
+STDOUT:
+============================================================
+## Community Monthly gerado ✅
+
+**Arquivo:** `03 Comunidade/reports/monthly/[C] 2026-03-community-monthly.html`
+**Mês:** Março 2026
+**MAM:** 633 Discord (baseline — primeiro relatório mensal)
+**Mensagens:** 6.133 total — Discord 1.754 + WhatsApp 4.379
+**Novos membros:** 426 (média 14/dia)
+**Sentimento:** 🟡 Neutro-Misto | **Resolução estimada:** ~72%
+
+---
+
+### Destaques do mês:
+
+| Dimensão | Dado |
+|---|---|
+| Canal mais ativo | 💬 chat-pt (1.628 msgs) |
+| WhatsApp vs Discord | WA 71% do volume total |
+| Pico semanal | W4: 492 msgs Discord, 112 novos |
+| MVP da comunidade | oismaelash (383 msgs) + d_paes (161) |
+| Features solicitadas | 7 identificadas |
+| Bugs reportados | 6 críticos |
+| Docs gaps | 7 lacunas (Nginx+SSL = mais urgente) |
+
+### Principais recomendações:
+1. **Reconhecer oismaelash e d_paes** com cargo/role oficial — sustentam 31% do suporte
+2. **3 docs prioritários**: Nginx+SSL, reconexão 24/7, migração v2→v3
+3. **Aproveitar momentum do Summit** (14-16/abr) — buzz já gerou 31 menções orgânicas em março
+
